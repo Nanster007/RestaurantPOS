@@ -16,7 +16,7 @@ public class NewOrderPanel extends CustomPanel {
     private MainFrame mainFrame;
     private CustomerOrder customerOrder;
     private DecimalFormat df;
-    
+
     public NewOrderPanel(MainFrame mainFrame, CustomerOrder customerOrder) {
         initComponents();
         setClockField(ClockLabel);
@@ -25,18 +25,17 @@ public class NewOrderPanel extends CustomPanel {
         OrderIDLabel.setText(customerOrder.getOrderID().toString());
         CustomerNameLabel.setText(customerOrder.getCustomerName());
         CustomerPhoneLabel.setText(customerOrder.getCustomerPhoneNumber());
-        CustomerOrderTotalLabel.setText(String.format("%.2f",customerOrder.getOrderTotal()));
-        
-        if(customerOrder.getCustomerAddress() != null){
+        CustomerOrderTotalLabel.setText(String.format("%.2f", customerOrder.getOrderTotal()));
+
+        if (customerOrder.getCustomerAddress() != null) {
             CustomerAddressLabel.setText(customerOrder.getCustomerAddress());
-        }
-        else{
+        } else {
             AddressLabel.setVisible(false);
             CustomerAddressLabel.setVisible(false);
         }
-        
+
         jTextArea1.setText(customerOrder.toString());
-        
+
     }
 
     /**
@@ -91,7 +90,7 @@ public class NewOrderPanel extends CustomPanel {
             }
         });
 
-        EntreesButton.setText("Entree's");
+        EntreesButton.setText("Entrees");
         EntreesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EntreesButtonActionPerformed(evt);
@@ -285,7 +284,7 @@ public class NewOrderPanel extends CustomPanel {
     }//GEN-LAST:event_EditInfoButtonActionPerformed
 
     private void DessertsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DessertsButtonActionPerformed
-        
+
     }//GEN-LAST:event_DessertsButtonActionPerformed
 
     private void CancelOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelOrderButtonActionPerformed
@@ -298,7 +297,6 @@ public class NewOrderPanel extends CustomPanel {
         mainFrame.removeCustomerOrder(customerOrder.getOrderID().toString());
         mainFrame.addCustomerOrder(customerOrder);
     }//GEN-LAST:event_PlaceOrderButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AddressLabel;
