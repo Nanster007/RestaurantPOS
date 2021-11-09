@@ -6,6 +6,8 @@
 package possystem;
 
 import java.awt.BorderLayout;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
@@ -15,7 +17,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 public class POSSystem {
 
     public MainFrame boardframe;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
         POSSystem posSystem = new POSSystem();
         posSystem.boardframe = new MainFrame();
         posSystem.boardframe.setVisible(true);

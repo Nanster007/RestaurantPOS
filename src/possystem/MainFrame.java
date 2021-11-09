@@ -2,6 +2,12 @@ package possystem;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,11 +19,15 @@ public class MainFrame extends JFrame {
     private CustomPanel currentPage, lastPage;
     private ClockThread clock;
     private ArrayList<CustomerOrder> customerOrders;
+    FileOutputStream fos;
+    FileInputStream fis;
+    ObjectOutputStream oos;
+    ObjectInputStream ois;
     
     public MainFrame()
     {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setTitle("Pos System");
+        this.setTitle("Pos SystemHol");
         this.setResizable(true);
         currentPage = new MainMenuPanel(this);
         this.add(currentPage, BorderLayout.CENTER);
@@ -44,8 +54,11 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
     }
     
-    public void addCustomerOrder(CustomerOrder customerOrder){
+    public void addCustomerOrder(CustomerOrder customerOrder) throws FileNotFoundException, IOException{
         customerOrders.add(customerOrder);
+        fos = new FileOutputStream("CustomerOrders.txt");
+        oos = new ObjectOutputStream(fos);
+        oos.writeObject(customerOrders);
     }
     
     public void removeCustomerOrder(String orderID){
@@ -56,7 +69,11 @@ public class MainFrame extends JFrame {
         }
     }
 
-    public ArrayList<CustomerOrder> getCustomerOrders() {
+    public ArrayList<CustomerOrder> getCustomerOrders() throws FileNotFoundException, IOException, ClassNotFoundException {
+        fis = new FileInputStream("CustomerOrders.txt");
+        ois = new ObjectInputStream(fis);
+        customerOrders = (ArrayList<CustomerOrder>) ois.readObject();
+        ois.close();
         return customerOrders;
     }
     

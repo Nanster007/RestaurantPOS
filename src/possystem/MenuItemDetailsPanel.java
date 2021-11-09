@@ -41,6 +41,7 @@ public class MenuItemDetailsPanel extends CustomPanel {
         defaultColor = null;
         
         CurrentItem.setText(itemName);
+        ItemPrice.setText(""+ menuItem.getItemPrice());
         
         if(itemName.equals("Draft")){
             DraftBeerPanel.setVisible(true);
@@ -77,8 +78,6 @@ public class MenuItemDetailsPanel extends CustomPanel {
     private void initComponents() {
 
         CurrentItemPanel = new javax.swing.JPanel();
-        CurrentItemLabel = new javax.swing.JLabel();
-        CurrentItem = new javax.swing.JLabel();
         ItemSizePanel = new javax.swing.JPanel();
         ItemSizeLabel = new javax.swing.JLabel();
         SmallButton = new javax.swing.JButton();
@@ -117,7 +116,7 @@ public class MenuItemDetailsPanel extends CustomPanel {
         CommentsPanel = new javax.swing.JPanel();
         CommentsLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        ExtraCommentsArea = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         MixedDrinksPanel = new javax.swing.JPanel();
         StyleLabel = new javax.swing.JLabel();
@@ -134,29 +133,20 @@ public class MenuItemDetailsPanel extends CustomPanel {
         LemonLimeButton = new javax.swing.JButton();
         PinaColodaButton = new javax.swing.JButton();
         MargaritaFlavorLabel = new javax.swing.JLabel();
-
-        CurrentItemLabel.setText("Current Item:");
-
-        CurrentItem.setText("jLabel3");
+        CurrentItemLabel = new javax.swing.JLabel();
+        CurrentItem = new javax.swing.JLabel();
+        ItemPriceLabel = new javax.swing.JLabel();
+        ItemPrice = new javax.swing.JLabel();
 
         javax.swing.GroupLayout CurrentItemPanelLayout = new javax.swing.GroupLayout(CurrentItemPanel);
         CurrentItemPanel.setLayout(CurrentItemPanelLayout);
         CurrentItemPanelLayout.setHorizontalGroup(
             CurrentItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CurrentItemPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(CurrentItemLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CurrentItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         CurrentItemPanelLayout.setVerticalGroup(
             CurrentItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CurrentItemPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(CurrentItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CurrentItemLabel)
-                    .addComponent(CurrentItem))
-                .addContainerGap())
+            .addGap(0, 36, Short.MAX_VALUE)
         );
 
         ItemSizeLabel.setText("Please Select a Size");
@@ -516,9 +506,9 @@ public class MenuItemDetailsPanel extends CustomPanel {
 
         CommentsLabel.setText("Extra Comments");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        ExtraCommentsArea.setColumns(20);
+        ExtraCommentsArea.setRows(5);
+        jScrollPane1.setViewportView(ExtraCommentsArea);
 
         jButton1.setText("Cancel");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -703,6 +693,14 @@ public class MenuItemDetailsPanel extends CustomPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        CurrentItemLabel.setText("Current Item:");
+
+        CurrentItem.setText("jLabel3");
+
+        ItemPriceLabel.setText("Item Price:");
+
+        ItemPrice.setText("jLabel3");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -711,8 +709,18 @@ public class MenuItemDetailsPanel extends CustomPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(CurrentItemPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(CurrentItemLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CurrentItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(ItemPriceLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(ItemPrice)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CurrentItemPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(ItemSizePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -729,14 +737,24 @@ public class MenuItemDetailsPanel extends CustomPanel {
                         .addComponent(MargaritaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(CommentsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
             .addComponent(AddItemButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(CurrentItemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CurrentItemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CurrentItemLabel)
+                            .addComponent(CurrentItem))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ItemPriceLabel)
+                            .addComponent(ItemPrice))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CommentsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -776,6 +794,8 @@ public class MenuItemDetailsPanel extends CustomPanel {
             SmallButton.setBackground(Color.red);
             itemComplete = true;
         }
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_SmallButtonActionPerformed
 
     private void MediumButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MediumButtonActionPerformed
@@ -803,6 +823,8 @@ public class MenuItemDetailsPanel extends CustomPanel {
             menuItem.setItemPrice(menuItem.getItemPrice() + 1.00);
             itemComplete = true;
         }
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_MediumButtonActionPerformed
 
     private void LargeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LargeButtonActionPerformed
@@ -830,6 +852,8 @@ public class MenuItemDetailsPanel extends CustomPanel {
             menuItem.setItemPrice(menuItem.getItemPrice() + 1.50);
             itemComplete = true;
         }
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_LargeButtonActionPerformed
 
     private void ChocolateLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChocolateLabelActionPerformed
@@ -856,6 +880,9 @@ public class MenuItemDetailsPanel extends CustomPanel {
                 itemComplete = true;
             }
         }
+        CurrentItem.setText(menuItem.getItemName());
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_ChocolateLabelActionPerformed
 
     private void VanillaLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VanillaLabelActionPerformed
@@ -881,6 +908,9 @@ public class MenuItemDetailsPanel extends CustomPanel {
                 itemComplete = true;
             }
         }
+        CurrentItem.setText(menuItem.getItemName());
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_VanillaLabelActionPerformed
 
     private void StrawberryLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StrawberryLabelActionPerformed
@@ -906,107 +936,120 @@ public class MenuItemDetailsPanel extends CustomPanel {
                 itemComplete = true;
             }
         }
+        CurrentItem.setText(menuItem.getItemName());
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_StrawberryLabelActionPerformed
 
     private void SkimMilkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SkimMilkButtonActionPerformed
         if(SkimMilkButton.getBackground() == Color.red){
             SkimMilkButton.setBackground(defaultColor);
-            menuItem.setComments(menuItem.getComments().replace("Skim Milk", ""));
+            menuItem.setComments(menuItem.getComments().replace("Skim Milk \n", ""));
         }
         else if(HalfnHalfButton.getBackground() == Color.red){
             HalfnHalfButton.setBackground(defaultColor);
             SkimMilkButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments().replace("Half & Half", "Skim Milk"));
+            menuItem.setComments(menuItem.getComments().replace("Half & Half \n", "Skim Milk \n"));
         }
         else if(FullMilkButton.getBackground() == Color.red){
             FullMilkButton.setBackground(defaultColor);
             SkimMilkButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments().replace("Full Milk", "Skim Milk"));
+            menuItem.setComments(menuItem.getComments().replace("Full Milk \n", "Skim Milk \n"));
         }
         else{
             SkimMilkButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments() + "Skim Milk");
+            menuItem.setComments(menuItem.getComments() + "Skim Milk \n");
         }
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_SkimMilkButtonActionPerformed
 
     private void HalfnHalfButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HalfnHalfButtonActionPerformed
         if(HalfnHalfButton.getBackground() == Color.red){
             HalfnHalfButton.setBackground(defaultColor);
-            menuItem.setComments(menuItem.getComments().replace("Half & Half", ""));
+            menuItem.setComments(menuItem.getComments().replace("Half & Half \n", ""));
         }
         else if(SkimMilkButton.getBackground() == Color.red){
             SkimMilkButton.setBackground(defaultColor);
             HalfnHalfButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments().replace("Skim Milk", "Half & Half"));
+            menuItem.setComments(menuItem.getComments().replace("Skim Milk \n", "Half & Half \n"));
         }
         else if(FullMilkButton.getBackground() == Color.red){
             FullMilkButton.setBackground(defaultColor);
             HalfnHalfButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments().replace("Full Milk", "Half & Half"));
+            menuItem.setComments(menuItem.getComments().replace("Full Milk \n", "Half & Half \n"));
         }
         else{
             HalfnHalfButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments() + "Half & Half");
+            menuItem.setComments(menuItem.getComments() + "Half & Half \n");
         }
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_HalfnHalfButtonActionPerformed
 
     private void FullMilkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FullMilkButtonActionPerformed
         if(FullMilkButton.getBackground() == Color.red){
             FullMilkButton.setBackground(defaultColor);
-            menuItem.setComments(menuItem.getComments().replace("Full Milk", ""));
+            menuItem.setComments(menuItem.getComments().replace("Full Milk \n", ""));
         }
         else if(SkimMilkButton.getBackground() == Color.red){
             SkimMilkButton.setBackground(defaultColor);
             FullMilkButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments().replace("Skim Milk", "Full Milk"));
+            menuItem.setComments(menuItem.getComments().replace("Skim Milk \n", "Full Milk \n"));
         }
         else if(HalfnHalfButton.getBackground() == Color.red){
             HalfnHalfButton.setBackground(defaultColor);
             FullMilkButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments().replace("Half & Half", "Full Milk"));
+            menuItem.setComments(menuItem.getComments().replace("Half & Half \n", "Full Milk \n"));
         }
         else{
             FullMilkButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments() + "Full Milk");
+            menuItem.setComments(menuItem.getComments() + "Full Milk \n");
         }
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_FullMilkButtonActionPerformed
 
     private void SplendaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SplendaButtonActionPerformed
 
             if(SugarButton.getBackground() == Color.red){
-                menuItem.setComments(menuItem.getComments().replace("Sugar", "Splenda"));
+                menuItem.setComments(menuItem.getComments().replace("Sugar \n", "Splenda \n"));
                 SugarButton.setBackground(defaultColor);
                 SplendaButton.setBackground(Color.red);
             }
             else if(SplendaButton.getBackground() == Color.red){
-                menuItem.setComments(menuItem.getComments().replace("Splenda", ""));
+                menuItem.setComments(menuItem.getComments().replace("Splenda \n", ""));
                 SplendaButton.setBackground(defaultColor);
                 itemComplete = false;
             }
             else{
-                menuItem.setComments(menuItem.getComments() + " Splenda");
+                menuItem.setComments(menuItem.getComments() + "Splenda \n");
                 SplendaButton.setBackground(Color.red);
                 itemComplete = true;
         }
+            ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_SplendaButtonActionPerformed
 
     private void SugarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SugarButtonActionPerformed
 
             if(SplendaButton.getBackground() == Color.red){
-                menuItem.setComments(menuItem.getComments().replace("Splenda", "Sugar"));
+                menuItem.setComments(menuItem.getComments().replace("Splenda \n", "Sugar \n"));
                 SplendaButton.setBackground(defaultColor);
                 SugarButton.setBackground(Color.red);
             }
             else if(SugarButton.getBackground() == Color.red){
-                menuItem.setComments(menuItem.getComments().replace("Sugar", ""));
+                menuItem.setComments(menuItem.getComments().replace("Sugar \n", ""));
                 SugarButton.setBackground(defaultColor);
                 itemComplete = false;
             }
             else{
-                menuItem.setComments(menuItem.getComments() + " Sugar");
+                menuItem.setComments(menuItem.getComments() + "Sugar \n");
                 SugarButton.setBackground(Color.red);
                 itemComplete = true;
         }
+            ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_SugarButtonActionPerformed
 
     private void TruthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TruthButtonActionPerformed
@@ -1022,6 +1065,8 @@ public class MenuItemDetailsPanel extends CustomPanel {
             menuItem.setItemName("Draft");
         }
         CurrentItem.setText(menuItem.getItemName());
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_TruthButtonActionPerformed
 
     private void largeOzButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeOzButtonActionPerformed
@@ -1047,6 +1092,8 @@ public class MenuItemDetailsPanel extends CustomPanel {
             SmallOzButton.setBackground(defaultColor);
             itemComplete = true;
         }
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_largeOzButtonActionPerformed
 
     private void SmallOzButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SmallOzButtonActionPerformed
@@ -1070,6 +1117,8 @@ public class MenuItemDetailsPanel extends CustomPanel {
             largeOzButton.setBackground(defaultColor);
             itemComplete = true;
         }
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_SmallOzButtonActionPerformed
 
     private void BudlightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BudlightButtonActionPerformed
@@ -1084,7 +1133,9 @@ public class MenuItemDetailsPanel extends CustomPanel {
             BudlightButton.setBackground(defaultColor);
             menuItem.setItemName("Draft");
         }
-        CurrentItem.setText(menuItem.getItemName());       
+        CurrentItem.setText(menuItem.getItemName());  
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_BudlightButtonActionPerformed
 
     private void BlueMoonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BlueMoonButtonActionPerformed
@@ -1100,6 +1151,8 @@ public class MenuItemDetailsPanel extends CustomPanel {
             menuItem.setItemName("Draft");
         }
         CurrentItem.setText(menuItem.getItemName());
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_BlueMoonButtonActionPerformed
 
     private void MillerLiteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MillerLiteButtonActionPerformed
@@ -1115,6 +1168,8 @@ public class MenuItemDetailsPanel extends CustomPanel {
             menuItem.setItemName("Draft");
         }
         CurrentItem.setText(menuItem.getItemName());
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_MillerLiteButtonActionPerformed
 
     private void AddItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddItemButtonActionPerformed
@@ -1140,6 +1195,8 @@ public class MenuItemDetailsPanel extends CustomPanel {
             menuItem.setItemName("Wine");
         }
         CurrentItem.setText(menuItem.getItemName());
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_WhiteWineButtonActionPerformed
 
     private void RedWineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedWineButtonActionPerformed
@@ -1154,6 +1211,8 @@ public class MenuItemDetailsPanel extends CustomPanel {
             menuItem.setItemName("Wine");
         }
         CurrentItem.setText(menuItem.getItemName());
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_RedWineButtonActionPerformed
 
     private void PinkWineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PinkWineButtonActionPerformed
@@ -1168,6 +1227,8 @@ public class MenuItemDetailsPanel extends CustomPanel {
             menuItem.setItemName("Wine");
         }
         CurrentItem.setText(menuItem.getItemName());
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_PinkWineButtonActionPerformed
 
     private void GlassButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GlassButtonActionPerformed
@@ -1191,6 +1252,8 @@ public class MenuItemDetailsPanel extends CustomPanel {
             BottleButton.setBackground(defaultColor);
             itemComplete = true;
         }
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_GlassButtonActionPerformed
 
     private void BottleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BottleButtonActionPerformed
@@ -1216,164 +1279,209 @@ public class MenuItemDetailsPanel extends CustomPanel {
             GlassButton.setBackground(defaultColor);
             itemComplete = true;
         }
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_BottleButtonActionPerformed
 
     private void Margarita24OzButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Margarita24OzButtonActionPerformed
         if(Margarita24OzButton.getBackground() == Color.red){
             Margarita24OzButton.setBackground(defaultColor);
-            menuItem.setComments(menuItem.getComments().replace("24 Oz.", ""));
+            menuItem.setComments(menuItem.getComments().replace("24 Oz. \n", ""));
+            menuItem.setItemPrice(menuItem.getItemPrice() - 3.00);
+            itemComplete = false;
+            if(BlueRaspberryButton.getBackground() == Color.red){
+                BlueRaspberryButton.setBackground(defaultColor);
+                menuItem.setComments(menuItem.getComments().replace("Blue Raspberry \n", ""));
+            }
+            else if(LemonLimeButton.getBackground() == Color.red){
+                LemonLimeButton.setBackground(defaultColor);
+                menuItem.setComments(menuItem.getComments().replace("Lemon Lime \n", ""));
+            }
+            else if(PinaColodaButton.getBackground() == Color.red){
+                PinaColodaButton.setBackground(defaultColor);
+                menuItem.setComments(menuItem.getComments().replace("Pina Coloda \n", ""));
+            }
         }
         else if(Margarita16OzButton.getBackground() == Color.red){
             Margarita16OzButton.setBackground(defaultColor);
             Margarita24OzButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments().replace("16 Oz.", "24 Oz"));
+            menuItem.setComments(menuItem.getComments().replace("16 Oz. \n", "24 Oz. \n"));
             menuItem.setItemPrice(menuItem.getItemPrice() + 3.00);
         }
         else{
             Margarita24OzButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments() + "24 Oz");
+            menuItem.setComments(menuItem.getComments() + "24 Oz. \n");
             menuItem.setItemPrice(menuItem.getItemPrice() + 3.00);
         }
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_Margarita24OzButtonActionPerformed
 
     private void Margarita16OzButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Margarita16OzButtonActionPerformed
         if(Margarita16OzButton.getBackground() == Color.red){
             Margarita16OzButton.setBackground(defaultColor);
-            menuItem.setComments(menuItem.getComments().replace("16 Oz.", ""));
+            menuItem.setComments(menuItem.getComments().replace("16 Oz. \n", ""));
+            itemComplete = false;
+            if(BlueRaspberryButton.getBackground() == Color.red){
+                BlueRaspberryButton.setBackground(defaultColor);
+                menuItem.setComments(menuItem.getComments().replace("Blue Raspberry \n", ""));
+            }
+            else if(LemonLimeButton.getBackground() == Color.red){
+                LemonLimeButton.setBackground(defaultColor);
+                menuItem.setComments(menuItem.getComments().replace("Lemon Lime \n", ""));
+            }
+            else if(PinaColodaButton.getBackground() == Color.red){
+                PinaColodaButton.setBackground(defaultColor);
+                menuItem.setComments(menuItem.getComments().replace("Pina Coloda \n", ""));
+            }
         }
         else if(Margarita24OzButton.getBackground() == Color.red){
             Margarita24OzButton.setBackground(defaultColor);
             Margarita16OzButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments().replace("24 Oz.", "16 Oz"));
+            menuItem.setComments(menuItem.getComments().replace("24 Oz. \n", "16 Oz. \n"));
             menuItem.setItemPrice(menuItem.getItemPrice() - 3.00);
         }
         else{
             Margarita16OzButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments() + "16 Oz");
+            menuItem.setComments(menuItem.getComments() + "16 Oz. \n");
         }
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_Margarita16OzButtonActionPerformed
 
     private void BlueRaspberryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BlueRaspberryButtonActionPerformed
         if(Margarita16OzButton.getBackground() == Color.red || Margarita24OzButton.getBackground() == Color.red){
             if(BlueRaspberryButton.getBackground() == Color.red){
                 BlueRaspberryButton.setBackground(defaultColor);
-                menuItem.setComments(menuItem.getComments().replace("Blue Raspberry", ""));
+                menuItem.setComments(menuItem.getComments().replace("Blue Raspberry \n", ""));
                 itemComplete = false;
             }
             else if(LemonLimeButton.getBackground() == Color.red){
                 LemonLimeButton.setBackground(defaultColor);
                 BlueRaspberryButton.setBackground(Color.red);
-                menuItem.setComments(menuItem.getComments().replace("Lemon Lime", "Blue Raspberry"));
+                menuItem.setComments(menuItem.getComments().replace("Lemon Lime \n", "Blue Raspberry \n"));
             }
             else if(PinaColodaButton.getBackground() == Color.red){
                 PinaColodaButton.setBackground(defaultColor);
                 BlueRaspberryButton.setBackground(Color.red);
-                menuItem.setComments(menuItem.getComments().replace("Pine Coloda" , "Blue Raspberry"));
+                menuItem.setComments(menuItem.getComments().replace("Pina Coloda \n" , "Blue Raspberry \n"));
             }
             else{
                 BlueRaspberryButton.setBackground(Color.red);
-                menuItem.setComments(menuItem.getComments() + "Blue Raspberry");
+                menuItem.setComments(menuItem.getComments() + "Blue Raspberry \n");
                 itemComplete = true;
             }
         }
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_BlueRaspberryButtonActionPerformed
 
     private void LemonLimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LemonLimeButtonActionPerformed
         if(Margarita16OzButton.getBackground() == Color.red || Margarita24OzButton.getBackground() == Color.red){
             if(LemonLimeButton.getBackground() == Color.red){
                 LemonLimeButton.setBackground(defaultColor);
-                menuItem.setComments(menuItem.getComments().replace("Lemon Lime", ""));
+                menuItem.setComments(menuItem.getComments().replace("Lemon Lime \n", ""));
                 itemComplete = false;
             }
             else if(BlueRaspberryButton.getBackground() == Color.red){
                 BlueRaspberryButton.setBackground(defaultColor);
                 LemonLimeButton.setBackground(Color.red);
-                menuItem.setComments(menuItem.getComments().replace("Blue Raspberry", "Lemon Lime"));
+                menuItem.setComments(menuItem.getComments().replace("Blue Raspberry \n", "Lemon Lime \n"));
             }
             else if(PinaColodaButton.getBackground() == Color.red){
                 PinaColodaButton.setBackground(defaultColor);
                 LemonLimeButton.setBackground(Color.red);
-                menuItem.setComments(menuItem.getComments().replace("Pine Coloda" , "Lemon Lime"));
+                menuItem.setComments(menuItem.getComments().replace("Pina Coloda \n" , "Lemon Lime \n"));
             }
             else{
                 LemonLimeButton.setBackground(Color.red);
-                menuItem.setComments(menuItem.getComments() + "Lemon Lime");
+                menuItem.setComments(menuItem.getComments() + "Lemon Lime \n");
                 itemComplete = true;
             }
         }
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_LemonLimeButtonActionPerformed
 
     private void PinaColodaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PinaColodaButtonActionPerformed
         if(Margarita16OzButton.getBackground() == Color.red || Margarita24OzButton.getBackground() == Color.red){
             if(PinaColodaButton.getBackground() == Color.red){
                 PinaColodaButton.setBackground(defaultColor);
-                menuItem.setComments(menuItem.getComments().replace("Pina Coloda", ""));
+                menuItem.setComments(menuItem.getComments().replace("Pina Coloda \n", ""));
                 itemComplete = false;
             }
             else if(LemonLimeButton.getBackground() == Color.red){
                 LemonLimeButton.setBackground(defaultColor);
                 PinaColodaButton.setBackground(Color.red);
-                menuItem.setComments(menuItem.getComments().replace("Lemon Lime", "Pina Coloda"));
+                menuItem.setComments(menuItem.getComments().replace("Lemon Lime \n", "Pina Coloda \n"));
             }
             else if(BlueRaspberryButton.getBackground() == Color.red){
                 BlueRaspberryButton.setBackground(defaultColor);
                 PinaColodaButton.setBackground(Color.red);
-                menuItem.setComments(menuItem.getComments().replace("Blue Raspberry", "Pine Coloda"));
+                menuItem.setComments(menuItem.getComments().replace("Blue Raspberry \n", "Pina Coloda \n"));
             }
             else{
                 PinaColodaButton.setBackground(Color.red);
-                menuItem.setComments(menuItem.getComments() + "Pina Coloda");
+                menuItem.setComments(menuItem.getComments() + "Pina Coloda \n");
                 itemComplete = true;
             }
         }
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_PinaColodaButtonActionPerformed
 
     private void DryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DryButtonActionPerformed
         if(DryButton.getBackground() == Color.red){
             DryButton.setBackground(defaultColor);
-            menuItem.setComments(menuItem.getComments().replace("Dry", ""));
+            menuItem.setComments(menuItem.getComments().replace("Dry \n", ""));
             itemComplete = false;
         }
         else if(RocksButton.getBackground() == Color.red){
             RocksButton.setBackground(defaultColor);
             DryButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments().replace("On the Rocks", "Dry"));
+            menuItem.setComments(menuItem.getComments().replace("On the Rocks \n", "Dry \n"));
         }
         else{
             DryButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments() + "Dry");
+            menuItem.setComments(menuItem.getComments() + "Dry \n");
             itemComplete = true;
         }
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_DryButtonActionPerformed
 
     private void RocksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RocksButtonActionPerformed
         if(RocksButton.getBackground() == Color.red){
             RocksButton.setBackground(defaultColor);
-            menuItem.setComments(menuItem.getComments().replace("On the Rocks", ""));
+            menuItem.setComments(menuItem.getComments().replace("On the Rocks \n", ""));
             itemComplete = false;
         }
         else if(DryButton.getBackground() == Color.red){
             DryButton.setBackground(defaultColor);
             RocksButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments().replace("Dry", "On the Rocks"));
+            menuItem.setComments(menuItem.getComments().replace("Dry \n", "On the Rocks \n"));
         }
         else{
             RocksButton.setBackground(Color.red);
-            menuItem.setComments(menuItem.getComments() + "On the Rocks");
+            menuItem.setComments(menuItem.getComments() + "On the Rocks \n");
             itemComplete = true;
         }
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_RocksButtonActionPerformed
 
     private void RemoveShotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveShotButtonActionPerformed
         if(menuItem.getComments().contains("Extra Shot")){
-            menuItem.setComments(menuItem.getComments().replace("Extra Shot", ""));
+            menuItem.setComments(menuItem.getComments().replaceFirst("Extra Shot \n", ""));
             menuItem.setItemPrice(menuItem.getItemPrice() - 3.00);
+            ItemPrice.setText("" + menuItem.getItemPrice());
+            ExtraCommentsArea.setText(menuItem.getComments());
         }
     }//GEN-LAST:event_RemoveShotButtonActionPerformed
 
     private void ExtraShotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExtraShotButtonActionPerformed
-        menuItem.setComments(menuItem.getComments() + "Extra Shot");
+        menuItem.setComments(menuItem.getComments() + "Extra Shot \n");
         menuItem.setItemPrice(menuItem.getItemPrice() + 3.00);
+        ItemPrice.setText("" + menuItem.getItemPrice());
+        ExtraCommentsArea.setText(menuItem.getComments());
     }//GEN-LAST:event_ExtraShotButtonActionPerformed
 
 
@@ -1395,10 +1503,13 @@ public class MenuItemDetailsPanel extends CustomPanel {
     private javax.swing.JPanel DraftBeerPanel;
     private javax.swing.JLabel DraftSizeLabel;
     private javax.swing.JButton DryButton;
+    private javax.swing.JTextArea ExtraCommentsArea;
     private javax.swing.JButton ExtraShotButton;
     private javax.swing.JButton FullMilkButton;
     private javax.swing.JButton GlassButton;
     private javax.swing.JButton HalfnHalfButton;
+    private javax.swing.JLabel ItemPrice;
+    private javax.swing.JLabel ItemPriceLabel;
     private javax.swing.JLabel ItemSizeLabel;
     private javax.swing.JPanel ItemSizePanel;
     private javax.swing.JButton LargeButton;
@@ -1434,7 +1545,6 @@ public class MenuItemDetailsPanel extends CustomPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton largeOzButton;
     // End of variables declaration//GEN-END:variables
 }
