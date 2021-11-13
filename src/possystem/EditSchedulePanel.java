@@ -5,8 +5,13 @@
  */
 package possystem;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,8 +25,9 @@ public class EditSchedulePanel extends CustomPanel {
     private int day;
     private String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     private int[] daysPerMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private ArrayList<Shift> shifts;
     
-    public EditSchedulePanel(MainFrame mainFrame, SchedulingPanel schedulingPanel, int day) {
+    public EditSchedulePanel(MainFrame mainFrame, SchedulingPanel schedulingPanel, int day) throws IOException, FileNotFoundException, ClassNotFoundException {
         initComponents();
         this.mainFrame = mainFrame;
         this.day = day;
@@ -30,6 +36,11 @@ public class EditSchedulePanel extends CustomPanel {
         calendar = Calendar.getInstance();
         YearLabel.setText("" + schedulingPanel.getCurrentYear());
         DateLabel.setText(months[schedulingPanel.getCurrentMonth()] + ", " + day);
+        shifts = mainFrame.getShifts(schedulingPanel.getCurrentMonth(), schedulingPanel.getCurrentYear());
+    }
+    
+    private void updateInterface(){
+        
     }
 
     /**
@@ -45,11 +56,12 @@ public class EditSchedulePanel extends CustomPanel {
         ClockLabel = new javax.swing.JTextField();
         YearLabel = new javax.swing.JLabel();
         DateLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         PreviousDayButton = new javax.swing.JButton();
         NextDayButton = new javax.swing.JButton();
         BackButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         CurrentUserLabel.setText("Welcome: User's Name");
 
@@ -63,10 +75,6 @@ public class EditSchedulePanel extends CustomPanel {
         YearLabel.setText("jLabel1");
 
         DateLabel.setText("jLabel1");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
 
         PreviousDayButton.setText("Previous Day");
         PreviousDayButton.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +97,31 @@ public class EditSchedulePanel extends CustomPanel {
             }
         });
 
+        jLabel1.setText("Day's Schedule:");
+
+        jLabel2.setText("Unscheduled Employees");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(115, 115, 115))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addContainerGap(261, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,7 +129,7 @@ public class EditSchedulePanel extends CustomPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PreviousDayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
@@ -127,8 +160,8 @@ public class EditSchedulePanel extends CustomPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PreviousDayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(NextDayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -151,18 +184,27 @@ public class EditSchedulePanel extends CustomPanel {
             day--;
             schedulingPanel.setDate(new Date(schedulingPanel.getCurrentYear()-1900, schedulingPanel.getCurrentMonth(), day));
         }
-        else{
-            day = daysPerMonth[schedulingPanel.getCurrentMonth()];
-            
-            if(schedulingPanel.getCurrentMonth() == 0){
-                schedulingPanel.setDate(new Date((schedulingPanel.getCurrentYear()-1901), 1, 1));
+        else{          
+            if(schedulingPanel.getCurrentMonth() == 0){ 
+                day = daysPerMonth[11];
+                schedulingPanel.setDate(new Date((schedulingPanel.getCurrentYear()-1901), 11, day));
             }
             else{
-                schedulingPanel.setDate(new Date((schedulingPanel.getCurrentYear()-1900), schedulingPanel.getCurrentMonth()-1, 1));
+                day = daysPerMonth[schedulingPanel.getCurrentMonth()-1];
+                schedulingPanel.setDate(new Date((schedulingPanel.getCurrentYear()-1900), schedulingPanel.getCurrentMonth()-1, day));
+            }
+            try {
+                shifts = mainFrame.getShifts(schedulingPanel.getCurrentMonth(), schedulingPanel.getCurrentYear());
+            } catch (IOException | ClassNotFoundException ex) {
+                Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
-        mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, schedulingPanel, day), Boolean.FALSE, this);
+        try {
+            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, schedulingPanel, day), Boolean.FALSE, this);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_PreviousDayButtonActionPerformed
 
@@ -184,16 +226,24 @@ public class EditSchedulePanel extends CustomPanel {
         }
         else{
             day=1;
-            
             if(schedulingPanel.getCurrentMonth() == 11){
-                schedulingPanel.setDate(new Date((schedulingPanel.getCurrentYear()-1899), 1, 1));
+                schedulingPanel.setDate(new Date((schedulingPanel.getCurrentYear()-1899), 0, 1));
             }
             else{
                 schedulingPanel.setDate(new Date((schedulingPanel.getCurrentYear()-1900), schedulingPanel.getCurrentMonth()+1, 1));
             }
+            try {
+                shifts = mainFrame.getShifts(schedulingPanel.getCurrentMonth(), schedulingPanel.getCurrentYear());
+            } catch (IOException | ClassNotFoundException ex) {
+                Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
-        mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, schedulingPanel, day), Boolean.FALSE, this);
+        try {
+            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, schedulingPanel, day), Boolean.FALSE, this);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_NextDayButtonActionPerformed
 
 
@@ -205,7 +255,8 @@ public class EditSchedulePanel extends CustomPanel {
     private javax.swing.JButton NextDayButton;
     private javax.swing.JButton PreviousDayButton;
     private javax.swing.JLabel YearLabel;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

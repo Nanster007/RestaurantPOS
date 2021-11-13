@@ -20,18 +20,13 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="BackButton" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="StockSystemButton" pref="320" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="AdjustEmployeesButton" min="-2" pref="256" max="-2" attributes="0"/>
                           <Component id="CurrentUserLabel" alignment="0" min="-2" pref="164" max="-2" attributes="0"/>
                           <Component id="ClockLabel" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
-                          <Component id="SchedulingButton" alignment="1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="BusinessReportsButton" pref="315" max="32767" attributes="0"/>
-                          <Component id="SettingsButton" max="32767" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="0" pref="488" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -46,17 +41,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="ClockLabel" min="-2" pref="33" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="SettingsButton" pref="181" max="32767" attributes="0"/>
-                  <Component id="StockSystemButton" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="BusinessReportsButton" pref="179" max="32767" attributes="0"/>
-                  <Component id="SchedulingButton" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="BackButton" min="-2" max="-2" attributes="0"/>
+              <Component id="AdjustEmployeesButton" min="-2" pref="141" max="-2" attributes="0"/>
+              <EmptySpace pref="267" max="32767" attributes="0"/>
+              <Component id="BackButton" min="-2" pref="35" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -76,6 +63,14 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ClockLabelActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JButton" name="AdjustEmployeesButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Adjust Employee"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AdjustEmployeesButtonActionPerformed"/>
+      </Events>
+    </Component>
     <Component class="javax.swing.JButton" name="BackButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Back"/>
@@ -83,35 +78,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BackButtonActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="StockSystemButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Stock System"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="StockSystemButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="SettingsButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Settings"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SettingsButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="SchedulingButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Scheduling"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SchedulingButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BusinessReportsButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Business reports"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -3,12 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/NewOrderPanel.java</file>
-            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/OrderHistoryPanel.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/AdjustEmployeePanel.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/Employee.java</file>
             <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/CustomerOrder.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/SchedulingCalendar.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/EditSchedulePanel.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/NewOrderPanel.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/SystemSettingsPanel.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/OrderHistoryPanel.java</file>
             <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/MenuItemDetailsPanel.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/SchedulingPanel.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/Shift.java</file>
             <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/MainFrame.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/ManagerSettingsPanel.java</file>
             <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/CustomerInfoPanel.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system/src/possystem/MainMenuPanel.java</file>
         </group>
     </open-files>
 </project-private>

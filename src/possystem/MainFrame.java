@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
@@ -20,10 +21,12 @@ public class MainFrame extends JFrame {
     private CustomPanel currentPage, lastPage;
     private ClockThread clock;
     private ArrayList<CustomerOrder> customerOrders;
-    FileOutputStream fos;
-    FileInputStream fis;
-    ObjectOutputStream oos;
-    ObjectInputStream ois;
+    private FileOutputStream fos;
+    private FileInputStream fis;
+    private ObjectOutputStream oos;
+    private ObjectInputStream ois;
+    private ArrayList<Shift> shifts;
+    
     
     public MainFrame() throws IOException, FileNotFoundException, ClassNotFoundException
     {
@@ -64,12 +67,30 @@ public class MainFrame extends JFrame {
         oos.writeObject(customerOrders);
     }
     
+    public void addShift(Shift shift)throws FileNotFoundException, IOException, ClassNotFoundException{
+        shifts = getShifts(shift.getSetStart().getMonth(), shift.getSetStart().getYear());
+        shifts.add(shift);
+        String file = shift.getSetStart().getMonth() + "_" + shift.getSetStart().getYear();
+        fos = new FileOutputStream(file);
+        oos = new ObjectOutputStream(fos);
+        oos.writeObject(shifts);
+    }
+    
     public void removeCustomerOrder(String orderID){
         for(int i=0; i < customerOrders.size(); i++){
             if(customerOrders.get(i).getOrderID().toString().equals(orderID)){
                 customerOrders.remove(i);
             }
         }
+    }
+    
+    public ArrayList<Shift> getShifts(int month, int year) throws FileNotFoundException, IOException, ClassNotFoundException {
+        String file = month + "_" + year;
+        fis = new FileInputStream(file);
+        ois = new ObjectInputStream(fis);
+        shifts = (ArrayList<Shift>) ois.readObject();
+        ois.close();
+        return shifts;
     }
 
     public ArrayList<CustomerOrder> getCustomerOrders() throws FileNotFoundException, IOException, ClassNotFoundException {

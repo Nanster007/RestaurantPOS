@@ -46,7 +46,7 @@ public class MainMenuPanel extends CustomPanel {
             }
         });
 
-        ScheduleButton.setText("View Schedule");
+        ScheduleButton.setText("Schedule / Clock-In-Out");
         ScheduleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ScheduleButtonActionPerformed(evt);

@@ -32,7 +32,7 @@ public class ManagerSettingsPanel extends CustomPanel {
         ClockLabel = new javax.swing.JTextField();
         BackButton = new javax.swing.JButton();
         StockSystemButton = new javax.swing.JButton();
-        AdjustDrawerButton = new javax.swing.JButton();
+        SettingsButton = new javax.swing.JButton();
         SchedulingButton = new javax.swing.JButton();
         BusinessReportsButton = new javax.swing.JButton();
 
@@ -59,7 +59,12 @@ public class ManagerSettingsPanel extends CustomPanel {
             }
         });
 
-        AdjustDrawerButton.setText("Adjust Drawer");
+        SettingsButton.setText("Settings");
+        SettingsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SettingsButtonActionPerformed(evt);
+            }
+        });
 
         SchedulingButton.setText("Scheduling");
         SchedulingButton.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +92,7 @@ public class ManagerSettingsPanel extends CustomPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BusinessReportsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                            .addComponent(AdjustDrawerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(SettingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -99,7 +104,7 @@ public class ManagerSettingsPanel extends CustomPanel {
                 .addComponent(ClockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(AdjustDrawerButton, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                    .addComponent(SettingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
                     .addComponent(StockSystemButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -127,14 +132,18 @@ public class ManagerSettingsPanel extends CustomPanel {
         mainFrame.setNewPanel(new SchedulingPanel(mainFrame), Boolean.FALSE, this);
     }//GEN-LAST:event_SchedulingButtonActionPerformed
 
+    private void SettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsButtonActionPerformed
+        mainFrame.setNewPanel(new SystemSettingsPanel(mainFrame), Boolean.FALSE, this);
+    }//GEN-LAST:event_SettingsButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AdjustDrawerButton;
     private javax.swing.JButton BackButton;
     private javax.swing.JButton BusinessReportsButton;
     private javax.swing.JTextField ClockLabel;
     private javax.swing.JLabel CurrentUserLabel;
     private javax.swing.JButton SchedulingButton;
+    private javax.swing.JButton SettingsButton;
     private javax.swing.JButton StockSystemButton;
     // End of variables declaration//GEN-END:variables
 }
