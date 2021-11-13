@@ -5,6 +5,7 @@
  */
 package possystem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -12,7 +13,7 @@ import java.util.UUID;
  *
  * @author tylar
  */
-public class MenuItem {
+public class MenuItem implements Serializable{
     
     private String itemName;
     private double itemPrice;

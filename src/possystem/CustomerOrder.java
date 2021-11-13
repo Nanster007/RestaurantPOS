@@ -80,7 +80,7 @@ public class CustomerOrder implements Serializable{
     
     @Override
     public String toString(){
-        String toString = "";
+        String toString = "----------------------------------------------------------- \n";
         
         toString += this.orderID + "\n" + this.customerName + "\n" + this.customerPhoneNumber + "\n" + this.customerAddress + "\n" + "\n";
         

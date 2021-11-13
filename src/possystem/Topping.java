@@ -5,11 +5,13 @@
  */
 package possystem;
 
+import java.io.Serializable;
+
 /**
  *
  * @author tylar
  */
-public class Topping {
+public class Topping implements Serializable{
     
     private String toppingName;
     private double toppingPrice;

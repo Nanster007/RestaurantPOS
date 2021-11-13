@@ -2,6 +2,7 @@ package possystem;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -24,7 +25,7 @@ public class MainFrame extends JFrame {
     ObjectOutputStream oos;
     ObjectInputStream ois;
     
-    public MainFrame()
+    public MainFrame() throws IOException, FileNotFoundException, ClassNotFoundException
     {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Pos SystemHol");
@@ -37,7 +38,7 @@ public class MainFrame extends JFrame {
         this.pack();
         this.setVisible(true);
         clock = new ClockThread(currentPage);
-        customerOrders = new ArrayList();
+        customerOrders = getCustomerOrders();
     }
     
     public void setNewPanel(CustomPanel newPage, Boolean saveLastPage, CustomPanel lastPage){
@@ -49,6 +50,8 @@ public class MainFrame extends JFrame {
         clock.setCurrentPanel(currentPage);
         this.add(currentPage, BorderLayout.CENTER);
         this.setLocation(200, 50);
+        this.setPreferredSize(new Dimension(800, 600));
+        this.setResizable(true);
         //what is this??
         this.pack();
         this.setVisible(true);
