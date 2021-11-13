@@ -32,8 +32,12 @@ public class AdjustEmployeePanel extends CustomPanel {
         initComponents();
         this.mainFrame = mainFrame;
         setClockField(ClockLabel);
-        updateInterface();
         HelpText.setVisible(false);
+        updateInterface();
+        selectedEmployee = mainFrame.findEmployee(listModel.getElementAt(0).toString());
+        NameField.setText(selectedEmployee.getName());
+        NumberField.setText(selectedEmployee.getPhoneNumber());
+        PayrateField.setText("" + selectedEmployee.getPayRate());
         
         EmployeesList.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -51,6 +55,10 @@ public class AdjustEmployeePanel extends CustomPanel {
             }
             
         });
+        NameField.setEditable(false);
+        NumberField.setEditable(false);
+        PayrateField.setEditable(false);
+        ShiftsField.setEditable(false);
     }
 
     public void updateInterface() throws IOException, FileNotFoundException, ClassNotFoundException{
@@ -61,7 +69,6 @@ public class AdjustEmployeePanel extends CustomPanel {
         EmployeesList = new JList(listModel);
         EmployeesScrollPane.setViewportView(EmployeesList);
         EmployeesList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        mainFrame.pack();
     }
     
     /**
@@ -137,8 +144,17 @@ public class AdjustEmployeePanel extends CustomPanel {
         });
 
         EditSaveButton.setText("Edit Current Employee");
+        EditSaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditSaveButtonActionPerformed(evt);
+            }
+        });
 
-        ShiftsField.setText("jTextField4");
+        ShiftsField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ShiftsFieldActionPerformed(evt);
+            }
+        });
 
         ShiftsLabel.setText("Month's Shifts:");
 
@@ -304,7 +320,6 @@ public class AdjustEmployeePanel extends CustomPanel {
             HelpText.setVisible(false);
             EditSaveButton.setEnabled(true);
             EmployeesList.setEnabled(true);
-            ShiftsField.setEnabled(true);
             try {
                 updateInterface();
             } catch (IOException ex) {
@@ -316,14 +331,53 @@ public class AdjustEmployeePanel extends CustomPanel {
         else{
             HelpText.setVisible(true);
             EditSaveButton.setEnabled(false);
-            AddEmployeeButton.setText("Submit");
             EmployeesList.setEnabled(false);
-            ShiftsField.setEnabled(false);
+            AddEmployeeButton.setText("Submit");
+            NameField.setEditable(true);
+            NameField.setText("");
+            NumberField.setEditable(true);
+            NumberField.setText("");
+            PayrateField.setEditable(true);
+            PayrateField.setText("");
         }
-        
+
         
         
     }//GEN-LAST:event_AddEmployeeButtonActionPerformed
+
+    private void EditSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditSaveButtonActionPerformed
+        if(EditSaveButton.getText().equals("Edit Current Employee")){
+            EmployeesList.setEnabled(false);
+            NameField.setEditable(true);
+            NumberField.setEditable(true);
+            PayrateField.setEditable(true);
+            EditSaveButton.setText("Save Changes");
+            AddEmployeeButton.setEnabled(false);
+        }
+        else{
+            EditSaveButton.setText("Edit Current Employee");
+            selectedEmployee.setName(NameField.getText());
+            selectedEmployee.setPayRate(Double.parseDouble(PayrateField.getText()));
+            selectedEmployee.setPhoneNumber(NumberField.getText());
+            try {
+                mainFrame.saveEmployees();
+            } catch (IOException ex) {
+                Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            EmployeesList.setEnabled(true);
+            NameField.setEditable(false);
+            NumberField.setEditable(false);
+            PayrateField.setEditable(false);
+            AddEmployeeButton.setEnabled(true);
+        }
+        
+    }//GEN-LAST:event_EditSaveButtonActionPerformed
+
+    private void ShiftsFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShiftsFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ShiftsFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

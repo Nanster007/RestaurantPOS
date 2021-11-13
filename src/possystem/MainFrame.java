@@ -87,6 +87,12 @@ public class MainFrame extends JFrame {
         oos.writeObject(employees);
     }
     
+    public void saveEmployees()throws FileNotFoundException, IOException, ClassNotFoundException {
+        fos = new FileOutputStream("Employees.txt");
+        oos = new ObjectOutputStream(fos);
+        oos.writeObject(employees);
+    }
+    
     public void addShift(Shift shift)throws FileNotFoundException, IOException, ClassNotFoundException{
         shifts = getShifts(shift.getSetStart().getMonth(), shift.getSetStart().getYear());
         shifts.add(shift);
