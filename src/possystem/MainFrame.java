@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
@@ -26,6 +27,7 @@ public class MainFrame extends JFrame {
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
     private ArrayList<Shift> shifts;
+    private ArrayList<Employee> employees;
     
     
     public MainFrame() throws IOException, FileNotFoundException, ClassNotFoundException
@@ -42,6 +44,7 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
         clock = new ClockThread(currentPage);
         customerOrders = getCustomerOrders();
+        employees = getEmployees();
     }
     
     public void setNewPanel(CustomPanel newPage, Boolean saveLastPage, CustomPanel lastPage){
@@ -60,6 +63,16 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
     }
     
+    public Employee findEmployee(String name) throws IOException, FileNotFoundException, ClassNotFoundException{
+        getEmployees();
+        for(int x=0; x<employees.size(); x++){
+            if(employees.get(x).getName().equals(name)){
+                return employees.get(x);
+            }
+        }
+        return null;
+    }
+    
     public void addCustomerOrder(CustomerOrder customerOrder) throws FileNotFoundException, IOException{
         customerOrders.add(customerOrder);
         fos = new FileOutputStream("CustomerOrders.txt");
@@ -67,10 +80,17 @@ public class MainFrame extends JFrame {
         oos.writeObject(customerOrders);
     }
     
+    public void addEmployee(Employee employee)throws FileNotFoundException, IOException, ClassNotFoundException {
+        employees.add(employee);
+        fos = new FileOutputStream("Employees.txt");
+        oos = new ObjectOutputStream(fos);
+        oos.writeObject(employees);
+    }
+    
     public void addShift(Shift shift)throws FileNotFoundException, IOException, ClassNotFoundException{
         shifts = getShifts(shift.getSetStart().getMonth(), shift.getSetStart().getYear());
         shifts.add(shift);
-        String file = shift.getSetStart().getMonth() + "_" + shift.getSetStart().getYear();
+        String file = shift.getSetStart().getMonth() + "_" + shift.getSetStart().getYear() + ".txt";
         fos = new FileOutputStream(file);
         oos = new ObjectOutputStream(fos);
         oos.writeObject(shifts);
@@ -84,8 +104,18 @@ public class MainFrame extends JFrame {
         }
     }
     
+    public ArrayList<Employee> getEmployees() throws FileNotFoundException, IOException, ClassNotFoundException{
+        
+        String file = "Employees.txt";
+        fis = new FileInputStream(file);
+        ois = new ObjectInputStream(fis);
+        employees = (ArrayList<Employee>) ois.readObject();
+        ois.close();
+        return employees;
+    }
+    
     public ArrayList<Shift> getShifts(int month, int year) throws FileNotFoundException, IOException, ClassNotFoundException {
-        String file = month + "_" + year;
+        String file = month + "_" + year + ".txt";
         fis = new FileInputStream(file);
         ois = new ObjectInputStream(fis);
         shifts = (ArrayList<Shift>) ois.readObject();

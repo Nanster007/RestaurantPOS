@@ -21,6 +21,8 @@ public class Shift implements Serializable{
         this.employee = employee;
         this.setStart = setStart;
         this.setEnd = setEnd;
+        this.clockStart = null;
+        this.clockEnd = null;
     }
 
     public Employee getEmployee() {
@@ -59,6 +61,31 @@ public class Shift implements Serializable{
         this.setEnd = setEnd;
     }
     
-    
+    @Override
+    public String toString(){
+        String string = "";
+        
+        string += this.employee.getName() + "\n";
+        string += this.setStart + "\n";
+        
+        if(setEnd == null){
+            string += "to \n" + "TBD \n";
+        }
+        else{
+            string += "to \n" + this.setEnd + "\n";
+        }
+        
+        if(clockStart != null){
+            string += clockStart + "\n";
+        }
+        if(clockEnd != null){
+            string += clockEnd + "\n";
+        }
+        
+        string += "\n";
+        
+        
+        return string;
+    }
     
 }

@@ -6,6 +6,7 @@
 package possystem;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  *
@@ -13,13 +14,39 @@ import java.io.Serializable;
  */
 public class Employee implements Serializable{
     
-    String name, phoneNumber;
-    double payRate;
+    private String name, phoneNumber;
+    private double payRate;
+    private UUID orderID;
     
     public Employee (String name, String phoneNumber, double payRate){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.payRate = payRate;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public double getPayRate() {
+        return payRate;
+    }
+
+    public void setPayRate(double payRate) {
+        this.payRate = payRate;
+    }
+
     
 }

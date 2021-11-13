@@ -5,6 +5,10 @@
  */
 package possystem;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author tylar
@@ -92,7 +96,13 @@ public class SystemSettingsPanel extends CustomPanel {
     }//GEN-LAST:event_ClockLabelActionPerformed
 
     private void AdjustEmployeesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdjustEmployeesButtonActionPerformed
-        mainFrame.setNewPanel(new AdjustEmployeePanel(mainFrame), false, this);
+        try {
+            mainFrame.setNewPanel(new AdjustEmployeePanel(mainFrame), false, this);
+        } catch (IOException ex) {
+            Logger.getLogger(SystemSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SystemSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_AdjustEmployeesButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
