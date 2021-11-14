@@ -21,24 +21,43 @@ public class CustomLabel extends JLabel{
     
     private SchedulingPanel schedulingPanel;
     private MainFrame mainFrame;
+    private EditSchedulePanel editSchedulePanel;
     
-    public CustomLabel (String text, SchedulingPanel schedulingPanel, MainFrame mainFrame){
+    public CustomLabel (String text, SchedulingPanel schedulingPanel, EditSchedulePanel editSchedulePanel, MainFrame mainFrame){
         super(text);
         this.mainFrame = mainFrame;
-        this.schedulingPanel = schedulingPanel;
-        this.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
-                try {
-                    mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, schedulingPanel, Integer.parseInt(getText())), true, schedulingPanel);
-                } catch (IOException ex) {
-                    Logger.getLogger(CustomLabel.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(CustomLabel.class.getName()).log(Level.SEVERE, null, ex);
+        if(editSchedulePanel == null){
+            this.schedulingPanel = schedulingPanel;
+            this.addMouseListener(new MouseAdapter(){
+
+                @Override
+                public void mouseClicked(MouseEvent e){
+                    try {
+                        mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, schedulingPanel, Integer.parseInt(getText())), true, schedulingPanel);
+                    } catch (IOException ex) {
+                        Logger.getLogger(CustomLabel.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(CustomLabel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }
-            
-        });
+            });
+        }
+        else{
+            this.editSchedulePanel = editSchedulePanel;
+            this.addMouseListener(new MouseAdapter(){
+
+                @Override
+                public void mouseClicked(MouseEvent e){
+                    try {
+                        mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, schedulingPanel, Integer.parseInt(getText())), true, schedulingPanel);
+                    } catch (IOException ex) {
+                        Logger.getLogger(CustomLabel.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(CustomLabel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+        }
     }
-    
 }
+    
