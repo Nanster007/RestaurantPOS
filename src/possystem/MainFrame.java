@@ -3,6 +3,8 @@ package possystem;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -110,30 +112,84 @@ public class MainFrame extends JFrame {
         }
     }
     
+    public void removeEmployee (Employee employee) throws IOException, FileNotFoundException, ClassNotFoundException{
+        employees = getEmployees();
+        
+        for(int x=0; x<employees.size(); x++){
+            System.out.println(employees.get(x).getName());
+            if (employees.get(x).getName().equals(employee.getName())){
+                employees.remove(x);
+
+            }
+        }
+        
+        saveEmployees();
+    }
+    
     public ArrayList<Employee> getEmployees() throws FileNotFoundException, IOException, ClassNotFoundException{
         
         String file = "Employees.txt";
-        fis = new FileInputStream(file);
-        ois = new ObjectInputStream(fis);
-        employees = (ArrayList<Employee>) ois.readObject();
-        ois.close();
+        try{
+            fis = new FileInputStream(file);
+        }
+        catch(FileNotFoundException e){
+            File newFile = new File(file);
+            newFile.createNewFile();
+            fis = new FileInputStream(file);
+        }
+        try{
+            ois = new ObjectInputStream(fis);
+            employees = (ArrayList<Employee>) ois.readObject();
+            ois.close();
+        }
+        catch(EOFException e){
+            employees = new ArrayList();
+        }
+        
         return employees;
     }
     
     public ArrayList<Shift> getShifts(int month, int year) throws FileNotFoundException, IOException, ClassNotFoundException {
         String file = month + "_" + year + ".txt";
-        fis = new FileInputStream(file);
-        ois = new ObjectInputStream(fis);
-        shifts = (ArrayList<Shift>) ois.readObject();
-        ois.close();
+        try{
+            fis = new FileInputStream(file);
+        }
+        catch(FileNotFoundException e){
+            File newFile = new File(file);
+            newFile.createNewFile();
+            fis = new FileInputStream(file);
+        }
+        try{
+            ois = new ObjectInputStream(fis);
+            shifts = (ArrayList<Shift>) ois.readObject();
+            ois.close();
+        }
+        catch(EOFException e){
+            shifts = new ArrayList();
+        }
+        
         return shifts;
     }
 
     public ArrayList<CustomerOrder> getCustomerOrders() throws FileNotFoundException, IOException, ClassNotFoundException {
-        fis = new FileInputStream("CustomerOrders.txt");
-        ois = new ObjectInputStream(fis);
-        customerOrders = (ArrayList<CustomerOrder>) ois.readObject();
-        ois.close();
+        String file = "CustomerOrders.txt";
+        try{
+            fis = new FileInputStream(file);
+        }
+        catch(FileNotFoundException e){
+            File newFile = new File(file);
+            newFile.createNewFile();
+            fis = new FileInputStream(file);
+        }
+        try{
+            ois = new ObjectInputStream(fis);
+            customerOrders = (ArrayList<CustomerOrder>) ois.readObject();
+            ois.close();
+        }
+        catch(EOFException e){
+            customerOrders = new ArrayList();
+        }
+
         return customerOrders;
     }
     

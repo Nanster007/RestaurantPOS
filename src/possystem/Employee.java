@@ -47,6 +47,5 @@ public class Employee implements Serializable{
     public void setPayRate(double payRate) {
         this.payRate = payRate;
     }
-
     
 }

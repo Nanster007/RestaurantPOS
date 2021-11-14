@@ -7,6 +7,8 @@ package possystem;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -38,6 +40,33 @@ public class AdjustEmployeePanel extends CustomPanel {
         NameField.setText(selectedEmployee.getName());
         NumberField.setText(selectedEmployee.getPhoneNumber());
         PayrateField.setText("" + selectedEmployee.getPayRate());
+       
+        NameField.setEditable(false);
+        NumberField.setEditable(false);
+        PayrateField.setEditable(false);
+        ShiftsField.setEditable(false);
+    }
+    
+    public void updateShifts() throws IOException, FileNotFoundException, ClassNotFoundException{
+        Calendar calendar = Calendar.getInstance();
+        String string = "";
+        ArrayList<Shift> shifts = mainFrame.getShifts(calendar.get(Calendar.MONTH), Calendar.YEAR);
+        for(int x=0; x<shifts.size(); x++){
+            if(shifts.get(x).getEmployee().getName().equals(selectedEmployee.getName())){
+                string += shifts.get(x).toString();
+            }
+        }
+        ShiftsField.setText(string);
+    }
+
+    public void updateInterface() throws IOException, FileNotFoundException, ClassNotFoundException{
+        listModel = new DefaultListModel();
+        for(int x=0; x<mainFrame.getEmployees().size(); x++){
+            listModel.addElement(mainFrame.getEmployees().get(x).getName());
+        }
+        EmployeesList = new JList(listModel);
+        EmployeesScrollPane.setViewportView(EmployeesList);
+        EmployeesList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         
         EmployeesList.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -55,20 +84,6 @@ public class AdjustEmployeePanel extends CustomPanel {
             }
             
         });
-        NameField.setEditable(false);
-        NumberField.setEditable(false);
-        PayrateField.setEditable(false);
-        ShiftsField.setEditable(false);
-    }
-
-    public void updateInterface() throws IOException, FileNotFoundException, ClassNotFoundException{
-        listModel = new DefaultListModel();
-        for(int x=0; x<mainFrame.getEmployees().size(); x++){
-            listModel.addElement(mainFrame.getEmployees().get(x).getName());
-        }
-        EmployeesList = new JList(listModel);
-        EmployeesScrollPane.setViewportView(EmployeesList);
-        EmployeesList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
     }
     
     /**
@@ -99,6 +114,7 @@ public class AdjustEmployeePanel extends CustomPanel {
         NameField = new javax.swing.JTextField();
         NameLabel = new javax.swing.JLabel();
         HelpText = new javax.swing.JLabel();
+        DeleteEmployeeButton = new javax.swing.JButton();
 
         BackButton.setText("Back");
         BackButton.addActionListener(new java.awt.event.ActionListener() {
@@ -136,14 +152,14 @@ public class AdjustEmployeePanel extends CustomPanel {
                 .addComponent(EmployeesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE))
         );
 
-        AddEmployeeButton.setText("Add New Employee");
+        AddEmployeeButton.setText("Add Employee");
         AddEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddEmployeeButtonActionPerformed(evt);
             }
         });
 
-        EditSaveButton.setText("Edit Current Employee");
+        EditSaveButton.setText("Edit Info");
         EditSaveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EditSaveButtonActionPerformed(evt);
@@ -178,6 +194,13 @@ public class AdjustEmployeePanel extends CustomPanel {
 
         HelpText.setText("Please fill in required information");
 
+        DeleteEmployeeButton.setText("Delete Employee");
+        DeleteEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteEmployeeButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout EmployeeInfoPanelLayout = new javax.swing.GroupLayout(EmployeeInfoPanel);
         EmployeeInfoPanel.setLayout(EmployeeInfoPanelLayout);
         EmployeeInfoPanelLayout.setHorizontalGroup(
@@ -186,10 +209,11 @@ public class AdjustEmployeePanel extends CustomPanel {
                 .addContainerGap()
                 .addGroup(EmployeeInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EmployeeInfoPanelLayout.createSequentialGroup()
-                        .addGap(0, 10, Short.MAX_VALUE)
-                        .addComponent(EditSaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(EditSaveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(AddEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(DeleteEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(AddEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(ShiftsField)
                     .addComponent(ShiftsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PayrateField)
@@ -199,7 +223,7 @@ public class AdjustEmployeePanel extends CustomPanel {
                         .addGroup(EmployeeInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(EmployeeInfoPanelLayout.createSequentialGroup()
                                 .addComponent(NameLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
                                 .addComponent(HelpText))
                             .addGroup(EmployeeInfoPanelLayout.createSequentialGroup()
                                 .addGroup(EmployeeInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +256,8 @@ public class AdjustEmployeePanel extends CustomPanel {
                 .addGap(18, 18, 18)
                 .addGroup(EmployeeInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EditSaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(EditSaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DeleteEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -319,7 +344,7 @@ public class AdjustEmployeePanel extends CustomPanel {
             AddEmployeeButton.setText("Add New Employee");
             HelpText.setVisible(false);
             EditSaveButton.setEnabled(true);
-            EmployeesList.setEnabled(true);
+//            EmployeesList.setEnabled(true);
             try {
                 updateInterface();
             } catch (IOException ex) {
@@ -331,7 +356,7 @@ public class AdjustEmployeePanel extends CustomPanel {
         else{
             HelpText.setVisible(true);
             EditSaveButton.setEnabled(false);
-            EmployeesList.setEnabled(false);
+//            EmployeesList.setEnabled(false);
             AddEmployeeButton.setText("Submit");
             NameField.setEditable(true);
             NameField.setText("");
@@ -346,8 +371,8 @@ public class AdjustEmployeePanel extends CustomPanel {
     }//GEN-LAST:event_AddEmployeeButtonActionPerformed
 
     private void EditSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditSaveButtonActionPerformed
-        if(EditSaveButton.getText().equals("Edit Current Employee")){
-            EmployeesList.setEnabled(false);
+        if(EditSaveButton.getText().equals("Edit Info")){
+//            EmployeesList.setEnabled(false);
             NameField.setEditable(true);
             NumberField.setEditable(true);
             PayrateField.setEditable(true);
@@ -355,7 +380,8 @@ public class AdjustEmployeePanel extends CustomPanel {
             AddEmployeeButton.setEnabled(false);
         }
         else{
-            EditSaveButton.setText("Edit Current Employee");
+            EditSaveButton.setText("Edit Info");
+            System.out.println(selectedEmployee.getName());
             selectedEmployee.setName(NameField.getText());
             selectedEmployee.setPayRate(Double.parseDouble(PayrateField.getText()));
             selectedEmployee.setPhoneNumber(NumberField.getText());
@@ -366,7 +392,7 @@ public class AdjustEmployeePanel extends CustomPanel {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
             }
-            EmployeesList.setEnabled(true);
+//            EmployeesList.setEnabled(true);
             NameField.setEditable(false);
             NumberField.setEditable(false);
             PayrateField.setEditable(false);
@@ -379,6 +405,30 @@ public class AdjustEmployeePanel extends CustomPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_ShiftsFieldActionPerformed
 
+    private void DeleteEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteEmployeeButtonActionPerformed
+        try {
+            int index = EmployeesList.getSelectedIndex();
+            if(index == 0){
+                EmployeesList.setSelectedIndex(1);
+            }
+            else{
+                EmployeesList.setSelectedIndex(0);
+            }
+            mainFrame.removeEmployee(selectedEmployee);
+        } catch (IOException ex) {
+            Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            updateInterface();
+        } catch (IOException ex) {
+            Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_DeleteEmployeeButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddEmployeeButton;
@@ -386,6 +436,7 @@ public class AdjustEmployeePanel extends CustomPanel {
     private javax.swing.JTextField ClockLabel;
     private javax.swing.JLabel CurrentEmployeesLabel;
     private javax.swing.JLabel CurrentUserLabel;
+    private javax.swing.JButton DeleteEmployeeButton;
     private javax.swing.JButton EditSaveButton;
     private javax.swing.JPanel EmployeeInfoPanel;
     private javax.swing.JPanel EmployeesPanel;

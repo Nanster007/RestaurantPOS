@@ -29,6 +29,7 @@ public class EditSchedulePanel extends CustomPanel {
     private String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     private int[] daysPerMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     private ArrayList<Shift> shifts;
+    private DefaultListModel listModel;
     
     public EditSchedulePanel(MainFrame mainFrame, SchedulingPanel schedulingPanel, int day) throws IOException, FileNotFoundException, ClassNotFoundException {
         initComponents();
@@ -50,6 +51,7 @@ public class EditSchedulePanel extends CustomPanel {
             listModel.addElement(shifts.get(x));
         }
         ShiftsList = new JList(listModel);
+        ListScrollPane.setViewportView(ShiftsList);
         ShiftsList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
     }
 
@@ -73,6 +75,8 @@ public class EditSchedulePanel extends CustomPanel {
         jLabel1 = new javax.swing.JLabel();
         ListScrollPane = new javax.swing.JScrollPane();
         ShiftsList = new javax.swing.JList<>();
+        jPanel2 = new javax.swing.JPanel();
+        AddShiftLabel = new javax.swing.JLabel();
 
         CurrentUserLabel.setText("Welcome: User's Name");
 
@@ -117,6 +121,24 @@ public class EditSchedulePanel extends CustomPanel {
         });
         ListScrollPane.setViewportView(ShiftsList);
 
+        AddShiftLabel.setText("Add Shift");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(AddShiftLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(AddShiftLabel)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -126,16 +148,21 @@ public class EditSchedulePanel extends CustomPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ListScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ListScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ListScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -263,6 +290,7 @@ public class EditSchedulePanel extends CustomPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AddShiftLabel;
     private javax.swing.JButton BackButton;
     private javax.swing.JTextField ClockLabel;
     private javax.swing.JLabel CurrentUserLabel;
@@ -274,5 +302,6 @@ public class EditSchedulePanel extends CustomPanel {
     private javax.swing.JLabel YearLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
