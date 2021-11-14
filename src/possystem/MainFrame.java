@@ -1,7 +1,6 @@
 package possystem;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.io.EOFException;
 import java.io.File;
@@ -12,17 +11,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.UUID;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 
 //creates window and sets meta data for window
 public class MainFrame extends JFrame {
     private CustomPanel currentPage, lastPage;
-    private ClockThread clock;
+    private final ClockThread clock;
     private ArrayList<CustomerOrder> customerOrders;
     private FileOutputStream fos;
     private FileInputStream fis;
@@ -36,13 +32,11 @@ public class MainFrame extends JFrame {
     {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Pos SystemHol");
-        this.setResizable(true);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setResizable(false);
         currentPage = new MainMenuPanel(this);
         this.add(currentPage, BorderLayout.CENTER);
-        
-        this.setLocation(200, 50);
         //what is this??
-        this.pack();
         this.setVisible(true);
         clock = new ClockThread(currentPage);
         customerOrders = getCustomerOrders();
@@ -57,11 +51,7 @@ public class MainFrame extends JFrame {
         currentPage = newPage;
         clock.setCurrentPanel(currentPage);
         this.add(currentPage, BorderLayout.CENTER);
-        this.setLocation(200, 50);
-        this.setPreferredSize(new Dimension(800, 600));
-        this.setResizable(true);
         //what is this??
-        this.pack();
         this.setVisible(true);
     }
     

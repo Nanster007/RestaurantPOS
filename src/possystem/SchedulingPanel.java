@@ -8,10 +8,12 @@ package possystem;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
@@ -36,13 +38,12 @@ public class SchedulingPanel extends CustomPanel {
         createCalendar();
         YearLabel.setText("" + currentYear);
         MonthLabel.setText(months[currentMonth]);
-
     }
 
     private void createCalendar(){
         
-        int height = (int) mainFrame.getHeight()-250;
-        int width = (int) mainFrame.getWidth()-42;
+        int height = (int) mainFrame.getHeight()-235;
+        int width = (int) mainFrame.getWidth()-39;
 
         calendar = Calendar.getInstance();
         currentMonth = calendar.get(Calendar.MONTH);
@@ -51,14 +52,23 @@ public class SchedulingPanel extends CustomPanel {
         
         Date date = new Date(currentYear - 1900, currentMonth, 1);
         calendar.setTime(date);
-        firstDay = calendar.get(Calendar.DAY_OF_WEEK) - 1;
-        
-        schedulingCalendar = new SchedulingCalendar(mainFrame, height, width, this);
+        firstDay = calendar.get(Calendar.DAY_OF_WEEK) - 1;       
+        schedulingCalendar = new SchedulingCalendar(mainFrame, this, null);
         CalendarPanel.add(schedulingCalendar);
-        mainFrame.pack();
- 
-        
+        CalendarPanel.setLayout(new GridLayout(1, 1));
 
+    }
+    
+    public SchedulingPanel getSchedulingPanel(){
+        return this;
+    }
+    
+    public int getCalendarPanelWidth(){
+        return CalendarPanel.getWidth();
+    }
+    
+    public int getCalendarPanelHeight(){
+        return CalendarPanel.getHeight();
     }
     
     public void setDate(Date date){
@@ -69,13 +79,10 @@ public class SchedulingPanel extends CustomPanel {
     }
 
     public int getFirstDay() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date(getCurrentYear(), getCurrentMonth(), 1));
-        return firstDay = cal.get(Calendar.DAY_OF_MONTH);
-    }
-
-    public void setFirstDay(int firstDay) {
-        this.firstDay = firstDay;
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(new Date(getCurrentYear(), getCurrentMonth(), 1));
+//        return firstDay = cal.get(Calendar.DAY_OF_MONTH);
+    return firstDay;
     }
 
     public int getCurrentMonth() {
@@ -234,7 +241,7 @@ public class SchedulingPanel extends CustomPanel {
         }
                 
         calendar.setTime(date);
-        firstDay = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+        firstDay = calendar.get(Calendar.DAY_OF_WEEK)-1;
         schedulingCalendar.changeMonth();
         MonthLabel.setText(months[currentMonth]);
         YearLabel.setText("" + currentYear);

@@ -17,6 +17,7 @@ public class ManagerSettingsPanel extends CustomPanel {
         initComponents();
         this.mainFrame = mainFrame;
         setClockField(ClockLabel);
+        
     }
 
     /**
