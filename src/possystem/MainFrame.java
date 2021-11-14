@@ -65,6 +65,14 @@ public class MainFrame extends JFrame {
         return null;
     }
     
+    public ArrayList<String> getEmployeeNames(){
+        ArrayList<String> list = new ArrayList();
+        for(int x=0; x<employees.size(); x++){
+            list.add(employees.get(x).getName());
+        }
+        return list;
+    }
+    
     public void addCustomerOrder(CustomerOrder customerOrder) throws FileNotFoundException, IOException{
         customerOrders.add(customerOrder);
         fos = new FileOutputStream("CustomerOrders.txt");
@@ -92,6 +100,7 @@ public class MainFrame extends JFrame {
         fos = new FileOutputStream(file);
         oos = new ObjectOutputStream(fos);
         oos.writeObject(shifts);
+        System.out.print(shifts);
     }
     
     public void removeCustomerOrder(String orderID){

@@ -15,7 +15,9 @@ import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 
@@ -27,6 +29,7 @@ public class SchedulingPanel extends CustomPanel {
 
     private MainFrame mainFrame;
     private String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    private String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     private int currentMonth, currentDay, currentYear, firstDay;
     private Calendar calendar;
     private SchedulingCalendar schedulingCalendar;
@@ -56,7 +59,16 @@ public class SchedulingPanel extends CustomPanel {
         schedulingCalendar = new SchedulingCalendar(mainFrame, this, null);
         CalendarPanel.add(schedulingCalendar);
         CalendarPanel.setLayout(new GridLayout(1, 1));
+        
+        LabelsPanel.setLayout(new GridLayout(1, 7));
+        for(int x=0; x<7; x++){
+            LabelsPanel.add(new JLabel(daysOfWeek[x], SwingConstants.CENTER));
+        }
 
+    }
+    
+    public SchedulingCalendar getSchedulingCalendar(){
+        return schedulingCalendar;
     }
     
     public SchedulingPanel getSchedulingPanel(){
@@ -127,6 +139,7 @@ public class SchedulingPanel extends CustomPanel {
         NextMonthButton = new javax.swing.JButton();
         PreviousMonthButton = new javax.swing.JButton();
         CalendarPanel = new javax.swing.JPanel();
+        LabelsPanel = new javax.swing.JPanel();
 
         CurrentUserLabel.setText("Welcome: User's Name");
 
@@ -170,7 +183,18 @@ public class SchedulingPanel extends CustomPanel {
         );
         CalendarPanelLayout.setVerticalGroup(
             CalendarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addGap(0, 299, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout LabelsPanelLayout = new javax.swing.GroupLayout(LabelsPanel);
+        LabelsPanel.setLayout(LabelsPanelLayout);
+        LabelsPanelLayout.setHorizontalGroup(
+            LabelsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 953, Short.MAX_VALUE)
+        );
+        LabelsPanelLayout.setVerticalGroup(
+            LabelsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 35, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -183,16 +207,17 @@ public class SchedulingPanel extends CustomPanel {
                     .addComponent(BackButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(PreviousMonthButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 516, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(NextMonthButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CalendarPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(YearLabel)
-                            .addComponent(MonthLabel)
                             .addComponent(CurrentUserLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ClockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ClockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(YearLabel)
+                            .addComponent(MonthLabel))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(CalendarPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(LabelsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -206,6 +231,8 @@ public class SchedulingPanel extends CustomPanel {
                 .addComponent(YearLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(MonthLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LabelsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CalendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -273,6 +300,7 @@ public class SchedulingPanel extends CustomPanel {
     private javax.swing.JPanel CalendarPanel;
     private javax.swing.JTextField ClockLabel;
     private javax.swing.JLabel CurrentUserLabel;
+    private javax.swing.JPanel LabelsPanel;
     private javax.swing.JLabel MonthLabel;
     private javax.swing.JButton NextMonthButton;
     private javax.swing.JButton PreviousMonthButton;
