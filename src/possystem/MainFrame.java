@@ -1,7 +1,6 @@
 package possystem;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
