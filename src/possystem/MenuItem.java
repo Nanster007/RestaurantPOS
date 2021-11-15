@@ -13,41 +13,35 @@ import java.util.UUID;
  *
  * @author tylar
  */
-public class MenuItem implements Serializable{
-    
-    private String itemName;
-    private double itemPrice;
-    private String itemType;
-    private UUID itemID;
-    private ArrayList<Topping> itemToppings;
-    private double toppingsPrice;
+public class MenuItem implements Serializable {
+
+    private String name;
+    private double price;
+    private String type;
+    private UUID id;
+    private ArrayList<Topping> possibleToppings;
     private String comments;
-    
-    public MenuItem(String itemName, double itemPrice, double toppingsPrice, String comments, String itemType){
-        this.itemName = itemName;
-        this.itemPrice = itemPrice;
-        this.itemID = UUID.randomUUID();
-        this.itemToppings = new ArrayList();
-        this.toppingsPrice = toppingsPrice;
+
+    public MenuItem(String name, double price, UUID id, String comments, String itemType) {
+        this.name = name;
+        this.price = price;
+        this.id = id;
+        this.possibleToppings = new ArrayList();
         this.comments = comments;
-        this.itemType = itemType;
-    }
-    
-    public double getItemPrice() {
-        
-        for(int i = 0; i < itemToppings.size(); i++){
-           toppingsPrice += itemToppings.get(i).getToppingPrice(); 
-        }
-        
-        return itemPrice + toppingsPrice;
+        this.type = itemType;
     }
 
-    public String getItemType() {
-        return itemType;
+    // <editor-fold desc="Getters and Setters" defaultstate="collapsed">
+    public double getPrice() {
+        return price;
     }
 
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getComments() {
@@ -57,39 +51,36 @@ public class MenuItem implements Serializable{
     public void setComments(String comments) {
         this.comments = comments;
     }
-    
-    public void addTopping(Topping topping){
-        itemToppings.add(topping);
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public void setItemPrice(double itemPrice) {
-        this.itemPrice = itemPrice;
+    public String getName() {
+        return name;
     }
 
-    public String getItemName() {
-        return itemName;
+    public UUID getId() {
+        return id;
     }
 
-    public UUID getItemID() {
-        return itemID;
-    }
-    
-    public void setItemName(String itemName){
-        this.itemName = itemName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public ArrayList<Topping> getItemToppings() {
-        return itemToppings;
+    public ArrayList<Topping> getPossibleToppings() {
+        return possibleToppings;
     }
-    
+
+    // </editor-fold>
+    public void addPossibleTopping(Topping topping) {
+        possibleToppings.add(topping);
+    }
+
     @Override
-    public String toString(){
-        String toString = itemPrice + " \n" + itemName + "\n" + comments;
-        
+    public String toString() {
+        String toString = price + " \n" + name + "\n" + comments;
+
         return toString;
     }
-    
-    
-    
-    
 }
