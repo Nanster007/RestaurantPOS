@@ -67,14 +67,6 @@ public class SchedulingPanel extends CustomPanel {
 
     }
     
-    public SchedulingCalendar getSchedulingCalendar(){
-        return schedulingCalendar;
-    }
-    
-    public SchedulingPanel getSchedulingPanel(){
-        return this;
-    }
-    
     public int getCalendarPanelWidth(){
         return CalendarPanel.getWidth();
     }

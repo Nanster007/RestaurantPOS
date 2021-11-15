@@ -95,11 +95,10 @@ public class MainFrame extends JFrame {
     public void addShift(Shift shift)throws FileNotFoundException, IOException, ClassNotFoundException{
         shifts = getShifts(shift.getSetStart().getMonth(), shift.getSetStart().getYear());
         shifts.add(shift);
-        String file = shift.getSetStart().getMonth() + "_" + shift.getSetStart().getYear() + ".txt";
+        String file = (shift.getSetStart().getMonth()+1) + "_" + shift.getSetStart().getYear() + ".txt";
         fos = new FileOutputStream(file);
         oos = new ObjectOutputStream(fos);
         oos.writeObject(shifts);
-        System.out.print(shifts);
     }
     
     public void removeCustomerOrder(String orderID){
@@ -148,7 +147,7 @@ public class MainFrame extends JFrame {
     }
     
     public ArrayList<Shift> getShifts(int month, int year) throws FileNotFoundException, IOException, ClassNotFoundException {
-        String file = month + "_" + year + ".txt";
+        String file = (month + 1) + "_" + year + ".txt";
         try{
             fis = new FileInputStream(file);
         }
@@ -164,8 +163,8 @@ public class MainFrame extends JFrame {
         }
         catch(EOFException e){
             shifts = new ArrayList();
+
         }
-        
         return shifts;
     }
 

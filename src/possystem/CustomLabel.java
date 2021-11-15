@@ -62,16 +62,21 @@ public class CustomLabel extends JLabel{
             });
         }
     }
+    
+    public Boolean getHighlighted(){
+        return highlighted;
+    }
+    
     public void highlightDay(){
         if(highlighted == false){
             this.setBorder(BorderFactory.createLineBorder(Color.red));
             this.highlighted = true;
-            schedulingPanel.getSchedulingCalendar().addSelectedDay(getText());
+            editSchedulePanel.getSchedulingCalendar().addSelectedDay(getText());
         }
         else{
             this.highlighted = false;
             this.setBorder(BorderFactory.createLineBorder(Color.black));
-            schedulingPanel.getSchedulingCalendar().removeSelectedDay(getText());
+            editSchedulePanel.getSchedulingCalendar().removeSelectedDay(getText());
         }
         
         

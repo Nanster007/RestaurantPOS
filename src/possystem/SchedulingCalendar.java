@@ -66,7 +66,15 @@ public class SchedulingCalendar extends JPanel {
 
     }
     
+    public void clearSelectedDays(){
+        selectedDays.clear();
+        for(int x=0; x<daysOfMonth.length && daysOfMonth[x].getHighlighted(); x++){
+            daysOfMonth[x].highlightDay();
+        }
+    }
+    
     public void addSelectedDay(String text){    
+        
         selectedDays.add(new Date(schedulingPanel.getCurrentYear(), schedulingPanel.getCurrentMonth(), Integer.parseInt(text)));
     }
     public void removeSelectedDay(String text){

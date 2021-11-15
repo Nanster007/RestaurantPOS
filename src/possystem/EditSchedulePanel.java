@@ -21,6 +21,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -30,7 +32,7 @@ public class EditSchedulePanel extends CustomPanel {
 
     private MainFrame mainFrame;
     private SchedulingPanel schedulingPanel;
-    private SchedulingCalendar schedulingCalendar;
+    private final SchedulingCalendar schedulingCalendar;
     private Calendar calendar;
     private int day;
     private String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
@@ -38,6 +40,7 @@ public class EditSchedulePanel extends CustomPanel {
     private int[] daysPerMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     private ArrayList<Shift> shifts;
     private DefaultListModel listModel;
+    private Shift selectedShift;
     
     public EditSchedulePanel(MainFrame mainFrame, SchedulingPanel schedulingPanel, int day) throws IOException, FileNotFoundException, ClassNotFoundException {
         initComponents();
@@ -50,7 +53,7 @@ public class EditSchedulePanel extends CustomPanel {
         DateLabel.setText(months[schedulingPanel.getCurrentMonth()] + ", " + day);
         shifts = mainFrame.getShifts(schedulingPanel.getCurrentMonth(), schedulingPanel.getCurrentYear());
         updateInterface();
-        schedulingCalendar = new SchedulingCalendar(mainFrame,schedulingPanel, this);
+        this.schedulingCalendar = new SchedulingCalendar(mainFrame,schedulingPanel, this);
         CalendarPanel.add(schedulingCalendar);
         CalendarPanel.setLayout(new GridLayout(1,1));
         setSpinners();
@@ -59,6 +62,7 @@ public class EditSchedulePanel extends CustomPanel {
         for(int x=0; x<7; x++){
             LabelsPanel.add(new JLabel(daysOfWeek[x], SwingConstants.CENTER));
         }
+        updateInterface();
     }
     
     public int getYear(){
@@ -69,14 +73,37 @@ public class EditSchedulePanel extends CustomPanel {
         return Integer.parseInt(DateLabel.getText());
     }
     
-    private void updateInterface(){
+    public SchedulingCalendar getSchedulingCalendar(){
+        return schedulingCalendar;
+    }
+    
+    private void updateInterface() throws IOException, FileNotFoundException, ClassNotFoundException{
+        
+        shifts = mainFrame.getShifts(schedulingPanel.getCurrentMonth(), schedulingPanel.getCurrentYear());
         listModel = new DefaultListModel();
-        for(int x=0; x<shifts.size(); x++){
-            listModel.addElement(shifts.get(x));
-        }
+            for(int x=0; x<shifts.size(); x++){
+                listModel.addElement(shifts.get(x));
+            }
         ShiftsList = new JList(listModel);
         ListScrollPane.setViewportView(ShiftsList);
         ShiftsList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        
+//        ShiftsList.addListSelectionListener(new ListSelectionListener() {
+//            @Override
+//            public void valueChanged(ListSelectionEvent e) {
+//                try {
+//                    selectedShift = ShiftsList.getSelectedValue();
+//                } catch (IOException ex) {
+//                    Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+//                } catch (ClassNotFoundException ex) {
+//                    Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                NameField.setText(selectedEmployee.getName());
+//                NumberField.setText(selectedEmployee.getPhoneNumber());
+//                PayrateField.setText("" + selectedEmployee.getPayRate());
+//            }
+//            
+//        });
     }
     
     private void setSpinners() throws IOException, FileNotFoundException, ClassNotFoundException{
@@ -372,17 +399,17 @@ public class EditSchedulePanel extends CustomPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BackButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ShiftInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(DateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(YearLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(CurrentUserLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ClockLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BackButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ShiftInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -484,11 +511,8 @@ public class EditSchedulePanel extends CustomPanel {
     private void CreateShiftButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateShiftButtonActionPerformed
         try {
             Employee employee = mainFrame.findEmployee((String)EmployeeSpinner.getValue());
-            Date startDate = new Date(Integer.parseInt(YearLabel.getText()) -1900, schedulingPanel.getCurrentMonth(), day, (Integer)StartHour.getValue(), (Integer)StartMinute.getValue(), 0);
-            Date endDate = new Date(Integer.parseInt(YearLabel.getText()) -1900, schedulingPanel.getCurrentMonth(), day, (Integer)EndHour.getValue(), (Integer)EndMinute.getValue(), 0);
-            System.out.println(startDate);
-            System.out.println(endDate);
-            
+            Date startDate = new Date(Integer.parseInt(YearLabel.getText()), schedulingPanel.getCurrentMonth(), day, (Integer)StartHour.getValue(), (Integer)StartMinute.getValue(), 0);
+            Date endDate = new Date(Integer.parseInt(YearLabel.getText()), schedulingPanel.getCurrentMonth(), day, (Integer)EndHour.getValue(), (Integer)EndMinute.getValue(), 0);  
             ArrayList<Date> selectedDays = schedulingCalendar.getSelectedDays();
             for(int x=0; x<selectedDays.size(); x++){
                 startDate.setDate(selectedDays.get(x).getDate());
@@ -496,7 +520,15 @@ public class EditSchedulePanel extends CustomPanel {
                 mainFrame.addShift(new Shift(employee, startDate, endDate));
                 
             }
+            schedulingCalendar.clearSelectedDays();
             
+        } catch (IOException ex) {
+            Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            updateInterface();
         } catch (IOException ex) {
             Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
