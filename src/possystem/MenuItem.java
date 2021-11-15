@@ -17,31 +17,21 @@ public class MenuItem implements Serializable {
 
     private String name;
     private double price;
-    private String type;
     private UUID id;
-    private ArrayList<Topping> possibleToppings;
+    private ArrayList<UUID> possibleToppings;
     private String comments;
 
-    public MenuItem(String name, double price, UUID id, String comments, String itemType) {
+    public MenuItem(String name, double price, UUID id, String comments, String type) {
         this.name = name;
         this.price = price;
         this.id = id;
         this.possibleToppings = new ArrayList();
         this.comments = comments;
-        this.type = itemType;
     }
 
     // <editor-fold desc="Getters and Setters" defaultstate="collapsed">
     public double getPrice() {
         return price;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getComments() {
@@ -68,12 +58,12 @@ public class MenuItem implements Serializable {
         this.name = name;
     }
 
-    public ArrayList<Topping> getPossibleToppings() {
+    public ArrayList<UUID> getPossibleToppings() {
         return possibleToppings;
     }
 
     // </editor-fold>
-    public void addPossibleTopping(Topping topping) {
+    public void addPossibleTopping(UUID topping) {
         possibleToppings.add(topping);
     }
 
