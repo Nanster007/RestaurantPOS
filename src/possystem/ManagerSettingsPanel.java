@@ -38,9 +38,9 @@ public class ManagerSettingsPanel extends CustomPanel {
         ClockLabel = new javax.swing.JTextField();
         BackButton = new javax.swing.JButton();
         StockSystemButton = new javax.swing.JButton();
-        SettingsButton = new javax.swing.JButton();
         SchedulingButton = new javax.swing.JButton();
         BusinessReportsButton = new javax.swing.JButton();
+        AdjustEmployeesButton = new javax.swing.JButton();
 
         CurrentUserLabel.setText("Welcome: User's Name");
 
@@ -65,13 +65,6 @@ public class ManagerSettingsPanel extends CustomPanel {
             }
         });
 
-        SettingsButton.setText("Settings");
-        SettingsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SettingsButtonActionPerformed(evt);
-            }
-        });
-
         SchedulingButton.setText("Scheduling");
         SchedulingButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,6 +73,13 @@ public class ManagerSettingsPanel extends CustomPanel {
         });
 
         BusinessReportsButton.setText("Business reports");
+
+        AdjustEmployeesButton.setText("Adjust Employee");
+        AdjustEmployeesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AdjustEmployeesButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -97,8 +97,8 @@ public class ManagerSettingsPanel extends CustomPanel {
                             .addComponent(SchedulingButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BusinessReportsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                            .addComponent(SettingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(BusinessReportsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+                            .addComponent(AdjustEmployeesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -110,8 +110,8 @@ public class ManagerSettingsPanel extends CustomPanel {
                 .addComponent(ClockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(SettingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                    .addComponent(StockSystemButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(AdjustEmployeesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(StockSystemButton, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(BusinessReportsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
@@ -144,18 +144,24 @@ public class ManagerSettingsPanel extends CustomPanel {
         }
     }//GEN-LAST:event_SchedulingButtonActionPerformed
 
-    private void SettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsButtonActionPerformed
-        mainFrame.setNewPanel(new SystemSettingsPanel(mainFrame), Boolean.FALSE, this);
-    }//GEN-LAST:event_SettingsButtonActionPerformed
+    private void AdjustEmployeesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdjustEmployeesButtonActionPerformed
+        try {
+            mainFrame.setNewPanel(new AdjustEmployeePanel(mainFrame), false, this);
+        } catch (IOException ex) {
+            Logger.getLogger(ManagerSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManagerSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_AdjustEmployeesButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AdjustEmployeesButton;
     private javax.swing.JButton BackButton;
     private javax.swing.JButton BusinessReportsButton;
     private javax.swing.JTextField ClockLabel;
     private javax.swing.JLabel CurrentUserLabel;
     private javax.swing.JButton SchedulingButton;
-    private javax.swing.JButton SettingsButton;
     private javax.swing.JButton StockSystemButton;
     // End of variables declaration//GEN-END:variables
 }

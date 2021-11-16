@@ -29,8 +29,8 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="BusinessReportsButton" pref="315" max="32767" attributes="0"/>
-                          <Component id="SettingsButton" max="32767" attributes="0"/>
+                          <Component id="BusinessReportsButton" pref="652" max="32767" attributes="0"/>
+                          <Component id="AdjustEmployeesButton" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -47,8 +47,8 @@
               <Component id="ClockLabel" min="-2" pref="33" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="SettingsButton" pref="181" max="32767" attributes="0"/>
-                  <Component id="StockSystemButton" max="32767" attributes="0"/>
+                  <Component id="AdjustEmployeesButton" max="32767" attributes="0"/>
+                  <Component id="StockSystemButton" pref="181" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -92,14 +92,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="StockSystemButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="SettingsButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Settings"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SettingsButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="SchedulingButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Scheduling"/>
@@ -112,6 +104,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Business reports"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="AdjustEmployeesButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Adjust Employee"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AdjustEmployeesButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -17,13 +17,19 @@ public class Employee implements Serializable{
     private String name, phoneNumber;
     private double payRate;
     private UUID orderID;
+    private int pin;
     
-    public Employee (String name, String phoneNumber, double payRate){
+    public Employee (String name, String phoneNumber, double payRate, int pin){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.payRate = payRate;
+        this.pin = pin;
     }
 
+    public void setPin(int pin){
+        this.pin = pin;
+    }
+    
     public String getName() {
         return name;
     }
