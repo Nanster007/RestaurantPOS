@@ -5,7 +5,6 @@
  */
 package possystem;
 
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,8 +20,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -30,30 +27,26 @@ import javax.swing.event.ListSelectionListener;
  */
 public class EditSchedulePanel extends CustomPanel {
 
-    private MainFrame mainFrame;
-    private SchedulingPanel schedulingPanel;
+    private final MainFrame mainFrame;
     private final SchedulingCalendar schedulingCalendar;
     private Calendar calendar;
-    private int day;
-    private String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    private String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    private final String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    private final String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     private int[] daysPerMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     private ArrayList<Shift> shifts;
     private DefaultListModel listModel;
     private Shift selectedShift;
     
-    public EditSchedulePanel(MainFrame mainFrame, SchedulingPanel schedulingPanel, int day) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public EditSchedulePanel(MainFrame mainFrame, Calendar calendar) throws IOException, FileNotFoundException, ClassNotFoundException {
         initComponents();
         this.mainFrame = mainFrame;
-        this.day = day;
-        this.schedulingPanel = schedulingPanel;
         setClockField(ClockLabel);
-        calendar = Calendar.getInstance();
-        YearLabel.setText("" + schedulingPanel.getCurrentYear());
-        DateLabel.setText(months[schedulingPanel.getCurrentMonth()] + ", " + day);
-        shifts = mainFrame.getShifts(schedulingPanel.getCurrentMonth(), schedulingPanel.getCurrentYear());
+        this.schedulingCalendar = new SchedulingCalendar(mainFrame);
+        this.calendar = calendar;
+        YearLabel.setText("" + getYear());
+        shifts = mainFrame.getShifts(getMonth(), getYear());
+        DateLabel.setText(months[getMonth()]);
         updateInterface();
-        this.schedulingCalendar = new SchedulingCalendar(mainFrame,schedulingPanel, this);
         CalendarPanel.add(schedulingCalendar);
         CalendarPanel.setLayout(new GridLayout(1,1));
         setSpinners();
@@ -65,12 +58,16 @@ public class EditSchedulePanel extends CustomPanel {
         updateInterface();
     }
     
-    public int getYear(){
-        return Integer.parseInt(YearLabel.getText());
+    private int getYear(){
+        return calendar.get(Calendar.YEAR);
     }
     
-    public int getMonth(){
-        return Integer.parseInt(DateLabel.getText());
+    private int getMonth(){
+        return calendar.get(Calendar.MONTH);
+    }
+    
+    private int getDay(){
+        return calendar.get(Calendar.DAY_OF_MONTH);
     }
     
     public SchedulingCalendar getSchedulingCalendar(){
@@ -79,31 +76,16 @@ public class EditSchedulePanel extends CustomPanel {
     
     private void updateInterface() throws IOException, FileNotFoundException, ClassNotFoundException{
         
-        shifts = mainFrame.getShifts(schedulingPanel.getCurrentMonth(), schedulingPanel.getCurrentYear());
+        shifts = mainFrame.getShifts(getMonth(), getYear());
         listModel = new DefaultListModel();
             for(int x=0; x<shifts.size(); x++){
-                listModel.addElement(shifts.get(x));
+                listModel.addElement(shifts.get(x).toString());
             }
         ShiftsList = new JList(listModel);
         ListScrollPane.setViewportView(ShiftsList);
         ShiftsList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         
-//        ShiftsList.addListSelectionListener(new ListSelectionListener() {
-//            @Override
-//            public void valueChanged(ListSelectionEvent e) {
-//                try {
-//                    selectedShift = ShiftsList.getSelectedValue();
-//                } catch (IOException ex) {
-//                    Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
-//                } catch (ClassNotFoundException ex) {
-//                    Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                NameField.setText(selectedEmployee.getName());
-//                NumberField.setText(selectedEmployee.getPhoneNumber());
-//                PayrateField.setText("" + selectedEmployee.getPayRate());
-//            }
-//            
-//        });
+        schedulingCalendar.clearSelectedDays();
     }
     
     private void setSpinners() throws IOException, FileNotFoundException, ClassNotFoundException{
@@ -162,8 +144,9 @@ public class EditSchedulePanel extends CustomPanel {
         CalendarPanel = new javax.swing.JPanel();
         LabelsPanel = new javax.swing.JPanel();
         CreateShiftButton = new javax.swing.JButton();
-        NextDayButton = new javax.swing.JButton();
-        PreviousDayButton = new javax.swing.JButton();
+        DeleteShiftButton = new javax.swing.JButton();
+        NextMonthButton = new javax.swing.JButton();
+        PreviousMonthButton = new javax.swing.JButton();
 
         CurrentUserLabel.setText("Welcome: User's Name");
 
@@ -185,7 +168,7 @@ public class EditSchedulePanel extends CustomPanel {
             }
         });
 
-        jLabel1.setText("Day's Shifts:");
+        jLabel1.setText("Month's Shifts:");
 
         ShiftsList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -194,7 +177,7 @@ public class EditSchedulePanel extends CustomPanel {
         });
         ListScrollPane.setViewportView(ShiftsList);
 
-        AddShiftLabel.setText("Add Shift");
+        AddShiftLabel.setText("To add shifts: fill in required info, select days applicable and hit submit");
 
         EmployeeLabel.setText("Employee:");
 
@@ -271,7 +254,7 @@ public class EditSchedulePanel extends CustomPanel {
         );
         CalendarPanelLayout.setVerticalGroup(
             CalendarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 387, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout LabelsPanelLayout = new javax.swing.GroupLayout(LabelsPanel);
@@ -308,6 +291,13 @@ public class EditSchedulePanel extends CustomPanel {
             }
         });
 
+        DeleteShiftButton.setText("Delete Selected Shift");
+        DeleteShiftButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteShiftButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout AddShiftPanelLayout = new javax.swing.GroupLayout(AddShiftPanel);
         AddShiftPanel.setLayout(AddShiftPanelLayout);
         AddShiftPanelLayout.setHorizontalGroup(
@@ -315,7 +305,7 @@ public class EditSchedulePanel extends CustomPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(AddShiftPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(AddShiftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(AddShiftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AddShiftPanelLayout.createSequentialGroup()
                         .addGroup(AddShiftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(EmployeeLabel)
@@ -323,19 +313,22 @@ public class EditSchedulePanel extends CustomPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(AddShiftPanelLayout.createSequentialGroup()
                         .addComponent(AddShiftLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CreateShiftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(CreateShiftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(155, 155, 155)
+                        .addComponent(DeleteShiftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         AddShiftPanelLayout.setVerticalGroup(
             AddShiftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AddShiftPanelLayout.createSequentialGroup()
                 .addGroup(AddShiftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddShiftLabel)
-                    .addComponent(CreateShiftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CreateShiftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DeleteShiftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AddShiftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddShiftPanelLayout.createSequentialGroup()
@@ -348,17 +341,17 @@ public class EditSchedulePanel extends CustomPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        NextDayButton.setText("Next Day");
-        NextDayButton.addActionListener(new java.awt.event.ActionListener() {
+        NextMonthButton.setText("Next Month");
+        NextMonthButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NextDayButtonActionPerformed(evt);
+                NextMonthButtonActionPerformed(evt);
             }
         });
 
-        PreviousDayButton.setText("Previous Day");
-        PreviousDayButton.addActionListener(new java.awt.event.ActionListener() {
+        PreviousMonthButton.setText("Previous Month");
+        PreviousMonthButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PreviousDayButtonActionPerformed(evt);
+                PreviousMonthButtonActionPerformed(evt);
             }
         });
 
@@ -370,9 +363,9 @@ public class EditSchedulePanel extends CustomPanel {
                 .addContainerGap()
                 .addGroup(ShiftInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ShiftInfoPanelLayout.createSequentialGroup()
-                        .addComponent(PreviousDayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PreviousMonthButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(NextDayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(NextMonthButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1)
                     .addComponent(ListScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -382,8 +375,8 @@ public class EditSchedulePanel extends CustomPanel {
             ShiftInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ShiftInfoPanelLayout.createSequentialGroup()
                 .addGroup(ShiftInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NextDayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PreviousDayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NextMonthButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PreviousMonthButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -434,85 +427,82 @@ public class EditSchedulePanel extends CustomPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_ClockLabelActionPerformed
 
-    private void PreviousDayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousDayButtonActionPerformed
-        if(schedulingPanel.getCurrentYear()%4 == 0){
+    private void PreviousMonthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousMonthButtonActionPerformed
+        if(getYear()%4 == 0){
             daysPerMonth[1] = 29;
         }
         else{
             daysPerMonth[1] = 28;
         }
-        
-        if(day > 1){
-            day--;
-            schedulingPanel.setDate(new Date(schedulingPanel.getCurrentYear()-1900, schedulingPanel.getCurrentMonth(), day));
+                 
+        if(getMonth() == 0){ 
+            schedulingCalendar.setTime(new Date((getYear()-1901), 11, 1));
         }
-        else{          
-            if(schedulingPanel.getCurrentMonth() == 0){ 
-                day = daysPerMonth[11];
-                schedulingPanel.setDate(new Date((schedulingPanel.getCurrentYear()-1901), 11, day));
-            }
-            else{
-                day = daysPerMonth[schedulingPanel.getCurrentMonth()-1];
-                schedulingPanel.setDate(new Date((schedulingPanel.getCurrentYear()-1900), schedulingPanel.getCurrentMonth()-1, day));
-            }
-            try {
-                shifts = mainFrame.getShifts(schedulingPanel.getCurrentMonth(), schedulingPanel.getCurrentYear());
-            } catch (IOException | ClassNotFoundException ex) {
-                Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        else{
+            schedulingCalendar.setTime(new Date((getYear()-1900), getMonth()-1, 1));
         }
-        
         try {
-            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, schedulingPanel, day), Boolean.FALSE, this);
+            shifts = mainFrame.getShifts(getMonth(), getYear());
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }//GEN-LAST:event_PreviousDayButtonActionPerformed
+        try {
+            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, schedulingCalendar.getCalendar()), Boolean.FALSE, this);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_PreviousMonthButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        mainFrame.setNewPanel(new SchedulingPanel(mainFrame), Boolean.FALSE, this);
+        mainFrame.setNewPanel(new ManagerSettingsPanel(mainFrame), Boolean.FALSE, this);
     }//GEN-LAST:event_BackButtonActionPerformed
 
-    private void NextDayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextDayButtonActionPerformed
-        if(schedulingPanel.getCurrentYear()%4 == 0){
+    private void NextMonthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextMonthButtonActionPerformed
+        if(getYear()%4 == 0){
             daysPerMonth[1] = 29;
         }
         else{
             daysPerMonth[1] = 28;
         }
-        
-        if(day < daysPerMonth[schedulingPanel.getCurrentMonth()]){
-            day++;
-            schedulingPanel.setDate(new Date((schedulingPanel.getCurrentYear()-1900), schedulingPanel.getCurrentMonth(), day));
+            
+        if(getMonth() == 11){
+            schedulingCalendar.setTime(new Date((getYear()-1899), 0, 1));
         }
         else{
-            day=1;
-            if(schedulingPanel.getCurrentMonth() == 11){
-                schedulingPanel.setDate(new Date((schedulingPanel.getCurrentYear()-1899), 0, 1));
-            }
-            else{
-                schedulingPanel.setDate(new Date((schedulingPanel.getCurrentYear()-1900), schedulingPanel.getCurrentMonth()+1, 1));
-            }
-            try {
-                shifts = mainFrame.getShifts(schedulingPanel.getCurrentMonth(), schedulingPanel.getCurrentYear());
-            } catch (IOException | ClassNotFoundException ex) {
+            schedulingCalendar.setTime(new Date((getYear()-1900), getMonth()+1, 1));
+        }
+        try {
+            shifts = mainFrame.getShifts(getMonth(), getYear());
+        } catch (IOException | ClassNotFoundException ex) {
                 Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
         
         try {
-            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, schedulingPanel, day), Boolean.FALSE, this);
+            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, schedulingCalendar.getCalendar()), Boolean.FALSE, this);
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_NextDayButtonActionPerformed
+    }//GEN-LAST:event_NextMonthButtonActionPerformed
 
     private void CreateShiftButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateShiftButtonActionPerformed
         try {
-            Employee employee = mainFrame.findEmployee((String)EmployeeSpinner.getValue());
-            Date startDate = new Date(Integer.parseInt(YearLabel.getText()), schedulingPanel.getCurrentMonth(), day, (Integer)StartHour.getValue(), (Integer)StartMinute.getValue(), 0);
-            Date endDate = new Date(Integer.parseInt(YearLabel.getText()), schedulingPanel.getCurrentMonth(), day, (Integer)EndHour.getValue(), (Integer)EndMinute.getValue(), 0);  
+            Date startDate, endDate;
+            if(StartPhase.getValue().toString().equals("PM")){
+                startDate = new Date(Integer.parseInt(YearLabel.getText()) - 1900, getMonth(), 1, (Integer)StartHour.getValue()+12, (Integer)StartMinute.getValue(), 0);
+                  
+            }
+            else{
+                startDate = new Date(Integer.parseInt(YearLabel.getText()) - 1900, getMonth(), 1, (Integer)StartHour.getValue(), (Integer)StartMinute.getValue(), 0);
+            }
+            if(EndPhase.getValue().toString().equals("PM")){
+                endDate = new Date(Integer.parseInt(YearLabel.getText()) - 1900, getMonth(), 1, (Integer)EndHour.getValue()+12, (Integer)EndMinute.getValue(), 0);
+            }
+            else{
+                endDate = new Date(Integer.parseInt(YearLabel.getText()) - 1900, getMonth(), 1, (Integer)EndHour.getValue(), (Integer)EndMinute.getValue(), 0); 
+            }           
+            Employee employee = mainFrame.findEmployee((String)EmployeeSpinner.getValue());  
             ArrayList<Date> selectedDays = schedulingCalendar.getSelectedDays();
             for(int x=0; x<selectedDays.size(); x++){
                 startDate.setDate(selectedDays.get(x).getDate());
@@ -520,7 +510,6 @@ public class EditSchedulePanel extends CustomPanel {
                 mainFrame.addShift(new Shift(employee, startDate, endDate));
                 
             }
-            schedulingCalendar.clearSelectedDays();
             
         } catch (IOException ex) {
             Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -536,6 +525,27 @@ public class EditSchedulePanel extends CustomPanel {
         }
     }//GEN-LAST:event_CreateShiftButtonActionPerformed
 
+    private void DeleteShiftButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteShiftButtonActionPerformed
+        for(int x=0; x<shifts.size(); x++){
+            if(shifts.get(x).toString().equals(ShiftsList.getSelectedValue())){
+                try {
+                    mainFrame.removeShift(shifts.get(x));
+                } catch (IOException ex) {
+                    Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        try {
+            updateInterface();
+        } catch (IOException ex) {
+            Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_DeleteShiftButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AddShiftLabel;
@@ -546,6 +556,7 @@ public class EditSchedulePanel extends CustomPanel {
     private javax.swing.JButton CreateShiftButton;
     private javax.swing.JLabel CurrentUserLabel;
     private javax.swing.JLabel DateLabel;
+    private javax.swing.JButton DeleteShiftButton;
     private javax.swing.JLabel EmployeeLabel;
     private javax.swing.JSpinner EmployeeSpinner;
     private javax.swing.JSpinner EndHour;
@@ -553,8 +564,8 @@ public class EditSchedulePanel extends CustomPanel {
     private javax.swing.JSpinner EndPhase;
     private javax.swing.JPanel LabelsPanel;
     private javax.swing.JScrollPane ListScrollPane;
-    private javax.swing.JButton NextDayButton;
-    private javax.swing.JButton PreviousDayButton;
+    private javax.swing.JButton NextMonthButton;
+    private javax.swing.JButton PreviousMonthButton;
     private javax.swing.JPanel ShiftInfoPanel;
     private javax.swing.JList<String> ShiftsList;
     private javax.swing.JSpinner StartHour;

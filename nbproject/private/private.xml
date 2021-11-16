@@ -5,11 +5,19 @@
         <group>
             <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/MainFrame.java</file>
             <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/SchedulingCalendar.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/POSSystem.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/Shift.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/SchedulingPanel.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/DrinksPanel.java</file>
             <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/MainMenuPanel.java</file>
-            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/MenuItemDetailsPanel.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/CustomPanel.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/AdjustEmployeePanel.java</file>
             <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/CustomLabel.java</file>
             <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/EditSchedulePanel.java</file>
-            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/SchedulingPanel.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/OrderHistoryPanel.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/ManagerSettingsPanel.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/SystemSettingsPanel.java</file>
+            <file>file:/C:/Users/tylar/Documents/NetBeansProjects/pos_system2/src/possystem/MenuItem.java</file>
         </group>
     </open-files>
 </project-private>

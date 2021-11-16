@@ -13,7 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
-import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -24,7 +23,7 @@ import javax.swing.event.ListSelectionListener;
  */
 public class AdjustEmployeePanel extends CustomPanel {
 
-    private MainFrame mainFrame;
+    private final MainFrame mainFrame;
     private JList EmployeesList;
     private DefaultListModel listModel;
     private Employee selectedEmployee;
@@ -39,28 +38,15 @@ public class AdjustEmployeePanel extends CustomPanel {
         selectedEmployee = mainFrame.findEmployee(listModel.getElementAt(0).toString());
         NameField.setText(selectedEmployee.getName());
         NumberField.setText(selectedEmployee.getPhoneNumber());
-        PayrateField.setText("" + selectedEmployee.getPayRate());
-       
+        PayrateField.setText("" + selectedEmployee.getPayRate());      
         NameField.setEditable(false);
         NumberField.setEditable(false);
         PayrateField.setEditable(false);
         ShiftsField.setEditable(false);
         EmployeesList.setSelectedIndex(0);
     }
-    
-    public void updateShifts() throws IOException, FileNotFoundException, ClassNotFoundException{
-        Calendar calendar = Calendar.getInstance();
-        String string = "";
-        ArrayList<Shift> shifts = mainFrame.getShifts(calendar.get(Calendar.MONTH), Calendar.YEAR);
-        for(int x=0; x<shifts.size(); x++){
-            if(shifts.get(x).getEmployee().getName().equals(selectedEmployee.getName())){
-                string += shifts.get(x).toString();
-            }
-        }
-        ShiftsField.setText(string);
-    }
 
-    public void updateInterface() throws IOException, FileNotFoundException, ClassNotFoundException{
+    private void updateInterface() throws IOException, FileNotFoundException, ClassNotFoundException{
         listModel = new DefaultListModel();
         for(int x=0; x<mainFrame.getEmployees().size(); x++){
             listModel.addElement(mainFrame.getEmployees().get(x).getName());

@@ -100,9 +100,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="PreviousDayButton" min="-2" pref="139" max="-2" attributes="0"/>
+                          <Component id="PreviousMonthButton" min="-2" pref="139" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="NextDayButton" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Component id="NextMonthButton" min="-2" pref="141" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <Component id="ListScrollPane" alignment="0" min="-2" pref="290" max="-2" attributes="0"/>
@@ -116,8 +116,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="NextDayButton" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="PreviousDayButton" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="NextMonthButton" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="PreviousMonthButton" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -131,7 +131,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Day&apos;s Shifts:"/>
+            <Property name="text" type="java.lang.String" value="Month&apos;s Shifts:"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="ListScrollPane">
@@ -161,10 +161,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Component id="jPanel1" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="EmployeeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -174,14 +174,16 @@
                               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="AddShiftLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="CreateShiftButton" min="-2" pref="206" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
+                              <Component id="DeleteShiftButton" min="-2" pref="206" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -191,6 +193,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="AddShiftLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="CreateShiftButton" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="DeleteShiftButton" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -211,7 +214,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="AddShiftLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Add Shift"/>
+                <Property name="text" type="java.lang.String" value="To add shifts: fill in required info, select days applicable and hit submit"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="EmployeeSpinner">
@@ -362,7 +365,7 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="387" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -392,22 +395,30 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreateShiftButtonActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JButton" name="DeleteShiftButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Delete Selected Shift"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeleteShiftButtonActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="NextDayButton">
+        <Component class="javax.swing.JButton" name="NextMonthButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Next Day"/>
+            <Property name="text" type="java.lang.String" value="Next Month"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NextDayButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NextMonthButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="PreviousDayButton">
+        <Component class="javax.swing.JButton" name="PreviousMonthButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Previous Day"/>
+            <Property name="text" type="java.lang.String" value="Previous Month"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PreviousDayButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PreviousMonthButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

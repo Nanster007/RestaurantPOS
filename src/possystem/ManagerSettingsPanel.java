@@ -5,13 +5,18 @@
  */
 package possystem;
 
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author tylar
  */
 public class ManagerSettingsPanel extends CustomPanel {
 
-    MainFrame mainFrame;
+    private final MainFrame mainFrame;
     
     public ManagerSettingsPanel(MainFrame mainFrame) {
         initComponents();
@@ -130,7 +135,13 @@ public class ManagerSettingsPanel extends CustomPanel {
     }//GEN-LAST:event_StockSystemButtonActionPerformed
 
     private void SchedulingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SchedulingButtonActionPerformed
-        mainFrame.setNewPanel(new SchedulingPanel(mainFrame), Boolean.FALSE, this);
+        try {
+            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, Calendar.getInstance()), Boolean.FALSE, this);
+        } catch (IOException ex) {
+            Logger.getLogger(ManagerSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManagerSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_SchedulingButtonActionPerformed
 
     private void SettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsButtonActionPerformed

@@ -18,14 +18,13 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class MainFrame extends JFrame {
     private CustomPanel currentPage, lastPage;
     private final ClockThread clock;
-    private ArrayList<CustomerOrder> customerOrders;
     private FileOutputStream fos;
     private FileInputStream fis;
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
     private ArrayList<Shift> shifts;
     private ArrayList<Employee> employees;
-    
+    private ArrayList<CustomerOrder> customerOrders;
     
     public MainFrame() throws IOException, FileNotFoundException, ClassNotFoundException
     {
@@ -93,9 +92,9 @@ public class MainFrame extends JFrame {
     }
     
     public void addShift(Shift shift)throws FileNotFoundException, IOException, ClassNotFoundException{
-        shifts = getShifts(shift.getSetStart().getMonth(), shift.getSetStart().getYear());
+        shifts = getShifts(shift.getSetStart().getMonth(), shift.getSetStart().getYear()+1900);
         shifts.add(shift);
-        String file = (shift.getSetStart().getMonth()+1) + "_" + shift.getSetStart().getYear() + ".txt";
+        String file = (shift.getSetStart().getMonth()+1) + "_" + (shift.getSetStart().getYear()+1900) + ".txt";
         fos = new FileOutputStream(file);
         oos = new ObjectOutputStream(fos);
         oos.writeObject(shifts);
@@ -109,11 +108,23 @@ public class MainFrame extends JFrame {
         }
     }
     
+    public void removeShift(Shift shift) throws IOException, FileNotFoundException, ClassNotFoundException{
+        shifts = getShifts(shift.getSetStart().getMonth(), shift.getSetStart().getYear()+1900);
+        for(int x=0; x<shifts.size(); x++){
+            if(shifts.get(x).toString().equals(shift.toString())){
+                shifts.remove(x);
+            }
+        }
+        String file = (shift.getSetStart().getMonth()+1) + "_" + (shift.getSetStart().getYear()+1900) + ".txt";
+        fos = new FileOutputStream(file);
+        oos = new ObjectOutputStream(fos);
+        oos.writeObject(shifts);
+    }
+    
     public void removeEmployee (Employee employee) throws IOException, FileNotFoundException, ClassNotFoundException{
         employees = getEmployees();
         
         for(int x=0; x<employees.size(); x++){
-            System.out.println(employees.get(x).getName());
             if (employees.get(x).getName().equals(employee.getName())){
                 employees.remove(x);
 
@@ -166,6 +177,37 @@ public class MainFrame extends JFrame {
 
         }
         return shifts;
+    }
+    
+    public ArrayList<Shift> getShiftsOfDay(int month, int year, int day) throws FileNotFoundException, IOException, ClassNotFoundException {
+        String file = (month + 1) + "_" + year + ".txt";
+        try{
+            fis = new FileInputStream(file);
+        }
+        catch(FileNotFoundException e){
+            File newFile = new File(file);
+            newFile.createNewFile();
+            fis = new FileInputStream(file);
+        }
+        try{
+            ois = new ObjectInputStream(fis);
+            shifts = (ArrayList<Shift>) ois.readObject();
+            ois.close();
+        }
+        catch(EOFException e){
+            shifts = new ArrayList();
+
+        }
+        
+        ArrayList<Shift> daysShifts = shifts;
+        
+        for(int x=0; x< daysShifts.size(); x++){
+            if(daysShifts.get(x).getSetStart().getDate() != day){
+                daysShifts.remove(x);
+            }
+        }
+        
+        return daysShifts;
     }
 
     public ArrayList<CustomerOrder> getCustomerOrders() throws FileNotFoundException, IOException, ClassNotFoundException {

@@ -5,20 +5,11 @@
  */
 package possystem;
 
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Graphics2D;
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 
 
 /**
@@ -56,7 +47,7 @@ public class SchedulingPanel extends CustomPanel {
         Date date = new Date(currentYear - 1900, currentMonth, 1);
         calendar.setTime(date);
         firstDay = calendar.get(Calendar.DAY_OF_WEEK) - 1;       
-        schedulingCalendar = new SchedulingCalendar(mainFrame, this, null);
+        schedulingCalendar = new SchedulingCalendar(mainFrame);
         CalendarPanel.add(schedulingCalendar);
         CalendarPanel.setLayout(new GridLayout(1, 1));
         

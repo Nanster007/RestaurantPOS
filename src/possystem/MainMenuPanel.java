@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class MainMenuPanel extends CustomPanel {
 
-    private MainFrame mainFrame;
+    private final MainFrame mainFrame;
     
     public MainMenuPanel(MainFrame mainFrame) {
         initComponents();
@@ -203,9 +203,6 @@ public class MainMenuPanel extends CustomPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setjTextField1Text(String date) {
-        this.ClockLabel.setText(date.toString());
-    }
 
     private void ScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScheduleButtonActionPerformed
         // TODO add your handling code here:
