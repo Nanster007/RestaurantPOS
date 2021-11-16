@@ -206,7 +206,13 @@ public class MainMenuPanel extends CustomPanel {
 
 
     private void ScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScheduleButtonActionPerformed
-        mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, Calendar.getInstance()), Boolean.FALSE, this);
+        try {
+            mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, Calendar.getInstance()), Boolean.FALSE, this);
+        } catch (IOException ex) {
+            Logger.getLogger(MainMenuPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainMenuPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ScheduleButtonActionPerformed
 
     private void NewOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewOrderButtonActionPerformed

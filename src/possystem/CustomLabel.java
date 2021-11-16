@@ -6,6 +6,7 @@
 package possystem;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Calendar;
@@ -24,6 +25,7 @@ public class CustomLabel extends JLabel{
     
     public CustomLabel (String text, EditScheduleCalendar schedulingCalendar, MainFrame mainFrame){
         super(text);
+        this.setFont(new Font("sansserif", 1, 30));
         this.mainFrame = mainFrame;
         this.schedulingCalendar = schedulingCalendar;
         this.highlighted = false;
@@ -44,13 +46,15 @@ public class CustomLabel extends JLabel{
     
     public void highlightDay(){
         if(highlighted == false){
-            this.setBorder(BorderFactory.createLineBorder(Color.red));
+            this.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+            this.setForeground(Color.red);
             this.highlighted = true;
             schedulingCalendar.addSelectedDay(getText());
         }
         else{
             this.highlighted = false;
-            this.setBorder(BorderFactory.createLineBorder(Color.black));
+            this.setForeground(null);
+            this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
             schedulingCalendar.removeSelectedDay(getText());
         }
         
