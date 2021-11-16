@@ -363,7 +363,8 @@ public class AdjustEmployeePanel extends CustomPanel {
                     Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 EmployeesList.setSelectedIndex(listModel.getSize()-1);
-                PinField.setEnabled(false);
+                PinField.setEditable(false);
+                PinField.setText("");
             }
         else{
             PinField.setEditable(true);
