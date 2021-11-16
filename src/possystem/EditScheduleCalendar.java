@@ -17,21 +17,19 @@ import javax.swing.JPanel;
  *
  * @author tylar
  */
-public class SchedulingCalendar extends JPanel {
+public class EditScheduleCalendar extends JPanel {
     
-    MainFrame mainFrame;
-    private int height, width;
-    private int[] daysPerMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private final MainFrame mainFrame;
     private CustomLabel[] daysOfMonth;
     private GridLayout layout;
     private ArrayList<Date> selectedDays;
     private Calendar calendar;
     
-    public SchedulingCalendar (MainFrame mainFrame){
+    public EditScheduleCalendar (MainFrame mainFrame, Calendar calendar){
         super();
         this.mainFrame = mainFrame;
         this.layout = new GridLayout(6, 7);
-        setClock();
+        this.calendar = calendar;
         selectedDays = new ArrayList();
         layout.setVgap(0);
         layout.setHgap(0);
@@ -39,18 +37,13 @@ public class SchedulingCalendar extends JPanel {
         createDayLabels();
     }
     
-    private void setClock(){
-        calendar = Calendar.getInstance();       
-        Date date = new Date(calendar.get(Calendar.YEAR) - 1900, calendar.get(Calendar.MONTH), 1);
-        calendar.setTime(date);
-    }
-    
     private void createDayLabels(){
         daysOfMonth = new CustomLabel[42];
         int index = 1;
         
+        System.out.println(getMonth());
         for(int x=0; x<42; x++){
-            if(index <= daysPerMonth[getMonth()] && x >= getDay()){
+            if(index <= mainFrame.daysPerMonth[getMonth()] && x >= getDay()-1){
                 daysOfMonth[x] = new CustomLabel("" + (index), this, mainFrame);
                 index++;
             }
@@ -62,14 +55,6 @@ public class SchedulingCalendar extends JPanel {
             daysOfMonth[x].setBorder(BorderFactory.createLineBorder(Color.black));
         }
 
-    }
-    
-    public void setTime(Date date){
-        this.calendar.setTime(date);
-    }
-    
-    public Calendar getCalendar(){
-        return this.calendar;
     }
     
     public void clearSelectedDays(){
@@ -90,7 +75,7 @@ public class SchedulingCalendar extends JPanel {
     }
     
     private int getDay(){
-        return calendar.get(Calendar.DAY_OF_MONTH);
+        return calendar.get(Calendar.DAY_OF_WEEK);
     }
     
     public void addSelectedDay(String text){    
@@ -109,19 +94,19 @@ public class SchedulingCalendar extends JPanel {
         return selectedDays;
     }
 
-    public void changeMonth(){
+    private void changeMonth(){
         
         int index = 1;
         
         if(getYear()%4 == 0){
-            daysPerMonth[1] = 29;
+            mainFrame.daysPerMonth[1] = 29;
         }
         else{
-            daysPerMonth[1] = 28;
+            mainFrame.daysPerMonth[1] = 28;
         }
         
         for(int x=0; x<42; x++){
-            if(index <= daysPerMonth[getMonth()] && x >= getDay()){
+            if(index <= mainFrame.daysPerMonth[getMonth()] && x >= getDay()){
                 daysOfMonth[x].setText("" + (index));
                 index++;
             }

@@ -7,6 +7,7 @@ package possystem;
 
 import java.awt.GridLayout;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -205,7 +206,7 @@ public class MainMenuPanel extends CustomPanel {
 
 
     private void ScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScheduleButtonActionPerformed
-        // TODO add your handling code here:
+        mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, Calendar.getInstance()), Boolean.FALSE, this);
     }//GEN-LAST:event_ScheduleButtonActionPerformed
 
     private void NewOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewOrderButtonActionPerformed

@@ -61,6 +61,55 @@ public class Shift implements Serializable{
         this.setEnd = setEnd;
     }
     
+    public String formattedShift(){
+        String string = "";
+        
+        string += this.employee.getName() + " ";
+ 
+        if(this.getSetStart().getHours()>11){
+            if(this.getSetStart().getHours() == 12){
+                string += this.getSetStart().getHours() + ":" + this.getSetStart().getMinutes(); 
+            }
+            else{
+                string += this.getSetStart().getHours()-12 + ":" + this.getSetStart().getMinutes();
+            }
+            string += "PM";
+        }
+        else{
+            if(this.getSetStart().getHours() == 0){
+                string += "12" + ":" + this.getSetStart().getMinutes();
+            }
+            else{
+                string += this.getSetStart().getHours() + ":" + this.getSetStart().getMinutes();
+            }
+            string += "AM";
+        }
+        
+        string += "-";
+        
+        if(this.getSetEnd().getHours()>11){
+            if(this.getSetEnd().getHours() == 12){
+                string += this.getSetEnd().getHours() + ":" + this.getSetEnd().getMinutes();
+            }
+            else{
+                string += this.getSetEnd().getHours()-12 + ":" + this.getSetEnd().getMinutes();
+            }          
+            string += "PM";
+        }
+        
+        else{
+            if(this.getSetEnd().getHours() == 0){
+                string += "12" + ":" + this.getSetEnd().getMinutes();
+            }
+            else{
+                string += this.getSetEnd().getHours() + ":" + this.getSetEnd().getMinutes();
+            }            
+            string += "AM";
+        }
+        
+        return string;
+    }
+    
     @Override
     public String toString(){
         String string = "";

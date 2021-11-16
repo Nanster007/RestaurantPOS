@@ -25,6 +25,9 @@ public class MainFrame extends JFrame {
     private ArrayList<Shift> shifts;
     private ArrayList<Employee> employees;
     private ArrayList<CustomerOrder> customerOrders;
+    public final String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    public final String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    public int[] daysPerMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     
     public MainFrame() throws IOException, FileNotFoundException, ClassNotFoundException
     {
@@ -180,31 +183,14 @@ public class MainFrame extends JFrame {
         return shifts;
     }
     
-    public ArrayList<Shift> getShiftsOfDay(int month, int year, int day) throws FileNotFoundException, IOException, ClassNotFoundException {
-        String file = (month + 1) + "_" + year + ".txt";
-        try{
-            fis = new FileInputStream(file);
-        }
-        catch(FileNotFoundException e){
-            File newFile = new File(file);
-            newFile.createNewFile();
-            fis = new FileInputStream(file);
-        }
-        try{
-            ois = new ObjectInputStream(fis);
-            shifts = (ArrayList<Shift>) ois.readObject();
-            ois.close();
-        }
-        catch(EOFException e){
-            shifts = new ArrayList();
-
-        }
+    public ArrayList<String> getShiftsOfDay(int month, int year, int day) throws FileNotFoundException, IOException, ClassNotFoundException {       
+        getShifts(month, year);
+        ArrayList<String> daysShifts = new ArrayList();
         
-        ArrayList<Shift> daysShifts = shifts;
-        
-        for(int x=0; x< daysShifts.size(); x++){
-            if(daysShifts.get(x).getSetStart().getDate() != day){
-                daysShifts.remove(x);
+        for(int x=0; x< shifts.size(); x++){
+//            System.out.println(daysShifts.get(x).getSetStart().getDate());
+            if(shifts.get(x).getSetStart().getDate() == day){
+                daysShifts.add(shifts.get(x).formattedShift());
             }
         }
         

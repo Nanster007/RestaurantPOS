@@ -28,32 +28,29 @@ import javax.swing.SwingConstants;
 public class EditSchedulePanel extends CustomPanel {
 
     private final MainFrame mainFrame;
-    private final SchedulingCalendar schedulingCalendar;
-    private Calendar calendar;
-    private final String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    private final String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-    private int[] daysPerMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private final EditScheduleCalendar editScheduleCalendar;
     private ArrayList<Shift> shifts;
     private DefaultListModel listModel;
-    private Shift selectedShift;
+    private Calendar calendar;
     
     public EditSchedulePanel(MainFrame mainFrame, Calendar calendar) throws IOException, FileNotFoundException, ClassNotFoundException {
         initComponents();
         this.mainFrame = mainFrame;
         setClockField(ClockLabel);
-        this.schedulingCalendar = new SchedulingCalendar(mainFrame);
         this.calendar = calendar;
+        this.editScheduleCalendar = new EditScheduleCalendar(mainFrame, calendar);
+        this.shifts = mainFrame.getShifts(getMonth(), getYear());
+        
         YearLabel.setText("" + getYear());
-        shifts = mainFrame.getShifts(getMonth(), getYear());
-        DateLabel.setText(months[getMonth()]);
-        updateInterface();
-        CalendarPanel.add(schedulingCalendar);
+        DateLabel.setText(mainFrame.months[getMonth()]);
+  
+        CalendarPanel.add(editScheduleCalendar);
         CalendarPanel.setLayout(new GridLayout(1,1));
         setSpinners();
         
         LabelsPanel.setLayout(new GridLayout(1, 7));
         for(int x=0; x<7; x++){
-            LabelsPanel.add(new JLabel(daysOfWeek[x], SwingConstants.CENTER));
+            LabelsPanel.add(new JLabel(mainFrame.daysOfWeek[x], SwingConstants.CENTER));
         }
         updateInterface();
     }
@@ -65,13 +62,9 @@ public class EditSchedulePanel extends CustomPanel {
     private int getMonth(){
         return calendar.get(Calendar.MONTH);
     }
-    
-    private int getDay(){
-        return calendar.get(Calendar.DAY_OF_MONTH);
-    }
-    
-    public SchedulingCalendar getSchedulingCalendar(){
-        return schedulingCalendar;
+
+    private void setTime(Date date){
+        calendar.setTime(date);
     }
     
     private void updateInterface() throws IOException, FileNotFoundException, ClassNotFoundException{
@@ -85,7 +78,7 @@ public class EditSchedulePanel extends CustomPanel {
         ListScrollPane.setViewportView(ShiftsList);
         ShiftsList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         
-        schedulingCalendar.clearSelectedDays();
+        editScheduleCalendar.clearSelectedDays();
     }
     
     private void setSpinners() throws IOException, FileNotFoundException, ClassNotFoundException{
@@ -429,17 +422,17 @@ public class EditSchedulePanel extends CustomPanel {
 
     private void PreviousMonthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousMonthButtonActionPerformed
         if(getYear()%4 == 0){
-            daysPerMonth[1] = 29;
+            mainFrame.daysPerMonth[1] = 29;
         }
         else{
-            daysPerMonth[1] = 28;
+            mainFrame.daysPerMonth[1] = 28;
         }
                  
         if(getMonth() == 0){ 
-            schedulingCalendar.setTime(new Date((getYear()-1901), 11, 1));
+            setTime(new Date((getYear()-1901), 11, 1));
         }
         else{
-            schedulingCalendar.setTime(new Date((getYear()-1900), getMonth()-1, 1));
+            setTime(new Date((getYear()-1900), getMonth()-1, 1));
         }
         try {
             shifts = mainFrame.getShifts(getMonth(), getYear());
@@ -448,7 +441,7 @@ public class EditSchedulePanel extends CustomPanel {
         }
         
         try {
-            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, schedulingCalendar.getCalendar()), Boolean.FALSE, this);
+            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, calendar), Boolean.FALSE, this);
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -461,17 +454,17 @@ public class EditSchedulePanel extends CustomPanel {
 
     private void NextMonthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextMonthButtonActionPerformed
         if(getYear()%4 == 0){
-            daysPerMonth[1] = 29;
+            mainFrame.daysPerMonth[1] = 29;
         }
         else{
-            daysPerMonth[1] = 28;
+            mainFrame.daysPerMonth[1] = 28;
         }
             
         if(getMonth() == 11){
-            schedulingCalendar.setTime(new Date((getYear()-1899), 0, 1));
+            setTime(new Date((getYear()-1899), 0, 1));
         }
         else{
-            schedulingCalendar.setTime(new Date((getYear()-1900), getMonth()+1, 1));
+            setTime(new Date((getYear()-1900), getMonth()+1, 1));
         }
         try {
             shifts = mainFrame.getShifts(getMonth(), getYear());
@@ -480,7 +473,7 @@ public class EditSchedulePanel extends CustomPanel {
         }
         
         try {
-            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, schedulingCalendar.getCalendar()), Boolean.FALSE, this);
+            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, calendar), Boolean.FALSE, this);
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -490,20 +483,41 @@ public class EditSchedulePanel extends CustomPanel {
         try {
             Date startDate, endDate;
             if(StartPhase.getValue().toString().equals("PM")){
-                startDate = new Date(Integer.parseInt(YearLabel.getText()) - 1900, getMonth(), 1, (Integer)StartHour.getValue()+12, (Integer)StartMinute.getValue(), 0);
-                  
+                if((Integer)StartHour.getValue() == 12){
+                    startDate = new Date(Integer.parseInt(YearLabel.getText()) - 1900, getMonth(), 1, (Integer)StartHour.getValue(), (Integer)StartMinute.getValue(), 0);
+                }
+                else{
+                    startDate = new Date(Integer.parseInt(YearLabel.getText()) - 1900, getMonth(), 1, (Integer)StartHour.getValue()+12, (Integer)StartMinute.getValue(), 0);
+                }
             }
             else{
-                startDate = new Date(Integer.parseInt(YearLabel.getText()) - 1900, getMonth(), 1, (Integer)StartHour.getValue(), (Integer)StartMinute.getValue(), 0);
+                if((Integer)StartHour.getValue() == 12){
+                    startDate = new Date(Integer.parseInt(YearLabel.getText()) - 1900, getMonth(), 1, 0, (Integer)StartMinute.getValue(), 0);
+                }
+                else{
+                    startDate = new Date(Integer.parseInt(YearLabel.getText()) - 1900, getMonth(), 1, (Integer)StartHour.getValue(), (Integer)StartMinute.getValue(), 0);
+                }  
             }
+            
             if(EndPhase.getValue().toString().equals("PM")){
-                endDate = new Date(Integer.parseInt(YearLabel.getText()) - 1900, getMonth(), 1, (Integer)EndHour.getValue()+12, (Integer)EndMinute.getValue(), 0);
+                if((Integer)EndHour.getValue() == 12){
+                    endDate = new Date(Integer.parseInt(YearLabel.getText()) - 1900, getMonth(), 1, (Integer)EndHour.getValue(), (Integer)EndMinute.getValue(), 0);
+                }
+                else{
+                    endDate = new Date(Integer.parseInt(YearLabel.getText()) - 1900, getMonth(), 1, (Integer)EndHour.getValue()+12, (Integer)EndMinute.getValue(), 0);
+                }              
             }
+            
             else{
-                endDate = new Date(Integer.parseInt(YearLabel.getText()) - 1900, getMonth(), 1, (Integer)EndHour.getValue(), (Integer)EndMinute.getValue(), 0); 
+                if((Integer)EndHour.getValue() == 12){
+                    endDate = new Date(Integer.parseInt(YearLabel.getText()) - 1900, getMonth(), 1, 0, (Integer)EndMinute.getValue(), 0);
+                }
+                else{
+                    endDate = new Date(Integer.parseInt(YearLabel.getText()) - 1900, getMonth(), 1, (Integer)EndHour.getValue(), (Integer)EndMinute.getValue(), 0); 
+                }        
             }           
             Employee employee = mainFrame.findEmployee((String)EmployeeSpinner.getValue());  
-            ArrayList<Date> selectedDays = schedulingCalendar.getSelectedDays();
+            ArrayList<Date> selectedDays = editScheduleCalendar.getSelectedDays();
             for(int x=0; x<selectedDays.size(); x++){
                 startDate.setDate(selectedDays.get(x).getDate());
                 endDate.setDate(selectedDays.get(x).getDate());

@@ -20,9 +20,9 @@ public class CustomLabel extends JLabel{
     
     private final MainFrame mainFrame;
     private Boolean highlighted;
-    private SchedulingCalendar schedulingCalendar;
+    private EditScheduleCalendar schedulingCalendar;
     
-    public CustomLabel (String text, SchedulingCalendar schedulingCalendar, MainFrame mainFrame){
+    public CustomLabel (String text, EditScheduleCalendar schedulingCalendar, MainFrame mainFrame){
         super(text);
         this.mainFrame = mainFrame;
         this.schedulingCalendar = schedulingCalendar;

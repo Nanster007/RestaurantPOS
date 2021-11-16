@@ -6,8 +6,12 @@
 package possystem;
 
 import java.awt.GridLayout;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
@@ -16,95 +20,46 @@ import javax.swing.SwingConstants;
  *
  * @author tylar
  */
-public class SchedulingPanel extends CustomPanel {
+public class ViewSchedulePanel extends CustomPanel {
 
-    private MainFrame mainFrame;
-    private String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    private String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-    private int currentMonth, currentDay, currentYear, firstDay;
+    private final MainFrame mainFrame;
+    private ViewScheduleCalendar viewScheduleCalendar;
     private Calendar calendar;
-    private SchedulingCalendar schedulingCalendar;
     
-    public SchedulingPanel(MainFrame mainFrame) {
+    public ViewSchedulePanel(MainFrame mainFrame, Calendar calendar) throws IOException, FileNotFoundException, ClassNotFoundException {
         initComponents();
         this.mainFrame = mainFrame;
+        this.calendar = calendar;
         setClockField(ClockLabel);
         createCalendar();
-        YearLabel.setText("" + currentYear);
-        MonthLabel.setText(months[currentMonth]);
+        YearLabel.setText("" + getYear());
+        MonthLabel.setText(mainFrame.months[getMonth()]);
     }
 
-    private void createCalendar(){
-        
-        int height = (int) mainFrame.getHeight()-235;
-        int width = (int) mainFrame.getWidth()-39;
-
-        calendar = Calendar.getInstance();
-        currentMonth = calendar.get(Calendar.MONTH);
-        currentDay = calendar.get(Calendar.DAY_OF_MONTH);
-        currentYear = calendar.get(Calendar.YEAR);
-        
-        Date date = new Date(currentYear - 1900, currentMonth, 1);
-        calendar.setTime(date);
-        firstDay = calendar.get(Calendar.DAY_OF_WEEK) - 1;       
-        schedulingCalendar = new SchedulingCalendar(mainFrame);
-        CalendarPanel.add(schedulingCalendar);
+    private void createCalendar() throws IOException, FileNotFoundException, ClassNotFoundException{
+    
+        viewScheduleCalendar = new ViewScheduleCalendar(mainFrame, calendar);
+        CalendarPanel.add(viewScheduleCalendar);
         CalendarPanel.setLayout(new GridLayout(1, 1));
         
         LabelsPanel.setLayout(new GridLayout(1, 7));
         for(int x=0; x<7; x++){
-            LabelsPanel.add(new JLabel(daysOfWeek[x], SwingConstants.CENTER));
+            LabelsPanel.add(new JLabel(mainFrame.daysOfWeek[x], SwingConstants.CENTER));
         }
 
     }
     
-    public int getCalendarPanelWidth(){
-        return CalendarPanel.getWidth();
+    private int getYear(){
+        return calendar.get(Calendar.YEAR);
     }
     
-    public int getCalendarPanelHeight(){
-        return CalendarPanel.getHeight();
+    private int getMonth(){
+        return calendar.get(Calendar.MONTH);
     }
     
-    public void setDate(Date date){
-        calendar.setTime(date);
-        YearLabel.setText("" + getCurrentYear());
-        MonthLabel.setText(months[getCurrentMonth()]);
-        schedulingCalendar.changeMonth();
+    private void setTime(Date date){
+        this.calendar.setTime(date);
     }
-
-    public int getFirstDay() {
-//        Calendar cal = Calendar.getInstance();
-//        cal.setTime(new Date(getCurrentYear(), getCurrentMonth(), 1));
-//        return firstDay = cal.get(Calendar.DAY_OF_MONTH);
-    return firstDay;
-    }
-
-    public int getCurrentMonth() {
-        return currentMonth = calendar.get(Calendar.MONTH);
-    }
-
-    public void setCurrentMonth(int currentMonth) {
-        this.currentMonth = currentMonth;
-    }
-
-    public int getCurrentDay() {
-        return currentDay = calendar.get(Calendar.DAY_OF_MONTH);
-    }
-
-    public void setCurrentDay(int currentDay) {
-        this.currentDay = currentDay;
-    }
-
-    public int getCurrentYear() {
-        return currentYear = calendar.get(Calendar.YEAR);
-    }
-
-    public void setCurrentYear(int currentYear) {
-        this.currentYear = currentYear;
-    }
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -240,41 +195,37 @@ public class SchedulingPanel extends CustomPanel {
         
         Date date;
         
-        if(currentMonth== 0){
-            currentMonth = 11;
-            currentYear--;
-            date = new Date(currentYear - 1900, currentMonth, 1);
+        if(getMonth()== 0){
+            date = new Date(getYear()-1901, 11, 1);
         }
         else{
-            currentMonth--;
-            date = new Date(currentYear - 1900, currentMonth, 1);
+            date = new Date(getYear()-1900, getMonth()-1, 1);
         }
-                
-        calendar.setTime(date);
-        firstDay = calendar.get(Calendar.DAY_OF_WEEK)-1;
-        schedulingCalendar.changeMonth();
-        MonthLabel.setText(months[currentMonth]);
-        YearLabel.setText("" + currentYear);
+           
+        setTime(date);
+        try {
+            mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar), Boolean.FALSE, this);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(ViewSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_PreviousMonthButtonActionPerformed
 
     private void NextMonthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextMonthButtonActionPerformed
         Date date;
         
-        if(currentMonth== 11){
-            currentMonth = 0;
-            currentYear++;
-            date = new Date(currentYear - 1900, currentMonth, 1);
+        if(getMonth()== 11){
+            date = new Date(getYear() - 1899, 0, 1);
         }
         else{
-            currentMonth++;
-            date = new Date(currentYear - 1900, currentMonth, 1);
+            date = new Date(getYear() - 1900, getMonth()+1, 1);
         }
                 
-        calendar.setTime(date);
-        firstDay = calendar.get(Calendar.DAY_OF_WEEK) - 1;
-        schedulingCalendar.changeMonth();
-        MonthLabel.setText(months[currentMonth]);
-        YearLabel.setText("" + currentYear);
+        setTime(date);
+        try {
+            mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar), Boolean.FALSE, this);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(ViewSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_NextMonthButtonActionPerformed
 
 
