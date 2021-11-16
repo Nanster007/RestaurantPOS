@@ -53,6 +53,7 @@ public class ViewScheduleCalendar extends JPanel {
             this.add(daysOfMonth[x]);
 //            daysOfMonth[x].setLocation(x%7*width/7+30, x/7*height/5+30);
             daysOfMonth[x].setBorder(BorderFactory.createLineBorder(Color.black));
+            daysOfMonth[x].setEditable(false);
         }
 
     }

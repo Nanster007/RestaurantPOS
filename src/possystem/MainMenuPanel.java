@@ -8,6 +8,7 @@ package possystem;
 import java.awt.GridLayout;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -207,7 +208,11 @@ public class MainMenuPanel extends CustomPanel {
 
     private void ScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScheduleButtonActionPerformed
         try {
-            mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, Calendar.getInstance()), Boolean.FALSE, this);
+            Calendar calendar = Calendar.getInstance();
+            System.out.println((calendar.get(Calendar.YEAR)-1900) + " - " + calendar.get(Calendar.MONTH));
+            calendar.setTime(new Date(calendar.get(Calendar.YEAR)-1900, calendar.get(Calendar.MONTH), 1));
+            
+            mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar), Boolean.FALSE, this);
         } catch (IOException ex) {
             Logger.getLogger(MainMenuPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
