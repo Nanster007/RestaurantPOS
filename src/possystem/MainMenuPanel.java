@@ -23,8 +23,13 @@ public class MainMenuPanel extends CustomPanel {
     public MainMenuPanel(MainFrame mainFrame) {
         initComponents();
         this.mainFrame = mainFrame;
+        //update top left clock field
         setClockField(ClockLabel);
+        
+        //set 2x2 grid layout for menu buttons
         ButtonsPanel.setLayout(new GridLayout(2, 2));
+        
+        //set current user label
         CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
     }
 
@@ -208,20 +213,25 @@ public class MainMenuPanel extends CustomPanel {
 
 
     private void ScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScheduleButtonActionPerformed
-        try {
-            Calendar calendar = Calendar.getInstance();
-            System.out.println((calendar.get(Calendar.YEAR)-1900) + " - " + calendar.get(Calendar.MONTH));
-            calendar.setTime(new Date(calendar.get(Calendar.YEAR)-1900, calendar.get(Calendar.MONTH), 1));
-            
+          
+        //create calendar with current date
+        Calendar calendar = Calendar.getInstance();
+        //year returns 1900 over by function design
+        //always set calendars to first day of month for display reasons
+        calendar.setTime(new Date(calendar.get(Calendar.YEAR)-1900, calendar.get(Calendar.MONTH), 1));
+
+        //try catch for possible file reading failures
+        try {  
             mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar), Boolean.FALSE, this);
-        } catch (IOException ex) {
-            Logger.getLogger(MainMenuPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } 
+       
+        catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(MainMenuPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_ScheduleButtonActionPerformed
 
     private void NewOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewOrderButtonActionPerformed
+        //create blank cutsomer order for customer info panel
         CustomPanel nextPanel = new CustomerInfoPanel(mainFrame, new CustomerOrder("", "", ""));
         mainFrame.setNewPanel(nextPanel, true, this);
     }//GEN-LAST:event_NewOrderButtonActionPerformed
@@ -238,9 +248,7 @@ public class MainMenuPanel extends CustomPanel {
     private void OrderHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderHistoryButtonActionPerformed
         try {
             mainFrame.setNewPanel(new OrderHistoryPanel(mainFrame), true, this);
-        } catch (IOException ex) {
-            Logger.getLogger(MainMenuPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(MainMenuPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_OrderHistoryButtonActionPerformed

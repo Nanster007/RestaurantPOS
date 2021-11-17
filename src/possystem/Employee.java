@@ -14,11 +14,12 @@ import java.util.UUID;
  */
 public class Employee implements Serializable{
     
+    //various info points for each employee
     private String name, phoneNumber;
     private double payRate;
-    private UUID orderID;
     private int pin;
     
+    //basic constructor
     public Employee (String name, String phoneNumber, double payRate, int pin){
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -26,6 +27,10 @@ public class Employee implements Serializable{
         this.pin = pin;
     }
 
+    
+    //various getters and settings for employee info
+    
+    
     public void setPin(int pin){
         this.pin = pin;
     }

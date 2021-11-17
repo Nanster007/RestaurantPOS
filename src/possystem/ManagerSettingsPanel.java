@@ -18,10 +18,13 @@ public class ManagerSettingsPanel extends CustomPanel {
 
     private final MainFrame mainFrame;
     
+    //simple options panel, just a fewbuttons
     public ManagerSettingsPanel(MainFrame mainFrame) {
         initComponents();
         this.mainFrame = mainFrame;
+        //update clock label
         setClockField(ClockLabel);
+        //update current used label
         CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
         
     }
@@ -161,6 +164,7 @@ public class ManagerSettingsPanel extends CustomPanel {
     }//GEN-LAST:event_ClockLabelActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+       //return to the main menu
         mainFrame.setNewPanel(new MainMenuPanel(mainFrame), Boolean.FALSE, this);
     }//GEN-LAST:event_BackButtonActionPerformed
 
@@ -169,21 +173,19 @@ public class ManagerSettingsPanel extends CustomPanel {
     }//GEN-LAST:event_StockSystemButtonActionPerformed
 
     private void SchedulingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SchedulingButtonActionPerformed
+        //try catch for possible file reading failures (editschedulepanel needs to read current month's shifts)
         try {
             mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, Calendar.getInstance()), Boolean.FALSE, this);
-        } catch (IOException ex) {
-            Logger.getLogger(ManagerSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ManagerSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_SchedulingButtonActionPerformed
 
     private void AdjustEmployeesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdjustEmployeesButtonActionPerformed
+        //try catch for possible file reading failes(adjust employee panel needs to read employees file)
         try {
             mainFrame.setNewPanel(new AdjustEmployeePanel(mainFrame), false, this);
-        } catch (IOException ex) {
-            Logger.getLogger(ManagerSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ManagerSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_AdjustEmployeesButtonActionPerformed

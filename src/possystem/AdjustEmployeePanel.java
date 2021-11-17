@@ -7,8 +7,6 @@ package possystem;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -24,56 +22,84 @@ import javax.swing.event.ListSelectionListener;
 public class AdjustEmployeePanel extends CustomPanel {
 
     private final MainFrame mainFrame;
+    
+    //Jlist is visual element to display all current employees' names
     private JList EmployeesList;
+    
+    //list model ensures only one list item is chosen
+    //also allows for the reading of the current selection
     private DefaultListModel listModel;
+    
+    //selected employee object to display employees info when selected on JList and allow for editing of info
     private Employee selectedEmployee;
     
     
     public AdjustEmployeePanel(MainFrame mainFrame) throws IOException, FileNotFoundException, ClassNotFoundException {
         initComponents();
         this.mainFrame = mainFrame;
+        
+        //update current user label and clock label
         CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
         setClockField(ClockLabel);
+        
+        //help text for instructions when adding new employee
+        //Add Employee button reenables visibility 
         HelpText.setVisible(false);
+        
+        //reads and displays all current employees' names
         updateInterface();
+        
+        //set selected employee to first on list at initialization to read their info on both visual list element and user info elements
         selectedEmployee = mainFrame.findEmployee(listModel.getElementAt(0).toString());
+        EmployeesList.setSelectedIndex(0);
+        
+        //set employee info to newly^^selected employees info
         NameField.setText(selectedEmployee.getName());
         NumberField.setText(selectedEmployee.getPhoneNumber());
-        PayrateField.setText("" + selectedEmployee.getPayRate());      
+        PayrateField.setText("" + selectedEmployee.getPayRate()); 
+        
+        //dont allow editing without first clicking 'edit info' button
         NameField.setEditable(false);
         PinField.setEditable(false);
         NumberField.setEditable(false);
         PayrateField.setEditable(false);
         ShiftsField.setEditable(false);
-        EmployeesList.setSelectedIndex(0);
     }
 
     private void updateInterface() throws IOException, FileNotFoundException, ClassNotFoundException{
+        //listModel structure ensures only 1 option selected at a time
         listModel = new DefaultListModel();
+        
+        //loops to create a line in the list for every current employee
         for(int x=0; x<mainFrame.getEmployees().size(); x++){
             listModel.addElement(mainFrame.getEmployees().get(x).getName());
         }
+        
+        //EmployeesList is visual element to display employee names
         EmployeesList = new JList(listModel);
+        //this may be unecessary
         EmployeesScrollPane.setViewportView(EmployeesList);
+        //actually setting listModel to only 1 selection at a time allowed 
         EmployeesList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         
+        //add actionlistener to visual EmployeesList to update displayed employee info to new selection
         EmployeesList.addListSelectionListener(new ListSelectionListener() {
             @Override
+            //this is whats called when used clicks a new employee selection
             public void valueChanged(ListSelectionEvent e) {
+                //try catch for possible employee.txt file reading failes
                 try {
                     selectedEmployee = mainFrame.findEmployee(EmployeesList.getSelectedValue().toString());
-                } catch (IOException ex) {
-                    Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
+                } catch (IOException | ClassNotFoundException ex) {
                     Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                //update visual elements to newly selected employee
                 NameField.setText(selectedEmployee.getName());
                 NumberField.setText(selectedEmployee.getPhoneNumber());
                 PayrateField.setText("" + selectedEmployee.getPayRate());
             }
             
         });
-        
     }
     
     /**
@@ -326,6 +352,7 @@ public class AdjustEmployeePanel extends CustomPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        //previous panel button
         mainFrame.setNewPanel(new ManagerSettingsPanel(mainFrame), Boolean.FALSE, this);
     }//GEN-LAST:event_BackButtonActionPerformed
 
@@ -341,38 +368,55 @@ public class AdjustEmployeePanel extends CustomPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_ClockLabelActionPerformed
 
+    //button acts as enabling editing to add new employee ("Add New Employee") and as a ("Submit") button
     private void AddEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmployeeButtonActionPerformed
+        //when clicked - if button says "Submit", do this
         if(AddEmployeeButton.getText().equals("Submit")){
-                try {
+            //try catch for possible file writing errors    
+            try {
                     mainFrame.addEmployee(new Employee(NameField.getText(), NumberField.getText(), Double.parseDouble(PayrateField.getText()), Integer.parseInt(PinField.getText())));
-                } catch (IOException ex) {
-                    Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
+                } catch (IOException | ClassNotFoundException ex) {
                     Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
+                //change phase of current back to "Add New Employee"
                 AddEmployeeButton.setText("Add New Employee");
+                //disable help text for instructions when adding new employee
                 HelpText.setVisible(false);
+                //edit/save, employeeslist and delete buttons get disabled when entering new employee info
                 EditSaveButton.setEnabled(true);
                 DeleteEmployeeButton.setEnabled(true);
                 EmployeesList.setEnabled(true);
-    //            EmployeesList.setEnabled(true);
+                
+                //try catch for possible file reading failes in updateInterface method
                 try {
                     updateInterface();
-                } catch (IOException ex) {
-                    Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
+                } catch (IOException | ClassNotFoundException ex) {
                     Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                //set currently selected employee to newly added submission
                 EmployeesList.setSelectedIndex(listModel.getSize()-1);
+                
+                //pinfield not editable unless adding or adjusting info (and never displays pins read from file, only displays on pin entry
                 PinField.setEditable(false);
                 PinField.setText("");
             }
+        //if button doesnt say "Submit" do this("Add New Employee" phase")
         else{
+            //allow pin entry when adding employees
             PinField.setEditable(true);
+            
+            //enable instructions
             HelpText.setVisible(true);
+            
+            //disable edit and delete button when adding new employee
             EditSaveButton.setEnabled(false);
             DeleteEmployeeButton.setEnabled(false);
+            
+            //change this button to "Submit" phase
             AddEmployeeButton.setText("Submit");
+            
+            //clear all display fields and allow editing for entry of new employee info
             NameField.setEditable(true);
             NameField.setText("");
             NumberField.setEditable(true);
@@ -387,37 +431,54 @@ public class AdjustEmployeePanel extends CustomPanel {
     }//GEN-LAST:event_AddEmployeeButtonActionPerformed
 
     private void EditSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditSaveButtonActionPerformed
+        //if button clicked in "Edit Info" phase, do this
         if(EditSaveButton.getText().equals("Edit Info")){
+            //allow editing of currently displayed employee info fields
             PinField.setEditable(true);
             NameField.setEditable(true);
             NumberField.setEditable(true);
             PayrateField.setEditable(true);
+            
+            //change current button to "Save Changes" phase
             EditSaveButton.setText("Save Changes");
+            
+            //disable add employee, delete button, and employeeslist when editing current info
             AddEmployeeButton.setEnabled(false);
             DeleteEmployeeButton.setEnabled(false);
             EmployeesList.setEnabled(false);
         }
+        //button is clicked in "Submit Changes" phase, do this
         else{
+            //change button to "Edit Info" phase
             EditSaveButton.setText("Edit Info");
-            System.out.println(selectedEmployee.getName());
+            
+            //sets currently selected employee object changes
             selectedEmployee.setName(NameField.getText());
             selectedEmployee.setPayRate(Double.parseDouble(PayrateField.getText()));
             selectedEmployee.setPhoneNumber(NumberField.getText());
+            
+            //only update pin if new pin was entered
             if(!PinField.getText().isBlank()){
                 selectedEmployee.setPin(Integer.parseInt(PinField.getText()));
             }
+            
+            //try catch for possible file writing failures
             try {
                 mainFrame.saveEmployees();
-            } catch (IOException ex) {
-                Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
+            } catch (IOException | ClassNotFoundException ex) {
                 Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            //clear visual pin field incase new one was entered
             PinField.setText("");
+            
+            //dont allow editing of fields unless editing or adding employee
             PinField.setEditable(false);
             NameField.setEditable(false);
             NumberField.setEditable(false);
             PayrateField.setEditable(false);
+            
+            //enable fields for adding emplooyees, selecting new employees, and deleting employees
             AddEmployeeButton.setEnabled(true);
             DeleteEmployeeButton.setEnabled(true);
             EmployeesList.setEnabled(true);
@@ -430,20 +491,19 @@ public class AdjustEmployeePanel extends CustomPanel {
     }//GEN-LAST:event_ShiftsFieldActionPerformed
 
     private void DeleteEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteEmployeeButtonActionPerformed
+        //try catch for possible file writing errors when deleting employee selection
         try {
             mainFrame.removeEmployee(selectedEmployee);
-        } catch (IOException ex) {
-            Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //try catch for file reading failes when updating interface, which reads employees file
         try {
             updateInterface();
-        } catch (IOException ex) {
-            Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //rest displayed employee selection to first element after deleting employee
         EmployeesList.setSelectedIndex(0);
     }//GEN-LAST:event_DeleteEmployeeButtonActionPerformed
 

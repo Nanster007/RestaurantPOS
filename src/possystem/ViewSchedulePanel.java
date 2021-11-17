@@ -23,26 +23,38 @@ import javax.swing.SwingConstants;
 public class ViewSchedulePanel extends CustomPanel {
 
     private final MainFrame mainFrame;
+    
+    //calendar holds date variables important for graphics and file keeping
+    private final Calendar calendar;
+    
+    //holds actual calendar graphic
     private ViewScheduleCalendar viewScheduleCalendar;
-    private Calendar calendar;
     
     public ViewSchedulePanel(MainFrame mainFrame, Calendar calendar) throws IOException, FileNotFoundException, ClassNotFoundException {
         initComponents();
         this.mainFrame = mainFrame;
         this.calendar = calendar;
+        //update clock field to current panel
         setClockField(ClockLabel);
+        
         createCalendar();
+        
+        //set calendar labels
         YearLabel.setText("" + getYear());
         MonthLabel.setText(mainFrame.months[getMonth()]);
+        //set current user label
         CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
     }
 
+    //create the Calendar graphic
     private void createCalendar() throws IOException, FileNotFoundException, ClassNotFoundException{
     
         viewScheduleCalendar = new ViewScheduleCalendar(mainFrame, calendar);
+        //add graphic to this panel
         CalendarPanel.add(viewScheduleCalendar);
         CalendarPanel.setLayout(new GridLayout(1, 1));
         
+        //create days of week labels
         LabelsPanel.setLayout(new GridLayout(1, 7));
         for(int x=0; x<7; x++){
             LabelsPanel.add(new JLabel(mainFrame.daysOfWeek[x], SwingConstants.CENTER));
@@ -194,15 +206,21 @@ public class ViewSchedulePanel extends CustomPanel {
 
     private void PreviousMonthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousMonthButtonActionPerformed
         
+        //previous month needs date change
+        //date variable used to generate new graphic with respect to the new month
         Date date;
         
+        //if going from Jan to December of previous year, decrement year and reset to december
         if(getMonth()== 0){
             date = new Date(getYear()-1901, 11, 1);
         }
+        //else set date to previous month of current year
         else{
             date = new Date(getYear()-1900, getMonth()-1, 1);
         }
            
+        //set current calendar to new date
+        //date then passed to brand new ViewSchedulePanel, generating new graphics with respect to new date
         setTime(date);
         try {
             mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar), Boolean.FALSE, this);
@@ -212,15 +230,21 @@ public class ViewSchedulePanel extends CustomPanel {
     }//GEN-LAST:event_PreviousMonthButtonActionPerformed
 
     private void NextMonthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextMonthButtonActionPerformed
+        //next month needs date change
+        //date variable used to generate new graphic with respect to the new month
         Date date;
         
+        //if going from December to January of next year, increment year and reset to january
         if(getMonth()== 11){
             date = new Date(getYear() - 1899, 0, 1);
         }
+        //else set date to next month of current year
         else{
             date = new Date(getYear() - 1900, getMonth()+1, 1);
         }
-                
+           
+        //set current calendar to new date
+        //date then passed to brand new ViewSchedulePanel, generating new graphics with respect to new date
         setTime(date);
         try {
             mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar), Boolean.FALSE, this);

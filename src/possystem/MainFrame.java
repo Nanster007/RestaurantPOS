@@ -16,37 +16,53 @@ import javax.swing.JFrame;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 
-//creates window and sets meta data for window
+//creates window and sets various data for window
 public class MainFrame extends JFrame {
+    
+    //variables for general functionality
     private CustomPanel currentPage, lastPage;
-    private Employee currentUser;
     private final ClockThread clock;
+
+    //variables for file input and output
     private FileOutputStream fos;
     private FileInputStream fis;
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
+    
+    //variables for holding file readings
+    private Employee currentUser;
     private ArrayList<Shift> shifts;
     private ArrayList<Employee> employees;
     private ArrayList<CustomerOrder> customerOrders;
+    
+    //general calendar info for use in various panels
     public final String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     public final String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     public int[] daysPerMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     
     public MainFrame() throws IOException, FileNotFoundException, ClassNotFoundException
     {
+        //various frame settings
+        this.setTitle("POS System");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setTitle("Pos SystemHol");
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setResizable(false);
-        currentPage = new LoginPanel(this);
-        this.add(currentPage, BorderLayout.CENTER);
-        //what is this??
         this.setVisible(true);
-        clock = new ClockThread(currentPage);
+        
+        //always open to log in page
+        this.currentPage = new LoginPanel(this);        
+        this.add(currentPage, BorderLayout.CENTER);
+       
+        //clock is referenced in most panels
+        //as current panel changes, clock remains attached to visible panel
+        this.clock = new ClockThread(currentPage);
+        
+        ////read in customer orders and employees from files
         customerOrders = getCustomerOrders();
         employees = getEmployees();
     }
     
+    //called from LoginPanel to check validity
     public Boolean logIn(int pin){
         try {
             getEmployees();
@@ -59,6 +75,7 @@ public class MainFrame extends JFrame {
         return false;
     }
     
+    //loops through employees list for matching pin
     public Boolean checkPins(int pin){
         for(int x=0; x<employees.size(); x++){
             if(employees.get(x).getPin() == pin){
@@ -69,23 +86,34 @@ public class MainFrame extends JFrame {
         return false;
     }
     
-    public Employee getCurrentUser(){
-        return currentUser;
-    }
-    
+    //function to change screens
     public void setNewPanel(CustomPanel newPage, Boolean saveLastPage, CustomPanel lastPage){
+        
+        //remove current panel from mainFrame
         this.remove(currentPage);   
+        
+        //savePage boolean to bother saving previous panel - rarely used
         if(saveLastPage){
             this.lastPage = lastPage;
         }
+        
+        //set current page to the new page passed to function
         currentPage = newPage;
+        
+        //tell the clock the new current panel
         clock.setCurrentPanel(currentPage);
+        
+        //add panel to frame
         this.add(currentPage, BorderLayout.CENTER);
-        //what is this??
         this.setVisible(true);
     }
     
+    
+    //recieves employees name
+    //loops through employee list for match
     public Employee findEmployee(String name) throws IOException, FileNotFoundException, ClassNotFoundException{
+        
+        //refresh employee list for safety
         getEmployees();
         for(int x=0; x<employees.size(); x++){
             if(employees.get(x).getName().equals(name)){
@@ -95,6 +123,7 @@ public class MainFrame extends JFrame {
         return null;
     }
     
+    //returns list of all employees' names
     public ArrayList<String> getEmployeeNames(){
         ArrayList<String> list = new ArrayList();
         for(int x=0; x<employees.size(); x++){
@@ -103,6 +132,7 @@ public class MainFrame extends JFrame {
         return list;
     }
     
+    //add an order to customer orders file
     public void addCustomerOrder(CustomerOrder customerOrder) throws FileNotFoundException, IOException{
         customerOrders.add(customerOrder);
         fos = new FileOutputStream("CustomerOrders.txt");
@@ -110,6 +140,7 @@ public class MainFrame extends JFrame {
         oos.writeObject(customerOrders);
     }
     
+    //add an employee to file
     public void addEmployee(Employee employee)throws FileNotFoundException, IOException, ClassNotFoundException {
         employees.add(employee);
         fos = new FileOutputStream("Employees.txt");
@@ -117,14 +148,12 @@ public class MainFrame extends JFrame {
         oos.writeObject(employees);
     }
     
-    public void saveEmployees()throws FileNotFoundException, IOException, ClassNotFoundException {
-        fos = new FileOutputStream("Employees.txt");
-        oos = new ObjectOutputStream(fos);
-        oos.writeObject(employees);
-    }
-    
+    //add shift to file
     public void addShift(Shift shift)throws FileNotFoundException, IOException, ClassNotFoundException{
+        
+        //must first update shifts list to the matching month and year
         shifts = getShifts(shift.getSetStart().getMonth(), shift.getSetStart().getYear()+1900);
+        
         shifts.add(shift);
         String file = (shift.getSetStart().getMonth()+1) + "_" + (shift.getSetStart().getYear()+1900) + ".txt";
         fos = new FileOutputStream(file);
@@ -132,6 +161,9 @@ public class MainFrame extends JFrame {
         oos.writeObject(shifts);
     }
     
+    //loops through customer orders for matching orderID
+    //if match, remove from list
+    //**should add in saving current customerOrders list to file
     public void removeCustomerOrder(String orderID){
         for(int i=0; i < customerOrders.size(); i++){
             if(customerOrders.get(i).getOrderID().toString().equals(orderID)){
@@ -140,19 +172,28 @@ public class MainFrame extends JFrame {
         }
     }
     
+    
+    //remove specified shift from file and save file
     public void removeShift(Shift shift) throws IOException, FileNotFoundException, ClassNotFoundException{
+        
+        //must first update shifts list to matching month and year
         shifts = getShifts(shift.getSetStart().getMonth(), shift.getSetStart().getYear()+1900);
+        
+        //loops through shifts list for matching shift by toString()
+        //should probably use an id instead
         for(int x=0; x<shifts.size(); x++){
             if(shifts.get(x).toString().equals(shift.toString())){
                 shifts.remove(x);
             }
         }
+        
         String file = (shift.getSetStart().getMonth()+1) + "_" + (shift.getSetStart().getYear()+1900) + ".txt";
         fos = new FileOutputStream(file);
         oos = new ObjectOutputStream(fos);
         oos.writeObject(shifts);
     }
     
+    //remove specified employee from file and save file
     public void removeEmployee (Employee employee) throws IOException, FileNotFoundException, ClassNotFoundException{
         employees = getEmployees();
         
@@ -166,6 +207,14 @@ public class MainFrame extends JFrame {
         saveEmployees();
     }
     
+    //save current 'employees' list to files
+    public void saveEmployees()throws FileNotFoundException, IOException, ClassNotFoundException {
+        fos = new FileOutputStream("Employees.txt");
+        oos = new ObjectOutputStream(fos);
+        oos.writeObject(employees);
+    }
+    
+    //updates mainFrame employees list from file AND returns list
     public ArrayList<Employee> getEmployees() throws FileNotFoundException, IOException, ClassNotFoundException{
         
         String file = "Employees.txt";
@@ -190,6 +239,7 @@ public class MainFrame extends JFrame {
         return employees;
     }
     
+    //updates mainframe shifts list and returns it
     public ArrayList<Shift> getShifts(int month, int year) throws FileNotFoundException, IOException, ClassNotFoundException {
         String file = (month + 1) + "_" + year + ".txt";
         try{
@@ -212,20 +262,25 @@ public class MainFrame extends JFrame {
         return shifts;
     }
     
+    //returns all shifts on a specified day
     public ArrayList<String> getShiftsOfDay(int month, int year, int day) throws FileNotFoundException, IOException, ClassNotFoundException {       
+        
+        //read file for month and year recieved
         getShifts(month, year);
         ArrayList<String> daysShifts = new ArrayList();
         
+        //loops through shifts list for shifts on same day as recieved and adds to secondary list
         for(int x=0; x< shifts.size(); x++){
-//            System.out.println(daysShifts.get(x).getSetStart().getDate());
             if(shifts.get(x).getSetStart().getDate() == day){
                 daysShifts.add(shifts.get(x).formattedShift());
             }
         }
         
+        //returns list of shifts on specified day
         return daysShifts;
     }
 
+    //updates mainframe customerOrders list and returns it
     public ArrayList<CustomerOrder> getCustomerOrders() throws FileNotFoundException, IOException, ClassNotFoundException {
         String file = "CustomerOrders.txt";
         try{
@@ -256,5 +311,8 @@ public class MainFrame extends JFrame {
         return lastPage;
     }
     
+    public Employee getCurrentUser(){
+        return currentUser;
+    }
     
 }

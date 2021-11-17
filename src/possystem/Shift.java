@@ -14,9 +14,11 @@ import java.util.Date;
  */
 public class Shift implements Serializable{
     
+    //employee and time variables for each shifts
     private Employee employee;
     private Date clockStart, clockEnd, setStart, setEnd;
     
+    //basic constructor
     public Shift (Employee employee, Date setStart, Date setEnd){
         this.employee = employee;
         this.setStart = setStart;
@@ -24,43 +26,8 @@ public class Shift implements Serializable{
         this.clockStart = null;
         this.clockEnd = null;
     }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public Date getClockStart() {
-        return clockStart;
-    }
-
-    public void setClockStart(Date clockStart) {
-        this.clockStart = clockStart;
-    }
-
-    public Date getClockEnd() {
-        return clockEnd;
-    }
-
-    public void setClockEnd(Date clockEnd) {
-        this.clockEnd = clockEnd;
-    }
-
-    public Date getSetStart() {
-        return setStart;
-    }
-
-    public void setSetStart(Date setStart) {
-        this.setStart = setStart;
-    }
-
-    public Date getSetEnd() {
-        return setEnd;
-    }
-
-    public void setSetEnd(Date setEnd) {
-        this.setEnd = setEnd;
-    }
     
+    //likely a gross overcomplication of a formatted output of the shift
     public String formattedShift(){
         String string = "";
         
@@ -110,6 +77,47 @@ public class Shift implements Serializable{
         return string;
     }
     
+    
+    //various getters and setters for shift info
+    
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public Date getClockStart() {
+        return clockStart;
+    }
+
+    public void setClockStart(Date clockStart) {
+        this.clockStart = clockStart;
+    }
+
+    public Date getClockEnd() {
+        return clockEnd;
+    }
+
+    public void setClockEnd(Date clockEnd) {
+        this.clockEnd = clockEnd;
+    }
+
+    public Date getSetStart() {
+        return setStart;
+    }
+
+    public void setSetStart(Date setStart) {
+        this.setStart = setStart;
+    }
+
+    public Date getSetEnd() {
+        return setEnd;
+    }
+
+    public void setSetEnd(Date setEnd) {
+        this.setEnd = setEnd;
+    }
+    
+    //basic toString for file writing and reading
     @Override
     public String toString(){
         String string = "";

@@ -21,29 +21,41 @@ public class LoginPanel extends CustomPanel {
      * Creates new form LoginPanel
      */
     private final MainFrame mainFrame;
+    
+    //buttongroup ensures only one button clicked at a time
     private ButtonGroup bg;
+    
+    //just to add clear and delete button convieniently
     private final String[] buttonOrder = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "Clear", "0", "Delete"};
     
+    //login page
     public LoginPanel(MainFrame mainFrame) {
         initComponents();
         this.mainFrame = mainFrame;
         this.bg = new ButtonGroup();
+        //sets top left clock field
         setClockField(ClockLabel);
         
+        //just centers added fields 
+        TopPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         MiddlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         BottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        EntryPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         
+        //bolder clocklabel border for this page
         ClockLabel.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+        //4x3 grid for 12 buttons 
         GridLayout layout = new GridLayout(4, 3);
+        //removes padding
         layout.setVgap(0);
         layout.setHgap(0);
         
-        
+        //adds 12 buttons to keypad
         KeyPad.setLayout(layout);
         
+        //loop to actually initialize and add buttons to panel
         for(int x=0; x<12; x++){
             CustomButton button = new CustomButton(buttonOrder[x], this);
+            //bg = buttongroup -- ensures only 1 button clicked at a time
             bg.add(button);
             KeyPad.add(button);
             
@@ -51,18 +63,22 @@ public class LoginPanel extends CustomPanel {
         
     }
     
-    public void selection(String string){
+    //called from keypad buttons to update pin displayed (should probably not be displayed in final product)
+    public void numberClicked(String string){
         PinField.setText(PinField.getText() + string);
     }
     
+    //called from keypad 'Delete' button to backspace the current entered pin
     public void deleteEntry(){
         PinField.setText(PinField.getText().substring(0, PinField.getText().length()-1));
     }
     
+    //called from keypad 'clear' button to clear entry
     public void clearEntry(){
         PinField.setText("");
     }
     
+    //self explanatory
     public ButtonGroup getButtonGroup(){
         return this.bg;
     }
@@ -81,8 +97,8 @@ public class LoginPanel extends CustomPanel {
         MiddlePanel = new javax.swing.JPanel();
         KeyPad = new javax.swing.JPanel();
         BottomPanel = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        EntryPanel = new javax.swing.JPanel();
+        EnterButton = new javax.swing.JToggleButton();
+        TopPanel = new javax.swing.JPanel();
         PinField = new javax.swing.JTextField();
         ErrorLabel = new javax.swing.JLabel();
 
@@ -126,12 +142,12 @@ public class LoginPanel extends CustomPanel {
             .addComponent(KeyPad, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jToggleButton1.setFont(new java.awt.Font("SansSerif", 0, 30)); // NOI18N
-        jToggleButton1.setText("Enter");
-        jToggleButton1.setPreferredSize(new java.awt.Dimension(600, 50));
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        EnterButton.setFont(new java.awt.Font("SansSerif", 0, 30)); // NOI18N
+        EnterButton.setText("Enter");
+        EnterButton.setPreferredSize(new java.awt.Dimension(600, 50));
+        EnterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                EnterButtonActionPerformed(evt);
             }
         });
 
@@ -141,14 +157,14 @@ public class LoginPanel extends CustomPanel {
             BottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BottomPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(EnterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         BottomPanelLayout.setVerticalGroup(
             BottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BottomPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(EnterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -156,18 +172,18 @@ public class LoginPanel extends CustomPanel {
         PinField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         PinField.setPreferredSize(new java.awt.Dimension(450, 50));
 
-        javax.swing.GroupLayout EntryPanelLayout = new javax.swing.GroupLayout(EntryPanel);
-        EntryPanel.setLayout(EntryPanelLayout);
-        EntryPanelLayout.setHorizontalGroup(
-            EntryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EntryPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout TopPanelLayout = new javax.swing.GroupLayout(TopPanel);
+        TopPanel.setLayout(TopPanelLayout);
+        TopPanelLayout.setHorizontalGroup(
+            TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TopPanelLayout.createSequentialGroup()
                 .addGap(348, 348, 348)
                 .addComponent(PinField, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        EntryPanelLayout.setVerticalGroup(
-            EntryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EntryPanelLayout.createSequentialGroup()
+        TopPanelLayout.setVerticalGroup(
+            TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TopPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(PinField, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(49, Short.MAX_VALUE))
@@ -186,7 +202,7 @@ public class LoginPanel extends CustomPanel {
                     .addComponent(ClockLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1036, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(MiddlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(EntryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TopPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ErrorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -200,7 +216,7 @@ public class LoginPanel extends CustomPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ErrorLabel)
                 .addGap(34, 34, 34)
-                .addComponent(EntryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TopPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(MiddlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -212,26 +228,29 @@ public class LoginPanel extends CustomPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_ClockLabelActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void EnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterButtonActionPerformed
+        //call mainframe.LogIn() to check pin validity
+        //pass it the current PinField text, converted into in integer
         if(mainFrame.logIn(Integer.parseInt(PinField.getText()))){
             mainFrame.setNewPanel(new MainMenuPanel(mainFrame), Boolean.FALSE, this);
         }
+        //if LogIn() returns false, invalid pin
         else{
             ErrorLabel.setText("*Invalid pin please try again*");
             PinField.setText("");
         }
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_EnterButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BottomPanel;
     private javax.swing.JTextField ClockLabel;
-    private javax.swing.JPanel EntryPanel;
+    private javax.swing.JToggleButton EnterButton;
     private javax.swing.JLabel ErrorLabel;
     private javax.swing.JPanel KeyPad;
     private javax.swing.JPanel MiddlePanel;
     private javax.swing.JTextField PinField;
+    private javax.swing.JPanel TopPanel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

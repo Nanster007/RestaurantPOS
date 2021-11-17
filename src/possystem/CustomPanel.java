@@ -12,8 +12,11 @@ import javax.swing.JTextField;
  *
  * @author tylar
  */
+
+//CustomPanel class allows for clock thread to be referenced continously in each new panel
 public class CustomPanel extends JPanel {
     
+    //each panel must have a clock field to display the clock thread
     private JTextField clockField;
  
     public CustomPanel(){
