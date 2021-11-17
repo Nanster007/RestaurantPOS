@@ -233,7 +233,7 @@ public class MainFrame extends JFrame {
         }
         catch(EOFException e){
             employees = new ArrayList();
-            employees.add(new Employee("Tylar", "3303078422", 15.00, 1111));
+            employees.add(new Employee("Tylar", "3303078422", 15.00, 5555));
         }
         
         return employees;
