@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package possystem;
+package possystem.menuitems;
 
 import java.io.Serializable;
 
@@ -11,16 +11,16 @@ import java.io.Serializable;
  *
  * @author tylar
  */
-public class Topping implements Serializable{
-    
+public class Topping implements Serializable {
+
     private String toppingName;
     private double toppingPrice;
-    
-    public Topping (String toppingName, double toppingPrice){
+
+    public Topping(String toppingName, double toppingPrice) {
         this.toppingName = toppingName;
         this.toppingPrice = toppingPrice;
     }
-    
+
     public String getToppingName() {
         return toppingName;
     }
@@ -36,7 +36,5 @@ public class Topping implements Serializable{
     public void setToppingPrice(double toppingPrice) {
         this.toppingPrice = toppingPrice;
     }
-    
-    
-    
+
 }

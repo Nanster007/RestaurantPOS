@@ -1,5 +1,6 @@
 package possystem;
 
+import possystem.menuitems.MenuItem;
 import java.awt.Color;
 
 /*

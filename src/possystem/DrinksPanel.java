@@ -5,6 +5,8 @@
  */
 package possystem;
 
+import possystem.menuitems.MenuItem;
+
 /**
  *
  * @author tylar

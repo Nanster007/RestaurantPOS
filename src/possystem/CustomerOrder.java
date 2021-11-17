@@ -5,6 +5,7 @@
  */
 package possystem;
 
+import possystem.menuitems.MenuItem;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;

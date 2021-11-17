@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package possystem;
+package possystem.menuitems;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,6 +20,8 @@ public class MenuItem implements Serializable {
     private UUID id;
     private ArrayList<UUID> possibleToppings;
     private String comments;
+    // Could implement stock management through a recipes class, which would list
+    // the ingredients for making a food item (and potentially instructions)
 
     public MenuItem(String name, double price, UUID id, String comments, String type) {
         this.name = name;
