@@ -262,16 +262,16 @@ public class MainFrame extends JFrame {
         return shifts;
     }
     
-    //returns all shifts on a specified day
-    public ArrayList<String> getShiftsOfDay(int month, int year, int day) throws FileNotFoundException, IOException, ClassNotFoundException {       
+    //returns all shifts on a specified day for viewing schedule
+    public ArrayList<String> getEmployeesShiftsOfDay(int month, int year, int day, Employee employee) throws FileNotFoundException, IOException, ClassNotFoundException {       
         
         //read file for month and year recieved
         getShifts(month, year);
         ArrayList<String> daysShifts = new ArrayList();
         
-        //loops through shifts list for shifts on same day as recieved and adds to secondary list
+        //loops through shifts list for shifts on same day and employee as recieved and adds to secondary list
         for(int x=0; x< shifts.size(); x++){
-            if(shifts.get(x).getSetStart().getDate() == day){
+            if(shifts.get(x).getSetStart().getDate() == day && shifts.get(x).getEmployee().getName().equals(employee.getName())){
                 daysShifts.add(shifts.get(x).formattedShift());
             }
         }

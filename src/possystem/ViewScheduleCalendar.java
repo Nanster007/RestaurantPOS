@@ -63,7 +63,7 @@ public class ViewScheduleCalendar extends JPanel {
             //first boolean to ensure labeling stops when current month has no more days in it (ex: stop labeling at 28 for February)
             //second boolean ensures it doesnt label the blank days on the calendar BEFORE the first of the month
             if(index <= mainFrame.daysPerMonth[getMonth()] && x >= getDay()-1){
-                daysOfMonth[x] = new JTextArea("" + index + "\n" + mainFrame.getShiftsOfDay(getMonth(), getYear(), index));
+                daysOfMonth[x] = new JTextArea("" + index + "\n" + mainFrame.getEmployeesShiftsOfDay(getMonth(), getYear(), index, mainFrame.getCurrentUser()));
                 index++;
             }
             //dont label if didnt pass check
