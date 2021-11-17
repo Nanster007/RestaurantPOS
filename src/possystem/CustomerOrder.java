@@ -36,7 +36,7 @@ public class CustomerOrder implements Serializable{
         
         if(orderItems.size() > 0){
             for(int i = 0; i < orderItems.size(); i++){
-               orderTotal += orderItems.get(i).getPrice();
+               orderTotal += orderItems.get(i).getBasePrice();
             }
         }
         

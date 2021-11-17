@@ -16,24 +16,31 @@ import java.util.UUID;
 public class MenuItem implements Serializable {
 
     private String name;
-    private double price;
+    private double basePrice;
     private UUID id;
     private ArrayList<UUID> possibleToppings;
+    private ArrayList<ItemOption> options;
     private String comments;
+    private String category;    // Entree, drink, etc.
+    private String subcategory; // e.g. Pepsi products, Coke products, etc.
+
+    // Some way for the menu items to know how much foodstuffs they'll cost to make
     // Could implement stock management through a recipes class, which would list
     // the ingredients for making a food item (and potentially instructions)
-
-    public MenuItem(String name, double price, UUID id, String comments, String type) {
+    public MenuItem(String name, double price, UUID id, String comments, String category, String subcategory) {
         this.name = name;
-        this.price = price;
+        this.basePrice = price;
         this.id = id;
         this.possibleToppings = new ArrayList();
+        this.options = new ArrayList();
         this.comments = comments;
+        this.category = category;
+        this.subcategory = subcategory;
     }
 
     // <editor-fold desc="Getters and Setters" defaultstate="collapsed">
-    public double getPrice() {
-        return price;
+    public double getBasePrice() {
+        return basePrice;
     }
 
     public String getComments() {
@@ -44,8 +51,8 @@ public class MenuItem implements Serializable {
         this.comments = comments;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setBasePrice(double basePrice) {
+        this.basePrice = basePrice;
     }
 
     public String getName() {
@@ -64,14 +71,38 @@ public class MenuItem implements Serializable {
         return possibleToppings;
     }
 
+    public ArrayList<ItemOption> getOptions() {
+        return options;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getSubcategory() {
+        return subcategory;
+    }
+
+    public void setSubcategory(String subcategory) {
+        this.subcategory = subcategory;
+    }
+
     // </editor-fold>
     public void addPossibleTopping(UUID topping) {
         possibleToppings.add(topping);
     }
 
+    public void addOption(ItemOption option) {
+        options.add(option);
+    }
+
     @Override
     public String toString() {
-        String toString = price + " \n" + name + "\n" + comments;
+        String toString = basePrice + " \n" + name + "\n" + comments;
 
         return toString;
     }
