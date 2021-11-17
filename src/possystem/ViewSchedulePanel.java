@@ -34,6 +34,7 @@ public class ViewSchedulePanel extends CustomPanel {
         createCalendar();
         YearLabel.setText("" + getYear());
         MonthLabel.setText(mainFrame.months[getMonth()]);
+        CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
     }
 
     private void createCalendar() throws IOException, FileNotFoundException, ClassNotFoundException{

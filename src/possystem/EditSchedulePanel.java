@@ -40,6 +40,7 @@ public class EditSchedulePanel extends CustomPanel {
         this.calendar = calendar;
         this.editScheduleCalendar = new EditScheduleCalendar(mainFrame, calendar);
         this.shifts = mainFrame.getShifts(getMonth(), getYear());
+        CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
         
         YearLabel.setText("" + getYear());
         DateLabel.setText(mainFrame.months[getMonth()]);

@@ -30,6 +30,10 @@ public class Employee implements Serializable{
         this.pin = pin;
     }
     
+    public int getPin(){
+        return this.pin;
+    }
+    
     public String getName() {
         return name;
     }

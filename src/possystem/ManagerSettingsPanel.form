@@ -106,9 +106,9 @@
                       <Component id="AdjustEmployeesButton" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="BusinessReportsButton" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                      <Component id="AdjustEmployeesButton1" alignment="3" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="AdjustEmployeesButton1" min="-2" pref="200" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>

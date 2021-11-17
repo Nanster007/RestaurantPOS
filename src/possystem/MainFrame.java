@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -17,6 +19,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 //creates window and sets meta data for window
 public class MainFrame extends JFrame {
     private CustomPanel currentPage, lastPage;
+    private Employee currentUser;
     private final ClockThread clock;
     private FileOutputStream fos;
     private FileInputStream fis;
@@ -35,13 +38,39 @@ public class MainFrame extends JFrame {
         this.setTitle("Pos SystemHol");
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setResizable(false);
-        currentPage = new MainMenuPanel(this);
+        currentPage = new LoginPanel(this);
         this.add(currentPage, BorderLayout.CENTER);
         //what is this??
         this.setVisible(true);
         clock = new ClockThread(currentPage);
         customerOrders = getCustomerOrders();
         employees = getEmployees();
+    }
+    
+    public Boolean logIn(int pin){
+        try {
+            getEmployees();
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(checkPins(pin)){
+            return true;
+        }
+        return false;
+    }
+    
+    public Boolean checkPins(int pin){
+        for(int x=0; x<employees.size(); x++){
+            if(employees.get(x).getPin() == pin){
+                currentUser = employees.get(x);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public Employee getCurrentUser(){
+        return currentUser;
     }
     
     public void setNewPanel(CustomPanel newPage, Boolean saveLastPage, CustomPanel lastPage){

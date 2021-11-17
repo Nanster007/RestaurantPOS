@@ -25,6 +25,7 @@ public class MainMenuPanel extends CustomPanel {
         this.mainFrame = mainFrame;
         setClockField(ClockLabel);
         ButtonsPanel.setLayout(new GridLayout(2, 2));
+        CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
     }
 
     /**

@@ -32,6 +32,7 @@ public class AdjustEmployeePanel extends CustomPanel {
     public AdjustEmployeePanel(MainFrame mainFrame) throws IOException, FileNotFoundException, ClassNotFoundException {
         initComponents();
         this.mainFrame = mainFrame;
+        CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
         setClockField(ClockLabel);
         HelpText.setVisible(false);
         updateInterface();
