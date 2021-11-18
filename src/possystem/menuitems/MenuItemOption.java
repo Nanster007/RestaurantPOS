@@ -10,12 +10,12 @@ import java.util.ArrayList;
  *
  * @author dakingofcheckerz
  */
-public class ItemOption {
+public class MenuItemOption {
 
     private String name;
-    private ArrayList<ItemOptionEntry> possibleValues;
+    private ArrayList<MenuItemOptionValue> possibleValues;
 
-    public ItemOption(String name, ArrayList<ItemOptionEntry> possibleValues) {
+    public MenuItemOption(String name, ArrayList<MenuItemOptionValue> possibleValues) {
         this.name = name;
         this.possibleValues = possibleValues;
     }
@@ -28,11 +28,11 @@ public class ItemOption {
         this.name = name;
     }
 
-    public ArrayList<ItemOptionEntry> getPossibleValues() {
+    public ArrayList<MenuItemOptionValue> getPossibleValues() {
         return possibleValues;
     }
 
-    public void setPossibleValues(ArrayList<ItemOptionEntry> possibleValues) {
+    public void setPossibleValues(ArrayList<MenuItemOptionValue> possibleValues) {
         this.possibleValues = possibleValues;
     }
 

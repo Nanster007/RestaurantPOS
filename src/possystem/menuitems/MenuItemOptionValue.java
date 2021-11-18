@@ -9,14 +9,14 @@ package possystem.menuitems;
  *
  * @author dakingofcheckerz
  */
-public class ItemOptionEntry {
+public class MenuItemOptionValue {
 
     private String value;
-    private double modifiedPrice;
+    private double priceModifier;
 
-    public ItemOptionEntry(String value, double modifiedPrice) {
+    public MenuItemOptionValue(String value, double modifiedPrice) {
         this.value = value;
-        this.modifiedPrice = modifiedPrice;
+        this.priceModifier = modifiedPrice;
     }
 
     public String getValue() {
@@ -27,12 +27,12 @@ public class ItemOptionEntry {
         this.value = value;
     }
 
-    public double getModifiedPrice() {
-        return modifiedPrice;
+    public double getPriceModifier() {
+        return priceModifier;
     }
 
-    public void setModifiedPrice(double modifiedPrice) {
-        this.modifiedPrice = modifiedPrice;
+    public void setPriceModifier(double priceModifier) {
+        this.priceModifier = priceModifier;
     }
 
 }

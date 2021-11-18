@@ -16,10 +16,10 @@ import java.util.UUID;
 public class MenuItem implements Serializable {
 
     private String name;
-    private double basePrice;
+    private double basePrice;   // Price of item without any options selected
     private UUID id;
     private ArrayList<UUID> possibleToppings;
-    private ArrayList<ItemOption> options;
+    private ArrayList<MenuItemOption> options;
     private String comments;
     private String category;    // Entree, drink, etc.
     private String subcategory; // e.g. Pepsi products, Coke products, etc.
@@ -71,7 +71,7 @@ public class MenuItem implements Serializable {
         return possibleToppings;
     }
 
-    public ArrayList<ItemOption> getOptions() {
+    public ArrayList<MenuItemOption> getOptions() {
         return options;
     }
 
@@ -96,7 +96,7 @@ public class MenuItem implements Serializable {
         possibleToppings.add(topping);
     }
 
-    public void addOption(ItemOption option) {
+    public void addOption(MenuItemOption option) {
         options.add(option);
     }
 
