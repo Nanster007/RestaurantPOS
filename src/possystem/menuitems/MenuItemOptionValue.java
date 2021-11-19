@@ -14,9 +14,9 @@ public class MenuItemOptionValue {
     private String value;
     private double priceModifier;
 
-    public MenuItemOptionValue(String value, double modifiedPrice) {
+    public MenuItemOptionValue(String value, double priceModifier) {
         this.value = value;
-        this.priceModifier = modifiedPrice;
+        this.priceModifier = priceModifier;
     }
 
     public String getValue() {
