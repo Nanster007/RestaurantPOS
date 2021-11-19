@@ -4,6 +4,7 @@
  */
 package possystem.menuitems;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
 
@@ -15,4 +16,6 @@ import java.util.UUID;
 public class Menu {
 
     private Map<UUID, MenuItem> menuMap;
+
+    private ArrayList<SubMenu> submenus;
 }
