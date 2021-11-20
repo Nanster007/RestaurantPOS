@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -63,20 +65,18 @@ public class MainFrame extends JFrame {
     }
     
     //called from LoginPanel to check validity
-    public Boolean logIn(int pin){
+    public Boolean logIn(int pin) throws IOException, FileNotFoundException, ClassNotFoundException{
+        
         try {
             getEmployees();
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(checkPins(pin)){
-            return true;
-        }
-        return false;
+        return checkPins(pin);
     }
     
     //loops through employees list for matching pin
-    public Boolean checkPins(int pin){
+    public Boolean checkPins(int pin) throws IOException, FileNotFoundException, ClassNotFoundException{
         for(int x=0; x<employees.size(); x++){
             if(employees.get(x).getPin() == pin){
                 currentUser = employees.get(x);
@@ -154,7 +154,13 @@ public class MainFrame extends JFrame {
         //must first update shifts list to the matching month and year
         shifts = getShifts(shift.getSetStart().getMonth(), shift.getSetStart().getYear()+1900);
         
+        //custom comparator allows for super easy sorting in order of setStartTime
+        Collections.sort(shifts, new CustomComparator());
+        
+        //add passed shift to shifts list
         shifts.add(shift);
+        
+        //write
         String file = (shift.getSetStart().getMonth()+1) + "_" + (shift.getSetStart().getYear()+1900) + ".txt";
         fos = new FileOutputStream(file);
         oos = new ObjectOutputStream(fos);
@@ -214,6 +220,13 @@ public class MainFrame extends JFrame {
         oos.writeObject(employees);
     }
     
+    public void saveShifts(int month, int year)throws FileNotFoundException, IOException, ClassNotFoundException {
+        String file = (month+1) + "_" + (year+1900) + ".txt";
+        fos = new FileOutputStream(file);
+        oos = new ObjectOutputStream(fos);
+        oos.writeObject(shifts);
+    }
+    
     //updates mainFrame employees list from file AND returns list
     public ArrayList<Employee> getEmployees() throws FileNotFoundException, IOException, ClassNotFoundException{
         
@@ -234,6 +247,7 @@ public class MainFrame extends JFrame {
         catch(EOFException e){
             employees = new ArrayList();
             employees.add(new Employee("Tylar", "3303078422", 15.00, 5555));
+            saveEmployees();
         }
         
         return employees;
@@ -257,22 +271,22 @@ public class MainFrame extends JFrame {
         }
         catch(EOFException e){
             shifts = new ArrayList();
-
+            saveShifts(month, year-1900);
         }
         return shifts;
     }
     
     //returns all shifts on a specified day for viewing schedule
-    public ArrayList<String> getEmployeesShiftsOfDay(int month, int year, int day, Employee employee) throws FileNotFoundException, IOException, ClassNotFoundException {       
+    public ArrayList<Shift> getEmployeesShiftsOfDay(int month, int year, int day, Employee employee) throws FileNotFoundException, IOException, ClassNotFoundException {       
         
         //read file for month and year recieved
         getShifts(month, year);
-        ArrayList<String> daysShifts = new ArrayList();
+        ArrayList<Shift> daysShifts = new ArrayList();
         
-        //loops through shifts list for shifts on same day and employee as recieved and adds to secondary list
+        //loops through shifts list for shifts on same day and employee as recievegit and adds to secondary list
         for(int x=0; x< shifts.size(); x++){
             if(shifts.get(x).getSetStart().getDate() == day && shifts.get(x).getEmployee().getName().equals(employee.getName())){
-                daysShifts.add(shifts.get(x).formattedShift());
+                daysShifts.add(shifts.get(x));
             }
         }
         
@@ -311,8 +325,67 @@ public class MainFrame extends JFrame {
         return lastPage;
     }
     
-    public Employee getCurrentUser(){
-        return currentUser;
+    public Employee getCurrentUser() throws IOException, FileNotFoundException, ClassNotFoundException{
+        getEmployees();
+        for(int x=0; x<employees.size(); x++){
+            if(employees.get(x).getName().equals(currentUser.getName())){
+                currentUser = employees.get(x);
+                return currentUser;
+            }
+        }
+        return null;
+    }
+    
+    public void clockIn() throws IOException, FileNotFoundException, ClassNotFoundException{
+        Date date = clock.getDate();
+        getEmployees();
+        
+        for(int x=0; x < this.employees.size(); x++){
+            if (employees.get(x).getName().equals(this.currentUser.getName())){
+                employees.get(x).clockIn(date);
+                saveEmployees();
+                currentUser = getEmployees().get(x);
+            }
+        }
+        
+        getShifts(date.getMonth(), date.getYear()+1900);
+        
+        for(int x=0; x<this.shifts.size(); x++){
+            if(shifts.get(x).getEmployee().getName().equals(this.currentUser.getName()) && shifts.get(x).getSetStart().getDate() == date.getDate() && !shifts.get(x).getShiftCompleted()){
+                shifts.get(x).setClockStart(date);
+                saveShifts(shifts.get(x).getSetStart().getMonth(), shifts.get(x).getSetStart().getYear());
+                return;
+            }
+        }
+        
+        shifts.add(new Shift(currentUser, date, new Date(0,0,1)));
+        saveShifts(date.getMonth(), date.getYear());
+        
+        //clocking in without shift scheduled here
+    }
+    
+    public void clockOut() throws IOException, FileNotFoundException, ClassNotFoundException{
+        Date date = clock.getDate();
+        getEmployees();
+        
+        for(int x=0; x < this.employees.size(); x++){
+            if (employees.get(x).getName().equals(this.currentUser.getName())){
+                employees.get(x).clockOut(date);
+                saveEmployees();
+                currentUser = getEmployees().get(x);
+            }
+        }
+        
+        getShifts(date.getMonth(), date.getYear()+1900);
+        
+        for(int x=0; x<this.shifts.size(); x++){
+            if(shifts.get(x).getEmployee().getName().equals(this.currentUser.getName()) && shifts.get(x).getSetStart().getDate() == date.getDate() && !shifts.get(x).getShiftCompleted()){
+                shifts.get(x).setClockEnd(date);
+                shifts.get(x).setShiftCompleted(true);
+                saveShifts(shifts.get(x).getSetStart().getMonth(), shifts.get(x).getSetStart().getYear());
+                return;
+            }
+        }
     }
     
 }

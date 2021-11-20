@@ -9,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -185,7 +187,13 @@ public class OrderHistoryPanel extends CustomPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        mainFrame.setNewPanel(new MainMenuPanel(mainFrame), Boolean.FALSE, this);
+        try {
+            mainFrame.setNewPanel(new MainMenuPanel(mainFrame), Boolean.FALSE, this);
+        } catch (IOException ex) {
+            Logger.getLogger(OrderHistoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OrderHistoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void PreviousOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousOrderButtonActionPerformed

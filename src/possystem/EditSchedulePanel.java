@@ -450,7 +450,11 @@ public class EditSchedulePanel extends CustomPanel {
     }//GEN-LAST:event_PreviousMonthButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        mainFrame.setNewPanel(new ManagerSettingsPanel(mainFrame), Boolean.FALSE, this);
+        try {
+            mainFrame.setNewPanel(new ManagerSettingsPanel(mainFrame), Boolean.FALSE, this);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void NextMonthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextMonthButtonActionPerformed

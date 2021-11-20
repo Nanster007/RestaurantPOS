@@ -5,8 +5,10 @@
  */
 package possystem;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,7 +21,7 @@ public class ManagerSettingsPanel extends CustomPanel {
     private final MainFrame mainFrame;
     
     //simple options panel, just a fewbuttons
-    public ManagerSettingsPanel(MainFrame mainFrame) {
+    public ManagerSettingsPanel(MainFrame mainFrame) throws IOException, FileNotFoundException, ClassNotFoundException {
         initComponents();
         this.mainFrame = mainFrame;
         //update clock label
@@ -164,8 +166,12 @@ public class ManagerSettingsPanel extends CustomPanel {
     }//GEN-LAST:event_ClockLabelActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-       //return to the main menu
-        mainFrame.setNewPanel(new MainMenuPanel(mainFrame), Boolean.FALSE, this);
+        try {
+            //return to the main menu
+            mainFrame.setNewPanel(new MainMenuPanel(mainFrame), Boolean.FALSE, this);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(ManagerSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void StockSystemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StockSystemButtonActionPerformed
@@ -173,9 +179,15 @@ public class ManagerSettingsPanel extends CustomPanel {
     }//GEN-LAST:event_StockSystemButtonActionPerformed
 
     private void SchedulingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SchedulingButtonActionPerformed
+        //create calendar with current date
+        Calendar calendar = Calendar.getInstance();
+        //year returns 1900 over by function design
+        //always set calendars to first day of month for display reasons
+        calendar.setTime(new Date(calendar.get(Calendar.YEAR)-1900, calendar.get(Calendar.MONTH), 1));
+
         //try catch for possible file reading failures (editschedulepanel needs to read current month's shifts)
         try {
-            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, Calendar.getInstance()), Boolean.FALSE, this);
+            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, calendar), Boolean.FALSE, this);
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ManagerSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }

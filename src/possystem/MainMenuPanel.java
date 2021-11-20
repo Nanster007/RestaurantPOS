@@ -6,6 +6,7 @@
 package possystem;
 
 import java.awt.GridLayout;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,7 +21,7 @@ public class MainMenuPanel extends CustomPanel {
 
     private final MainFrame mainFrame;
     
-    public MainMenuPanel(MainFrame mainFrame) {
+    public MainMenuPanel(MainFrame mainFrame) throws IOException, FileNotFoundException, ClassNotFoundException {
         initComponents();
         this.mainFrame = mainFrame;
         //update top left clock field
@@ -237,8 +238,13 @@ public class MainMenuPanel extends CustomPanel {
     }//GEN-LAST:event_NewOrderButtonActionPerformed
 
     private void ManagerSettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManagerSettingsButtonActionPerformed
-        CustomPanel nextPanel = new ManagerSettingsPanel(mainFrame);
-        mainFrame.setNewPanel(nextPanel, true, this);
+        CustomPanel nextPanel = null;
+        try {
+            mainFrame.setNewPanel(new ManagerSettingsPanel(mainFrame), true, this);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(MainMenuPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_ManagerSettingsButtonActionPerformed
 
     private void ClockLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClockLabelActionPerformed

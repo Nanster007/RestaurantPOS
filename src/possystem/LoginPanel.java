@@ -8,6 +8,9 @@ package possystem;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 
@@ -229,15 +232,21 @@ public class LoginPanel extends CustomPanel {
     }//GEN-LAST:event_ClockLabelActionPerformed
 
     private void EnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterButtonActionPerformed
-        //call mainframe.LogIn() to check pin validity
-        //pass it the current PinField text, converted into in integer
-        if(mainFrame.logIn(Integer.parseInt(PinField.getText()))){
-            mainFrame.setNewPanel(new MainMenuPanel(mainFrame), Boolean.FALSE, this);
-        }
-        //if LogIn() returns false, invalid pin
-        else{
-            ErrorLabel.setText("*Invalid pin please try again*");
-            PinField.setText("");
+        try {
+            //call mainframe.LogIn() to check pin validity
+            //pass it the current PinField text, converted into in integer
+            if(mainFrame.logIn(Integer.parseInt(PinField.getText()))){
+                mainFrame.setNewPanel(new MainMenuPanel(mainFrame), Boolean.FALSE, this);
+            }
+            //if LogIn() returns false, invalid pin
+            else{
+                ErrorLabel.setText("*Invalid pin please try again*");
+                PinField.setText("");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_EnterButtonActionPerformed
 

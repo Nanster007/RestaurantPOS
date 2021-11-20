@@ -17,14 +17,16 @@ public class Shift implements Serializable{
     //employee and time variables for each shifts
     private Employee employee;
     private Date clockStart, clockEnd, setStart, setEnd;
+    private boolean shiftCompleted;
     
     //basic constructor
     public Shift (Employee employee, Date setStart, Date setEnd){
         this.employee = employee;
         this.setStart = setStart;
         this.setEnd = setEnd;
-        this.clockStart = null;
-        this.clockEnd = null;
+        this.clockStart = new Date();
+        this.clockEnd = new Date();
+        this.shiftCompleted = false;
     }
     
     //likely a gross overcomplication of a formatted output of the shift
@@ -79,7 +81,14 @@ public class Shift implements Serializable{
     
     
     //various getters and setters for shift info
-    
+
+    public boolean getShiftCompleted() {
+        return shiftCompleted;
+    }
+
+    public void setShiftCompleted(boolean shiftCompleted) {
+        this.shiftCompleted = shiftCompleted;
+    }
 
     public Employee getEmployee() {
         return employee;

@@ -292,12 +292,24 @@ public class NewOrderPanel extends CustomPanel {
     }//GEN-LAST:event_DessertsButtonActionPerformed
 
     private void CancelOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelOrderButtonActionPerformed
-        mainFrame.setNewPanel(new MainMenuPanel(mainFrame), false, this);
+        try {
+            mainFrame.setNewPanel(new MainMenuPanel(mainFrame), false, this);
+        } catch (IOException ex) {
+            Logger.getLogger(NewOrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NewOrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         mainFrame.clearLastPanel();
     }//GEN-LAST:event_CancelOrderButtonActionPerformed
 
     private void PlaceOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlaceOrderButtonActionPerformed
-        mainFrame.setNewPanel(new MainMenuPanel(mainFrame), false, this);
+        try {
+            mainFrame.setNewPanel(new MainMenuPanel(mainFrame), false, this);
+        } catch (IOException ex) {
+            Logger.getLogger(NewOrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NewOrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         mainFrame.removeCustomerOrder(customerOrder.getOrderID().toString());
         try {
             mainFrame.addCustomerOrder(customerOrder);
