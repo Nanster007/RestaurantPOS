@@ -115,6 +115,7 @@ public class AdjustEmployeePanel extends CustomPanel {
         BackButton = new javax.swing.JButton();
         CurrentUserLabel = new javax.swing.JLabel();
         ClockLabel = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
         EmployeesPanel = new javax.swing.JPanel();
         CurrentEmployeesLabel = new javax.swing.JLabel();
         EmployeesScrollPane = new javax.swing.JScrollPane();
@@ -133,9 +134,9 @@ public class AdjustEmployeePanel extends CustomPanel {
         DeleteEmployeeButton = new javax.swing.JButton();
         PinLabel = new javax.swing.JLabel();
         PinField = new javax.swing.JTextField();
-        ErrorText = new javax.swing.JLabel();
 
         BackButton.setText("Back");
+        BackButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackButtonActionPerformed(evt);
@@ -168,10 +169,11 @@ public class AdjustEmployeePanel extends CustomPanel {
                 .addContainerGap()
                 .addComponent(CurrentEmployeesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EmployeesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE))
+                .addComponent(EmployeesScrollPane))
         );
 
         AddEmployeeButton.setText("Add Employee");
+        AddEmployeeButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddEmployeeButtonActionPerformed(evt);
@@ -179,6 +181,7 @@ public class AdjustEmployeePanel extends CustomPanel {
         });
 
         EditSaveButton.setText("Edit Info");
+        EditSaveButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         EditSaveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EditSaveButtonActionPerformed(evt);
@@ -214,6 +217,7 @@ public class AdjustEmployeePanel extends CustomPanel {
         HelpText.setText("Please fill in required information");
 
         DeleteEmployeeButton.setText("Delete Employee");
+        DeleteEmployeeButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         DeleteEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DeleteEmployeeButtonActionPerformed(evt);
@@ -246,27 +250,22 @@ public class AdjustEmployeePanel extends CustomPanel {
                     .addComponent(PayrateField)
                     .addComponent(NumberField)
                     .addComponent(NameField)
-                    .addGroup(EmployeeInfoPanelLayout.createSequentialGroup()
-                        .addGroup(EmployeeInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(EmployeeInfoPanelLayout.createSequentialGroup()
-                                .addComponent(NameLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
-                                .addComponent(HelpText))
-                            .addGroup(EmployeeInfoPanelLayout.createSequentialGroup()
-                                .addComponent(PayrateLabel)
-                                .addGap(0, 346, Short.MAX_VALUE)))
-                        .addContainerGap())
                     .addComponent(PinField)
                     .addGroup(EmployeeInfoPanelLayout.createSequentialGroup()
                         .addGroup(EmployeeInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PayrateLabel)
                             .addComponent(NumberLabel)
                             .addComponent(PinLabel))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addContainerGap(324, Short.MAX_VALUE))
+                    .addGroup(EmployeeInfoPanelLayout.createSequentialGroup()
+                        .addComponent(NameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(HelpText))))
         );
         EmployeeInfoPanelLayout.setVerticalGroup(
             EmployeeInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmployeeInfoPanelLayout.createSequentialGroup()
-                .addGap(0, 8, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(EmployeeInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NameLabel)
                     .addComponent(HelpText))
@@ -276,23 +275,45 @@ public class AdjustEmployeePanel extends CustomPanel {
                 .addComponent(NumberLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(NumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PayrateLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PayrateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PinLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PinField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ShiftsLabel)
-                .addGap(18, 18, 18)
-                .addComponent(ShiftsField, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ShiftsField, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(EmployeeInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(EditSaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DeleteEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(EmployeesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(EmployeeInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(EmployeeInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(EmployeesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -304,33 +325,21 @@ public class AdjustEmployeePanel extends CustomPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ClockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EmployeesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CurrentUserLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(EmployeeInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
-                    .addComponent(ErrorText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(CurrentUserLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(635, 635, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CurrentUserLabel)
-                    .addComponent(ErrorText))
+                .addComponent(CurrentUserLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ClockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(EmployeesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(EmployeeInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addComponent(ClockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -378,41 +387,73 @@ public class AdjustEmployeePanel extends CustomPanel {
     private void AddEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmployeeButtonActionPerformed
         //when clicked - if button says "Submit", do this
         if(AddEmployeeButton.getText().equals("Submit")){
-            //try catch for possible file writing errors    
-            try {
-                    mainFrame.addEmployee(new Employee(NameField.getText(), NumberField.getText(), Double.parseDouble(PayrateField.getText()), Integer.parseInt(PinField.getText())));
-                } catch (IOException | ClassNotFoundException ex) {
-                    Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+            String phonePattern = "\\d{10}";
+            String pinPattern = "\\d{4}";
+            if(!NumberField.getText().matches(phonePattern)){
+                if(NumberField.getText().isBlank() && NameField.getText().isBlank() && PayrateField.getText().isBlank() && PinField.getText().isBlank()){
+                    AddEmployeeButton.setText("Add New Employee");
+                    HelpText.setVisible(false);
+                    EditSaveButton.setEnabled(true);
+                    DeleteEmployeeButton.setEnabled(true);
+                    EmployeesList.setEnabled(true);
+                    try {
+                        updateInterface();
+                    } catch (IOException | ClassNotFoundException ex) {
+                        Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    EmployeesList.setSelectedIndex(0);
+                    PinField.setEditable(false);
+                    PinField.setText("");
                 }
-                
-                //change phase of current back to "Add New Employee"
-                AddEmployeeButton.setText("Add New Employee");
-                //disable help text for instructions when adding new employee
-                HelpText.setVisible(false);
-                //edit/save, employeeslist and delete buttons get disabled when entering new employee info
-                EditSaveButton.setEnabled(true);
-                DeleteEmployeeButton.setEnabled(true);
-                EmployeesList.setEnabled(true);
-                
-                //try catch for possible file reading failes in updateInterface method
-                try {
-                    updateInterface();
-                } catch (IOException | ClassNotFoundException ex) {
-                    Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+                else{
+                   NumberField.setText("Please Enter a Valid Phone Number"); 
                 }
-                //set currently selected employee to newly added submission
-                EmployeesList.setSelectedIndex(listModel.getSize()-1);
-                
-                //pinfield not editable unless adding or adjusting info (and never displays pins read from file, only displays on pin entry
-                PinField.setEditable(false);
-                PinField.setText("");
             }
+            else if(!PinField.getText().matches(pinPattern)){
+                PinField.setText("Please Enter a Valid 4-Digit Pin");
+            }
+            else{
+            
+                //try catch for possible file writing errors    
+                try {
+                        mainFrame.addEmployee(new Employee(NameField.getText(), NumberField.getText(), Double.parseDouble(PayrateField.getText()), Integer.parseInt(PinField.getText())));
+                        //change phase of current back to "Add New Employee"
+                        AddEmployeeButton.setText("Add New Employee");
+                        //disable help text for instructions when adding new employee
+                        HelpText.setVisible(false);
+                        //edit/save, employeeslist and delete buttons get disabled when entering new employee info
+                        EditSaveButton.setEnabled(true);
+                        DeleteEmployeeButton.setEnabled(true);
+                        EmployeesList.setEnabled(true);
+
+                        //try catch for possible file reading failes in updateInterface method
+                        try {
+                            updateInterface();
+                        } catch (IOException | ClassNotFoundException ex) {
+                            Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        //set currently selected employee to newly added submission
+                        EmployeesList.setSelectedIndex(listModel.getSize()-1);
+
+                        //pinfield not editable unless adding or adjusting info (and never displays pins read from file, only displays on pin entry
+                        PinField.setEditable(false);
+                        PinField.setText("");
+                    } catch (IOException | ClassNotFoundException ex) {
+                        Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }catch(NumberFormatException e){
+                        PinField.setText("Please Enter a Numerical Pin");
+                        PayrateField.setText("Please Enter a Valid Hourly Wage");
+                    }
+            }
+                
+        }
         //if button doesnt say "Submit" do this("Add New Employee" phase")
         else{
             //allow pin entry when adding employees
             PinField.setEditable(true);
             
             //enable instructions
+            HelpText.setText("Please fill in required information");
             HelpText.setVisible(true);
             
             //disable edit and delete button when adding new employee
@@ -455,39 +496,68 @@ public class AdjustEmployeePanel extends CustomPanel {
         }
         //button is clicked in "Submit Changes" phase, do this
         else{
-            //change button to "Edit Info" phase
-            EditSaveButton.setText("Edit Info");
-            
-            //sets currently selected employee object changes
-            selectedEmployee.setName(NameField.getText());
-            selectedEmployee.setPayRate(Double.parseDouble(PayrateField.getText()));
-            selectedEmployee.setPhoneNumber(NumberField.getText());
-            
-            //only update pin if new pin was entered
-            if(!PinField.getText().isBlank()){
-                selectedEmployee.setPin(Integer.parseInt(PinField.getText()));
+            String phonePattern = "\\d{10}";
+            if(!NumberField.getText().matches(phonePattern)){
+                NumberField.setText("Please Enter a Valid Phone Number");
+            }else{
+                
+                try{
+                    selectedEmployee.setPayRate(Double.parseDouble(PayrateField.getText()));
+                    if(!PinField.getText().isBlank()){
+                        try{
+                            selectedEmployee.setPin(Integer.parseInt(PinField.getText()));
+                            try {
+                                mainFrame.saveEmployees();
+                            } catch (IOException | ClassNotFoundException ex) {
+                                Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            //clear visual pin field incase new one was entered
+                            PinField.setText("");
+                            //change button to "Edit Info" phase
+                            EditSaveButton.setText("Edit Info");
+
+                            //dont allow editing of fields unless editing or adding employee
+                            PinField.setEditable(false);
+                            NameField.setEditable(false);
+                            NumberField.setEditable(false);
+                            PayrateField.setEditable(false);
+
+                            //enable fields for adding emplooyees, selecting new employees, and deleting employees
+                            AddEmployeeButton.setEnabled(true);
+                            DeleteEmployeeButton.setEnabled(true);
+                            EmployeesList.setEnabled(true);
+                        }
+                        catch(NumberFormatException e){
+                            PinField.setText("Please Enter a Numerical Pin");
+
+                        }
+                    }else{
+                        try {
+                            mainFrame.saveEmployees();
+                        } catch (IOException | ClassNotFoundException ex) {
+                            Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        //clear visual pin field incase new one was entered
+                        PinField.setText("");
+                        //change button to "Edit Info" phase
+                        EditSaveButton.setText("Edit Info");
+                        
+                        //dont allow editing of fields unless editing or adding employee
+                        PinField.setEditable(false);
+                        NameField.setEditable(false);
+                        NumberField.setEditable(false);
+                        PayrateField.setEditable(false);
+
+                        //enable fields for adding emplooyees, selecting new employees, and deleting employees
+                        AddEmployeeButton.setEnabled(true);
+                        DeleteEmployeeButton.setEnabled(true);
+                        EmployeesList.setEnabled(true);
+                    }   
+                }
+                catch(NumberFormatException e){
+                    PayrateField.setText("Please Enter a Valid Hourly Wage");
+                }
             }
-            
-            //try catch for possible file writing failures
-            try {
-                mainFrame.saveEmployees();
-            } catch (IOException | ClassNotFoundException ex) {
-                Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            //clear visual pin field incase new one was entered
-            PinField.setText("");
-            
-            //dont allow editing of fields unless editing or adding employee
-            PinField.setEditable(false);
-            NameField.setEditable(false);
-            NumberField.setEditable(false);
-            PayrateField.setEditable(false);
-            
-            //enable fields for adding emplooyees, selecting new employees, and deleting employees
-            AddEmployeeButton.setEnabled(true);
-            DeleteEmployeeButton.setEnabled(true);
-            EmployeesList.setEnabled(true);
         }
         
     }//GEN-LAST:event_EditSaveButtonActionPerformed
@@ -497,20 +567,38 @@ public class AdjustEmployeePanel extends CustomPanel {
     }//GEN-LAST:event_ShiftsFieldActionPerformed
 
     private void DeleteEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteEmployeeButtonActionPerformed
-        //try catch for possible file writing errors when deleting employee selection
-        try {
-            mainFrame.removeEmployee(selectedEmployee);
-        } catch (IOException | ClassNotFoundException ex) {
+        
+        if(!(listModel.size()> 1)){
+            HelpText.setText("You may not delete the only employee.");
+            HelpText.setVisible(true); 
+        }
+        else try {
+            if(mainFrame.getCurrentUser().getName().equals(selectedEmployee.getName())){
+                HelpText.setText("You may not delete the current user.");
+                HelpText.setVisible(true);
+            }else{
+                
+                //try catch for possible file writing errors when deleting employee selection
+                try {
+                    mainFrame.removeEmployee(selectedEmployee);
+                } catch (IOException | ClassNotFoundException ex) {
+                    Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                //try catch for file reading failes when updating interface, which reads employees file
+                try {
+                    updateInterface();
+                } catch (IOException | ClassNotFoundException ex) {
+                    Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                //rest displayed employee selection to first element after deleting employee
+                EmployeesList.setSelectedIndex(0);
+                HelpText.setVisible(false);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //try catch for file reading failes when updating interface, which reads employees file
-        try {
-            updateInterface();
-        } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //rest displayed employee selection to first element after deleting employee
-        EmployeesList.setSelectedIndex(0);
     }//GEN-LAST:event_DeleteEmployeeButtonActionPerformed
 
     private void PinFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PinFieldActionPerformed
@@ -529,7 +617,6 @@ public class AdjustEmployeePanel extends CustomPanel {
     private javax.swing.JPanel EmployeeInfoPanel;
     private javax.swing.JPanel EmployeesPanel;
     private javax.swing.JScrollPane EmployeesScrollPane;
-    private javax.swing.JLabel ErrorText;
     private javax.swing.JLabel HelpText;
     private javax.swing.JTextField NameField;
     private javax.swing.JLabel NameLabel;
@@ -542,5 +629,6 @@ public class AdjustEmployeePanel extends CustomPanel {
     private javax.swing.JTextField ShiftsField;
     private javax.swing.JLabel ShiftsLabel;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

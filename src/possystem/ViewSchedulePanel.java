@@ -108,6 +108,7 @@ public class ViewSchedulePanel extends CustomPanel {
         LastActionLabel = new javax.swing.JLabel();
         ClockOutButton = new javax.swing.JButton();
         ClockInButton = new javax.swing.JButton();
+        ExcessiveClocks = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         CalendarPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -144,6 +145,7 @@ public class ViewSchedulePanel extends CustomPanel {
         LastActionLabel.setText(" ");
 
         ClockOutButton.setText("Clock Out");
+        ClockOutButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         ClockOutButton.setMaximumSize(new java.awt.Dimension(150, 23));
         ClockOutButton.setMinimumSize(new java.awt.Dimension(150, 23));
         ClockOutButton.setPreferredSize(new java.awt.Dimension(150, 23));
@@ -154,6 +156,7 @@ public class ViewSchedulePanel extends CustomPanel {
         });
 
         ClockInButton.setText("ClockIn");
+        ClockInButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         ClockInButton.setMaximumSize(new java.awt.Dimension(150, 23));
         ClockInButton.setMinimumSize(new java.awt.Dimension(150, 23));
         ClockInButton.setPreferredSize(new java.awt.Dimension(150, 23));
@@ -172,7 +175,9 @@ public class ViewSchedulePanel extends CustomPanel {
                 .addGroup(ClockingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(ClockingPanelLayout.createSequentialGroup()
                         .addComponent(ClockInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 261, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ExcessiveClocks, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ClockOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(ClockingPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -189,7 +194,8 @@ public class ViewSchedulePanel extends CustomPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ClockingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ClockOutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ClockInButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ClockInButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ExcessiveClocks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -216,6 +222,7 @@ public class ViewSchedulePanel extends CustomPanel {
         );
 
         PreviousMonthButton.setText("Previous Month");
+        PreviousMonthButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PreviousMonthButton.setPreferredSize(new java.awt.Dimension(107, 50));
         PreviousMonthButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,6 +231,7 @@ public class ViewSchedulePanel extends CustomPanel {
         });
 
         NextMonthButton.setText("Next Month");
+        NextMonthButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         NextMonthButton.setPreferredSize(new java.awt.Dimension(107, 50));
         NextMonthButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,6 +240,7 @@ public class ViewSchedulePanel extends CustomPanel {
         });
 
         BackButton.setText("Back");
+        BackButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackButtonActionPerformed(evt);
@@ -372,11 +381,24 @@ public class ViewSchedulePanel extends CustomPanel {
 
     private void ClockInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClockInButtonActionPerformed
         try {
-            mainFrame.clockIn();
-            mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar), false, this);
-        } catch (IOException | ClassNotFoundException ex) {
+            if((System.currentTimeMillis()/1000 - mainFrame.getCurrentUser().getLastClock().getTime()/1000) > 300 && !mainFrame.getCurrentUser().getClockedIn()){
+                try {
+                    mainFrame.clockIn();
+                    mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar), false, this);
+                } catch (IOException | ClassNotFoundException ex) {
+                    Logger.getLogger(ViewSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+                ExcessiveClocks.setText("Recent clock too soon, please wait.");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ViewSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(ViewSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
         
     }//GEN-LAST:event_ClockInButtonActionPerformed
 
@@ -398,6 +420,7 @@ public class ViewSchedulePanel extends CustomPanel {
     private javax.swing.JButton ClockOutButton;
     private javax.swing.JPanel ClockingPanel;
     private javax.swing.JLabel CurrentUserLabel;
+    private javax.swing.JLabel ExcessiveClocks;
     private javax.swing.JPanel LabelsPanel;
     private javax.swing.JLabel LastActionLabel;
     private javax.swing.JLabel MonthLabel;

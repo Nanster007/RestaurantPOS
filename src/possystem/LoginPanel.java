@@ -147,6 +147,7 @@ public class LoginPanel extends CustomPanel {
 
         EnterButton.setFont(new java.awt.Font("SansSerif", 0, 30)); // NOI18N
         EnterButton.setText("Enter");
+        EnterButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         EnterButton.setPreferredSize(new java.awt.Dimension(600, 50));
         EnterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

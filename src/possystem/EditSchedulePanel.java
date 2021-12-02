@@ -156,6 +156,7 @@ public class EditSchedulePanel extends CustomPanel {
         DateLabel.setText("jLabel1");
 
         BackButton.setText("Back");
+        BackButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackButtonActionPerformed(evt);
@@ -279,6 +280,7 @@ public class EditSchedulePanel extends CustomPanel {
         );
 
         CreateShiftButton.setText("Submit Shift");
+        CreateShiftButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         CreateShiftButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateShiftButtonActionPerformed(evt);
@@ -286,6 +288,7 @@ public class EditSchedulePanel extends CustomPanel {
         });
 
         DeleteShiftButton.setText("Delete Selected Shift");
+        DeleteShiftButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         DeleteShiftButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DeleteShiftButtonActionPerformed(evt);
@@ -336,6 +339,7 @@ public class EditSchedulePanel extends CustomPanel {
         );
 
         NextMonthButton.setText("Next Month");
+        NextMonthButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         NextMonthButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NextMonthButtonActionPerformed(evt);
@@ -343,6 +347,7 @@ public class EditSchedulePanel extends CustomPanel {
         });
 
         PreviousMonthButton.setText("Previous Month");
+        PreviousMonthButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PreviousMonthButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PreviousMonthButtonActionPerformed(evt);
