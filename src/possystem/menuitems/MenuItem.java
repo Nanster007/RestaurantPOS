@@ -7,6 +7,8 @@ package possystem.menuitems;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -27,7 +29,8 @@ public class MenuItem implements Serializable {
     // Some way for the menu items to know how much foodstuffs they'll cost to make
     // Could implement stock management through a recipes class, which would list
     // the ingredients for making a food item (and potentially instructions)
-    public MenuItem(String name, double price, UUID id, String comments, String category, String subcategory) {
+    public MenuItem(String name, double price, UUID id, Collection<UUID> possibleToppings,
+            List<MenuItemOption> options, String comments, String category, String subcategory) {
         this.name = name;
         this.basePrice = price;
         this.id = id;
@@ -36,6 +39,14 @@ public class MenuItem implements Serializable {
         this.comments = comments;
         this.category = category;
         this.subcategory = subcategory;
+
+        // Initialize toppings & options
+        if (possibleToppings != null) {
+            this.possibleToppings.addAll(possibleToppings);
+        }
+        if (options != null) {
+            this.options.addAll(options);
+        }
     }
 
     // <editor-fold desc="Getters and Setters" defaultstate="collapsed">

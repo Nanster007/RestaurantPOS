@@ -14,6 +14,16 @@ public class MenuItemOptionValue {
     private String value;
     private double priceModifier;
 
+    /**
+     * Initializes value with no price modifier.
+     *
+     * @param value
+     */
+    public MenuItemOptionValue(String value) {
+        this.value = value;
+        this.priceModifier = 0d;
+    }
+
     public MenuItemOptionValue(String value, double priceModifier) {
         this.value = value;
         this.priceModifier = priceModifier;

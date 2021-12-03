@@ -4,10 +4,8 @@
  */
 package possystem.menuitems;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -18,8 +16,8 @@ import java.util.UUID;
  */
 public class Menu {
 
-    protected Map<UUID, MenuItem> menuItems;
-    protected Map<String, MenuCategory> menuCategories;
+    private Map<UUID, MenuItem> menuItems;
+    private Map<String, MenuCategory> menuCategories;
 
     public Menu() {
         initializeMenu();
@@ -57,5 +55,17 @@ public class Menu {
     private void addCategory(String itemCategory) {
         MenuCategory subMenu = new MenuCategory(itemCategory);
         this.menuCategories.put(itemCategory, subMenu);
+    }
+
+    public MenuItem getMenuItem(UUID id) {
+        return menuItems.get(id);
+    }
+
+    public Collection<String> getMenuCategoryNames() {
+        return menuCategories.keySet();
+    }
+
+    public Collection<MenuCategory> getMenuCategories() {
+        return menuCategories.values();
     }
 }

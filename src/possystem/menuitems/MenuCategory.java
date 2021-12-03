@@ -21,11 +21,20 @@ class MenuCategory {
     private Map<String, MenuSubCategory> subCategories;
 
     public MenuCategory(String name) {
-        this.name = name;
+        initialize(name);
     }
 
     public MenuCategory(Collection<MenuItem> initialItems, String name) {
+        initialize(name);
+
+        for (MenuItem menuItem : initialItems) {
+            addMenuItem(menuItem);
+        }
+    }
+
+    private void initialize(String name) {
         this.name = name;
+        this.subCategories = new HashMap();
     }
 
     public void addMenuItem(MenuItem item) {
@@ -42,4 +51,5 @@ class MenuCategory {
         MenuSubCategory subCategory = new MenuSubCategory(name);
         this.subCategories.put(name, subCategory);
     }
+
 }
