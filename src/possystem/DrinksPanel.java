@@ -15,11 +15,11 @@ public class DrinksPanel extends CustomPanel {
 
     MainFrame mainFrame;
     CustomerOrder customerOrder;
-    
+
     public DrinksPanel(MainFrame mainFrame, CustomerOrder customerOrder) {
         initComponents();
         this.mainFrame = mainFrame;
-        this.customerOrder = customerOrder; 
+        this.customerOrder = customerOrder;
     }
 
     /**
@@ -392,87 +392,51 @@ public class DrinksPanel extends CustomPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SweetTeaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SweetTeaButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Fountain Cold Brew Tea", 1.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_SweetTeaButtonActionPerformed
 
     private void MountainDewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MountainDewButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Fountain Mountain Dew", 1.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_MountainDewButtonActionPerformed
 
     private void RootBeerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RootBeerButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Fountain Root Beer", 1.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_RootBeerButtonActionPerformed
 
     private void SpriteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SpriteButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Fountain Sprite", 1.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_SpriteButtonActionPerformed
 
     private void WaterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WaterButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Fountain Water", 1.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_WaterButtonActionPerformed
 
     private void HotTeaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HotTeaButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Hot Tea", 2.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_HotTeaButtonActionPerformed
 
     private void CapuchinnoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CapuchinnoButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Cappuchino", 2.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_CapuchinnoButtonActionPerformed
 
     private void PepsiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PepsiButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Fountain Pepsi", 1.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_PepsiButtonActionPerformed
 
     private void MilkShakeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MilkShakeButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Milkshake", 3.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_MilkShakeButtonActionPerformed
 
     private void MoscowMuleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MoscowMuleButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Moscow Mule", 6.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_MoscowMuleButtonActionPerformed
 
     private void WineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WineButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Wine", 4.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_WineButtonActionPerformed
 
     private void OldFashionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OldFashionButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Old Fashion", 6.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_OldFashionButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -480,61 +444,36 @@ public class DrinksPanel extends CustomPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void DraftBeerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DraftBeerButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Draft", 3.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_DraftBeerButtonActionPerformed
 
     private void DietPepsiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DietPepsiButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Fountain Diet Pepsi", 1.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_DietPepsiButtonActionPerformed
 
     private void DrPepperButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DrPepperButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Fountain Dr. Pepper", 1.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_DrPepperButtonActionPerformed
 
     private void OrangeJuiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrangeJuiceButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Orange Juice", 1.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_OrangeJuiceButtonActionPerformed
 
     private void CoffeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CoffeeButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Coffee", 2.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_CoffeeButtonActionPerformed
 
     private void MargaritaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MargaritaButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Margarita", 5.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_MargaritaButtonActionPerformed
 
     private void MartiniButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MartiniButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Martini", 6.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
+
     }//GEN-LAST:event_MartiniButtonActionPerformed
 
     private void WhiskeySourButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WhiskeySourButtonActionPerformed
-        MenuItem menuItem = new MenuItem("Whiskey Sour", 6.99, 0.00, "", "");
-        MenuItemDetailsPanel detailsPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        
-        mainFrame.setNewPanel(detailsPanel, true, this);
-    }//GEN-LAST:event_WhiskeySourButtonActionPerformed
 
+    }//GEN-LAST:event_WhiskeySourButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AlcoholicLabel;
