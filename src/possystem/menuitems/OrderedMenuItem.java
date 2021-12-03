@@ -15,7 +15,7 @@ public class OrderedMenuItem {
 
     private MenuItem menuItem;
     private List<MenuItem> toppings;
-    private int[] selectedOptions;
+    private ArrayList<Integer> selectedOptions;
 
     public OrderedMenuItem(MenuItem menuItem) {
         initialize(menuItem);
@@ -24,25 +24,27 @@ public class OrderedMenuItem {
     public OrderedMenuItem(MenuItem menuItem, List<MenuItem> toppings) {
         initialize(menuItem);
 
-        for (MenuItem topping : toppings) {
-            this.toppings.add(topping);
+        if (toppings != null) {
+            for (MenuItem topping : toppings) {
+                this.toppings.add(topping);
+            }
         }
     }
 
-    public OrderedMenuItem(MenuItem menuItem, List<MenuItem> toppings, int[] selectdOptions) {
+    public OrderedMenuItem(MenuItem menuItem, List<MenuItem> toppings, ArrayList<Integer> selectedOptions) {
         initialize(menuItem);
 
         for (MenuItem topping : toppings) {
             this.toppings.add(topping);
         }
 
-        System.arraycopy(selectedOptions, 0, this.selectedOptions, 0, this.selectedOptions.length);
+        this.selectedOptions = selectedOptions;
     }
 
     private void initialize(MenuItem menuItem) {
         this.menuItem = menuItem;
         this.toppings = new ArrayList();
-        this.selectedOptions = new int[menuItem.getOptions().size()];
+        this.selectedOptions = new ArrayList();
     }
 
     public void addTopping(MenuItem topping) {
@@ -54,7 +56,7 @@ public class OrderedMenuItem {
     }
 
     public void setSelectedOption(int option, int selectedOption) {
-        this.selectedOptions[option] = selectedOption;
+        this.selectedOptions.set(option, selectedOption);
     }
 
     public void setSelectedOption(MenuItemOption option, int selectedOption) {
@@ -72,24 +74,27 @@ public class OrderedMenuItem {
         }
 
         List<MenuItemOption> options = menuItem.getOptions();
-        for (int i = 0; i < selectedOptions.length; i++) {
-            price += options.get(i).getPossibleValues().get(selectedOptions[i]).getPriceModifier();
+        for (int i = 0; i < selectedOptions.size(); i++) {
+            price += options.get(i).getPossibleValues().get(selectedOptions.get(i)).getPriceModifier();
         }
 
         return price;
     }
 
-    /* Better to let the caller decide how to format the output
     @Override
     public String toString() {
         String returnString = "";
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(menuItem.getName());
+        stringBuilder.append(String.format("|%-15s|$%.2f", menuItem.getName(), getPrice()));
 
+        for (MenuItem topping : toppings) {
+            stringBuilder.append("     ")
+                    .append(String.format("|%-10s|$%.2f", topping.getName(), topping.getBasePrice()))
+                    .append('\n');
+        }
 
         return returnString;
     }
-     */
 }
