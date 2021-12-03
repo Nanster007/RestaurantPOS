@@ -19,7 +19,7 @@ public class NewOrderPanel extends CustomPanel {
     private MainFrame mainFrame;
     private CustomerOrder customerOrder;
     private DecimalFormat df;
-    
+
     public NewOrderPanel(MainFrame mainFrame, CustomerOrder customerOrder) {
         initComponents();
         setClockField(ClockLabel);
@@ -28,18 +28,17 @@ public class NewOrderPanel extends CustomPanel {
         OrderIDLabel.setText(customerOrder.getOrderID().toString());
         CustomerNameLabel.setText(customerOrder.getCustomerName());
         CustomerPhoneLabel.setText(customerOrder.getCustomerPhoneNumber());
-        CustomerOrderTotalLabel.setText(String.format("%.2f",customerOrder.getOrderTotal()));
-        
-        if(customerOrder.getCustomerAddress() != null){
+        CustomerOrderTotalLabel.setText(String.format("%.2f", customerOrder.getOrderTotal()));
+
+        if (customerOrder.getCustomerAddress() != null) {
             CustomerAddressLabel.setText(customerOrder.getCustomerAddress());
-        }
-        else{
+        } else {
             AddressLabel.setVisible(false);
             CustomerAddressLabel.setVisible(false);
         }
-        
+
         jTextArea1.setText(customerOrder.toString());
-        
+
     }
 
     /**
@@ -53,16 +52,17 @@ public class NewOrderPanel extends CustomPanel {
 
         TicketTextArea = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        MenuCategoriesPanel = new javax.swing.JPanel();
+        AppetizersButton = new javax.swing.JButton();
+        MerchButton = new javax.swing.JButton();
+        EntreesButton = new javax.swing.JButton();
+        DessertsButton = new javax.swing.JButton();
+        DrinksButton = new javax.swing.JButton();
         CurrentOrderLabel = new javax.swing.JLabel();
         NameLabel = new javax.swing.JLabel();
         PhoneNumberLabel = new javax.swing.JLabel();
         OrderTotalLabel = new javax.swing.JLabel();
-        DrinksButton = new javax.swing.JButton();
-        EntreesButton = new javax.swing.JButton();
-        AppetizersButton = new javax.swing.JButton();
-        MerchButton = new javax.swing.JButton();
         EditInfoButton = new javax.swing.JButton();
-        DessertsButton = new javax.swing.JButton();
         UsernameLabel = new javax.swing.JLabel();
         ClockLabel = new javax.swing.JTextField();
         OrderIDLabel = new javax.swing.JLabel();
@@ -79,6 +79,48 @@ public class NewOrderPanel extends CustomPanel {
         jTextArea1.setText("order items & prices");
         TicketTextArea.setViewportView(jTextArea1);
 
+        MenuCategoriesPanel.setLayout(new java.awt.GridLayout(5, 0));
+
+        AppetizersButton.setText("Appetizers");
+        AppetizersButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AppetizersButtonActionPerformed(evt);
+            }
+        });
+        MenuCategoriesPanel.add(AppetizersButton);
+
+        MerchButton.setText("Restaurant merch?");
+        MerchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MerchButtonActionPerformed(evt);
+            }
+        });
+        MenuCategoriesPanel.add(MerchButton);
+
+        EntreesButton.setText("Entree's");
+        EntreesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EntreesButtonActionPerformed(evt);
+            }
+        });
+        MenuCategoriesPanel.add(EntreesButton);
+
+        DessertsButton.setText("Desserts");
+        DessertsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DessertsButtonActionPerformed(evt);
+            }
+        });
+        MenuCategoriesPanel.add(DessertsButton);
+
+        DrinksButton.setText("Drinks");
+        DrinksButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DrinksButtonActionPerformed(evt);
+            }
+        });
+        MenuCategoriesPanel.add(DrinksButton);
+
         CurrentOrderLabel.setText("Current Order:");
 
         NameLabel.setText("Name:");
@@ -87,45 +129,10 @@ public class NewOrderPanel extends CustomPanel {
 
         OrderTotalLabel.setText("Order Total:  $");
 
-        DrinksButton.setText("Drinks");
-        DrinksButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DrinksButtonActionPerformed(evt);
-            }
-        });
-
-        EntreesButton.setText("Entree's");
-        EntreesButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EntreesButtonActionPerformed(evt);
-            }
-        });
-
-        AppetizersButton.setText("Appetizers");
-        AppetizersButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AppetizersButtonActionPerformed(evt);
-            }
-        });
-
-        MerchButton.setText("Restaurant merch?");
-        MerchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MerchButtonActionPerformed(evt);
-            }
-        });
-
         EditInfoButton.setText("Change Customer Info");
         EditInfoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EditInfoButtonActionPerformed(evt);
-            }
-        });
-
-        DessertsButton.setText("Desserts");
-        DessertsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DessertsButtonActionPerformed(evt);
             }
         });
 
@@ -166,30 +173,21 @@ public class NewOrderPanel extends CustomPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(ClockLabel)
-                            .addComponent(UsernameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(EntreesButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                        .addComponent(DrinksButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(AppetizersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 12, Short.MAX_VALUE)
+                            .addComponent(UsernameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(CurrentOrderLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(OrderIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11)
                         .addComponent(CancelOrderButton))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(MenuCategoriesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(MerchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(EditInfoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(DessertsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TicketTextArea, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TicketTextArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(NameLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -206,7 +204,8 @@ public class NewOrderPanel extends CustomPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(AddressLabel)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(PlaceOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(PlaceOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(EditInfoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -223,47 +222,33 @@ public class NewOrderPanel extends CustomPanel {
                             .addComponent(CurrentOrderLabel)
                             .addComponent(OrderIDLabel)
                             .addComponent(CancelOrderButton))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(NameLabel)
+                            .addComponent(CustomerNameLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(PhoneNumberLabel)
+                            .addComponent(CustomerPhoneLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AddressLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CustomerAddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(EditInfoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TicketTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(OrderTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CustomerOrderTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PlaceOrderButton)
-                        .addContainerGap())
+                        .addComponent(PlaceOrderButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(NameLabel)
-                                    .addComponent(CustomerNameLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(PhoneNumberLabel)
-                                    .addComponent(CustomerPhoneLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(AddressLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(CustomerAddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(265, 265, 265))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(DrinksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(DessertsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(34, 34, 34)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(AppetizersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(MerchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(EntreesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(EditInfoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23))))
+                        .addComponent(MenuCategoriesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -288,7 +273,7 @@ public class NewOrderPanel extends CustomPanel {
     }//GEN-LAST:event_EditInfoButtonActionPerformed
 
     private void DessertsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DessertsButtonActionPerformed
-        
+
     }//GEN-LAST:event_DessertsButtonActionPerformed
 
     private void CancelOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelOrderButtonActionPerformed
@@ -305,7 +290,6 @@ public class NewOrderPanel extends CustomPanel {
         }
     }//GEN-LAST:event_PlaceOrderButtonActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AddressLabel;
     private javax.swing.JButton AppetizersButton;
@@ -320,6 +304,7 @@ public class NewOrderPanel extends CustomPanel {
     private javax.swing.JButton DrinksButton;
     private javax.swing.JButton EditInfoButton;
     private javax.swing.JButton EntreesButton;
+    private javax.swing.JPanel MenuCategoriesPanel;
     private javax.swing.JButton MerchButton;
     private javax.swing.JLabel NameLabel;
     private javax.swing.JLabel OrderIDLabel;

@@ -138,15 +138,15 @@ public class MenuItemDetailsPanel extends CustomPanel {
         CommentsPanelLayout.setHorizontalGroup(
             CommentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CommentsPanelLayout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(CommentsLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(CommentsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(CommentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(CommentsPanelLayout.createSequentialGroup()
+                .addGap(93, 93, 93)
+                .addComponent(CommentsLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CommentsPanelLayout.setVerticalGroup(
             CommentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +174,7 @@ public class MenuItemDetailsPanel extends CustomPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void CurrentItemPanelAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_CurrentItemPanelAncestorAdded
-        // TODO add your handling code here:
+        // TODO add your hanasdfsadfas
     }//GEN-LAST:event_CurrentItemPanelAncestorAdded
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
