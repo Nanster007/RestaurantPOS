@@ -15,7 +15,7 @@ import java.util.UUID;
  *
  * @author dakingofcheckerz
  */
-class MenuCategory {
+public class MenuCategory {
 
     private String name;
     private Map<String, MenuSubCategory> subCategories;
