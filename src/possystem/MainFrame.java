@@ -119,6 +119,10 @@ public class MainFrame extends JFrame {
                 "Drinks", "Alcoholic Beverages"));
     }
 
+    public Menu getMenu() {
+        return this.menu;
+    }
+
     public void setNewPanel(CustomPanel newPage, Boolean saveLastPage, CustomPanel lastPage) {
         this.remove(currentPage);
         if (saveLastPage) {
