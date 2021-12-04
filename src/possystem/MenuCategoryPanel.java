@@ -18,16 +18,23 @@ public class MenuCategoryPanel extends CustomPanel {
     String categoryName;
 
     public MenuCategoryPanel(MainFrame mainFrame, CustomerOrder customerOrder, String categoryName) {
+        super();
         initComponents();
         this.mainFrame = mainFrame;
         this.customerOrder = customerOrder;
         this.categoryName = categoryName;
+
+        this.CategoryNameLabel.setText(categoryName);
 
         setupSubCategories();
     }
 
     private void setupSubCategories() {
         MenuCategory category = this.mainFrame.getMenu().getMenuCategory(this.categoryName);
+
+        for (MenuSubCategory subCategory : category.getSubCategories()) {
+            this.SubCategoriesPanel.add(new MenuSubCategoryPanel(subCategory));
+        }
 
     }
 
@@ -40,478 +47,57 @@ public class MenuCategoryPanel extends CustomPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton13 = new javax.swing.JButton();
-        FountainDrinksPanel = new javax.swing.JPanel();
-        FountainLabel = new javax.swing.JLabel();
-        PepsiButton = new javax.swing.JButton();
-        DrPepperButton = new javax.swing.JButton();
-        DietPepsiButton = new javax.swing.JButton();
-        SweetTeaButton = new javax.swing.JButton();
-        MountainDewButton = new javax.swing.JButton();
-        RootBeerButton = new javax.swing.JButton();
-        SpriteButton = new javax.swing.JButton();
-        WaterButton = new javax.swing.JButton();
-        FountainDrinksPanel1 = new javax.swing.JPanel();
-        SpecialtiesLabel = new javax.swing.JLabel();
-        MilkShakeButton = new javax.swing.JButton();
-        CoffeeButton = new javax.swing.JButton();
-        OrangeJuiceButton = new javax.swing.JButton();
-        HotTeaButton = new javax.swing.JButton();
-        CapuchinnoButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        AlcoholicLabel = new javax.swing.JLabel();
-        WineButton = new javax.swing.JButton();
-        MargaritaButton = new javax.swing.JButton();
-        DraftBeerButton = new javax.swing.JButton();
-        MoscowMuleButton = new javax.swing.JButton();
-        MartiniButton = new javax.swing.JButton();
-        WhiskeySourButton = new javax.swing.JButton();
-        OldFashionButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        HeaerPanel = new javax.swing.JPanel();
+        CancelButton = new javax.swing.JButton();
+        CategoryNameLabel = new javax.swing.JLabel();
+        SubCategoriesPanel = new javax.swing.JPanel();
 
-        jButton13.setText("jButton1");
+        setLayout(new java.awt.BorderLayout());
 
-        FountainLabel.setText("Fountain Drinks");
-
-        PepsiButton.setText("Pepsi");
-        PepsiButton.addActionListener(new java.awt.event.ActionListener() {
+        CancelButton.setText("Cancel");
+        CancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PepsiButtonActionPerformed(evt);
+                CancelButtonActionPerformed(evt);
             }
         });
 
-        DrPepperButton.setText("Dr. Pepper");
-        DrPepperButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DrPepperButtonActionPerformed(evt);
-            }
-        });
+        CategoryNameLabel.setText("Category Name");
 
-        DietPepsiButton.setText("Diet Pepsi");
-        DietPepsiButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DietPepsiButtonActionPerformed(evt);
-            }
-        });
-
-        SweetTeaButton.setText("Cold Bew Tea");
-        SweetTeaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SweetTeaButtonActionPerformed(evt);
-            }
-        });
-
-        MountainDewButton.setText("Mountain Dew");
-        MountainDewButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MountainDewButtonActionPerformed(evt);
-            }
-        });
-
-        RootBeerButton.setText("Root Beer");
-        RootBeerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RootBeerButtonActionPerformed(evt);
-            }
-        });
-
-        SpriteButton.setText("Sprite");
-        SpriteButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SpriteButtonActionPerformed(evt);
-            }
-        });
-
-        WaterButton.setText("Water");
-        WaterButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                WaterButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout FountainDrinksPanelLayout = new javax.swing.GroupLayout(FountainDrinksPanel);
-        FountainDrinksPanel.setLayout(FountainDrinksPanelLayout);
-        FountainDrinksPanelLayout.setHorizontalGroup(
-            FountainDrinksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FountainDrinksPanelLayout.createSequentialGroup()
-                .addGroup(FountainDrinksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(FountainDrinksPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(MountainDewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(RootBeerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(FountainDrinksPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(DietPepsiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(SweetTeaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(FountainDrinksPanelLayout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(FountainLabel))
-                    .addGroup(FountainDrinksPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(PepsiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(DrPepperButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(FountainDrinksPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(SpriteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(WaterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        FountainDrinksPanelLayout.setVerticalGroup(
-            FountainDrinksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FountainDrinksPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout HeaerPanelLayout = new javax.swing.GroupLayout(HeaerPanel);
+        HeaerPanel.setLayout(HeaerPanelLayout);
+        HeaerPanelLayout.setHorizontalGroup(
+            HeaerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(FountainLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(FountainDrinksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PepsiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DrPepperButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(FountainDrinksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DietPepsiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SweetTeaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(FountainDrinksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(MountainDewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RootBeerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(FountainDrinksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SpriteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(WaterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-
-        SpecialtiesLabel.setText("Specialties");
-
-        MilkShakeButton.setText("Milkshake");
-        MilkShakeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MilkShakeButtonActionPerformed(evt);
-            }
-        });
-
-        CoffeeButton.setText("Coffee");
-        CoffeeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CoffeeButtonActionPerformed(evt);
-            }
-        });
-
-        OrangeJuiceButton.setText("Orange Juice");
-        OrangeJuiceButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrangeJuiceButtonActionPerformed(evt);
-            }
-        });
-
-        HotTeaButton.setText("Hot Tea");
-        HotTeaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HotTeaButtonActionPerformed(evt);
-            }
-        });
-
-        CapuchinnoButton.setText("Capuchinno");
-        CapuchinnoButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CapuchinnoButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout FountainDrinksPanel1Layout = new javax.swing.GroupLayout(FountainDrinksPanel1);
-        FountainDrinksPanel1.setLayout(FountainDrinksPanel1Layout);
-        FountainDrinksPanel1Layout.setHorizontalGroup(
-            FountainDrinksPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FountainDrinksPanel1Layout.createSequentialGroup()
-                .addGroup(FountainDrinksPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(FountainDrinksPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(CapuchinnoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(FountainDrinksPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(OrangeJuiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(HotTeaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(FountainDrinksPanel1Layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(SpecialtiesLabel))
-                    .addGroup(FountainDrinksPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(MilkShakeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CoffeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        FountainDrinksPanel1Layout.setVerticalGroup(
-            FountainDrinksPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FountainDrinksPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(SpecialtiesLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(FountainDrinksPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MilkShakeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CoffeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(FountainDrinksPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(OrangeJuiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(HotTeaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CapuchinnoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        AlcoholicLabel.setText("Alcoholic Beverages");
-
-        WineButton.setText("Wine ");
-        WineButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                WineButtonActionPerformed(evt);
-            }
-        });
-
-        MargaritaButton.setText("Margarita");
-        MargaritaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MargaritaButtonActionPerformed(evt);
-            }
-        });
-
-        DraftBeerButton.setText("Draft Beer");
-        DraftBeerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DraftBeerButtonActionPerformed(evt);
-            }
-        });
-
-        MoscowMuleButton.setText("Moscow Mule");
-        MoscowMuleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MoscowMuleButtonActionPerformed(evt);
-            }
-        });
-
-        MartiniButton.setText("Martini");
-        MartiniButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MartiniButtonActionPerformed(evt);
-            }
-        });
-
-        WhiskeySourButton.setText("Whiskey Sour");
-        WhiskeySourButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                WhiskeySourButtonActionPerformed(evt);
-            }
-        });
-
-        OldFashionButton.setText("Old Fashion");
-        OldFashionButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OldFashionButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(AlcoholicLabel)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(MartiniButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(WhiskeySourButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(OldFashionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(154, 154, 154))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(DraftBeerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(WineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(MargaritaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(MoscowMuleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(AlcoholicLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(WineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MoscowMuleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DraftBeerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MargaritaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(OldFashionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(WhiskeySourButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MartiniButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-
-        jButton1.setText("Cancel");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(FountainDrinksPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(FountainDrinksPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(CategoryNameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
+                .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        HeaerPanelLayout.setVerticalGroup(
+            HeaerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HeaerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(FountainDrinksPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(FountainDrinksPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGroup(HeaerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CategoryNameLabel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        add(HeaerPanel, java.awt.BorderLayout.NORTH);
+
+        SubCategoriesPanel.setLayout(new java.awt.GridLayout());
+        add(SubCategoriesPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SweetTeaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SweetTeaButtonActionPerformed
-
-    }//GEN-LAST:event_SweetTeaButtonActionPerformed
-
-    private void MountainDewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MountainDewButtonActionPerformed
-
-    }//GEN-LAST:event_MountainDewButtonActionPerformed
-
-    private void RootBeerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RootBeerButtonActionPerformed
-
-    }//GEN-LAST:event_RootBeerButtonActionPerformed
-
-    private void SpriteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SpriteButtonActionPerformed
-
-    }//GEN-LAST:event_SpriteButtonActionPerformed
-
-    private void WaterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WaterButtonActionPerformed
-
-    }//GEN-LAST:event_WaterButtonActionPerformed
-
-    private void HotTeaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HotTeaButtonActionPerformed
-
-    }//GEN-LAST:event_HotTeaButtonActionPerformed
-
-    private void CapuchinnoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CapuchinnoButtonActionPerformed
-
-    }//GEN-LAST:event_CapuchinnoButtonActionPerformed
-
-    private void PepsiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PepsiButtonActionPerformed
-
-    }//GEN-LAST:event_PepsiButtonActionPerformed
-
-    private void MilkShakeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MilkShakeButtonActionPerformed
-
-    }//GEN-LAST:event_MilkShakeButtonActionPerformed
-
-    private void MoscowMuleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MoscowMuleButtonActionPerformed
-
-    }//GEN-LAST:event_MoscowMuleButtonActionPerformed
-
-    private void WineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WineButtonActionPerformed
-
-    }//GEN-LAST:event_WineButtonActionPerformed
-
-    private void OldFashionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OldFashionButtonActionPerformed
-
-    }//GEN-LAST:event_OldFashionButtonActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         mainFrame.setNewPanel(new NewOrderPanel(mainFrame, customerOrder), Boolean.FALSE, this);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void DraftBeerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DraftBeerButtonActionPerformed
-
-    }//GEN-LAST:event_DraftBeerButtonActionPerformed
-
-    private void DietPepsiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DietPepsiButtonActionPerformed
-
-    }//GEN-LAST:event_DietPepsiButtonActionPerformed
-
-    private void DrPepperButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DrPepperButtonActionPerformed
-
-    }//GEN-LAST:event_DrPepperButtonActionPerformed
-
-    private void OrangeJuiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrangeJuiceButtonActionPerformed
-
-    }//GEN-LAST:event_OrangeJuiceButtonActionPerformed
-
-    private void CoffeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CoffeeButtonActionPerformed
-
-    }//GEN-LAST:event_CoffeeButtonActionPerformed
-
-    private void MargaritaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MargaritaButtonActionPerformed
-
-    }//GEN-LAST:event_MargaritaButtonActionPerformed
-
-    private void MartiniButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MartiniButtonActionPerformed
-
-    }//GEN-LAST:event_MartiniButtonActionPerformed
-
-    private void WhiskeySourButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WhiskeySourButtonActionPerformed
-
-    }//GEN-LAST:event_WhiskeySourButtonActionPerformed
+    }//GEN-LAST:event_CancelButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel AlcoholicLabel;
-    private javax.swing.JButton CapuchinnoButton;
-    private javax.swing.JButton CoffeeButton;
-    private javax.swing.JButton DietPepsiButton;
-    private javax.swing.JButton DrPepperButton;
-    private javax.swing.JButton DraftBeerButton;
-    private javax.swing.JPanel FountainDrinksPanel;
-    private javax.swing.JPanel FountainDrinksPanel1;
-    private javax.swing.JLabel FountainLabel;
-    private javax.swing.JButton HotTeaButton;
-    private javax.swing.JButton MargaritaButton;
-    private javax.swing.JButton MartiniButton;
-    private javax.swing.JButton MilkShakeButton;
-    private javax.swing.JButton MoscowMuleButton;
-    private javax.swing.JButton MountainDewButton;
-    private javax.swing.JButton OldFashionButton;
-    private javax.swing.JButton OrangeJuiceButton;
-    private javax.swing.JButton PepsiButton;
-    private javax.swing.JButton RootBeerButton;
-    private javax.swing.JLabel SpecialtiesLabel;
-    private javax.swing.JButton SpriteButton;
-    private javax.swing.JButton SweetTeaButton;
-    private javax.swing.JButton WaterButton;
-    private javax.swing.JButton WhiskeySourButton;
-    private javax.swing.JButton WineButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton CancelButton;
+    private javax.swing.JLabel CategoryNameLabel;
+    private javax.swing.JPanel HeaerPanel;
+    private javax.swing.JPanel SubCategoriesPanel;
     // End of variables declaration//GEN-END:variables
 }
