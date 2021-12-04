@@ -68,4 +68,8 @@ public class Menu {
     public Collection<MenuCategory> getMenuCategories() {
         return menuCategories.values();
     }
+
+    public MenuCategory getMenuCategory(String categoryName) {
+        return menuCategories.get(categoryName);
+    }
 }
