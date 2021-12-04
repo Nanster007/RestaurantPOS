@@ -137,6 +137,7 @@ public class MainFrame extends JFrame {
         this.add(currentPage, BorderLayout.CENTER);
         //what is this??
         this.setVisible(true);
+        this.repaint();
     }
 
     public Employee findEmployee(String name) throws IOException, FileNotFoundException, ClassNotFoundException {
