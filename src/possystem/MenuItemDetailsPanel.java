@@ -46,19 +46,43 @@ public class MenuItemDetailsPanel extends CustomPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MenuItemOptionsPanel = new javax.swing.JPanel();
+        NoOptionsLabel = new javax.swing.JLabel();
         CurrentItemPanel = new javax.swing.JPanel();
         CurrentItemTextLabel = new javax.swing.JLabel();
         CurrentItemLabel = new javax.swing.JLabel();
         BasePriceTextLabel = new javax.swing.JLabel();
         BasePriceLabel = new javax.swing.JLabel();
+        CancelButton = new javax.swing.JButton();
         AddItemButton = new javax.swing.JButton();
         CommentsPanel = new javax.swing.JPanel();
         CommentsLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ExtraCommentsArea = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
+
+        NoOptionsLabel.setFont(NoOptionsLabel.getFont().deriveFont((NoOptionsLabel.getFont().getStyle() | java.awt.Font.ITALIC)));
+        NoOptionsLabel.setText("No Options");
+
+        javax.swing.GroupLayout MenuItemOptionsPanelLayout = new javax.swing.GroupLayout(MenuItemOptionsPanel);
+        MenuItemOptionsPanel.setLayout(MenuItemOptionsPanelLayout);
+        MenuItemOptionsPanelLayout.setHorizontalGroup(
+            MenuItemOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MenuItemOptionsPanelLayout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(NoOptionsLabel)
+                .addContainerGap(237, Short.MAX_VALUE))
+        );
+        MenuItemOptionsPanelLayout.setVerticalGroup(
+            MenuItemOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MenuItemOptionsPanelLayout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(NoOptionsLabel)
+                .addContainerGap(167, Short.MAX_VALUE))
+        );
+
+        add(MenuItemOptionsPanel, java.awt.BorderLayout.CENTER);
 
         CurrentItemPanel.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -78,6 +102,13 @@ public class MenuItemDetailsPanel extends CustomPanel {
 
         BasePriceLabel.setText("jLabel3");
 
+        CancelButton.setText("Cancel");
+        CancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout CurrentItemPanelLayout = new javax.swing.GroupLayout(CurrentItemPanel);
         CurrentItemPanel.setLayout(CurrentItemPanelLayout);
         CurrentItemPanelLayout.setHorizontalGroup(
@@ -94,23 +125,30 @@ public class MenuItemDetailsPanel extends CustomPanel {
                         .addComponent(BasePriceTextLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BasePriceLabel)))
-                .addGap(12, 12, 12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         CurrentItemPanelLayout.setVerticalGroup(
             CurrentItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CurrentItemPanelLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(CurrentItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CurrentItemTextLabel)
-                    .addComponent(CurrentItemLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(CurrentItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BasePriceTextLabel)
-                    .addComponent(BasePriceLabel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(CurrentItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CurrentItemPanelLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(CurrentItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CurrentItemTextLabel)
+                            .addComponent(CurrentItemLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(CurrentItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BasePriceTextLabel)
+                            .addComponent(BasePriceLabel)))
+                    .addGroup(CurrentItemPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0))
         );
 
-        add(CurrentItemPanel, java.awt.BorderLayout.CENTER);
+        add(CurrentItemPanel, java.awt.BorderLayout.NORTH);
 
         AddItemButton.setText("Add Item");
         AddItemButton.addActionListener(new java.awt.event.ActionListener() {
@@ -120,46 +158,19 @@ public class MenuItemDetailsPanel extends CustomPanel {
         });
         add(AddItemButton, java.awt.BorderLayout.PAGE_END);
 
+        CommentsPanel.setLayout(new java.awt.BorderLayout());
+
+        CommentsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         CommentsLabel.setText("Extra Comments");
+        CommentsPanel.add(CommentsLabel, java.awt.BorderLayout.PAGE_START);
 
         ExtraCommentsArea.setColumns(20);
         ExtraCommentsArea.setRows(5);
         jScrollPane1.setViewportView(ExtraCommentsArea);
 
-        jButton1.setText("Cancel");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        CommentsPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout CommentsPanelLayout = new javax.swing.GroupLayout(CommentsPanel);
-        CommentsPanel.setLayout(CommentsPanelLayout);
-        CommentsPanelLayout.setHorizontalGroup(
-            CommentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CommentsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(CommentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(CommentsPanelLayout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(CommentsLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        CommentsPanelLayout.setVerticalGroup(
-            CommentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CommentsPanelLayout.createSequentialGroup()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CommentsLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
-        );
-
-        add(CommentsPanel, java.awt.BorderLayout.PAGE_END);
+        add(CommentsPanel, java.awt.BorderLayout.EAST);
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddItemButtonActionPerformed
@@ -169,9 +180,9 @@ public class MenuItemDetailsPanel extends CustomPanel {
         }
     }//GEN-LAST:event_AddItemButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         mainFrame.setNewPanel(mainFrame.getLastPage(), false, this);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void CurrentItemPanelAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_CurrentItemPanelAncestorAdded
         // TODO add your hanasdfsadfas
@@ -181,13 +192,15 @@ public class MenuItemDetailsPanel extends CustomPanel {
     private javax.swing.JButton AddItemButton;
     private javax.swing.JLabel BasePriceLabel;
     private javax.swing.JLabel BasePriceTextLabel;
+    private javax.swing.JButton CancelButton;
     private javax.swing.JLabel CommentsLabel;
     private javax.swing.JPanel CommentsPanel;
     private javax.swing.JLabel CurrentItemLabel;
     private javax.swing.JPanel CurrentItemPanel;
     private javax.swing.JLabel CurrentItemTextLabel;
     private javax.swing.JTextArea ExtraCommentsArea;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel MenuItemOptionsPanel;
+    private javax.swing.JLabel NoOptionsLabel;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
