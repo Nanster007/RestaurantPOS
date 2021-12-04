@@ -4,6 +4,10 @@
  */
 package possystem;
 
+import java.awt.event.ActionEvent;
+import possystem.menuitems.MenuItem;
+import possystem.menuitems.MenuSubCategory;
+
 /**
  *
  * @author dakingofcheckerz
@@ -13,8 +17,26 @@ public class MenuSubCategoryPanel extends javax.swing.JPanel {
     /**
      * Creates new form MenuSubCategoryPanel
      */
-    public MenuSubCategoryPanel() {
+    public MenuSubCategoryPanel(MenuSubCategory subCategory) {
+        super();
         initComponents();
+
+        this.SubCategoryLabel.setText(subCategory.getName());
+
+        for (MenuItem menuItem : subCategory.getMenuItemsArray()) {
+            MenuItemButton button = new MenuItemButton(menuItem);
+            button.addActionListener(evt -> {
+                MenuItemButtonActionPerformed(evt);
+            });
+
+            this.SubCategoryButtonsPanel.add(button);
+        }
+    }
+
+    public void MenuItemButtonActionPerformed(ActionEvent evt) {
+        MenuItemButton button = (MenuItemButton) evt.getSource();
+
+        button.getMenuItem();
     }
 
     /**
@@ -35,7 +57,7 @@ public class MenuSubCategoryPanel extends javax.swing.JPanel {
         SubCategoryLabel.setText("SubCategory Name");
         add(SubCategoryLabel, java.awt.BorderLayout.PAGE_START);
 
-        SubCategoryButtonsPanel.setLayout(new java.awt.GridLayout(1, 0, 12, 12));
+        SubCategoryButtonsPanel.setLayout(new java.awt.GridLayout(4, 2, 12, 12));
         add(SubCategoryButtonsPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
