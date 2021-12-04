@@ -117,6 +117,10 @@ public class MainFrame extends JFrame {
         this.menu.addMenuItem(new MenuItem("Beer", 3.99d, UUID.randomUUID(),
                 null, drinkOptions, "Bog-standard alcoholic beverage",
                 "Drinks", "Alcoholic Beverages"));
+
+        this.menu.addMenuItem(new MenuItem("Build-a-Burger-Workshop", 8.99d, UUID.randomUUID(),
+                null, drinkOptions, "Build your own burger! Lean Angus Beef patties grilled to perfection",
+                "Entreés", "Burgers"));
     }
 
     public Menu getMenu() {
