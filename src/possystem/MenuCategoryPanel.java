@@ -5,21 +5,30 @@
  */
 package possystem;
 
-import possystem.menuitems.MenuItem;
+import possystem.menuitems.*;
 
 /**
  *
  * @author tylar
  */
-public class DrinksPanel extends CustomPanel {
+public class MenuCategoryPanel extends CustomPanel {
 
     MainFrame mainFrame;
     CustomerOrder customerOrder;
+    String categoryName;
 
-    public DrinksPanel(MainFrame mainFrame, CustomerOrder customerOrder) {
+    public MenuCategoryPanel(MainFrame mainFrame, CustomerOrder customerOrder, String categoryName) {
         initComponents();
         this.mainFrame = mainFrame;
         this.customerOrder = customerOrder;
+        this.categoryName = categoryName;
+
+        setupSubCategories();
+    }
+
+    private void setupSubCategories() {
+        MenuCategory category = this.mainFrame.getMenu().getMenuCategory(this.categoryName);
+
     }
 
     /**
@@ -149,7 +158,7 @@ public class DrinksPanel extends CustomPanel {
                         .addComponent(SpriteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(WaterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         FountainDrinksPanelLayout.setVerticalGroup(
             FountainDrinksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,7 +242,7 @@ public class DrinksPanel extends CustomPanel {
                         .addComponent(MilkShakeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(CoffeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         FountainDrinksPanel1Layout.setVerticalGroup(
             FountainDrinksPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
