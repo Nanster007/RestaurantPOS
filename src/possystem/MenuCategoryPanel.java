@@ -33,7 +33,7 @@ public class MenuCategoryPanel extends CustomPanel {
         MenuCategory category = this.mainFrame.getMenu().getMenuCategory(this.categoryName);
 
         for (MenuSubCategory subCategory : category.getSubCategories()) {
-            this.SubCategoriesPanel.add(new MenuSubCategoryPanel(subCategory));
+            this.SubCategoriesPanel.add(new MenuSubCategoryPanel(subCategory, mainFrame, customerOrder, this));
         }
 
     }
@@ -47,7 +47,7 @@ public class MenuCategoryPanel extends CustomPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        HeaerPanel = new javax.swing.JPanel();
+        HeaderPanel = new javax.swing.JPanel();
         CancelButton = new javax.swing.JButton();
         CategoryNameLabel = new javax.swing.JLabel();
         SubCategoriesPanel = new javax.swing.JPanel();
@@ -63,28 +63,28 @@ public class MenuCategoryPanel extends CustomPanel {
 
         CategoryNameLabel.setText("Category Name");
 
-        javax.swing.GroupLayout HeaerPanelLayout = new javax.swing.GroupLayout(HeaerPanel);
-        HeaerPanel.setLayout(HeaerPanelLayout);
-        HeaerPanelLayout.setHorizontalGroup(
-            HeaerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaerPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout HeaderPanelLayout = new javax.swing.GroupLayout(HeaderPanel);
+        HeaderPanel.setLayout(HeaderPanelLayout);
+        HeaderPanelLayout.setHorizontalGroup(
+            HeaderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(CategoryNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
                 .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        HeaerPanelLayout.setVerticalGroup(
-            HeaerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HeaerPanelLayout.createSequentialGroup()
+        HeaderPanelLayout.setVerticalGroup(
+            HeaderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HeaderPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(HeaerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(HeaderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CategoryNameLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(HeaerPanel, java.awt.BorderLayout.NORTH);
+        add(HeaderPanel, java.awt.BorderLayout.NORTH);
 
         SubCategoriesPanel.setLayout(new java.awt.GridLayout());
         add(SubCategoriesPanel, java.awt.BorderLayout.CENTER);
@@ -97,7 +97,7 @@ public class MenuCategoryPanel extends CustomPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
     private javax.swing.JLabel CategoryNameLabel;
-    private javax.swing.JPanel HeaerPanel;
+    private javax.swing.JPanel HeaderPanel;
     private javax.swing.JPanel SubCategoriesPanel;
     // End of variables declaration//GEN-END:variables
 }
