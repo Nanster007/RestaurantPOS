@@ -5,6 +5,7 @@
 package possystem;
 
 import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
 import possystem.menuitems.MenuItem;
 import possystem.menuitems.MenuSubCategory;
 
@@ -12,14 +13,25 @@ import possystem.menuitems.MenuSubCategory;
  *
  * @author dakingofcheckerz
  */
-public class MenuSubCategoryPanel extends javax.swing.JPanel {
+public class MenuSubCategoryPanel extends CustomPanel {
+
+    private MainFrame mainFrame;
+    private CustomPanel parentPanel;
+    private MenuSubCategory subCategory;
+    private CustomerOrder customerOrder;
 
     /**
      * Creates new form MenuSubCategoryPanel
      */
-    public MenuSubCategoryPanel(MenuSubCategory subCategory) {
+    public MenuSubCategoryPanel(MenuSubCategory subCategory, MainFrame mainFrame,
+            CustomerOrder customerOrder, CustomPanel parentPanel) {
         super();
         initComponents();
+
+        this.subCategory = subCategory;
+        this.mainFrame = mainFrame;
+        this.customerOrder = customerOrder;
+        this.parentPanel = parentPanel;
 
         this.SubCategoryLabel.setText(subCategory.getName());
 
@@ -36,7 +48,10 @@ public class MenuSubCategoryPanel extends javax.swing.JPanel {
     public void MenuItemButtonActionPerformed(ActionEvent evt) {
         MenuItemButton button = (MenuItemButton) evt.getSource();
 
-        button.getMenuItem();
+        MenuItem menuItem = button.getMenuItem();
+
+        MenuItemDetailsPanel newPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
+        mainFrame.setNewPanel(newPanel, true, this.parentPanel);
     }
 
     /**
