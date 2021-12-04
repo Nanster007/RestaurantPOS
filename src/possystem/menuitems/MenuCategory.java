@@ -4,12 +4,10 @@
  */
 package possystem.menuitems;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  *
@@ -37,6 +35,10 @@ public class MenuCategory {
         this.subCategories = new HashMap();
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public void addMenuItem(MenuItem item) {
         String subCategory = item.getSubcategory();
 
@@ -52,4 +54,7 @@ public class MenuCategory {
         this.subCategories.put(name, subCategory);
     }
 
+    public List<MenuSubCategory> getSubCategories() {
+        return List.copyOf(this.subCategories.values());
+    }
 }
