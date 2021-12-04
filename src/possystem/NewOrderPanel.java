@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 
 /**
  *
@@ -18,7 +19,6 @@ public class NewOrderPanel extends CustomPanel {
 
     private MainFrame mainFrame;
     private CustomerOrder customerOrder;
-    private DecimalFormat df;
 
     public NewOrderPanel(MainFrame mainFrame, CustomerOrder customerOrder) {
         initComponents();
@@ -37,8 +37,27 @@ public class NewOrderPanel extends CustomPanel {
             CustomerAddressLabel.setVisible(false);
         }
 
-        jTextArea1.setText(customerOrder.toString());
+        OrderDetailsTextArea.setText(customerOrder.toString());
 
+        setupMenuCategories();
+    }
+
+    private void setupMenuCategories() {
+        for (String categoryName : this.mainFrame.getMenu().getMenuCategoryNames()) {
+            JButton button = new JButton(categoryName);
+            button.addActionListener(evt -> {
+                MenuCategoryButtonActionPerformed(evt);
+            });
+
+            this.MenuCategoriesPanel.add(button);
+        }
+    }
+
+    private void MenuCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        JButton button = (JButton) evt.getSource();
+        String categoryName = button.getText();
+
+        mainFrame.setNewPanel(new MenuCategoryPanel(mainFrame, customerOrder, categoryName), true, this);
     }
 
     /**
@@ -51,13 +70,8 @@ public class NewOrderPanel extends CustomPanel {
     private void initComponents() {
 
         TicketTextArea = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        OrderDetailsTextArea = new javax.swing.JTextArea();
         MenuCategoriesPanel = new javax.swing.JPanel();
-        AppetizersButton = new javax.swing.JButton();
-        MerchButton = new javax.swing.JButton();
-        EntreesButton = new javax.swing.JButton();
-        DessertsButton = new javax.swing.JButton();
-        DrinksButton = new javax.swing.JButton();
         CurrentOrderLabel = new javax.swing.JLabel();
         NameLabel = new javax.swing.JLabel();
         PhoneNumberLabel = new javax.swing.JLabel();
@@ -74,52 +88,12 @@ public class NewOrderPanel extends CustomPanel {
         CancelOrderButton = new javax.swing.JButton();
         PlaceOrderButton = new javax.swing.JButton();
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("order items & prices");
-        TicketTextArea.setViewportView(jTextArea1);
+        OrderDetailsTextArea.setColumns(20);
+        OrderDetailsTextArea.setRows(5);
+        OrderDetailsTextArea.setText("order items & prices");
+        TicketTextArea.setViewportView(OrderDetailsTextArea);
 
         MenuCategoriesPanel.setLayout(new java.awt.GridLayout(5, 0));
-
-        AppetizersButton.setText("Appetizers");
-        AppetizersButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AppetizersButtonActionPerformed(evt);
-            }
-        });
-        MenuCategoriesPanel.add(AppetizersButton);
-
-        MerchButton.setText("Restaurant merch?");
-        MerchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MerchButtonActionPerformed(evt);
-            }
-        });
-        MenuCategoriesPanel.add(MerchButton);
-
-        EntreesButton.setText("Entree's");
-        EntreesButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EntreesButtonActionPerformed(evt);
-            }
-        });
-        MenuCategoriesPanel.add(EntreesButton);
-
-        DessertsButton.setText("Desserts");
-        DessertsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DessertsButtonActionPerformed(evt);
-            }
-        });
-        MenuCategoriesPanel.add(DessertsButton);
-
-        DrinksButton.setText("Drinks");
-        DrinksButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DrinksButtonActionPerformed(evt);
-            }
-        });
-        MenuCategoriesPanel.add(DrinksButton);
 
         CurrentOrderLabel.setText("Current Order:");
 
@@ -252,29 +226,9 @@ public class NewOrderPanel extends CustomPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DrinksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DrinksButtonActionPerformed
-        mainFrame.setNewPanel(new DrinksPanel(mainFrame, customerOrder), true, this);
-    }//GEN-LAST:event_DrinksButtonActionPerformed
-
-    private void EntreesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EntreesButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EntreesButtonActionPerformed
-
-    private void AppetizersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AppetizersButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AppetizersButtonActionPerformed
-
-    private void MerchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MerchButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MerchButtonActionPerformed
-
     private void EditInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditInfoButtonActionPerformed
         mainFrame.setNewPanel(new CustomerInfoPanel(mainFrame, customerOrder), true, this);
     }//GEN-LAST:event_EditInfoButtonActionPerformed
-
-    private void DessertsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DessertsButtonActionPerformed
-
-    }//GEN-LAST:event_DessertsButtonActionPerformed
 
     private void CancelOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelOrderButtonActionPerformed
         mainFrame.setNewPanel(new MainMenuPanel(mainFrame), false, this);
@@ -292,7 +246,6 @@ public class NewOrderPanel extends CustomPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AddressLabel;
-    private javax.swing.JButton AppetizersButton;
     private javax.swing.JButton CancelOrderButton;
     private javax.swing.JTextField ClockLabel;
     private javax.swing.JLabel CurrentOrderLabel;
@@ -300,19 +253,15 @@ public class NewOrderPanel extends CustomPanel {
     private javax.swing.JLabel CustomerNameLabel;
     private javax.swing.JLabel CustomerOrderTotalLabel;
     private javax.swing.JLabel CustomerPhoneLabel;
-    private javax.swing.JButton DessertsButton;
-    private javax.swing.JButton DrinksButton;
     private javax.swing.JButton EditInfoButton;
-    private javax.swing.JButton EntreesButton;
     private javax.swing.JPanel MenuCategoriesPanel;
-    private javax.swing.JButton MerchButton;
     private javax.swing.JLabel NameLabel;
+    private javax.swing.JTextArea OrderDetailsTextArea;
     private javax.swing.JLabel OrderIDLabel;
     private javax.swing.JLabel OrderTotalLabel;
     private javax.swing.JLabel PhoneNumberLabel;
     private javax.swing.JButton PlaceOrderButton;
     private javax.swing.JScrollPane TicketTextArea;
     private javax.swing.JLabel UsernameLabel;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
