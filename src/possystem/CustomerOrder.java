@@ -19,14 +19,16 @@ public class CustomerOrder implements Serializable {
 
     private String customerName, customerAddress, customerPhoneNumber;
     private ArrayList<OrderedMenuItem> orderedItems;
-    private UUID orderID;
+    private final UUID orderID;
+    private boolean delivery;
 
-    public CustomerOrder(String customerName, String customerPhoneNumber, String customerAddress) {
+    public CustomerOrder(String customerName, String customerPhoneNumber, String customerAddress, boolean delivery) {
         this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.customerPhoneNumber = customerPhoneNumber;
         this.orderID = UUID.randomUUID();
         this.orderedItems = new ArrayList();
+        this.delivery = delivery;
     }
 
     public double getOrderTotal() {
@@ -41,6 +43,16 @@ public class CustomerOrder implements Serializable {
 
         return orderTotal;
     }
+
+    public boolean isDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(boolean delivery) {
+        this.delivery = delivery;
+    }
+    
+    
 
     public void addMenuItem(OrderedMenuItem menuItem) {
         orderedItems.add(menuItem);

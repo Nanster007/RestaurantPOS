@@ -240,13 +240,16 @@ public class MainMenuPanel extends CustomPanel {
     }//GEN-LAST:event_ScheduleButtonActionPerformed
 
     private void NewOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewOrderButtonActionPerformed
-        //create blank cutsomer order for customer info panel
-        CustomPanel nextPanel = new CustomerInfoPanel(mainFrame, new CustomerOrder("", "", ""));
-        mainFrame.setNewPanel(nextPanel, true, this);
+        try {
+            //create blank cutsomer order for customer info panel
+            mainFrame.setNewPanel(new CustomerInfoPanel(mainFrame, new CustomerOrder("", "", "", false)), true, this);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(MainMenuPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_NewOrderButtonActionPerformed
 
     private void ManagerSettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManagerSettingsButtonActionPerformed
-        CustomPanel nextPanel = null;
+
         try {
             mainFrame.setNewPanel(new ManagerSettingsPanel(mainFrame), true, this);
         } catch (IOException | ClassNotFoundException ex) {
