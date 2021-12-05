@@ -5,55 +5,55 @@
  */
 package possystem;
 
+import possystem.menuitems.MenuItem;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
+import possystem.menuitems.OrderedMenuItem;
 
 /**
  *
  * @author tylar
  */
-public class CustomerOrder implements Serializable{
-    
+public class CustomerOrder implements Serializable {
+
     private String customerName, customerAddress, customerPhoneNumber;
-    private ArrayList<MenuItem> orderItems;
+    private ArrayList<OrderedMenuItem> orderedItems;
     private UUID orderID;
-    private double orderTotal;
-    
-    public CustomerOrder(String customerName, String customerPhoneNumber, String customerAddress){
+
+    public CustomerOrder(String customerName, String customerPhoneNumber, String customerAddress) {
         this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.customerPhoneNumber = customerPhoneNumber;
         this.orderID = UUID.randomUUID();
-        this.orderTotal = 0;
-        this.orderItems = new ArrayList();
+        this.orderedItems = new ArrayList();
     }
-    
-    public double getOrderTotal(){
-        
-        orderTotal = 0;
-        
-        if(orderItems.size() > 0){
-            for(int i = 0; i < orderItems.size(); i++){
-               orderTotal += orderItems.get(i).getItemPrice();
+
+    public double getOrderTotal() {
+
+        double orderTotal = 0;
+
+        if (orderedItems.size() > 0) {
+            for (int i = 0; i < orderedItems.size(); i++) {
+                orderTotal += orderedItems.get(i).getPrice();
             }
         }
-        
+
         return orderTotal;
     }
-    
-    public void addMenuItem(MenuItem menuItem){
-        orderItems.add(menuItem);
+
+    public void addMenuItem(OrderedMenuItem menuItem) {
+        orderedItems.add(menuItem);
     }
 
     public UUID getOrderID() {
         return orderID;
     }
 
-    public ArrayList<MenuItem> getOrderItems() {
-        return orderItems;
+    public ArrayList<OrderedMenuItem> getOrderedItems() {
+        return orderedItems;
     }
-    
+
     public String getCustomerName() {
         return customerName;
     }
@@ -77,20 +77,19 @@ public class CustomerOrder implements Serializable{
     public void setCustomerPhoneNumber(String customerPhoneNumber) {
         this.customerPhoneNumber = customerPhoneNumber;
     }
-    
+
     @Override
-    public String toString(){
-        String toString = "----------------------------------------------------------- \n";
-        
+    public String toString() {
+        String toString = "---------------------------------------------- \n";
+
         toString += this.orderID + "\n" + this.customerName + "\n" + this.customerPhoneNumber + "\n" + this.customerAddress + "\n" + "\n";
-        
-        
-        for(int i = 0; i<orderItems.size(); i++){
-            toString += orderItems.get(i).toString() + "\n" + "\n";
+
+        for (int i = 0; i < orderedItems.size(); i++) {
+            toString += orderedItems.get(i).toString() + "\n\n";
         }
-        
-        toString += "Total: " + this.getOrderTotal();
+
+        toString += "Total: " + String.format("$%.2f", this.getOrderTotal());
         return toString;
-    }  
-    
+    }
+
 }
