@@ -5,6 +5,7 @@
  */
 package possystem;
 
+import java.awt.Font;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.logging.Level;
@@ -22,6 +23,10 @@ public class NewOrderPanel extends CustomPanel {
 
     public NewOrderPanel(MainFrame mainFrame, CustomerOrder customerOrder) {
         initComponents();
+        this.OrderDetailsTextArea.setFont(new Font(Font.MONOSPACED,
+                this.getFont().getStyle(),
+                this.getFont().getSize()));
+
         setClockField(ClockLabel);
         this.customerOrder = customerOrder;
         this.mainFrame = mainFrame;
