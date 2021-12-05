@@ -5,6 +5,7 @@
  */
 package possystem;
 
+import java.awt.Font;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,23 +22,30 @@ public class OrderHistoryPanel extends CustomPanel {
     private MainFrame mainFrame;
     private ArrayList<CustomerOrder> customerOrders;
     private int selectedOrderIndex;
-    
+
     public OrderHistoryPanel(MainFrame mainFrame) throws IOException, FileNotFoundException, ClassNotFoundException {
         initComponents();
         this.mainFrame = mainFrame;
         this.customerOrders = mainFrame.getCustomerOrders();
         this.selectedOrderIndex = 0;
-        
+
+        // Use a monospace font for text boxes for proper formatting
+        Font monospacedFont = new Font(Font.MONOSPACED, this.getFont().getStyle(),
+                this.getFont().getSize());
+
+        OrderHistoryTextArea.setFont(monospacedFont);
+        SelectedOrderTextArea.setFont(monospacedFont);
+
         displayOrders();
     }
-    
-    private void displayOrders(){
-        for(int i =0; i<customerOrders.size(); i++){
-            OrderHistoryTextArea.setText(OrderHistoryTextArea.getText() + 
-                    customerOrders.get(i).toString() + "\n" + "\n" + "\n");
+
+    private void displayOrders() {
+        for (int i = 0; i < customerOrders.size(); i++) {
+            OrderHistoryTextArea.setText(OrderHistoryTextArea.getText()
+                    + customerOrders.get(i).toString() + "\n\n\n");
         }
-        
-        if(customerOrders.size() != 0){
+
+        if (!customerOrders.isEmpty()) {
             SelectedOrderTextArea.setText(customerOrders.get(selectedOrderIndex).toString());
         }
     }
@@ -197,7 +205,7 @@ public class OrderHistoryPanel extends CustomPanel {
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void PreviousOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousOrderButtonActionPerformed
-        if(selectedOrderIndex > 0){
+        if (selectedOrderIndex > 0) {
             selectedOrderIndex--;
             SelectedOrderTextArea.setText(customerOrders.get(selectedOrderIndex).toString());
         }
@@ -208,7 +216,7 @@ public class OrderHistoryPanel extends CustomPanel {
     }//GEN-LAST:event_OrderIDInputActionPerformed
 
     private void NextOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextOrderButtonActionPerformed
-        if(selectedOrderIndex < customerOrders.size()-1){
+        if (selectedOrderIndex < customerOrders.size() - 1) {
             selectedOrderIndex++;
             SelectedOrderTextArea.setText(customerOrders.get(selectedOrderIndex).toString());
         }
@@ -220,16 +228,15 @@ public class OrderHistoryPanel extends CustomPanel {
 
     private void SearchByIDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchByIDButtonActionPerformed
         String orderID = OrderIDInput.getText();
-        
-        for(int i =0; i < customerOrders.size(); i++){
-            if(customerOrders.get(i).getOrderID().toString().equals(orderID)){
+
+        for (int i = 0; i < customerOrders.size(); i++) {
+            if (customerOrders.get(i).getOrderID().toString().equals(orderID)) {
                 SelectedOrderTextArea.setText(customerOrders.get(i).toString());
                 selectedOrderIndex = i;
                 return;
             }
         }
     }//GEN-LAST:event_SearchByIDButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackButton;
