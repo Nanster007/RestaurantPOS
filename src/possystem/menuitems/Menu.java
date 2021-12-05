@@ -4,6 +4,7 @@
  */
 package possystem.menuitems;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +15,7 @@ import java.util.UUID;
  *
  * @author dakingofcheckerz
  */
-public class Menu {
+public class Menu implements Serializable {
 
     private Map<UUID, MenuItem> menuItems;
     private Map<String, MenuCategory> menuCategories;
