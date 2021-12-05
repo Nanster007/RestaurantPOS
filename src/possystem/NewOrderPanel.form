@@ -43,10 +43,10 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="UsernameLabel" min="-2" pref="84" max="-2" attributes="0"/>
                       <Component id="ClockLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="UsernameLabel" min="-2" pref="212" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="140" pref="140" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Component id="CurrentOrderLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="OrderIDLabel" min="-2" max="-2" attributes="0"/>
@@ -189,8 +189,8 @@
                   <Component id="AddressLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="CustomerAddressLabel" min="-2" pref="24" max="-2" attributes="0"/>
-                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                  <Component id="EditInfoButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="EditInfoButton" min="-2" pref="33" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="TicketTextArea" min="-2" pref="299" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
