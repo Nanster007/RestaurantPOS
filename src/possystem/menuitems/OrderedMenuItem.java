@@ -88,12 +88,27 @@ public class OrderedMenuItem {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(String.format("%-38s $%.2f", menuItem.getName(), getPrice()));
+        stringBuilder.append(String.format("%-38s $%4.2f", menuItem.getName(), getPrice()));
+
+        for (int i = 0; i < menuItem.getOptions().size(); i++) {
+            MenuItemOption option = menuItem.getOptions().get(i);
+            MenuItemOptionValue value = option.getPossibleValues().get(selectedOptions.get(i));
+            stringBuilder.append("\n      ")
+                    .append(String.format("%-31s ", option.getName() + ": " + value.getValue()));
+
+            if (value.getPriceModifier() < 0) {
+                stringBuilder.append("-");
+            } else {
+                stringBuilder.append('+');
+            }
+
+            stringBuilder.append(String.format("$%4.2f", Math.abs(value.getPriceModifier())));
+
+        }
 
         for (Topping topping : toppings) {
             stringBuilder.append("\n      ")
-                    .append(String.format("%-32s $%.2f", topping.getName() + " (" + topping.getCount() + ')', topping.getBasePrice())) //.append('\n')
-                    ;
+                    .append(String.format("%-32s $%4.2f", topping.getName() + " (" + topping.getCount() + ')', topping.getBasePrice()));
         }
 
         return stringBuilder.toString();

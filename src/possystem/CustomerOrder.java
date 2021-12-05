@@ -88,7 +88,7 @@ public class CustomerOrder implements Serializable {
             toString += orderedItems.get(i).toString() + "\n\n";
         }
 
-        toString += "Total: " + this.getOrderTotal();
+        toString += "Total: " + String.format("$%.2f", this.getOrderTotal());
         return toString;
     }
 
