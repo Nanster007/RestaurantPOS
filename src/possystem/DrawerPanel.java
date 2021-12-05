@@ -71,23 +71,29 @@ public class DrawerPanel extends CustomPanel {
         OpenButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         OpenButton.setText("Open Drawer");
         OpenButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        OpenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OpenButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Enter Opening Amount:");
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField1.setText("jTextField1");
 
         OutButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         OutButton.setText("Cash Out");
         OutButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        OutButton.setEnabled(false);
 
         InButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         InButton.setText("Cash In");
         InButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        InButton.setEnabled(false);
 
+        jTextField2.setEditable(false);
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField2.setText("jTextField2");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Amount:");
@@ -95,38 +101,49 @@ public class DrawerPanel extends CustomPanel {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Opening Amount:");
 
+        OpeningField.setEditable(false);
         OpeningField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        OpeningField.setText("jTextField3");
+        OpeningField.setText("$00.00");
+        OpeningField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OpeningFieldActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Entree Sales:");
 
+        EntreeField.setEditable(false);
         EntreeField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        EntreeField.setText("jTextField3");
+        EntreeField.setText("$00.00");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Drink Sales:");
 
+        DrinkField.setEditable(false);
         DrinkField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        DrinkField.setText("jTextField3");
+        DrinkField.setText("$00.00");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Side Sales:");
 
+        DrinkField1.setEditable(false);
         DrinkField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        DrinkField1.setText("jTextField3");
+        DrinkField1.setText("$00.00");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Total Sales:");
 
+        DrinkField2.setEditable(false);
         DrinkField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        DrinkField2.setText("jTextField3");
+        DrinkField2.setText("$00.00");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("Delivery/Sales Cut:");
 
+        OrderTypeField.setEditable(false);
         OrderTypeField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        OrderTypeField.setText("jTextField3");
+        OrderTypeField.setText("$00.00");
 
         javax.swing.GroupLayout StatsPanelLayout = new javax.swing.GroupLayout(StatsPanel);
         StatsPanel.setLayout(StatsPanelLayout);
@@ -189,7 +206,7 @@ public class DrawerPanel extends CustomPanel {
                 .addGroup(StatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(OrderTypeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -205,9 +222,9 @@ public class DrawerPanel extends CustomPanel {
                             .addComponent(OutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                             .addComponent(InButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jTextField1)
-                        .addComponent(jTextField2))
-                    .addComponent(jLabel2))
+                        .addComponent(jTextField1))
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(StatsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(320, Short.MAX_VALUE))
@@ -217,22 +234,21 @@ public class DrawerPanel extends CustomPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(StatsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(StatsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(56, 56, 56)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(OutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(InButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(90, 90, 90))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         BackButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -276,6 +292,14 @@ public class DrawerPanel extends CustomPanel {
     private void ClockLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClockLabelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ClockLabelActionPerformed
+
+    private void OpeningFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpeningFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_OpeningFieldActionPerformed
+
+    private void OpenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenButtonActionPerformed
+        
+    }//GEN-LAST:event_OpenButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

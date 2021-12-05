@@ -349,11 +349,31 @@ public class MainFrame extends JFrame {
             ois.close();
         } catch (EOFException e) {
             employees = new ArrayList();
-            employees.add(new Employee("Tylar", "3303078422", 15.00, 5555));
+            employees.add(new Employee("Tylar", "3303078422", 15.00, 5555, true));
             saveEmployees();
         }
 
         return employees;
+    }
+    
+    public void openDrawer() throws FileNotFoundException, IOException, ClassNotFoundException{
+        String file = "Drawer.txt";
+        try {
+            fis = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            File newFile = new File(file);
+            newFile.createNewFile();
+            fis = new FileInputStream(file);
+        }
+        try {
+            ois = new ObjectInputStream(fis);
+            employees = (ArrayList<Employee>) ois.readObject();
+            ois.close();
+        } catch (EOFException e) {
+            employees = new ArrayList();
+            employees.add(new Employee("Tylar", "3303078422", 15.00, 5555, true));
+            saveEmployees();
+        }
     }
 
     //updates mainframe shifts list and returns it

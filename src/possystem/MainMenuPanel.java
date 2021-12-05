@@ -32,6 +32,10 @@ public class MainMenuPanel extends CustomPanel {
         
         //set current user label
         CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
+        
+        if(!mainFrame.getCurrentUser().isManager()){
+            ManagerSettingsButton.setEnabled(false);
+        }
     }
 
     /**

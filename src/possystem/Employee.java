@@ -20,20 +20,29 @@ public class Employee implements Serializable{
     private int pin;
     private boolean clockedIn;
     private Date lastClock;
+    private boolean manager;
     
     //basic constructor
-    public Employee (String name, String phoneNumber, double payRate, int pin){
+    public Employee (String name, String phoneNumber, double payRate, int pin, boolean manager){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.payRate = payRate;
         this.pin = pin;
         this.clockedIn = false;
         this.lastClock = new Date();
+        this.manager = manager;
     }
-
-    
+   
     //various getters and settings for employee info
 
+    public boolean isManager() {
+        return manager;
+    }
+
+    public void setManager(boolean manager) {
+        this.manager = manager;
+    }
+    
     public boolean getClockedIn() {
         return this.clockedIn;
     }
