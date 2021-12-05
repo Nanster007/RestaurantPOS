@@ -72,4 +72,8 @@ public class Menu {
     public MenuCategory getMenuCategory(String categoryName) {
         return menuCategories.get(categoryName);
     }
+
+    public Collection<UUID> getMenuItemIDs() {
+        return this.menuItems.keySet();
+    }
 }

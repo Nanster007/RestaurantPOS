@@ -2,9 +2,12 @@ package possystem;
 
 import possystem.menuitems.MenuItem;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import possystem.menuitems.MenuItemOption;
+import possystem.menuitems.Topping;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -41,19 +44,65 @@ public class MenuItemDetailsPanel extends CustomPanel {
         CurrentItemLabel.setText(menuItem.getName());
         BasePriceLabel.setText(String.format("$%.2f", menuItem.getBasePrice()));
 
+        this.ExtraCommentsArea.setText(menuItem.getComments());
+
         initializeOptions();
+        initializeToppings();
+        updateAddItemButton();
     }
 
     private void initializeOptions() {
         List<MenuItemOption> options = menuItem.getOptions();
 
-        for (int i = 0; i < options.size(); i++) {
-            MenuItemOption option = options.get(i);
+        if (options.size() > 0) {
+            MenuItemOptionsPanel.remove(NoOptionsLabel);
 
-            MenuItemOptionPanel newPanel = new MenuItemOptionPanel(option, i);
-            this.add(newPanel);
-            this.optionPanels.add(newPanel);
+            for (int i = 0; i < options.size(); i++) {
+                MenuItemOption option = options.get(i);
+
+                MenuItemOptionPanel newPanel = new MenuItemOptionPanel(option, i, option.getDefaultValue());
+                this.MenuItemOptionsPanel.add(newPanel);
+                this.optionPanels.add(newPanel);
+
+                ArrayList<OptionValueToggleButton> buttons = newPanel.getButtons();
+
+                buttons.forEach(button -> {
+                    button.addActionListener(evt -> {
+                        onOptionStatusChange(evt);
+                    });
+                });
+            }
         }
+    }
+
+    public void onOptionStatusChange(ActionEvent evt) {
+        updateAddItemButton();
+    }
+
+    private void initializeToppings() {
+        List<UUID> toppingIds = this.menuItem.getPossibleToppings();
+
+        for (var toppingId : toppingIds) {
+            MenuItem topping = this.mainFrame.getToppingMenu().getMenuItem(toppingId);
+            this.ToppingsPanel.add(new ToppingPanel());
+        }
+    }
+
+    private void updateAddItemButton() {
+        if (this.optionPanels.isEmpty()) {
+            return;
+        }
+
+        boolean shouldEnableButton = true;
+
+        for (MenuItemOptionPanel optionPanel : optionPanels) {
+            if (optionPanel.getOption().isRequired() && !optionPanel.isSelected()) {
+                shouldEnableButton = false;
+                break;
+            }
+        }
+
+        this.AddItemButton.setEnabled(shouldEnableButton);
     }
 
     /**
@@ -65,8 +114,6 @@ public class MenuItemDetailsPanel extends CustomPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        MenuItemOptionsPanel = new javax.swing.JPanel();
-        NoOptionsLabel = new javax.swing.JLabel();
         CurrentItemPanel = new javax.swing.JPanel();
         CurrentItemTextLabel = new javax.swing.JLabel();
         CurrentItemLabel = new javax.swing.JLabel();
@@ -78,18 +125,11 @@ public class MenuItemDetailsPanel extends CustomPanel {
         CommentsLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ExtraCommentsArea = new javax.swing.JTextArea();
+        ToppingsPanel = new javax.swing.JPanel();
+        MenuItemOptionsPanel = new javax.swing.JPanel();
+        NoOptionsLabel = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
-
-        MenuItemOptionsPanel.setLayout(new java.awt.GridLayout());
-
-        NoOptionsLabel.setFont(NoOptionsLabel.getFont().deriveFont((NoOptionsLabel.getFont().getStyle() | java.awt.Font.ITALIC)));
-        NoOptionsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        NoOptionsLabel.setText("No Options");
-        NoOptionsLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        MenuItemOptionsPanel.add(NoOptionsLabel);
-
-        add(MenuItemOptionsPanel, java.awt.BorderLayout.CENTER);
 
         CurrentItemPanel.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -158,6 +198,10 @@ public class MenuItemDetailsPanel extends CustomPanel {
         add(CurrentItemPanel, java.awt.BorderLayout.NORTH);
 
         AddItemButton.setText("Add Item");
+        AddItemButton.setEnabled(false);
+        AddItemButton.setMaximumSize(new java.awt.Dimension(66, 66));
+        AddItemButton.setMinimumSize(new java.awt.Dimension(66, 66));
+        AddItemButton.setPreferredSize(new java.awt.Dimension(66, 66));
         AddItemButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddItemButtonActionPerformed(evt);
@@ -171,13 +215,31 @@ public class MenuItemDetailsPanel extends CustomPanel {
         CommentsLabel.setText("Extra Comments");
         CommentsPanel.add(CommentsLabel, java.awt.BorderLayout.PAGE_START);
 
+        ExtraCommentsArea.setEditable(false);
         ExtraCommentsArea.setColumns(20);
+        ExtraCommentsArea.setLineWrap(true);
         ExtraCommentsArea.setRows(5);
+        ExtraCommentsArea.setWrapStyleWord(true);
         jScrollPane1.setViewportView(ExtraCommentsArea);
 
         CommentsPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         add(CommentsPanel, java.awt.BorderLayout.EAST);
+
+        ToppingsPanel.setLayout(new java.awt.GridLayout());
+        add(ToppingsPanel, java.awt.BorderLayout.CENTER);
+
+        MenuItemOptionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        MenuItemOptionsPanel.setLayout(new java.awt.GridLayout(0, 1, 12, 12));
+
+        NoOptionsLabel.setFont(NoOptionsLabel.getFont().deriveFont((NoOptionsLabel.getFont().getStyle() | java.awt.Font.ITALIC)));
+        NoOptionsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NoOptionsLabel.setText("No Options");
+        NoOptionsLabel.setBorder(javax.swing.BorderFactory.createTitledBorder("Options"));
+        NoOptionsLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        MenuItemOptionsPanel.add(NoOptionsLabel);
+
+        add(MenuItemOptionsPanel, java.awt.BorderLayout.WEST);
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddItemButtonActionPerformed
@@ -208,6 +270,7 @@ public class MenuItemDetailsPanel extends CustomPanel {
     private javax.swing.JTextArea ExtraCommentsArea;
     private javax.swing.JPanel MenuItemOptionsPanel;
     private javax.swing.JLabel NoOptionsLabel;
+    private javax.swing.JPanel ToppingsPanel;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

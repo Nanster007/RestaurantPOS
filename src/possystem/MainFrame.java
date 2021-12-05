@@ -28,7 +28,7 @@ public class MainFrame extends JFrame {
     private ObjectInputStream ois;
     private ArrayList<Shift> shifts;
     private ArrayList<Employee> employees;
-    private Menu menu;
+    private Menu menu, toppingMenu;
 
     public MainFrame() throws IOException, FileNotFoundException, ClassNotFoundException {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -52,7 +52,10 @@ public class MainFrame extends JFrame {
         }
 
         this.menu = new Menu();
+        this.toppingMenu = new Menu();
+
         initializeMenuItems();
+        initializeToppings();
     }
 
     private void initializeMenuItems() {
@@ -71,8 +74,8 @@ public class MainFrame extends JFrame {
         drinkIceValues.add(new MenuItemOptionValue("Normal Ice", +0d));
         drinkIceValues.add(new MenuItemOptionValue("Large", +5d));
 
-        drinkOptions.add(new MenuItemOption("Size", drinkSizeValues));
-        drinkOptions.add(new MenuItemOption("Ice", drinkIceValues));
+        drinkOptions.add(new MenuItemOption("Size", drinkSizeValues, 1, true));
+        drinkOptions.add(new MenuItemOption("Ice", drinkIceValues, -1, true));
 
         this.menu.addMenuItem(new MenuItem("Pepsi", 1.99d, UUID.randomUUID(),
                 null, drinkOptions, "Pepsi Cola",
@@ -119,12 +122,35 @@ public class MainFrame extends JFrame {
                 "Drinks", "Alcoholic Beverages"));
 
         this.menu.addMenuItem(new MenuItem("Build-a-Burger-Workshop", 8.99d, UUID.randomUUID(),
-                null, drinkOptions, "Build your own burger! Lean Angus Beef patties grilled to perfection",
+                this.toppingMenu.getMenuItemIDs(), drinkOptions, "Build your own burger! Lean Angus Beef patties grilled to perfection",
                 "Entreés", "Burgers"));
+    }
+
+    private void initializeToppings() {
+        UUID ketchupId = UUID.randomUUID();
+        UUID mustardId = UUID.randomUUID();
+        UUID cheddarCheeseId = UUID.randomUUID();
+
+        this.toppingMenu.addMenuItem(new Topping("Ketchup", 0d, ketchupId,
+                "Made from the Blood of a tomato. Goes good on Burgers and Hotdogs",
+                "Condiments", 3));
+
+        this.toppingMenu.addMenuItem(new Topping("Mustard", 0d, mustardId,
+                "Burger and Hotdog topping. Tangy and delicious.",
+                "Condiments", 3));
+
+        this.toppingMenu.addMenuItem(new Topping("Cheddar Cheese Slice", 0d, cheddarCheeseId,
+                "Old, yellow milk. Tastes better than American cheese. Goes good with plenty of dishes.",
+                "Add-ons", 3));
+
     }
 
     public Menu getMenu() {
         return this.menu;
+    }
+
+    public Menu getToppingMenu() {
+        return this.toppingMenu;
     }
 
     public void setNewPanel(CustomPanel newPage, Boolean saveLastPage, CustomPanel lastPage) {

@@ -5,6 +5,8 @@
 package possystem;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 import possystem.menuitems.MenuItemOption;
 import possystem.menuitems.MenuItemOptionValue;
@@ -17,26 +19,33 @@ public class MenuItemOptionPanel extends javax.swing.JPanel {
 
     private MenuItemOption option;
     private int index; // Index of option in MenuItem option List
+    ArrayList<OptionValueToggleButton> buttons;
 
     /**
      * Creates new form MenuItemOptionPanel
+     *
+     * @param option Option to add value to
+     * @param index Index of Option in MenuItem option list
+     * @param defaultValue Position of default selected value. Less than 0 means
+     * no default.
      */
-    public MenuItemOptionPanel(MenuItemOption option, int index) {
+    public MenuItemOptionPanel(MenuItemOption option, int index, int defaultValue) {
         initComponents();
 
         this.option = option;
         this.index = index;
+        this.buttons = new ArrayList();
 
-        initialize();
+        initialize(defaultValue);
     }
 
-    private void initialize() {
-        OptionTitleLabel.setText(option.getName() + ':');
+    private void initialize(int defaultValue) {
+        OptionTitleLabel.setText(option.getName() + ": ");
 
-        initializeOptionButtons();
+        initializeOptionButtons(defaultValue);
     }
 
-    private void initializeOptionButtons() {
+    private void initializeOptionButtons(int defaultValue) {
         List<MenuItemOptionValue> values = option.getPossibleValues();
 
         for (int i = 0; i < values.size(); i++) {
@@ -46,12 +55,48 @@ public class MenuItemOptionPanel extends javax.swing.JPanel {
 
             this.add(button);
             this.OptionButtonGroup.add(button);
-            button.setSize(69, 69);
+            this.buttons.add(button);
+
+            button.setSize(69, 420);
+
+            // If i is negative, i cannot equal defaltValue
+            if (i == defaultValue) {
+                button.setSelected(true);
+            }
         }
     }
 
-    public int getSelectedIndex() {
-        return ((OptionValueToggleButton) OptionButtonGroup.getSelection()).getIndex();
+    public Integer getSelectedValueIndex() {
+        Integer index = null;
+        for (var button : buttons) {
+            if (button.isSelected()) {
+                index = button.getIndex();
+                break;
+            }
+        }
+
+        return index;
+    }
+
+    public boolean isSelected() {
+        boolean isSelected = false;
+
+        for (var button : buttons) {
+            if (button.isSelected()) {
+                isSelected = true;
+                break;
+            }
+        }
+
+        return isSelected;
+    }
+
+    public MenuItemOption getOption() {
+        return this.option;
+    }
+
+    public ArrayList<OptionValueToggleButton> getButtons() {
+        return this.buttons;
     }
 
     /**
@@ -66,7 +111,7 @@ public class MenuItemOptionPanel extends javax.swing.JPanel {
         OptionButtonGroup = new javax.swing.ButtonGroup();
         OptionTitleLabel = new javax.swing.JLabel();
 
-        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
+        setLayout(new java.awt.GridLayout(1, 0, 12, 12));
 
         OptionTitleLabel.setText("Option Title:");
         add(OptionTitleLabel);

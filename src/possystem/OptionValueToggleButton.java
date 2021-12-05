@@ -26,8 +26,11 @@ public class OptionValueToggleButton extends JToggleButton {
     private void initialize() {
         double priceModifier = value.getPriceModifier();
 
-        String text = "<html>" + value.getValue() + "<\br><i>(";
-        text += (priceModifier < 0d ? "-" : priceModifier == 0d ? "" : "+");
+        String text = "<html>" + value.getValue() + "<br><i>(";
+
+        if (priceModifier >= 0d) {
+            text += "+";
+        }
         text += String.format("%.2f", priceModifier);
         text += ")</i></html>";
 

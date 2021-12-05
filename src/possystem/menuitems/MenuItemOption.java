@@ -14,10 +14,14 @@ public class MenuItemOption {
 
     private String name;
     private ArrayList<MenuItemOptionValue> possibleValues;
+    private Integer defaultValue;
+    private boolean isRequired;
 
-    public MenuItemOption(String name, ArrayList<MenuItemOptionValue> possibleValues) {
+    public MenuItemOption(String name, ArrayList<MenuItemOptionValue> possibleValues, Integer defaultValue, boolean isRequired) {
         this.name = name;
         this.possibleValues = possibleValues;
+        this.defaultValue = defaultValue;
+        this.isRequired = isRequired;
     }
 
     public String getName() {
@@ -26,6 +30,14 @@ public class MenuItemOption {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getDefaultValue() {
+        return defaultValue;
+    }
+
+    public boolean isRequired() {
+        return this.isRequired;
     }
 
     public ArrayList<MenuItemOptionValue> getPossibleValues() {

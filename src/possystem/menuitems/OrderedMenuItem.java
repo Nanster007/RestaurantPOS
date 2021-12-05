@@ -14,29 +14,31 @@ import java.util.List;
 public class OrderedMenuItem {
 
     private MenuItem menuItem;
-    private List<MenuItem> toppings;
+    private List<Topping> toppings;
     private ArrayList<Integer> selectedOptions;
 
     public OrderedMenuItem(MenuItem menuItem) {
         initialize(menuItem);
     }
 
-    public OrderedMenuItem(MenuItem menuItem, List<MenuItem> toppings) {
+    public OrderedMenuItem(MenuItem menuItem, List<Topping> toppings) {
         initialize(menuItem);
 
+        addToppings(toppings);
+    }
+
+    public void addToppings(List<Topping> toppings) {
         if (toppings != null) {
-            for (MenuItem topping : toppings) {
+            for (Topping topping : toppings) {
                 this.toppings.add(topping);
             }
         }
     }
 
-    public OrderedMenuItem(MenuItem menuItem, List<MenuItem> toppings, ArrayList<Integer> selectedOptions) {
+    public OrderedMenuItem(MenuItem menuItem, List<Topping> toppings, ArrayList<Integer> selectedOptions) {
         initialize(menuItem);
 
-        for (MenuItem topping : toppings) {
-            this.toppings.add(topping);
-        }
+        addToppings(toppings);
 
         this.selectedOptions = selectedOptions;
     }
@@ -47,7 +49,7 @@ public class OrderedMenuItem {
         this.selectedOptions = new ArrayList();
     }
 
-    public void addTopping(MenuItem topping) {
+    public void addTopping(Topping topping) {
         this.toppings.add(topping);
     }
 

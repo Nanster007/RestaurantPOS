@@ -44,6 +44,7 @@ public class MenuItem implements Serializable {
         if (possibleToppings != null) {
             this.possibleToppings.addAll(possibleToppings);
         }
+
         if (options != null) {
             this.options.addAll(options);
         }
