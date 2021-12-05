@@ -122,7 +122,6 @@ public class AdjustEmployeePanel extends CustomPanel {
         EmployeeInfoPanel = new javax.swing.JPanel();
         AddEmployeeButton = new javax.swing.JButton();
         EditSaveButton = new javax.swing.JButton();
-        ShiftsField = new javax.swing.JTextField();
         ShiftsLabel = new javax.swing.JLabel();
         PayrateField = new javax.swing.JTextField();
         PayrateLabel = new javax.swing.JLabel();
@@ -134,17 +133,22 @@ public class AdjustEmployeePanel extends CustomPanel {
         DeleteEmployeeButton = new javax.swing.JButton();
         PinLabel = new javax.swing.JLabel();
         PinField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ShiftsField = new javax.swing.JTextArea();
 
+        BackButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         BackButton.setText("Back");
-        BackButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        BackButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackButtonActionPerformed(evt);
             }
         });
 
+        CurrentUserLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         CurrentUserLabel.setText("Welcome: User's Name");
 
+        ClockLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ClockLabel.setText("jTextField1");
         ClockLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +156,10 @@ public class AdjustEmployeePanel extends CustomPanel {
             }
         });
 
+        CurrentEmployeesLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         CurrentEmployeesLabel.setText("Current Employees:");
+
+        EmployeesScrollPane.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         javax.swing.GroupLayout EmployeesPanelLayout = new javax.swing.GroupLayout(EmployeesPanel);
         EmployeesPanel.setLayout(EmployeesPanelLayout);
@@ -169,9 +176,12 @@ public class AdjustEmployeePanel extends CustomPanel {
                 .addContainerGap()
                 .addComponent(CurrentEmployeesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EmployeesScrollPane))
+                .addComponent(EmployeesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE))
         );
 
+        EmployeeInfoPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        AddEmployeeButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         AddEmployeeButton.setText("Add Employee");
         AddEmployeeButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +190,7 @@ public class AdjustEmployeePanel extends CustomPanel {
             }
         });
 
+        EditSaveButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         EditSaveButton.setText("Edit Info");
         EditSaveButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         EditSaveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -188,34 +199,41 @@ public class AdjustEmployeePanel extends CustomPanel {
             }
         });
 
-        ShiftsField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ShiftsFieldActionPerformed(evt);
-            }
-        });
-
+        ShiftsLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         ShiftsLabel.setText("Month's Shifts:");
 
+        PayrateField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        PayrateField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PayrateField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PayrateFieldActionPerformed(evt);
             }
         });
 
+        PayrateLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         PayrateLabel.setText("Payrate:");
 
+        NumberField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        NumberField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        NumberLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         NumberLabel.setText("Phone Number:");
 
+        NameField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        NameField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         NameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NameFieldActionPerformed(evt);
             }
         });
 
+        NameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         NameLabel.setText("Name:");
 
+        HelpText.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         HelpText.setText("Please fill in required information");
 
+        DeleteEmployeeButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         DeleteEmployeeButton.setText("Delete Employee");
         DeleteEmployeeButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         DeleteEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -224,13 +242,22 @@ public class AdjustEmployeePanel extends CustomPanel {
             }
         });
 
+        PinLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         PinLabel.setText("Pin:");
 
+        PinField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        PinField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PinField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PinFieldActionPerformed(evt);
             }
         });
+
+        ShiftsField.setColumns(20);
+        ShiftsField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ShiftsField.setRows(5);
+        ShiftsField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jScrollPane1.setViewportView(ShiftsField);
 
         javax.swing.GroupLayout EmployeeInfoPanelLayout = new javax.swing.GroupLayout(EmployeeInfoPanel);
         EmployeeInfoPanel.setLayout(EmployeeInfoPanelLayout);
@@ -239,28 +266,34 @@ public class AdjustEmployeePanel extends CustomPanel {
             .addGroup(EmployeeInfoPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(EmployeeInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EmployeeInfoPanelLayout.createSequentialGroup()
-                        .addComponent(EditSaveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(DeleteEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(AddEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(ShiftsField)
                     .addComponent(ShiftsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PayrateField)
-                    .addComponent(NumberField)
-                    .addComponent(NameField)
-                    .addComponent(PinField)
-                    .addGroup(EmployeeInfoPanelLayout.createSequentialGroup()
-                        .addGroup(EmployeeInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PayrateLabel)
-                            .addComponent(NumberLabel)
-                            .addComponent(PinLabel))
-                        .addContainerGap(324, Short.MAX_VALUE))
                     .addGroup(EmployeeInfoPanelLayout.createSequentialGroup()
                         .addComponent(NameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(HelpText))))
+                        .addComponent(HelpText))
+                    .addGroup(EmployeeInfoPanelLayout.createSequentialGroup()
+                        .addGroup(EmployeeInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(NameField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(NumberField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PinField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                            .addComponent(PayrateField, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(EmployeeInfoPanelLayout.createSequentialGroup()
+                        .addGroup(EmployeeInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(EmployeeInfoPanelLayout.createSequentialGroup()
+                                .addGroup(EmployeeInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(EmployeeInfoPanelLayout.createSequentialGroup()
+                                        .addComponent(EditSaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(DeleteEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(10, 10, 10)
+                                        .addComponent(AddEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(PayrateLabel)
+                                    .addComponent(NumberLabel)
+                                    .addComponent(PinLabel))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1))
+                        .addContainerGap())))
         );
         EmployeeInfoPanelLayout.setVerticalGroup(
             EmployeeInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,19 +312,20 @@ public class AdjustEmployeePanel extends CustomPanel {
                 .addComponent(PayrateLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PayrateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(11, 11, 11)
                 .addComponent(PinLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PinField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ShiftsLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ShiftsField, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(EmployeeInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AddEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(EditSaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DeleteEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(DeleteEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -309,10 +343,10 @@ public class AdjustEmployeePanel extends CustomPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(EmployeeInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(EmployeesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(EmployeesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(EmployeeInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -327,7 +361,7 @@ public class AdjustEmployeePanel extends CustomPanel {
                     .addComponent(ClockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CurrentUserLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(635, 635, Short.MAX_VALUE))
+                .addGap(661, 661, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,21 +369,18 @@ public class AdjustEmployeePanel extends CustomPanel {
                 .addContainerGap()
                 .addComponent(CurrentUserLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ClockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ClockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -562,10 +593,6 @@ public class AdjustEmployeePanel extends CustomPanel {
         
     }//GEN-LAST:event_EditSaveButtonActionPerformed
 
-    private void ShiftsFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShiftsFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ShiftsFieldActionPerformed
-
     private void DeleteEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteEmployeeButtonActionPerformed
         
         if(!(listModel.size()> 1)){
@@ -626,9 +653,10 @@ public class AdjustEmployeePanel extends CustomPanel {
     private javax.swing.JLabel PayrateLabel;
     private javax.swing.JTextField PinField;
     private javax.swing.JLabel PinLabel;
-    private javax.swing.JTextField ShiftsField;
+    private javax.swing.JTextArea ShiftsField;
     private javax.swing.JLabel ShiftsLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

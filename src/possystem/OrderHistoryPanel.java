@@ -9,7 +9,6 @@ import java.awt.Font;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -79,7 +78,7 @@ public class OrderHistoryPanel extends CustomPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        SelectedOrderLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        SelectedOrderLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         SelectedOrderLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         SelectedOrderLabel.setText("Selected Order");
 
@@ -91,7 +90,7 @@ public class OrderHistoryPanel extends CustomPanel {
             }
         });
 
-        SearchByIDButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        SearchByIDButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         SearchByIDButton.setText("Search by ID");
         SearchByIDButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         SearchByIDButton.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +103,7 @@ public class OrderHistoryPanel extends CustomPanel {
         OrLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         OrLabel.setText("OR");
 
-        PreviousOrderButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        PreviousOrderButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         PreviousOrderButton.setText("Previous Order");
         PreviousOrderButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PreviousOrderButton.addActionListener(new java.awt.event.ActionListener() {
@@ -113,7 +112,7 @@ public class OrderHistoryPanel extends CustomPanel {
             }
         });
 
-        NextOrderButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        NextOrderButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         NextOrderButton.setText("NextOrder");
         NextOrderButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         NextOrderButton.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +136,7 @@ public class OrderHistoryPanel extends CustomPanel {
             }
         });
 
-        OrdersLogLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        OrdersLogLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         OrdersLogLabel.setText("Orders Log");
 
         OrderHistoryPanel.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));

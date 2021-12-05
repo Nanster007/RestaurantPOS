@@ -118,17 +118,18 @@ public class LoginPanel extends CustomPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Please Enter Your Pin");
 
+        KeyPad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         KeyPad.setPreferredSize(new java.awt.Dimension(400, 550));
 
         javax.swing.GroupLayout KeyPadLayout = new javax.swing.GroupLayout(KeyPad);
         KeyPad.setLayout(KeyPadLayout);
         KeyPadLayout.setHorizontalGroup(
             KeyPadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 396, Short.MAX_VALUE)
         );
         KeyPadLayout.setVerticalGroup(
             KeyPadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 664, Short.MAX_VALUE)
+            .addGap(0, 660, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout MiddlePanelLayout = new javax.swing.GroupLayout(MiddlePanel);
@@ -147,7 +148,7 @@ public class LoginPanel extends CustomPanel {
 
         EnterButton.setFont(new java.awt.Font("SansSerif", 0, 30)); // NOI18N
         EnterButton.setText("Enter");
-        EnterButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        EnterButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         EnterButton.setPreferredSize(new java.awt.Dimension(600, 50));
         EnterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,6 +175,7 @@ public class LoginPanel extends CustomPanel {
 
         PinField.setFont(new java.awt.Font("SansSerif", 0, 30)); // NOI18N
         PinField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        PinField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         PinField.setPreferredSize(new java.awt.Dimension(450, 50));
 
         javax.swing.GroupLayout TopPanelLayout = new javax.swing.GroupLayout(TopPanel);

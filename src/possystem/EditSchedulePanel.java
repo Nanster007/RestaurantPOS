@@ -5,6 +5,7 @@
  */
 package possystem;
 
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -51,7 +52,9 @@ public class EditSchedulePanel extends CustomPanel {
         
         LabelsPanel.setLayout(new GridLayout(1, 7));
         for(int x=0; x<7; x++){
-            LabelsPanel.add(new JLabel(mainFrame.daysOfWeek[x], SwingConstants.CENTER));
+            JLabel label = new JLabel(mainFrame.daysOfWeek[x], SwingConstants.CENTER);
+            label.setFont(new Font("Tahoma", 1, 18));
+            LabelsPanel.add(label);
         }
         updateInterface();
     }
@@ -142,8 +145,10 @@ public class EditSchedulePanel extends CustomPanel {
         NextMonthButton = new javax.swing.JButton();
         PreviousMonthButton = new javax.swing.JButton();
 
+        CurrentUserLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         CurrentUserLabel.setText("Welcome: User's Name");
 
+        ClockLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ClockLabel.setText("jTextField1");
         ClockLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,20 +156,25 @@ public class EditSchedulePanel extends CustomPanel {
             }
         });
 
+        YearLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         YearLabel.setText("jLabel1");
 
+        DateLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         DateLabel.setText("jLabel1");
 
+        BackButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         BackButton.setText("Back");
-        BackButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        BackButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackButtonActionPerformed(evt);
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Month's Shifts:");
 
+        ShiftsList.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ShiftsList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -172,13 +182,25 @@ public class EditSchedulePanel extends CustomPanel {
         });
         ListScrollPane.setViewportView(ShiftsList);
 
+        AddShiftLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         AddShiftLabel.setText("To add shifts: fill in required info, select days applicable and hit submit");
 
+        EmployeeSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        EmployeeLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         EmployeeLabel.setText("Employee:");
 
+        StartLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         StartLabel.setText("Start Time:");
 
+        StartHour.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText(":");
+
+        StartMinute.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        StartPhase.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -190,8 +212,8 @@ public class EditSchedulePanel extends CustomPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(StartHour, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(StartMinute, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14)
                         .addComponent(StartPhase, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -209,9 +231,17 @@ public class EditSchedulePanel extends CustomPanel {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
+        StartLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         StartLabel2.setText("End Time");
 
+        EndHour.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText(":");
+
+        EndMinute.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        EndPhase.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -222,8 +252,8 @@ public class EditSchedulePanel extends CustomPanel {
                     .addComponent(EndHour)
                     .addComponent(StartLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addGap(3, 3, 3)
                 .addComponent(EndMinute, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EndPhase, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,6 +271,8 @@ public class EditSchedulePanel extends CustomPanel {
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
+        CalendarPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
         javax.swing.GroupLayout CalendarPanelLayout = new javax.swing.GroupLayout(CalendarPanel);
         CalendarPanel.setLayout(CalendarPanelLayout);
         CalendarPanelLayout.setHorizontalGroup(
@@ -249,8 +281,10 @@ public class EditSchedulePanel extends CustomPanel {
         );
         CalendarPanelLayout.setVerticalGroup(
             CalendarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 387, Short.MAX_VALUE)
+            .addGap(0, 354, Short.MAX_VALUE)
         );
+
+        LabelsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         javax.swing.GroupLayout LabelsPanelLayout = new javax.swing.GroupLayout(LabelsPanel);
         LabelsPanel.setLayout(LabelsPanelLayout);
@@ -279,16 +313,18 @@ public class EditSchedulePanel extends CustomPanel {
                 .addContainerGap())
         );
 
+        CreateShiftButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         CreateShiftButton.setText("Submit Shift");
-        CreateShiftButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        CreateShiftButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         CreateShiftButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateShiftButtonActionPerformed(evt);
             }
         });
 
+        DeleteShiftButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         DeleteShiftButton.setText("Delete Selected Shift");
-        DeleteShiftButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        DeleteShiftButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         DeleteShiftButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DeleteShiftButtonActionPerformed(evt);
@@ -324,8 +360,8 @@ public class EditSchedulePanel extends CustomPanel {
             .addGroup(AddShiftPanelLayout.createSequentialGroup()
                 .addGroup(AddShiftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddShiftLabel)
-                    .addComponent(CreateShiftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DeleteShiftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DeleteShiftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CreateShiftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AddShiftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddShiftPanelLayout.createSequentialGroup()
@@ -338,16 +374,18 @@ public class EditSchedulePanel extends CustomPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        NextMonthButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         NextMonthButton.setText("Next Month");
-        NextMonthButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        NextMonthButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         NextMonthButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NextMonthButtonActionPerformed(evt);
             }
         });
 
+        PreviousMonthButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         PreviousMonthButton.setText("Previous Month");
-        PreviousMonthButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        PreviousMonthButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         PreviousMonthButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PreviousMonthButtonActionPerformed(evt);
@@ -379,7 +417,7 @@ public class EditSchedulePanel extends CustomPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ListScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE))
+                .addComponent(ListScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
             .addComponent(AddShiftPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -417,7 +455,7 @@ public class EditSchedulePanel extends CustomPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ShiftInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

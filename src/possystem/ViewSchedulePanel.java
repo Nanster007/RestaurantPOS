@@ -5,6 +5,7 @@
  */
 package possystem;
 
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import static javax.swing.text.StyleConstants.Bold;
 
 
 /**
@@ -73,7 +75,9 @@ public class ViewSchedulePanel extends CustomPanel {
         //create days of week labels
         LabelsPanel.setLayout(new GridLayout(1, 7));
         for(int x=0; x<7; x++){
-            LabelsPanel.add(new JLabel(mainFrame.daysOfWeek[x], SwingConstants.CENTER));
+            JLabel label = new JLabel(mainFrame.daysOfWeek[x], SwingConstants.CENTER);
+            label.setFont(new Font("Tahoma", 1, 18));
+            LabelsPanel.add(label);
         }
 
     }
@@ -116,8 +120,10 @@ public class ViewSchedulePanel extends CustomPanel {
         NextMonthButton = new javax.swing.JButton();
         BackButton = new javax.swing.JButton();
 
+        CurrentUserLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         CurrentUserLabel.setText("Welcome: User's Name");
 
+        ClockLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ClockLabel.setText("jTextField1");
         ClockLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,9 +131,13 @@ public class ViewSchedulePanel extends CustomPanel {
             }
         });
 
+        YearLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         YearLabel.setText("jLabel1");
 
+        MonthLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         MonthLabel.setText("jLabel2");
+
+        LabelsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout LabelsPanelLayout = new javax.swing.GroupLayout(LabelsPanel);
         LabelsPanel.setLayout(LabelsPanelLayout);
@@ -140,12 +150,15 @@ public class ViewSchedulePanel extends CustomPanel {
             .addGap(0, 35, Short.MAX_VALUE)
         );
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Last Clock At:");
 
+        LastActionLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LastActionLabel.setText(" ");
 
+        ClockOutButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         ClockOutButton.setText("Clock Out");
-        ClockOutButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ClockOutButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         ClockOutButton.setMaximumSize(new java.awt.Dimension(150, 23));
         ClockOutButton.setMinimumSize(new java.awt.Dimension(150, 23));
         ClockOutButton.setPreferredSize(new java.awt.Dimension(150, 23));
@@ -155,8 +168,9 @@ public class ViewSchedulePanel extends CustomPanel {
             }
         });
 
+        ClockInButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         ClockInButton.setText("ClockIn");
-        ClockInButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ClockInButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         ClockInButton.setMaximumSize(new java.awt.Dimension(150, 23));
         ClockInButton.setMinimumSize(new java.awt.Dimension(150, 23));
         ClockInButton.setPreferredSize(new java.awt.Dimension(150, 23));
@@ -176,9 +190,9 @@ public class ViewSchedulePanel extends CustomPanel {
                     .addGroup(ClockingPanelLayout.createSequentialGroup()
                         .addComponent(ClockInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ExcessiveClocks, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                        .addComponent(ExcessiveClocks, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ClockOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ClockOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(ClockingPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -193,11 +207,14 @@ public class ViewSchedulePanel extends CustomPanel {
                     .addComponent(LastActionLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ClockingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ClockOutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(ClockingPanelLayout.createSequentialGroup()
+                        .addComponent(ExcessiveClocks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addComponent(ClockInButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ExcessiveClocks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(ClockOutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
+
+        CalendarPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout CalendarPanelLayout = new javax.swing.GroupLayout(CalendarPanel);
         CalendarPanel.setLayout(CalendarPanelLayout);
@@ -207,7 +224,7 @@ public class ViewSchedulePanel extends CustomPanel {
         );
         CalendarPanelLayout.setVerticalGroup(
             CalendarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 303, Short.MAX_VALUE)
+            .addGap(0, 280, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -221,8 +238,9 @@ public class ViewSchedulePanel extends CustomPanel {
             .addComponent(CalendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        PreviousMonthButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         PreviousMonthButton.setText("Previous Month");
-        PreviousMonthButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        PreviousMonthButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         PreviousMonthButton.setPreferredSize(new java.awt.Dimension(107, 50));
         PreviousMonthButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,8 +248,9 @@ public class ViewSchedulePanel extends CustomPanel {
             }
         });
 
+        NextMonthButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         NextMonthButton.setText("Next Month");
-        NextMonthButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        NextMonthButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         NextMonthButton.setPreferredSize(new java.awt.Dimension(107, 50));
         NextMonthButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,8 +258,9 @@ public class ViewSchedulePanel extends CustomPanel {
             }
         });
 
+        BackButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         BackButton.setText("Back");
-        BackButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        BackButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackButtonActionPerformed(evt);

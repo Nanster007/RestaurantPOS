@@ -21,16 +21,20 @@ import java.util.logging.Logger;
 public class ManagerSettingsPanel extends CustomPanel {
 
     private final MainFrame mainFrame;
-    private GridLayout gridLayout;
+    private GridLayout gridLayout1, gridLayout2;
     
     //simple options panel, just a fewbuttons
     public ManagerSettingsPanel(MainFrame mainFrame) throws IOException, FileNotFoundException, ClassNotFoundException {
         initComponents();
         this.mainFrame = mainFrame;
-        this.gridLayout = new GridLayout(2, 3);
-        this.ButtonPanel.setLayout(gridLayout);
-        this.gridLayout.setHgap(20);
-        this.gridLayout.setVgap(50);
+        this.gridLayout1 = new GridLayout(1, 2);
+        this.ButtonPanel.setLayout(gridLayout1);
+        this.gridLayout1.setHgap(20);
+        this.gridLayout1.setVgap(50);
+        this.gridLayout2 = new GridLayout(2, 1);
+        this.ButtonsPanel.setLayout(gridLayout2);
+        this.gridLayout2.setHgap(20);
+        this.gridLayout2.setVgap(50);
         //update clock label
         setClockField(ClockLabel);
         //update current used label
@@ -49,17 +53,17 @@ public class ManagerSettingsPanel extends CustomPanel {
 
         CurrentUserLabel = new javax.swing.JLabel();
         ClockLabel = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
-        BackButton = new javax.swing.JButton();
+        ButtonsPanel = new javax.swing.JPanel();
         ButtonPanel = new javax.swing.JPanel();
-        StockSystemButton = new javax.swing.JButton();
         SchedulingButton = new javax.swing.JButton();
         AdjustEmployeesButton = new javax.swing.JButton();
-        BusinessReportsButton = new javax.swing.JButton();
-        AdjustEmployeesButton1 = new javax.swing.JButton();
+        ViewDrawerButton = new javax.swing.JButton();
+        BackButton = new javax.swing.JButton();
 
+        CurrentUserLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         CurrentUserLabel.setText("Welcome: User's Name");
 
+        ClockLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ClockLabel.setText("jTextField1");
         ClockLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,46 +71,24 @@ public class ManagerSettingsPanel extends CustomPanel {
             }
         });
 
-        BackButton.setText("Back");
-        BackButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        BackButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackButtonActionPerformed(evt);
-            }
-        });
+        ButtonsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ButtonsPanel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        StockSystemButton.setText("Adjust Stock");
-        StockSystemButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        StockSystemButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                StockSystemButtonActionPerformed(evt);
-            }
-        });
-
+        SchedulingButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         SchedulingButton.setText("Adjust Schedule");
-        SchedulingButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        SchedulingButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         SchedulingButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SchedulingButtonActionPerformed(evt);
             }
         });
 
+        AdjustEmployeesButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         AdjustEmployeesButton.setText("Adjust Employee");
-        AdjustEmployeesButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        AdjustEmployeesButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         AdjustEmployeesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AdjustEmployeesButtonActionPerformed(evt);
-            }
-        });
-
-        BusinessReportsButton.setText("Business reports");
-        BusinessReportsButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        AdjustEmployeesButton1.setText("Adjust Drawer");
-        AdjustEmployeesButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        AdjustEmployeesButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AdjustEmployeesButton1ActionPerformed(evt);
             }
         });
 
@@ -115,54 +97,59 @@ public class ManagerSettingsPanel extends CustomPanel {
         ButtonPanelLayout.setHorizontalGroup(
             ButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ButtonPanelLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(ButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ButtonPanelLayout.createSequentialGroup()
-                        .addComponent(SchedulingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(AdjustEmployeesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(ButtonPanelLayout.createSequentialGroup()
-                        .addComponent(BusinessReportsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(AdjustEmployeesButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(SchedulingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(StockSystemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(AdjustEmployeesButton, javax.swing.GroupLayout.DEFAULT_SIZE, 762, Short.MAX_VALUE)
+                .addContainerGap())
         );
         ButtonPanelLayout.setVerticalGroup(
             ButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ButtonPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(ButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(SchedulingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(StockSystemButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AdjustEmployeesButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BusinessReportsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AdjustEmployeesButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(AdjustEmployeesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(SchedulingButton, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
+                .addGap(6, 6, 6))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BackButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        ViewDrawerButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        ViewDrawerButton.setText("View Drawer");
+        ViewDrawerButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        ViewDrawerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewDrawerButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ButtonsPanelLayout = new javax.swing.GroupLayout(ButtonsPanel);
+        ButtonsPanel.setLayout(ButtonsPanelLayout);
+        ButtonsPanelLayout.setHorizontalGroup(
+            ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ButtonsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ViewDrawerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ButtonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        ButtonsPanelLayout.setVerticalGroup(
+            ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ButtonsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ButtonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ViewDrawerButton, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        BackButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        BackButton.setText("Back");
+        BackButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -171,11 +158,12 @@ public class ManagerSettingsPanel extends CustomPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ButtonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BackButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CurrentUserLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ClockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ClockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -185,9 +173,11 @@ public class ManagerSettingsPanel extends CustomPanel {
                 .addContainerGap()
                 .addComponent(CurrentUserLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ClockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ClockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ButtonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -204,10 +194,6 @@ public class ManagerSettingsPanel extends CustomPanel {
             Logger.getLogger(ManagerSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BackButtonActionPerformed
-
-    private void StockSystemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StockSystemButtonActionPerformed
-        
-    }//GEN-LAST:event_StockSystemButtonActionPerformed
 
     private void SchedulingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SchedulingButtonActionPerformed
         //create calendar with current date
@@ -233,21 +219,23 @@ public class ManagerSettingsPanel extends CustomPanel {
         }
     }//GEN-LAST:event_AdjustEmployeesButtonActionPerformed
 
-    private void AdjustEmployeesButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdjustEmployeesButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AdjustEmployeesButton1ActionPerformed
+    private void ViewDrawerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewDrawerButtonActionPerformed
+        try {
+            mainFrame.setNewPanel(new DrawerPanel(mainFrame), Boolean.FALSE, this);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(ManagerSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_ViewDrawerButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AdjustEmployeesButton;
-    private javax.swing.JButton AdjustEmployeesButton1;
     private javax.swing.JButton BackButton;
-    private javax.swing.JButton BusinessReportsButton;
     private javax.swing.JPanel ButtonPanel;
+    private javax.swing.JPanel ButtonsPanel;
     private javax.swing.JTextField ClockLabel;
     private javax.swing.JLabel CurrentUserLabel;
     private javax.swing.JButton SchedulingButton;
-    private javax.swing.JButton StockSystemButton;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton ViewDrawerButton;
     // End of variables declaration//GEN-END:variables
 }

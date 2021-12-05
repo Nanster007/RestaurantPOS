@@ -55,8 +55,10 @@ public class MainMenuPanel extends CustomPanel {
         jPanel4 = new javax.swing.JPanel();
         ManagerSettingsButton = new javax.swing.JButton();
 
+        CurrentUserLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         CurrentUserLabel.setText("Welcome: User's Name");
 
+        ClockLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ClockLabel.setText("jTextField1");
         ClockLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,8 +66,11 @@ public class MainMenuPanel extends CustomPanel {
             }
         });
 
+        ButtonsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        NewOrderButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         NewOrderButton.setText("New Order");
-        NewOrderButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        NewOrderButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         NewOrderButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NewOrderButtonActionPerformed(evt);
@@ -89,8 +94,9 @@ public class MainMenuPanel extends CustomPanel {
                 .addContainerGap())
         );
 
+        OrderHistoryButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         OrderHistoryButton.setText("Order History");
-        OrderHistoryButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        OrderHistoryButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         OrderHistoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OrderHistoryButtonActionPerformed(evt);
@@ -110,12 +116,13 @@ public class MainMenuPanel extends CustomPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(OrderHistoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .addComponent(OrderHistoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
+        ScheduleButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         ScheduleButton.setText("Schedule / Clock-In-Out");
-        ScheduleButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ScheduleButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         ScheduleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ScheduleButtonActionPerformed(evt);
@@ -139,8 +146,9 @@ public class MainMenuPanel extends CustomPanel {
                 .addContainerGap())
         );
 
+        ManagerSettingsButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         ManagerSettingsButton.setText("Manager Settings");
-        ManagerSettingsButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ManagerSettingsButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         ManagerSettingsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ManagerSettingsButtonActionPerformed(evt);
@@ -213,8 +221,8 @@ public class MainMenuPanel extends CustomPanel {
                 .addContainerGap()
                 .addComponent(CurrentUserLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ClockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ClockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ButtonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
