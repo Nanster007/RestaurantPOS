@@ -14,6 +14,8 @@ import possystem.menuitems.Topping;
 public class ToppingPanel extends javax.swing.JPanel {
 
     private Topping topping;
+    private Integer count;
+    private int maxQuantity;
 
     /**
      * Creates new form ToppingPanel
@@ -27,12 +29,22 @@ public class ToppingPanel extends javax.swing.JPanel {
         }
 
         this.topping = (Topping) topping;
+        this.count = 0;
 
         initialize();
     }
 
     private void initialize() {
+        this.ToppingNameLabel.setText(topping.getName());
+        this.maxQuantity = topping.getMaxCount();
+    }
 
+    public Topping getTopping() {
+        return this.topping;
+    }
+
+    public int getCount() {
+        return this.count;
     }
 
     /**
@@ -43,71 +55,66 @@ public class ToppingPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
-        ToppingNameLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        DecrementButton = new javax.swing.JButton();
         QuantityLabel = new javax.swing.JLabel();
         IncrementButton = new javax.swing.JButton();
+        ToppingNameLabel = new javax.swing.JLabel();
 
-        setLayout(new java.awt.GridBagLayout());
+        setLayout(new java.awt.BorderLayout());
 
-        ToppingNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ToppingNameLabel.setText("Topping Name");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        add(ToppingNameLabel, gridBagConstraints);
-
-        jButton1.setText("-");
-        jButton1.setPreferredSize(new java.awt.Dimension(25, 33));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        DecrementButton.setText("-");
+        DecrementButton.setPreferredSize(new java.awt.Dimension(60, 33));
+        DecrementButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                DecrementButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        add(jButton1, gridBagConstraints);
+        add(DecrementButton, java.awt.BorderLayout.LINE_START);
 
         QuantityLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         QuantityLabel.setText("0");
         QuantityLabel.setPreferredSize(new java.awt.Dimension(22, 15));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        add(QuantityLabel, gridBagConstraints);
+        add(QuantityLabel, java.awt.BorderLayout.CENTER);
 
         IncrementButton.setText("+");
+        IncrementButton.setPreferredSize(new java.awt.Dimension(60, 33));
         IncrementButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IncrementButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        add(IncrementButton, gridBagConstraints);
+        add(IncrementButton, java.awt.BorderLayout.LINE_END);
+
+        ToppingNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ToppingNameLabel.setText("Topping Name");
+        add(ToppingNameLabel, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void DecrementButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecrementButtonActionPerformed
+        if (count > 0) {
+            count--;
+        }
+
+        updateQuantityLabel();
+    }//GEN-LAST:event_DecrementButtonActionPerformed
 
     private void IncrementButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IncrementButtonActionPerformed
-        // TODO add your handling code here:
+        if (count < maxQuantity || maxQuantity == 0) {
+            count++;
+        }
+
+        updateQuantityLabel();
     }//GEN-LAST:event_IncrementButtonActionPerformed
 
+    private void updateQuantityLabel() {
+        this.QuantityLabel.setText(count.toString());
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DecrementButton;
     private javax.swing.JButton IncrementButton;
     private javax.swing.JLabel QuantityLabel;
     private javax.swing.JLabel ToppingNameLabel;
-    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }
