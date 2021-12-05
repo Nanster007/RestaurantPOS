@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import possystem.menuitems.MenuItemOption;
+import possystem.menuitems.OrderedMenuItem;
 import possystem.menuitems.Topping;
 
 /*
@@ -24,15 +25,14 @@ public class MenuItemDetailsPanel extends CustomPanel {
     CustomerOrder customerOrder;
     Color defaultColor;
     MainFrame mainFrame;
-    Boolean itemComplete;
     private List<MenuItemOptionPanel> optionPanels;
+    private List<ToppingPanel> toppingPanels;
 
     public MenuItemDetailsPanel(MainFrame mainFrame, MenuItem menuItem, CustomerOrder customerOrder) {
         initComponents();
         this.menuItem = menuItem;
         this.customerOrder = customerOrder;
         this.mainFrame = mainFrame;
-        this.itemComplete = false;
 
         initialize();
     }
@@ -40,6 +40,7 @@ public class MenuItemDetailsPanel extends CustomPanel {
     private void initialize() {
         defaultColor = null;
         this.optionPanels = new ArrayList();
+        this.toppingPanels = new ArrayList();
 
         CurrentItemLabel.setText(menuItem.getName());
         BasePriceLabel.setText(String.format("$%.2f", menuItem.getBasePrice()));
@@ -84,7 +85,10 @@ public class MenuItemDetailsPanel extends CustomPanel {
 
         for (var toppingId : toppingIds) {
             MenuItem topping = this.mainFrame.getToppingMenu().getMenuItem(toppingId);
-            this.ToppingsPanel.add(new ToppingPanel());
+            ToppingPanel newPanel = new ToppingPanel(topping);
+            this.ToppingsPanel.add(newPanel);
+
+            this.toppingPanels.add(newPanel);
         }
     }
 
@@ -125,9 +129,10 @@ public class MenuItemDetailsPanel extends CustomPanel {
         CommentsLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ExtraCommentsArea = new javax.swing.JTextArea();
-        ToppingsPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         MenuItemOptionsPanel = new javax.swing.JPanel();
         NoOptionsLabel = new javax.swing.JLabel();
+        ToppingsPanel = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -226,8 +231,7 @@ public class MenuItemDetailsPanel extends CustomPanel {
 
         add(CommentsPanel, java.awt.BorderLayout.EAST);
 
-        ToppingsPanel.setLayout(new java.awt.GridLayout());
-        add(ToppingsPanel, java.awt.BorderLayout.CENTER);
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
         MenuItemOptionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         MenuItemOptionsPanel.setLayout(new java.awt.GridLayout(0, 1, 12, 12));
@@ -239,14 +243,39 @@ public class MenuItemDetailsPanel extends CustomPanel {
         NoOptionsLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         MenuItemOptionsPanel.add(NoOptionsLabel);
 
-        add(MenuItemOptionsPanel, java.awt.BorderLayout.WEST);
+        jPanel1.add(MenuItemOptionsPanel, java.awt.BorderLayout.CENTER);
+
+        ToppingsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Toppings"));
+        ToppingsPanel.setMinimumSize(new java.awt.Dimension(132, 22));
+        ToppingsPanel.setLayout(new java.awt.GridLayout(1, 0, 12, 12));
+        jPanel1.add(ToppingsPanel, java.awt.BorderLayout.SOUTH);
+
+        add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddItemButtonActionPerformed
-        if (itemComplete) {
-            //customerOrder.addMenuItem(menuItem);
-            mainFrame.setNewPanel(new NewOrderPanel(mainFrame, customerOrder), false, this);
+
+        ArrayList<Topping> toppings = new ArrayList();
+        ArrayList<Integer> options = new ArrayList();
+
+        for (ToppingPanel toppingPanel : this.toppingPanels) {
+            Topping topping = toppingPanel.getTopping();
+            int count = toppingPanel.getCount();
+
+            if (count == 0) {
+                continue;
+            }
+
+            topping.setCount(count);
+            toppings.add(topping);
         }
+
+        for (var optionPanel : optionPanels) {
+            options.add(optionPanel.getSelectedValueIndex());
+        }
+
+        customerOrder.addMenuItem(new OrderedMenuItem(this.menuItem, toppings, options));
+        mainFrame.setNewPanel(new NewOrderPanel(mainFrame, customerOrder), false, this);
     }//GEN-LAST:event_AddItemButtonActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
@@ -271,6 +300,7 @@ public class MenuItemDetailsPanel extends CustomPanel {
     private javax.swing.JPanel MenuItemOptionsPanel;
     private javax.swing.JLabel NoOptionsLabel;
     private javax.swing.JPanel ToppingsPanel;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
