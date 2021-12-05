@@ -121,15 +121,20 @@ public class MainFrame extends JFrame {
                 null, drinkOptions, "Bog-standard alcoholic beverage",
                 "Drinks", "Alcoholic Beverages"));
 
+        ArrayList<UUID> burgerToppings = new ArrayList(3);
+        burgerToppings.add(UUID.fromString("4f536d34-c5d2-4f41-ac16-d4978b3bf556"));
+        burgerToppings.add(UUID.fromString("14f84032-323b-48c5-8ff2-2ef33012c6a4"));
+        burgerToppings.add(UUID.fromString("f4fae268-b99f-448e-9f4f-cee289b3a256"));
+
         this.menu.addMenuItem(new MenuItem("Build-a-Burger-Workshop", 8.99d, UUID.randomUUID(),
-                this.toppingMenu.getMenuItemIDs(), drinkOptions, "Build your own burger! Lean Angus Beef patties grilled to perfection",
+                burgerToppings, drinkOptions, "Build your own burger! Lean Angus Beef patties grilled to perfection",
                 "Entreés", "Burgers"));
     }
 
     private void initializeToppings() {
-        UUID ketchupId = UUID.randomUUID();
-        UUID mustardId = UUID.randomUUID();
-        UUID cheddarCheeseId = UUID.randomUUID();
+        UUID ketchupId = UUID.fromString("4f536d34-c5d2-4f41-ac16-d4978b3bf556");
+        UUID mustardId = UUID.fromString("14f84032-323b-48c5-8ff2-2ef33012c6a4");
+        UUID cheddarCheeseId = UUID.fromString("f4fae268-b99f-448e-9f4f-cee289b3a256");
 
         this.toppingMenu.addMenuItem(new Topping("Ketchup", 0d, ketchupId,
                 "Made from the Blood of a tomato. Goes good on Burgers and Hotdogs",
