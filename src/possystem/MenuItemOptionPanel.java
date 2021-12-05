@@ -99,6 +99,10 @@ public class MenuItemOptionPanel extends javax.swing.JPanel {
         return this.buttons;
     }
 
+    public int getIndex() {
+        return this.index;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
