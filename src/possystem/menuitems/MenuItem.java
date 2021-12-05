@@ -17,14 +17,14 @@ import java.util.UUID;
  */
 public class MenuItem implements Serializable {
 
-    private String name;
-    private double basePrice;   // Price of item without any options selected
-    private UUID id;
-    private ArrayList<UUID> possibleToppings;
-    private ArrayList<MenuItemOption> options;
-    private String comments;
-    private String category;    // Entree, drink, etc.
-    private String subcategory; // e.g. Pepsi products, Coke products, etc.
+    protected String name;
+    protected double basePrice;   // Price of item without any options selected
+    protected UUID id;
+    protected ArrayList<UUID> possibleToppings;
+    protected ArrayList<MenuItemOption> options;
+    protected String comments;
+    protected String category;    // Entree, drink, etc.
+    protected String subcategory; // e.g. Pepsi products, Coke products, etc.
 
     // Some way for the menu items to know how much foodstuffs they'll cost to make
     // Could implement stock management through a recipes class, which would list
