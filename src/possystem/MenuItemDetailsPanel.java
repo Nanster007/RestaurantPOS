@@ -2,6 +2,9 @@ package possystem;
 
 import possystem.menuitems.MenuItem;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+import possystem.menuitems.MenuItemOption;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,6 +22,7 @@ public class MenuItemDetailsPanel extends CustomPanel {
     Color defaultColor;
     MainFrame mainFrame;
     Boolean itemComplete;
+    private List<MenuItemOptionPanel> optionPanels;
 
     public MenuItemDetailsPanel(MainFrame mainFrame, MenuItem menuItem, CustomerOrder customerOrder) {
         initComponents();
@@ -27,14 +31,29 @@ public class MenuItemDetailsPanel extends CustomPanel {
         this.mainFrame = mainFrame;
         this.itemComplete = false;
 
-        setPanels(menuItem.getName());
+        initialize();
     }
 
-    private void setPanels(String itemName) {
+    private void initialize() {
         defaultColor = null;
+        this.optionPanels = new ArrayList();
 
-        CurrentItemLabel.setText(itemName);
-        BasePriceLabel.setText("" + menuItem.getBasePrice());
+        CurrentItemLabel.setText(menuItem.getName());
+        BasePriceLabel.setText(String.format("$%.2f", menuItem.getBasePrice()));
+
+        initializeOptions();
+    }
+
+    private void initializeOptions() {
+        List<MenuItemOption> options = menuItem.getOptions();
+
+        for (int i = 0; i < options.size(); i++) {
+            MenuItemOption option = options.get(i);
+
+            MenuItemOptionPanel newPanel = new MenuItemOptionPanel(option, i);
+            this.add(newPanel);
+            this.optionPanels.add(newPanel);
+        }
     }
 
     /**
@@ -62,25 +81,13 @@ public class MenuItemDetailsPanel extends CustomPanel {
 
         setLayout(new java.awt.BorderLayout());
 
-        NoOptionsLabel.setFont(NoOptionsLabel.getFont().deriveFont((NoOptionsLabel.getFont().getStyle() | java.awt.Font.ITALIC)));
-        NoOptionsLabel.setText("No Options");
+        MenuItemOptionsPanel.setLayout(new java.awt.GridLayout());
 
-        javax.swing.GroupLayout MenuItemOptionsPanelLayout = new javax.swing.GroupLayout(MenuItemOptionsPanel);
-        MenuItemOptionsPanel.setLayout(MenuItemOptionsPanelLayout);
-        MenuItemOptionsPanelLayout.setHorizontalGroup(
-            MenuItemOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MenuItemOptionsPanelLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(NoOptionsLabel)
-                .addContainerGap(237, Short.MAX_VALUE))
-        );
-        MenuItemOptionsPanelLayout.setVerticalGroup(
-            MenuItemOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MenuItemOptionsPanelLayout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(NoOptionsLabel)
-                .addContainerGap(167, Short.MAX_VALUE))
-        );
+        NoOptionsLabel.setFont(NoOptionsLabel.getFont().deriveFont((NoOptionsLabel.getFont().getStyle() | java.awt.Font.ITALIC)));
+        NoOptionsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NoOptionsLabel.setText("No Options");
+        NoOptionsLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        MenuItemOptionsPanel.add(NoOptionsLabel);
 
         add(MenuItemOptionsPanel, java.awt.BorderLayout.CENTER);
 
