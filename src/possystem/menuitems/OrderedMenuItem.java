@@ -85,18 +85,17 @@ public class OrderedMenuItem {
 
     @Override
     public String toString() {
-        String returnString = "";
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(String.format("|%-15s|$%.2f", menuItem.getName(), getPrice()));
+        stringBuilder.append(String.format("%-38s $%.2f", menuItem.getName(), getPrice()));
 
-        for (MenuItem topping : toppings) {
-            stringBuilder.append("     ")
-                    .append(String.format("|%-10s|$%.2f", topping.getName(), topping.getBasePrice()))
-                    .append('\n');
+        for (Topping topping : toppings) {
+            stringBuilder.append("\n      ")
+                    .append(String.format("%-32s $%.2f", topping.getName() + " (" + topping.getCount() + ')', topping.getBasePrice())) //.append('\n')
+                    ;
         }
 
-        return returnString;
+        return stringBuilder.toString();
     }
 }
