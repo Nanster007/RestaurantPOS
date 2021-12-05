@@ -4,6 +4,7 @@
  */
 package possystem.menuitems;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Map;
  *
  * @author dakingofcheckerz
  */
-public class MenuCategory {
+public class MenuCategory implements Serializable {
 
     private String name;
     private Map<String, MenuSubCategory> subCategories;

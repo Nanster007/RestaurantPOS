@@ -4,6 +4,7 @@
  */
 package possystem.menuitems;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  *
  * @author dakingofcheckerz
  */
-public class OrderedMenuItem {
+public class OrderedMenuItem implements Serializable {
 
     private MenuItem menuItem;
     private List<Topping> toppings;

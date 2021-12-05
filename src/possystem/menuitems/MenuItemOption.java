@@ -4,13 +4,14 @@
  */
 package possystem.menuitems;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author dakingofcheckerz
  */
-public class MenuItemOption {
+public class MenuItemOption implements Serializable {
 
     private String name;
     private ArrayList<MenuItemOptionValue> possibleValues;

@@ -4,12 +4,14 @@
  */
 package possystem.menuitems;
 
+import java.io.Serializable;
+
 /**
  * Class for a possible value in a MenuItem option
  *
  * @author dakingofcheckerz
  */
-public class MenuItemOptionValue {
+public class MenuItemOptionValue implements Serializable {
 
     private String value;
     private double priceModifier;
