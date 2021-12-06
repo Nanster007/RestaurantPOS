@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import javax.swing.BorderFactory;
 import possystem.menuitems.MenuItemOption;
 import possystem.menuitems.OrderedMenuItem;
 import possystem.menuitems.Topping;
@@ -68,6 +69,7 @@ public class MenuItemDetailsPanel extends CustomPanel {
                 ArrayList<OptionValueToggleButton> buttons = newPanel.getButtons();
 
                 buttons.forEach(button -> {
+                    button.setBorder(BorderFactory.createLineBorder(Color.black, 2));
                     button.addActionListener(evt -> {
                         onOptionStatusChange(evt);
                     });
@@ -134,8 +136,6 @@ public class MenuItemDetailsPanel extends CustomPanel {
         NoOptionsLabel = new javax.swing.JLabel();
         ToppingsPanel = new javax.swing.JPanel();
 
-        setLayout(new java.awt.BorderLayout());
-
         CurrentItemPanel.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 CurrentItemPanelAncestorAdded(evt);
@@ -146,15 +146,21 @@ public class MenuItemDetailsPanel extends CustomPanel {
             }
         });
 
+        CurrentItemTextLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         CurrentItemTextLabel.setText("Current Item:");
 
+        CurrentItemLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         CurrentItemLabel.setText("jLabel3");
 
+        BasePriceTextLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         BasePriceTextLabel.setText("Base Price:");
 
+        BasePriceLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         BasePriceLabel.setText("jLabel3");
 
+        CancelButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         CancelButton.setText("Cancel");
+        CancelButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         CancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelButtonActionPerformed(evt);
@@ -177,8 +183,8 @@ public class MenuItemDetailsPanel extends CustomPanel {
                         .addComponent(BasePriceTextLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BasePriceLabel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(CancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         CurrentItemPanelLayout.setVerticalGroup(
@@ -200,9 +206,9 @@ public class MenuItemDetailsPanel extends CustomPanel {
                 .addGap(0, 0, 0))
         );
 
-        add(CurrentItemPanel, java.awt.BorderLayout.NORTH);
-
+        AddItemButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         AddItemButton.setText("Add Item");
+        AddItemButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         AddItemButton.setEnabled(false);
         AddItemButton.setMaximumSize(new java.awt.Dimension(66, 66));
         AddItemButton.setMinimumSize(new java.awt.Dimension(66, 66));
@@ -212,26 +218,40 @@ public class MenuItemDetailsPanel extends CustomPanel {
                 AddItemButtonActionPerformed(evt);
             }
         });
-        add(AddItemButton, java.awt.BorderLayout.PAGE_END);
 
-        CommentsPanel.setLayout(new java.awt.BorderLayout());
-
+        CommentsLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         CommentsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         CommentsLabel.setText("Extra Comments");
-        CommentsPanel.add(CommentsLabel, java.awt.BorderLayout.PAGE_START);
 
         ExtraCommentsArea.setEditable(false);
         ExtraCommentsArea.setColumns(20);
+        ExtraCommentsArea.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ExtraCommentsArea.setLineWrap(true);
         ExtraCommentsArea.setRows(5);
         ExtraCommentsArea.setWrapStyleWord(true);
         jScrollPane1.setViewportView(ExtraCommentsArea);
 
-        CommentsPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout CommentsPanelLayout = new javax.swing.GroupLayout(CommentsPanel);
+        CommentsPanel.setLayout(CommentsPanelLayout);
+        CommentsPanelLayout.setHorizontalGroup(
+            CommentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CommentsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CommentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                    .addComponent(CommentsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        CommentsPanelLayout.setVerticalGroup(
+            CommentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CommentsPanelLayout.createSequentialGroup()
+                .addComponent(CommentsLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
-        add(CommentsPanel, java.awt.BorderLayout.EAST);
-
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 1));
 
         MenuItemOptionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         MenuItemOptionsPanel.setLayout(new java.awt.GridLayout(0, 1, 12, 12));
@@ -243,14 +263,45 @@ public class MenuItemDetailsPanel extends CustomPanel {
         NoOptionsLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         MenuItemOptionsPanel.add(NoOptionsLabel);
 
-        jPanel1.add(MenuItemOptionsPanel, java.awt.BorderLayout.CENTER);
+        jPanel1.add(MenuItemOptionsPanel);
 
         ToppingsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Toppings"));
+        ToppingsPanel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         ToppingsPanel.setMinimumSize(new java.awt.Dimension(132, 22));
         ToppingsPanel.setLayout(new java.awt.GridLayout(1, 0, 12, 12));
-        jPanel1.add(ToppingsPanel, java.awt.BorderLayout.SOUTH);
 
-        add(jPanel1, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ToppingsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AddItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CommentsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(CurrentItemPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(CurrentItemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CommentsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ToppingsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(AddItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddItemButtonActionPerformed

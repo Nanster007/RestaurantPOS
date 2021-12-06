@@ -100,19 +100,103 @@ public class MainFrame extends JFrame {
 
         // Options
         ArrayList<MenuItemOption> drinkOptions = new ArrayList();
+        ArrayList<MenuItemOption> burgerOptions = new ArrayList();
+        ArrayList<MenuItemOption> fryOptions = new ArrayList();
+        ArrayList<MenuItemOption> pastaOptions = new ArrayList();
+        ArrayList<MenuItemOption> pizzaOptions = new ArrayList();
+        ArrayList<MenuItemOption> milkshakeOptions = new ArrayList();
+        ArrayList<MenuItemOption> coffeeOptions = new ArrayList();
+        ArrayList<MenuItemOption> wineOptions = new ArrayList();
+        ArrayList<MenuItemOption> beerOptions = new ArrayList();
+        ArrayList<MenuItemOption> saladOptions = new ArrayList();
+        ArrayList<MenuItemOption> wedgesOptions = new ArrayList();
 
         ArrayList<MenuItemOptionValue> drinkSizeValues = new ArrayList();
-        drinkSizeValues.add(new MenuItemOptionValue("Small", -5d));
+        ArrayList<MenuItemOptionValue> burgerSizeValues = new ArrayList();
+        ArrayList<MenuItemOptionValue> wineSizeValues = new ArrayList();
+        ArrayList<MenuItemOptionValue> beerSizeValues = new ArrayList();
+        
+        drinkSizeValues.add(new MenuItemOptionValue("Small", -2d));
         drinkSizeValues.add(new MenuItemOptionValue("Normal", +0d));
-        drinkSizeValues.add(new MenuItemOptionValue("Large", +5d));
+        drinkSizeValues.add(new MenuItemOptionValue("Large", +2d));
+        burgerSizeValues.add(new MenuItemOptionValue("One Patty", -5d));
+        burgerSizeValues.add(new MenuItemOptionValue("Two Patty", +0d));
+        burgerSizeValues.add(new MenuItemOptionValue("Three Patty", +5d));
+        wineSizeValues.add(new MenuItemOptionValue("Taste Test", -3.99d));
+        wineSizeValues.add(new MenuItemOptionValue("Glass", +0d));
+        wineSizeValues.add(new MenuItemOptionValue("Bottle", +15d));
+        beerSizeValues.add(new MenuItemOptionValue("Taste Test", -3.49d));
+        beerSizeValues.add(new MenuItemOptionValue("16 Oz", +0d));
+        beerSizeValues.add(new MenuItemOptionValue("24 Oz", +2d));
 
         ArrayList<MenuItemOptionValue> drinkIceValues = new ArrayList();
+        ArrayList<MenuItemOptionValue> burgerBunValues = new ArrayList();
+        ArrayList<MenuItemOptionValue> fryTypeValues = new ArrayList();
+        ArrayList<MenuItemOptionValue> pastaTypeValues = new ArrayList();
+        ArrayList<MenuItemOptionValue> pizzaTypeValues = new ArrayList();
+        ArrayList<MenuItemOptionValue> milkshakeTypes = new ArrayList();
+        ArrayList<MenuItemOptionValue> coffeeFlavors = new ArrayList();
+        ArrayList<MenuItemOptionValue> wineTypes = new ArrayList();
+        ArrayList<MenuItemOptionValue> beerTypes = new ArrayList();
+        ArrayList<MenuItemOptionValue> saladDressings = new ArrayList();
+        ArrayList<MenuItemOptionValue> wedgesTypes = new ArrayList();
+        
         drinkIceValues.add(new MenuItemOptionValue("No ice", +0d));
         drinkIceValues.add(new MenuItemOptionValue("Normal Ice", +0d));
-        drinkIceValues.add(new MenuItemOptionValue("Large", +5d));
+        drinkIceValues.add(new MenuItemOptionValue("Large", +.05d));
+        burgerBunValues.add(new MenuItemOptionValue("Seasame Seed", -1d));
+        burgerBunValues.add(new MenuItemOptionValue("Kaiser Roll", +0d));
+        burgerBunValues.add(new MenuItemOptionValue("Pretzel Bun", +1d));
+        fryTypeValues.add(new MenuItemOptionValue("Curly", +0d));
+        fryTypeValues.add(new MenuItemOptionValue("Regular", +0d));
+        fryTypeValues.add(new MenuItemOptionValue("Sweet Potato", +0d));
+        pastaTypeValues.add(new MenuItemOptionValue("Butter Noodles", -1d));
+        pastaTypeValues.add(new MenuItemOptionValue("Red Sauce", +0d));
+        pastaTypeValues.add(new MenuItemOptionValue("White Sauce", +0d));
+        pizzaTypeValues.add(new MenuItemOptionValue("Thin Crust", +0d));
+        pizzaTypeValues.add(new MenuItemOptionValue("Regular Crust", +0d));
+        pizzaTypeValues.add(new MenuItemOptionValue("Thick Crust", +0d));
+        milkshakeTypes.add(new MenuItemOptionValue("Chocolate", +0d));
+        milkshakeTypes.add(new MenuItemOptionValue("Vanilla", +0d));
+        milkshakeTypes.add(new MenuItemOptionValue("Strawberry", +0d));
+        coffeeFlavors.add(new MenuItemOptionValue("Hazelnut", +0d));
+        coffeeFlavors.add(new MenuItemOptionValue("Mocha", +0d));
+        coffeeFlavors.add(new MenuItemOptionValue("Caramel", +0d));
+        wineTypes.add(new MenuItemOptionValue("White", +0d));
+        wineTypes.add(new MenuItemOptionValue("Red", +0d));
+        wineTypes.add(new MenuItemOptionValue("Pink", +0d));
+        beerTypes.add(new MenuItemOptionValue("Bud Light", +0d));
+        beerTypes.add(new MenuItemOptionValue("Coors Light", +0d));
+        beerTypes.add(new MenuItemOptionValue("Rhinegeist Truth", +2d));
+        saladDressings.add(new MenuItemOptionValue("Ranch", +0d));
+        saladDressings.add(new MenuItemOptionValue("Italian", +0d));
+        saladDressings.add(new MenuItemOptionValue("Oil & Vinegar", +0d));
+        wedgesTypes.add(new MenuItemOptionValue("Crispy", +0d));
+        wedgesTypes.add(new MenuItemOptionValue("Regular", +0d));
 
+        
+        pizzaOptions.add(new MenuItemOption("Size", drinkSizeValues, 1, true));
+        pizzaOptions.add(new MenuItemOption("Crust Type", pizzaTypeValues, 1, true));
+        pastaOptions.add(new MenuItemOption("Sauce Type", pastaTypeValues, 1, true));
+        pastaOptions.add(new MenuItemOption("Size", drinkSizeValues, 1, true));
+        burgerOptions.add(new MenuItemOption("Patty Count", burgerSizeValues, 1, true));
+        burgerOptions.add(new MenuItemOption("Bun Type", burgerBunValues, 1, true));
         drinkOptions.add(new MenuItemOption("Size", drinkSizeValues, 1, true));
         drinkOptions.add(new MenuItemOption("Ice", drinkIceValues, -1, true));
+        milkshakeOptions.add(new MenuItemOption("Size", drinkSizeValues, 1, true));
+        milkshakeOptions.add(new MenuItemOption("Flavor", milkshakeTypes, -1, true));
+        coffeeOptions.add(new MenuItemOption("Size", drinkSizeValues, 1, true));
+        coffeeOptions.add(new MenuItemOption("Flavor", coffeeFlavors, -1, true));
+        fryOptions.add(new MenuItemOption("Size", drinkSizeValues, 1, true));
+        fryOptions.add(new MenuItemOption("Type", fryTypeValues, 1, true));
+        wineOptions.add(new MenuItemOption("Size", wineSizeValues, 1, true));
+        wineOptions.add(new MenuItemOption("Type", wineTypes, 1, true));
+        beerOptions.add(new MenuItemOption("Size", beerSizeValues, 1, true));
+        beerOptions.add(new MenuItemOption("Type", beerTypes, 1, true));
+        saladOptions.add(new MenuItemOption("Size", drinkSizeValues, 1, true));
+        saladOptions.add(new MenuItemOption("Dressing", saladDressings, 1, true));
+        wedgesOptions.add(new MenuItemOption("Size", drinkSizeValues, 1, true));
+        wedgesOptions.add(new MenuItemOption("Type", wedgesTypes, 1, true));
 
         this.menu.addMenuItem(new MenuItem("Pepsi", 1.99d, UUID.randomUUID(),
                 null, drinkOptions, "Pepsi Cola",
@@ -147,32 +231,117 @@ public class MainFrame extends JFrame {
                 "Drinks", "Fountain Drinks"));
 
         this.menu.addMenuItem(new MenuItem("Milkshake", 5.99d, UUID.randomUUID(),
-                null, drinkOptions, "Frozen Cow Juice",
+                null, milkshakeOptions, "Frozen Cow Juice",
+                "Drinks", "Specialty Drinks"));
+        
+        this.menu.addMenuItem(new MenuItem("Cappuchino", 6.99d, UUID.randomUUID(),
+                null, coffeeOptions, "Fresh Brewed Coffee",
                 "Drinks", "Specialty Drinks"));
 
         this.menu.addMenuItem(new MenuItem("Wine", 4.99d, UUID.randomUUID(),
-                null, drinkOptions, "Adult Grape Juice",
+                null, wineOptions, "Bottled Wine",
                 "Drinks", "Alcoholic Beverages"));
 
         this.menu.addMenuItem(new MenuItem("Beer", 3.99d, UUID.randomUUID(),
-                null, drinkOptions, "Bog-standard alcoholic beverage",
+                null, beerOptions, "Draft Beer",
                 "Drinks", "Alcoholic Beverages"));
 
         ArrayList<UUID> burgerToppings = new ArrayList(3);
+        ArrayList<UUID> fryToppings = new ArrayList();
+        ArrayList<UUID> pastaToppings = new ArrayList();
+        ArrayList<UUID> pizzaToppings = new ArrayList();
+        ArrayList<UUID> saladToppings = new ArrayList();
         burgerToppings.add(UUID.fromString("4f536d34-c5d2-4f41-ac16-d4978b3bf556"));
         burgerToppings.add(UUID.fromString("14f84032-323b-48c5-8ff2-2ef33012c6a4"));
         burgerToppings.add(UUID.fromString("f4fae268-b99f-448e-9f4f-cee289b3a256"));
+        fryToppings.add(UUID.fromString("f5fae268-b99f-448e-9f4f-cee289b3a256"));
+        fryToppings.add(UUID.fromString("f6fae268-b99f-448e-9f4f-cee289b3a256"));
+        fryToppings.add(UUID.fromString("f7fae268-b99f-448e-9f4f-cee289b3a256"));
+        pastaToppings.add(UUID.fromString("f8fae268-b99f-448e-9f4f-cee289b3a256"));
+        pastaToppings.add(UUID.fromString("f9fae268-b99f-448e-9f4f-cee289b3a256"));
+        pizzaToppings.add(UUID.fromString("f3fae268-b89f-448e-9f4f-cee289b3a256"));
+        pizzaToppings.add(UUID.fromString("f3fae268-b79f-448e-9f4f-cee289b3a256"));
+        pizzaToppings.add(UUID.fromString("f3fae268-b69f-448e-9f4f-cee289b3a256"));
+        pizzaToppings.add(UUID.fromString("f3fae268-b59f-448e-9f4f-cee289b3a256"));
+        pizzaToppings.add(UUID.fromString("f3fae268-b49f-448e-9f4f-cee289b3a256"));
+        saladToppings.add(UUID.fromString("f8fae268-b99f-448e-9f4f-cee289b3a256"));
+        saladToppings.add(UUID.fromString("f6fae268-b99f-448e-9f4f-cee289b3a256"));
+        saladToppings.add(UUID.fromString("f3fae268-b59f-448e-9f4f-cee289b3a256"));
+        saladToppings.add(UUID.fromString("f3fae268-b69f-448e-9f4f-cee289b3a256"));
+        saladToppings.add(UUID.fromString("f3fae268-b99f-448e-9f4f-cee289b3a256"));
+        saladToppings.add(UUID.fromString("f3fae268-b49f-448e-9f4f-cee289b3a256"));
+        saladToppings.add(UUID.fromString("f3fae268-b49f-448e-8f4f-cee289b3a256"));
 
-        this.menu.addMenuItem(new MenuItem("Build-a-Burger-Workshop", 8.99d, UUID.randomUUID(),
-                burgerToppings, drinkOptions, "Build your own burger! Lean Angus Beef patties grilled to perfection",
-                "Entreés", "Burgers"));
+        this.menu.addMenuItem(new MenuItem("Build-a-Burger", 8.99d, UUID.randomUUID(),
+                burgerToppings, burgerOptions, "Lean Angus Beef patties grilled to order.",
+                "Entreés", ""));
+        
+        this.menu.addMenuItem(new MenuItem("Pasta", 6.99d, UUID.randomUUID(),
+                pastaToppings, pastaOptions, "Al-Dente Pasta.",
+                "Entreés", ""));
+        
+        this.menu.addMenuItem(new MenuItem("Pizza", 10.99d, UUID.randomUUID(),
+                pizzaToppings, pizzaOptions, "Fire Brick Oven Pizza.",
+                "Entreés", ""));
+        
+        this.menu.addMenuItem(new MenuItem("Fries", 3.99d, UUID.randomUUID(), fryToppings, fryOptions, "Fries", "Sides", ""));
+        this.menu.addMenuItem(new MenuItem("Salad", 3.99d, UUID.randomUUID(), saladToppings, saladOptions, "Salad", "Sides", ""));
+        this.menu.addMenuItem(new MenuItem("Potato Wedges", 3.99d, UUID.randomUUID(), fryToppings, wedgesOptions, "Potato Wedges", "Sides", ""));
     }
 
     private void initializeToppings() {
         UUID ketchupId = UUID.fromString("4f536d34-c5d2-4f41-ac16-d4978b3bf556");
         UUID mustardId = UUID.fromString("14f84032-323b-48c5-8ff2-2ef33012c6a4");
         UUID cheddarCheeseId = UUID.fromString("f4fae268-b99f-448e-9f4f-cee289b3a256");
-
+        UUID nachoCheeseId = UUID.fromString("f5fae268-b99f-448e-9f4f-cee289b3a256");
+        UUID baconBitsId = UUID.fromString("f6fae268-b99f-448e-9f4f-cee289b3a256");
+        UUID onionId = UUID.fromString("f7fae268-b99f-448e-9f4f-cee289b3a256");
+        UUID parmID = UUID.fromString("f8fae268-b99f-448e-9f4f-cee289b3a256");
+        UUID pepperID = UUID.fromString("f9fae268-b99f-448e-9f4f-cee289b3a256");
+        UUID croutonID = UUID.fromString("f3fae268-b99f-448e-9f4f-cee289b3a256");
+        UUID pepperoniID = UUID.fromString("f3fae268-b89f-448e-9f4f-cee289b3a256");
+        UUID baconID = UUID.fromString("f3fae268-b79f-448e-9f4f-cee289b3a256");
+        UUID peppersID = UUID.fromString("f3fae268-b69f-448e-9f4f-cee289b3a256");
+        UUID onionsID = UUID.fromString("f3fae268-b59f-448e-9f4f-cee289b3a256");
+        UUID olivesID = UUID.fromString("f3fae268-b49f-448e-9f4f-cee289b3a256");
+        UUID tomatoesID = UUID.fromString("f3fae268-b49f-448e-8f4f-cee289b3a256");
+        
+        this.toppingMenu.addMenuItem(new Topping("Tomatoes", 0d, tomatoesID,
+                "Freshly Diced Tomatoes",
+                "Add-ons", 2));
+        
+        this.toppingMenu.addMenuItem(new Topping("Pepperoni", 1d, pepperoniID,
+                "Freshly Sliced Pepperoni",
+                "Add-ons", 2));
+        
+        this.toppingMenu.addMenuItem(new Topping("Bacon", 1d, baconID,
+                "Crunchy Bacon",
+                "Add-ons", 2));
+        
+        this.toppingMenu.addMenuItem(new Topping("Peppers", 0d, peppersID,
+                "Sliced Green & Red Peppers",
+                "Add-ons", 2));
+        
+        this.toppingMenu.addMenuItem(new Topping("Onions", 0d, onionsID,
+                "Diced Red Onions",
+                "Add-ons", 2));
+        
+        this.toppingMenu.addMenuItem(new Topping("Olives", 0d, olivesID,
+                "Sliced Black Olives",
+                "Add-ons", 2));
+        
+        this.toppingMenu.addMenuItem(new Topping("Parmesan", 0d, parmID,
+                "Freshly Grated Parmesan",
+                "Add-ons", 3));
+        
+        this.toppingMenu.addMenuItem(new Topping("Pepper Flakes", 0d, pepperID,
+                "Aromatic Pepper Flakes",
+                "Add-ons", 3));
+        
+        this.toppingMenu.addMenuItem(new Topping("Croutons", 0d, croutonID,
+                "Crunchy, seasoned croutons",
+                "Add-ons", 3));
+        
         this.toppingMenu.addMenuItem(new Topping("Ketchup", 0d, ketchupId,
                 "Made from the Blood of a tomato. Goes good on Burgers and Hotdogs",
                 "Condiments", 3));
@@ -184,6 +353,18 @@ public class MainFrame extends JFrame {
         this.toppingMenu.addMenuItem(new Topping("Cheddar Cheese Slice", 0d, cheddarCheeseId,
                 "Old, yellow milk. Tastes better than American cheese. Goes good with plenty of dishes.",
                 "Add-ons", 3));
+        
+        this.toppingMenu.addMenuItem(new Topping("Nacho Cheese", 1.00d, nachoCheeseId,
+                "Melted Nacho Cheese",
+                "Add-ons", 1));
+        
+        this.toppingMenu.addMenuItem(new Topping("Bacon Bits", 1.00d, baconBitsId,
+                "Fresh cooked, crunchy bacon bits.",
+                "Add-ons", 1));
+        
+        this.toppingMenu.addMenuItem(new Topping("Chopped Onion", 0d, onionId,
+                "Finely chopped onion bits.",
+                "Add-ons", 1));
 
     }
 
@@ -415,6 +596,24 @@ public class MainFrame extends JFrame {
         //returns list of shifts on specified day
         return daysShifts;
     }
+    
+    //returns all shifts on a specified day for viewing schedule
+    public ArrayList<Shift> getEmployeesShiftsOfMonth(Employee employee) throws FileNotFoundException, IOException, ClassNotFoundException {
+
+        //read file for month and year recieved
+        getShifts(clock.getDate().getMonth(), clock.getDate().getYear()+1900);
+        ArrayList<Shift> daysShifts = new ArrayList();
+
+        //loops through shifts list for shifts on same day and employee as recievegit and adds to secondary list
+        for (int x = 0; x < shifts.size(); x++) {
+            if (shifts.get(x).getEmployee().getName().equals(employee.getName())) {
+                daysShifts.add(shifts.get(x));
+            }
+        }
+
+        //returns list of shifts on specified day
+        return daysShifts;
+    }
 
     //updates mainframe customerOrders list and returns it
     public ArrayList<CustomerOrder> getCustomerOrders() throws FileNotFoundException, IOException, ClassNotFoundException {
@@ -507,4 +706,5 @@ public class MainFrame extends JFrame {
             }
         }
     }
+    
 }

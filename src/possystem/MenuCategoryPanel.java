@@ -54,13 +54,16 @@ public class MenuCategoryPanel extends CustomPanel {
 
         setLayout(new java.awt.BorderLayout());
 
+        CancelButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         CancelButton.setText("Cancel");
+        CancelButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         CancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelButtonActionPerformed(evt);
             }
         });
 
+        CategoryNameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         CategoryNameLabel.setText("Category Name");
 
         javax.swing.GroupLayout HeaderPanelLayout = new javax.swing.GroupLayout(HeaderPanel);
@@ -70,8 +73,8 @@ public class MenuCategoryPanel extends CustomPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(CategoryNameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
-                .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 433, Short.MAX_VALUE)
+                .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         HeaderPanelLayout.setVerticalGroup(
@@ -86,7 +89,7 @@ public class MenuCategoryPanel extends CustomPanel {
 
         add(HeaderPanel, java.awt.BorderLayout.NORTH);
 
-        SubCategoriesPanel.setLayout(new java.awt.GridLayout());
+        SubCategoriesPanel.setLayout(new java.awt.GridLayout(1, 0));
         add(SubCategoriesPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 

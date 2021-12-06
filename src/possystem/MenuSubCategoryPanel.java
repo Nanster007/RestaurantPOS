@@ -4,7 +4,9 @@
  */
 package possystem;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import possystem.menuitems.MenuItem;
 import possystem.menuitems.MenuSubCategory;
@@ -20,9 +22,6 @@ public class MenuSubCategoryPanel extends CustomPanel {
     private MenuSubCategory subCategory;
     private CustomerOrder customerOrder;
 
-    /**
-     * Creates new form MenuSubCategoryPanel
-     */
     public MenuSubCategoryPanel(MenuSubCategory subCategory, MainFrame mainFrame,
             CustomerOrder customerOrder, CustomPanel parentPanel) {
         super();
@@ -37,6 +36,7 @@ public class MenuSubCategoryPanel extends CustomPanel {
 
         for (MenuItem menuItem : subCategory.getMenuItemsArray()) {
             MenuItemButton button = new MenuItemButton(menuItem);
+            button.setBorder(BorderFactory.createLineBorder(Color.black, 2));
             button.addActionListener(evt -> {
                 MenuItemButtonActionPerformed(evt);
             });
@@ -66,14 +66,32 @@ public class MenuSubCategoryPanel extends CustomPanel {
         SubCategoryLabel = new javax.swing.JLabel();
         SubCategoryButtonsPanel = new javax.swing.JPanel();
 
-        setLayout(new java.awt.BorderLayout());
-
+        SubCategoryLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         SubCategoryLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         SubCategoryLabel.setText("SubCategory Name");
-        add(SubCategoryLabel, java.awt.BorderLayout.PAGE_START);
 
         SubCategoryButtonsPanel.setLayout(new java.awt.GridLayout(4, 2, 12, 12));
-        add(SubCategoryButtonsPanel, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(SubCategoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(SubCategoryButtonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(SubCategoryLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SubCategoryButtonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

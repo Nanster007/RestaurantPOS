@@ -57,7 +57,6 @@ public class ManagerSettingsPanel extends CustomPanel {
         ButtonPanel = new javax.swing.JPanel();
         SchedulingButton = new javax.swing.JButton();
         AdjustEmployeesButton = new javax.swing.JButton();
-        ViewDrawerButton = new javax.swing.JButton();
         BackButton = new javax.swing.JButton();
 
         CurrentUserLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -108,18 +107,9 @@ public class ManagerSettingsPanel extends CustomPanel {
                 .addContainerGap()
                 .addGroup(ButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(AdjustEmployeesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(SchedulingButton, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
+                    .addComponent(SchedulingButton, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE))
                 .addGap(6, 6, 6))
         );
-
-        ViewDrawerButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        ViewDrawerButton.setText("View Drawer");
-        ViewDrawerButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        ViewDrawerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ViewDrawerButtonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout ButtonsPanelLayout = new javax.swing.GroupLayout(ButtonsPanel);
         ButtonsPanel.setLayout(ButtonsPanelLayout);
@@ -127,19 +117,15 @@ public class ManagerSettingsPanel extends CustomPanel {
             ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ButtonsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ViewDrawerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButtonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(ButtonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         ButtonsPanelLayout.setVerticalGroup(
             ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ButtonsPanelLayout.createSequentialGroup()
+            .addGroup(ButtonsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(ViewDrawerButton, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         BackButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -219,14 +205,6 @@ public class ManagerSettingsPanel extends CustomPanel {
         }
     }//GEN-LAST:event_AdjustEmployeesButtonActionPerformed
 
-    private void ViewDrawerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewDrawerButtonActionPerformed
-        try {
-            mainFrame.setNewPanel(new DrawerPanel(mainFrame), Boolean.FALSE, this);
-        } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(ManagerSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_ViewDrawerButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AdjustEmployeesButton;
@@ -236,6 +214,5 @@ public class ManagerSettingsPanel extends CustomPanel {
     private javax.swing.JTextField ClockLabel;
     private javax.swing.JLabel CurrentUserLabel;
     private javax.swing.JButton SchedulingButton;
-    private javax.swing.JButton ViewDrawerButton;
     // End of variables declaration//GEN-END:variables
 }

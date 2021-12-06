@@ -145,7 +145,7 @@ public class Shift implements Serializable{
             string += clockStart + "\n";
         }
         if(clockEnd != null){
-            string += clockEnd;
+            string += clockEnd + "\n";
         }
         
         

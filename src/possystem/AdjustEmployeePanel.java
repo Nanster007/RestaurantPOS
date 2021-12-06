@@ -59,6 +59,7 @@ public class AdjustEmployeePanel extends CustomPanel {
         NameField.setText(selectedEmployee.getName());
         NumberField.setText(selectedEmployee.getPhoneNumber());
         PayrateField.setText("" + selectedEmployee.getPayRate()); 
+        ShiftsField.setText(mainFrame.getEmployeesShiftsOfMonth(selectedEmployee).toString());
         
         //dont allow editing without first clicking 'edit info' button
         NameField.setEditable(false);
