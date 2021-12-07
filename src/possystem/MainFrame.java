@@ -20,7 +20,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import possystem.menuitems.*;
 
 //creates window and sets various data for window
-public class MainFrame extends JFrame {
+public final class MainFrame extends JFrame {
 
     //variables for general functionality
     private CustomPanel currentPage, lastPage;
@@ -43,7 +43,8 @@ public class MainFrame extends JFrame {
     public final String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     public int[] daysPerMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    private Menu menu, toppingMenu;
+    private final Menu menu;
+    private final Menu toppingMenu;
 
     public MainFrame() throws IOException, FileNotFoundException, ClassNotFoundException {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

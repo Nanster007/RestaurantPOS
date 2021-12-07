@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package possystem;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
@@ -20,88 +16,95 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author tylar
  */
+//panel that is displayed upon manager account entering "adjust employee" panel
 public class AdjustEmployeePanel extends CustomPanel {
 
     private final MainFrame mainFrame;
     
-    //Jlist is visual element to display all current employees' names
+    //Jlist is visual element to display all current currentEmployees' names
     private JList EmployeesList;
-    private ButtonGroup buttonGroup;
+    
+    //buttongroup ensures only 1 selection may be made at a time with respect to manager or regular employee
+    private final ButtonGroup buttonGroup;
     
     //list model ensures only one list item is chosen
     //also allows for the reading of the current selection
-    private DefaultListModel listModel;
+    private DefaultListModel employees;
     
-    //selected employee object to display employees info when selected on JList and allow for editing of info
+    //selected employee object to display currentEmployees info when selected on JList and allow for editing of info
     private Employee selectedEmployee;
     
     
     public AdjustEmployeePanel(MainFrame mainFrame) throws IOException, FileNotFoundException, ClassNotFoundException {
+        //standard panel initiation on every page
         initComponents();
+        CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
+        setClockField(ClockLabel);              
         this.mainFrame = mainFrame;
         
-        //update current user label and clock label
-        CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
-        setClockField(ClockLabel);
-        
-        //help text for instructions when adding new employee
-        //Add Employee button reenables visibility 
-        HelpText.setVisible(false);
-        
-        //reads and displays all current employees' names
+        //reads and displays all current currentEmployees' names
         updateInterface();
         
-        //set selected employee to first on list at initialization to read their info on both visual list element and user info elements
-        selectedEmployee = mainFrame.findEmployee(listModel.getElementAt(0).toString());
+        //set selected employee to first on list at initialization to read their info on both visual list element and user info visual elements
+        selectedEmployee = mainFrame.findEmployee(employees.getElementAt(0).toString());
         EmployeesList.setSelectedIndex(0);
         
-        //set employee info to newly^^selected employees info
+        //set employee info to newly^^selected currentEmployees information
         NameField.setText(selectedEmployee.getName());
         NumberField.setText(selectedEmployee.getPhoneNumber());
         PayrateField.setText("" + selectedEmployee.getPayRate()); 
         ShiftsField.setText(mainFrame.getEmployeesShiftsOfMonth(selectedEmployee).toString());
         
-        //dont allow editing without first clicking 'edit info' button
+        //dont allow editing of these fields without first clicking 'edit info' button
         NameField.setEditable(false);
         PinField.setEditable(false);
         NumberField.setEditable(false);
         PayrateField.setEditable(false);
         ShiftsField.setEditable(false);
+        ManagerButton.setEnabled(false);
+        RegularButton.setEnabled(false);
         
+        //help text for instructions when adding new employee
+        //Add Employee button reenables visibility 
+        HelpText.setVisible(false);
+        
+        //adding manager and regular employee radio buttons to buttongroup
         buttonGroup = new ButtonGroup();
         buttonGroup.add(ManagerButton);
         buttonGroup.add(RegularButton);
         
+        //set selection to status of the currently selected employee in the list
         if(selectedEmployee.isManager()){
             ManagerButton.setSelected(true);
         }
         else{
             RegularButton.setSelected(true);
-        }
-        ManagerButton.setEnabled(false);
-        RegularButton.setEnabled(false);
+        }       
     }
-
+    
+    //this fucnction reads all 
     private void updateInterface() throws IOException, FileNotFoundException, ClassNotFoundException{
         //listModel structure ensures only 1 option selected at a time
-        listModel = new DefaultListModel();
+        employees = new DefaultListModel();
         
-        //loops to create a line in the list for every current employee
-        for(int x=0; x<mainFrame.getEmployees().size(); x++){
-            listModel.addElement(mainFrame.getEmployees().get(x).getName());
+        //loops to display each current employee (from file) on the visual list
+        ArrayList<Employee> currentEmployees = mainFrame.getEmployees();
+        for(int x=0; x<currentEmployees.size(); x++){
+            employees.addElement(currentEmployees.get(x).getName());
         }
         
-        //EmployeesList is visual element to display employee names
-        EmployeesList = new JList(listModel);
-        //this may be unecessary
-        EmployeesScrollPane.setViewportView(EmployeesList);
-        //actually setting listModel to only 1 selection at a time allowed 
+        //EmployeesList is the visual element to display employee names, which holds the list of currentEmployees
+        EmployeesList = new JList(employees);
+        //ensuring visual list can only have 1 selection at a time
         EmployeesList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         
-        //add actionlistener to visual EmployeesList to update displayed employee info to new selection
+        //graphics adjustment
+        EmployeesScrollPane.setViewportView(EmployeesList);        
+        
+        //add actionlistener on visual EmployeesList to update displayed employee info when new selection is made
         EmployeesList.addListSelectionListener(new ListSelectionListener() {
             @Override
-            //this is whats called when used clicks a new employee selection
+            //this is whats called when user clicks a new employee selection on the list
             public void valueChanged(ListSelectionEvent e) {
                 //try catch for possible employee.txt file reading failes
                 try {
@@ -428,9 +431,7 @@ public class AdjustEmployeePanel extends CustomPanel {
         try {
             //previous panel button
             mainFrame.setNewPanel(new ManagerSettingsPanel(mainFrame), Boolean.FALSE, this);
-        } catch (IOException ex) {
-            Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BackButtonActionPerformed
@@ -499,7 +500,7 @@ public class AdjustEmployeePanel extends CustomPanel {
                             Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         //set currently selected employee to newly added submission
-                        EmployeesList.setSelectedIndex(listModel.getSize()-1);
+                        EmployeesList.setSelectedIndex(employees.getSize()-1);
 
                         //pinfield not editable unless adding or adjusting info (and never displays pins read from file, only displays on pin entry
                         PinField.setEditable(false);
@@ -515,7 +516,7 @@ public class AdjustEmployeePanel extends CustomPanel {
         }
         //if button doesnt say "Submit" do this("Add New Employee" phase")
         else{
-            //allow pin entry when adding employees
+            //allow pin entry when adding currentEmployees
             PinField.setEditable(true);
             
             //enable instructions
@@ -594,7 +595,7 @@ public class AdjustEmployeePanel extends CustomPanel {
                             NumberField.setEditable(false);
                             PayrateField.setEditable(false);
 
-                            //enable fields for adding emplooyees, selecting new employees, and deleting employees
+                            //enable fields for adding emplooyees, selecting new currentEmployees, and deleting currentEmployees
                             AddEmployeeButton.setEnabled(true);
                             DeleteEmployeeButton.setEnabled(true);
                             EmployeesList.setEnabled(true);
@@ -620,7 +621,7 @@ public class AdjustEmployeePanel extends CustomPanel {
                         NumberField.setEditable(false);
                         PayrateField.setEditable(false);
 
-                        //enable fields for adding emplooyees, selecting new employees, and deleting employees
+                        //enable fields for adding emplooyees, selecting new currentEmployees, and deleting currentEmployees
                         AddEmployeeButton.setEnabled(true);
                         DeleteEmployeeButton.setEnabled(true);
                         EmployeesList.setEnabled(true);
@@ -636,7 +637,7 @@ public class AdjustEmployeePanel extends CustomPanel {
 
     private void DeleteEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteEmployeeButtonActionPerformed
         
-        if(!(listModel.size()> 1)){
+        if(!(employees.size()> 1)){
             HelpText.setText("You may not delete the only employee.");
             HelpText.setVisible(true); 
         }
@@ -652,7 +653,7 @@ public class AdjustEmployeePanel extends CustomPanel {
                 } catch (IOException | ClassNotFoundException ex) {
                     Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                //try catch for file reading failes when updating interface, which reads employees file
+                //try catch for file reading failes when updating interface, which reads currentEmployees file
                 try {
                     updateInterface();
                 } catch (IOException | ClassNotFoundException ex) {

@@ -32,7 +32,7 @@ public class EditSchedulePanel extends CustomPanel {
     private final EditScheduleCalendar editScheduleCalendar;
     private ArrayList<Shift> shifts;
     private DefaultListModel listModel;
-    private Calendar calendar;
+    private final Calendar calendar;
     
     public EditSchedulePanel(MainFrame mainFrame, Calendar calendar) throws IOException, FileNotFoundException, ClassNotFoundException {
         initComponents();
@@ -358,10 +358,11 @@ public class EditSchedulePanel extends CustomPanel {
         AddShiftPanelLayout.setVerticalGroup(
             AddShiftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AddShiftPanelLayout.createSequentialGroup()
-                .addGroup(AddShiftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AddShiftLabel)
-                    .addComponent(DeleteShiftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CreateShiftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(AddShiftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CreateShiftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(AddShiftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(AddShiftLabel)
+                        .addComponent(DeleteShiftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AddShiftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddShiftPanelLayout.createSequentialGroup()
@@ -573,16 +574,12 @@ public class EditSchedulePanel extends CustomPanel {
                 
             }
             
-        } catch (IOException ex) {
-            Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             updateInterface();
-        } catch (IOException ex) {
-            Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_CreateShiftButtonActionPerformed
@@ -592,18 +589,14 @@ public class EditSchedulePanel extends CustomPanel {
             if(shifts.get(x).toString().equals(ShiftsList.getSelectedValue())){
                 try {
                     mainFrame.removeShift(shifts.get(x));
-                } catch (IOException ex) {
-                    Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
+                } catch (IOException | ClassNotFoundException ex) {
                     Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
         try {
             updateInterface();
-        } catch (IOException ex) {
-            Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_DeleteShiftButtonActionPerformed

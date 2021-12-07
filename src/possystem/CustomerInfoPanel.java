@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package possystem;
 
 import java.io.FileNotFoundException;
@@ -13,45 +8,58 @@ import javax.swing.ButtonGroup;
  *
  * @author tylar
  */
+
+//panel that is displayed when "New Order" is Clicked on the main menu
 public class CustomerInfoPanel extends CustomPanel {
 
-    private ButtonGroup orderTypeButtonGroup;
-    private MainFrame mainFrame;
-    private ClockThread clock;
-    private CustomerOrder newOrder;
-    /**
-     * Creates new form CustomerInfoPanel
-     */
-    public CustomerInfoPanel(MainFrame mainFrame, CustomerOrder newOrder) throws IOException, FileNotFoundException, ClassNotFoundException {
+    //button group to ensure single selection only
+    private final ButtonGroup orderTypeButtonGroup;
+    
+    //mainFrame variable to set new panels
+    private final MainFrame mainFrame;
+    
+    //customerOrder object created to hold customer's info
+    private final CustomerOrder customerOrder;
+   
+    public CustomerInfoPanel(MainFrame mainFrame, CustomerOrder customerOrder) throws IOException, FileNotFoundException, ClassNotFoundException {
+        //basic panel inifiation 
         initComponents();
-        this.mainFrame = mainFrame;
-        this.newOrder = newOrder;
+        this.mainFrame = mainFrame;      
         setClockField(jTextField1);
+        CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
+        
+        //set displayed order to order passed to panel
+        this.customerOrder = customerOrder;
+        
+        //adding buttons to buttongroup
         orderTypeButtonGroup = new ButtonGroup();
         orderTypeButtonGroup.add(PickupButton);
         orderTypeButtonGroup.add(DeliveryButton);
-        NameField.setText(newOrder.getCustomerName());
-        NumberField.setText(newOrder.getCustomerPhoneNumber());
-        AddressField.setText(newOrder.getCustomerAddress());
-        if(newOrder.isDelivery()){
+        
+        //setting visual elements according to customerOrder object
+        NameField.setText(customerOrder.getCustomerName());
+        NumberField.setText(customerOrder.getCustomerPhoneNumber());
+        AddressField.setText(customerOrder.getCustomerAddress());
+        if(customerOrder.isDelivery()){
             DeliveryButton.setSelected(true);
         }
         else{
             PickupButton.setSelected(true);
             AddressField.setEnabled(false);
-        }
-        CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
-        
+        }     
     }
     
+    //returns true if all entered fields are valid to advance to newOrderPanel
     private boolean fieldsValid(){
         boolean clear = true;
+        
+        //check if phone field valid
         String phonePattern = "\\d{10}";
         if(!NumberField.getText().matches(phonePattern)){
             NumberField.setText("Please enter a valid number.");
             clear = false;
         }
-        
+        //check if address field is valid (only if delivery)
         if(DeliveryButton.isSelected() && AddressField.getText().isBlank()){
             AddressField.setText("Please enter an address.");
             clear = false;
@@ -257,11 +265,11 @@ public class CustomerInfoPanel extends CustomPanel {
 
     private void ContinueOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContinueOrderButtonActionPerformed
         if(fieldsValid()){
-            newOrder.setCustomerName(NameField.getText());
-            newOrder.setCustomerPhoneNumber(NumberField.getText());
-            newOrder.setCustomerAddress(AddressField.getText());
-            newOrder.setDelivery(DeliveryButton.isSelected());
-            mainFrame.setNewPanel(new NewOrderPanel(mainFrame, newOrder), true, this);
+            customerOrder.setCustomerName(NameField.getText());
+            customerOrder.setCustomerPhoneNumber(NumberField.getText());
+            customerOrder.setCustomerAddress(AddressField.getText());
+            customerOrder.setDelivery(DeliveryButton.isSelected());
+            mainFrame.setNewPanel(new NewOrderPanel(mainFrame, customerOrder), true, this);
         }
     }//GEN-LAST:event_ContinueOrderButtonActionPerformed
 

@@ -80,7 +80,7 @@ public class OrderedMenuItem implements Serializable {
         for (int i = 0; i < selectedOptions.size(); i++) {
             price += options.get(i).getPossibleValues().get(selectedOptions.get(i)).getPriceModifier();
         }
-
+        
         return price;
     }
 
@@ -89,7 +89,7 @@ public class OrderedMenuItem implements Serializable {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(String.format("%-38s $%4.2f", menuItem.getName(), getPrice()));
+        stringBuilder.append(String.format("%-38s $%4.2f", menuItem.getName(), this.menuItem.getBasePrice()));
 
         for (int i = 0; i < menuItem.getOptions().size(); i++) {
             MenuItemOption option = menuItem.getOptions().get(i);

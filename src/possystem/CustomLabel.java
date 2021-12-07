@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package possystem;
 
 import java.awt.Color;
@@ -18,33 +13,28 @@ import javax.swing.JLabel;
  */
 public class CustomLabel extends JLabel{
     
-    private final MainFrame mainFrame;
+    //boolean determining whether this label has been selected
     private Boolean highlighted;
-    private EditScheduleCalendar schedulingCalendar;
     
-    //customLabels displayed on edit schedule panel - custom implementation for highlighting selections
-    //I almost definitely shouldve used toggle buttons but i discovered those later
-    //recieves its calendar day of the month label 'text', the calendar graphic it belongs to 'editschedulingcalendar' and mainframe
-    public CustomLabel (String text, EditScheduleCalendar schedulingCalendar, MainFrame mainFrame){
-        //create label regularly with day of month 'text'
-        super(text);
-        
-        //bigger text
+    //these labels are present on the schedulingCalendar Panel
+    private final EditScheduleCalendar schedulingCalendar;
+    
+    //custom implementation to adjust actionListener to highlight label upon selection
+    public CustomLabel (String text, EditScheduleCalendar schedulingCalendar){
+        //create label regularly with day of month as its text
+        super(text);       
+        //bigger font
         this.setFont(new Font("sansserif", 1, 30));
-        
-        //arbitrary
-        this.mainFrame = mainFrame;
-        
-        //save calendar graphic 'schedulingCalendar'
-        this.schedulingCalendar = schedulingCalendar;
-        
-        //initialize to not highlighted
-        this.highlighted = false;
-        
         //align text to top of label
         this.setVerticalAlignment(JLabel.TOP);
         
-        //add mouse listener to enable highlighting selected days
+        //save the panel it belongs to
+        this.schedulingCalendar = schedulingCalendar;
+        
+        //initialize label to not highlighted
+        this.highlighted = false;
+        
+        //add mouse listener to enable highlighting selected labels
         this.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){                    
@@ -55,12 +45,12 @@ public class CustomLabel extends JLabel{
         });
     }
     
-    //return if highlighted
+    //return if currently highlighted
     public Boolean getHighlighted(){
         return highlighted;
     }
     
-    //function highlights day when label is clicked
+    //function highlights day when label is clicked and unhighlights if clicked again
     public void highlightDay(){
         //if not currently highlighted when clicked, do this
         if(highlighted == false){

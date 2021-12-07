@@ -15,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import static javax.swing.text.StyleConstants.Bold;
 
 
 /**
@@ -343,9 +342,7 @@ public class ViewSchedulePanel extends CustomPanel {
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         try {
             mainFrame.setNewPanel(new MainMenuPanel(mainFrame), Boolean.FALSE, this);
-        } catch (IOException ex) {
-            Logger.getLogger(ViewSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ViewSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BackButtonActionPerformed

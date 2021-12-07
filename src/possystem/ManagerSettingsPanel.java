@@ -5,7 +5,6 @@
  */
 package possystem;
 
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,7 +20,8 @@ import java.util.logging.Logger;
 public class ManagerSettingsPanel extends CustomPanel {
 
     private final MainFrame mainFrame;
-    private GridLayout gridLayout1, gridLayout2;
+    private final GridLayout gridLayout1;
+    private final GridLayout gridLayout2;
     
     //simple options panel, just a fewbuttons
     public ManagerSettingsPanel(MainFrame mainFrame) throws IOException, FileNotFoundException, ClassNotFoundException {

@@ -15,7 +15,7 @@ import java.util.Date;
 public class Shift implements Serializable{
     
     //employee and time variables for each shifts
-    private Employee employee;
+    private final Employee employee;
     private Date clockStart, clockEnd, setStart, setEnd;
     private boolean shiftCompleted;
     

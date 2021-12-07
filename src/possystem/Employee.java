@@ -6,6 +6,7 @@
 package possystem;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -29,7 +30,7 @@ public class Employee implements Serializable{
         this.payRate = payRate;
         this.pin = pin;
         this.clockedIn = false;
-        this.lastClock = new Date();
+        this.lastClock = new Date(Calendar.getInstance().getTimeInMillis() - (5*60*1000));
         this.manager = manager;
     }
    

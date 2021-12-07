@@ -7,7 +7,6 @@ package possystem;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
-import javax.swing.JPanel;
 import possystem.menuitems.MenuItem;
 import possystem.menuitems.MenuSubCategory;
 
@@ -17,10 +16,10 @@ import possystem.menuitems.MenuSubCategory;
  */
 public class MenuSubCategoryPanel extends CustomPanel {
 
-    private MainFrame mainFrame;
-    private CustomPanel parentPanel;
-    private MenuSubCategory subCategory;
-    private CustomerOrder customerOrder;
+    private final MainFrame mainFrame;
+    private final CustomPanel parentPanel;
+    private final MenuSubCategory subCategory;
+    private final CustomerOrder customerOrder;
 
     public MenuSubCategoryPanel(MenuSubCategory subCategory, MainFrame mainFrame,
             CustomerOrder customerOrder, CustomPanel parentPanel) {

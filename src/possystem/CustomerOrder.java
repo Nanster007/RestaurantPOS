@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package possystem;
 
-import possystem.menuitems.MenuItem;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -18,7 +12,7 @@ import possystem.menuitems.OrderedMenuItem;
 public class CustomerOrder implements Serializable {
 
     private String customerName, customerAddress, customerPhoneNumber;
-    private ArrayList<OrderedMenuItem> orderedItems;
+    private final ArrayList<OrderedMenuItem> orderedItems;
     private final UUID orderID;
     private boolean delivery;
 

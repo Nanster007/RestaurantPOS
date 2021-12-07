@@ -8,12 +8,10 @@ package possystem;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.border.Border;
 
 /**
  *
@@ -21,8 +19,8 @@ import javax.swing.border.Border;
  */
 public class NewOrderPanel extends CustomPanel {
 
-    private MainFrame mainFrame;
-    private CustomerOrder customerOrder;
+    private final MainFrame mainFrame;
+    private final CustomerOrder customerOrder;
 
     public NewOrderPanel(MainFrame mainFrame, CustomerOrder customerOrder) {
         initComponents();
@@ -162,6 +160,7 @@ public class NewOrderPanel extends CustomPanel {
                 .addContainerGap())
         );
 
+        OrderDetailsTextArea.setEditable(false);
         OrderDetailsTextArea.setColumns(20);
         OrderDetailsTextArea.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         OrderDetailsTextArea.setRows(5);

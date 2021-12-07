@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package possystem;
 
 import java.awt.Font;
@@ -18,12 +13,14 @@ public class CustomButton extends JToggleButton{
     
     private final LoginPanel loginPanel;
     
-    //custom toggle button allows for continuous number entry without having to manually toggle off after each numberClicked
+    //custom toggle button to adjust actionListener to manually unselect after clicking
     public CustomButton(String text, LoginPanel loginPanel){
-        //create regulag toggle button with label =text
+        //create regulag toggle button with label == text
         super(text);
         
+        //these buttons are present on the loginPanel
         this.loginPanel = loginPanel;
+        
         //bigger font
         this.setFont(new Font("sansserif", 1, 30));
         
@@ -44,7 +41,7 @@ public class CustomButton extends JToggleButton{
     }
     
     //.getButtonGroup().clearSelection(); disables toggle for continous selections
-    //each button press calls respective function in loginPanel
+    //each button press calls respective function in loginPanel according to button's label
     public void numberClicked(){
         loginPanel.getButtonGroup().clearSelection();
         loginPanel.numberClicked(getText());

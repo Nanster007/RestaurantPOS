@@ -4,7 +4,10 @@ import java.util.Date;
 
 public class ClockThread extends Thread {
 
+    //clockthread holding current panel allows 1 clock to persist through all panels
     private CustomPanel currentPanel;
+    
+    //standard variables
     private String time;
     private Date date;
 

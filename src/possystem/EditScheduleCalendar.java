@@ -21,9 +21,9 @@ public class EditScheduleCalendar extends JPanel {
     
     private final MainFrame mainFrame;
     private CustomLabel[] daysOfMonth;
-    private GridLayout layout;
-    private ArrayList<Date> selectedDays;
-    private Calendar calendar;
+    private final GridLayout layout;
+    private final ArrayList<Date> selectedDays;
+    private final Calendar calendar;
     
     public EditScheduleCalendar (MainFrame mainFrame, Calendar calendar){
         super();
@@ -44,11 +44,11 @@ public class EditScheduleCalendar extends JPanel {
         System.out.println(getMonth());
         for(int x=0; x<42; x++){
             if(index <= mainFrame.daysPerMonth[getMonth()] && x >= getDay()-1){
-                daysOfMonth[x] = new CustomLabel("" + (index), this, mainFrame);
+                daysOfMonth[x] = new CustomLabel("" + (index), this);
                 index++;
             }
             else{
-                daysOfMonth[x] = new CustomLabel("", this, mainFrame);
+                daysOfMonth[x] = new CustomLabel("", this);
             }
             this.add(daysOfMonth[x]);
 //            daysOfMonth[x].setLocation(x%7*width/7+30, x/7*height/5+30);
@@ -59,9 +59,9 @@ public class EditScheduleCalendar extends JPanel {
     
     public void clearSelectedDays(){
         selectedDays.clear();
-        for(int x=0; x<daysOfMonth.length; x++){
-            if(daysOfMonth[x].getHighlighted()){
-                daysOfMonth[x].highlightDay();
+        for (CustomLabel daysOfMonth1 : daysOfMonth) {
+            if (daysOfMonth1.getHighlighted()) {
+                daysOfMonth1.highlightDay();
             }
         }
     }
@@ -92,27 +92,5 @@ public class EditScheduleCalendar extends JPanel {
     
     public ArrayList<Date> getSelectedDays(){
         return selectedDays;
-    }
-
-    private void changeMonth(){
-        
-        int index = 1;
-        
-        if(getYear()%4 == 0){
-            mainFrame.daysPerMonth[1] = 29;
-        }
-        else{
-            mainFrame.daysPerMonth[1] = 28;
-        }
-        
-        for(int x=0; x<42; x++){
-            if(index <= mainFrame.daysPerMonth[getMonth()] && x >= getDay()){
-                daysOfMonth[x].setText("" + (index));
-                index++;
-            }
-            else{
-                daysOfMonth[x].setText("");
-            }
-        }
     }
 }

@@ -5,8 +5,6 @@
 package possystem;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
 import java.util.List;
 import possystem.menuitems.MenuItemOption;
 import possystem.menuitems.MenuItemOptionValue;
@@ -17,9 +15,9 @@ import possystem.menuitems.MenuItemOptionValue;
  */
 public class MenuItemOptionPanel extends javax.swing.JPanel {
 
-    private MenuItemOption option;
-    private int index; // Index of option in MenuItem option List
-    ArrayList<OptionValueToggleButton> buttons;
+    private final MenuItemOption option;
+    private final int index; // Index of option in MenuItem option List
+    private final ArrayList<OptionValueToggleButton> buttons;
 
     /**
      * Creates new form MenuItemOptionPanel

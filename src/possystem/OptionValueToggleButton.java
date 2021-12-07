@@ -13,8 +13,8 @@ import possystem.menuitems.MenuItemOptionValue;
  */
 public class OptionValueToggleButton extends JToggleButton {
 
-    private MenuItemOptionValue value;
-    private int index;  // Index into List of option values
+    private final MenuItemOptionValue value;
+    private final int index;  // Index into List of option values
 
     public OptionValueToggleButton(MenuItemOptionValue value, int index) {
         this.value = value;

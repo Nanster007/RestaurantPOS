@@ -5,10 +5,8 @@
  */
 package possystem;
 
-import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *

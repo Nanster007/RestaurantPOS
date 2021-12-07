@@ -26,7 +26,7 @@ public class LoginPanel extends CustomPanel {
     private final MainFrame mainFrame;
     
     //buttongroup ensures only one button clicked at a time
-    private ButtonGroup bg;
+    private final ButtonGroup bg;
     
     //just to add clear and delete button convieniently
     private final String[] buttonOrder = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "Clear", "0", "Delete"};
@@ -246,9 +246,7 @@ public class LoginPanel extends CustomPanel {
                 ErrorLabel.setText("*Invalid pin please try again*");
                 PinField.setText("");
             }
-        } catch (IOException ex) {
-            Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_EnterButtonActionPerformed
