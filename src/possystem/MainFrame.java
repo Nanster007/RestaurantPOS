@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import possystem.menuitems.*;
 
-//creates window and sets various data for window
+//main workhorse object for visual display and file reading
 public final class MainFrame extends JFrame {
 
     //variables for general functionality
@@ -43,10 +43,12 @@ public final class MainFrame extends JFrame {
     public final String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     public int[] daysPerMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
+    //holds available menu items for ordering
     private final Menu menu;
     private final Menu toppingMenu;
 
     public MainFrame() throws IOException, FileNotFoundException, ClassNotFoundException {
+        //visual adjustments
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setResizable(false);
@@ -67,6 +69,7 @@ public final class MainFrame extends JFrame {
         customerOrders = getCustomerOrders();
         employees = getEmployees();
 
+        //init menu objects
         this.menu = new Menu();
         this.toppingMenu = new Menu();
 
@@ -96,21 +99,9 @@ public final class MainFrame extends JFrame {
         return false;
     }
 
+    //creating of the menu and its structure upon program startup
     private void initializeMenuItems() {
         // Generate list of menu items here, for testing
-
-        // Options
-        ArrayList<MenuItemOption> drinkOptions = new ArrayList();
-        ArrayList<MenuItemOption> burgerOptions = new ArrayList();
-        ArrayList<MenuItemOption> fryOptions = new ArrayList();
-        ArrayList<MenuItemOption> pastaOptions = new ArrayList();
-        ArrayList<MenuItemOption> pizzaOptions = new ArrayList();
-        ArrayList<MenuItemOption> milkshakeOptions = new ArrayList();
-        ArrayList<MenuItemOption> coffeeOptions = new ArrayList();
-        ArrayList<MenuItemOption> wineOptions = new ArrayList();
-        ArrayList<MenuItemOption> beerOptions = new ArrayList();
-        ArrayList<MenuItemOption> saladOptions = new ArrayList();
-        ArrayList<MenuItemOption> wedgesOptions = new ArrayList();
 
         ArrayList<MenuItemOptionValue> drinkSizeValues = new ArrayList();
         ArrayList<MenuItemOptionValue> burgerSizeValues = new ArrayList();
@@ -175,6 +166,18 @@ public final class MainFrame extends JFrame {
         wedgesTypes.add(new MenuItemOptionValue("Crispy", +0d));
         wedgesTypes.add(new MenuItemOptionValue("Regular", +0d));
 
+        
+        ArrayList<MenuItemOption> drinkOptions = new ArrayList();
+        ArrayList<MenuItemOption> burgerOptions = new ArrayList();
+        ArrayList<MenuItemOption> fryOptions = new ArrayList();
+        ArrayList<MenuItemOption> pastaOptions = new ArrayList();
+        ArrayList<MenuItemOption> pizzaOptions = new ArrayList();
+        ArrayList<MenuItemOption> milkshakeOptions = new ArrayList();
+        ArrayList<MenuItemOption> coffeeOptions = new ArrayList();
+        ArrayList<MenuItemOption> wineOptions = new ArrayList();
+        ArrayList<MenuItemOption> beerOptions = new ArrayList();
+        ArrayList<MenuItemOption> saladOptions = new ArrayList();
+        ArrayList<MenuItemOption> wedgesOptions = new ArrayList();
         
         pizzaOptions.add(new MenuItemOption("Size", drinkSizeValues, 1, true));
         pizzaOptions.add(new MenuItemOption("Crust Type", pizzaTypeValues, 1, true));
@@ -369,23 +372,10 @@ public final class MainFrame extends JFrame {
 
     }
 
-    public Menu getMenu() {
-        return this.menu;
-    }
-
-    public Menu getToppingMenu() {
-        return this.toppingMenu;
-    }
-
     //function to change screens
-    public void setNewPanel(CustomPanel newPage, Boolean saveLastPage, CustomPanel lastPage) {
+    public void setNewPanel(CustomPanel newPage) {
         //remove current panel from mainFrame
         this.remove(currentPage);
-
-        //savePage boolean to bother saving previous panel - rarely used
-        if (saveLastPage) {
-            this.lastPage = lastPage;
-        }
 
         //set current page to the new page passed to function
         currentPage = newPage;
@@ -429,6 +419,7 @@ public final class MainFrame extends JFrame {
         oos.writeObject(customerOrders);
     }
 
+    //adds employee to file
     public void addEmployee(Employee employee) throws FileNotFoundException, IOException, ClassNotFoundException {
         employees.add(employee);
         fos = new FileOutputStream("Employees.txt");
@@ -507,6 +498,7 @@ public final class MainFrame extends JFrame {
         oos.writeObject(employees);
     }
 
+    //save shifts
     public void saveShifts(int month, int year) throws FileNotFoundException, IOException, ClassNotFoundException {
         String file = (month + 1) + "_" + (year + 1900) + ".txt";
         fos = new FileOutputStream(file);
@@ -536,26 +528,6 @@ public final class MainFrame extends JFrame {
         }
 
         return employees;
-    }
-    
-    public void openDrawer() throws FileNotFoundException, IOException, ClassNotFoundException{
-        String file = "Drawer.txt";
-        try {
-            fis = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            File newFile = new File(file);
-            newFile.createNewFile();
-            fis = new FileInputStream(file);
-        }
-        try {
-            ois = new ObjectInputStream(fis);
-            employees = (ArrayList<Employee>) ois.readObject();
-            ois.close();
-        } catch (EOFException e) {
-            employees = new ArrayList();
-            employees.add(new Employee("Tylar", "3303078422", 15.00, 5555, true));
-            saveEmployees();
-        }
     }
 
     //updates mainframe shifts list and returns it
@@ -637,14 +609,7 @@ public final class MainFrame extends JFrame {
         return customerOrders;
     }
 
-    public void clearLastPanel() {
-        this.lastPage = currentPage;
-    }
-
-    public CustomPanel getLastPage() {
-        return lastPage;
-    }
-
+    //returns the employee currently logged in
     public Employee getCurrentUser() throws IOException, FileNotFoundException, ClassNotFoundException {
         getEmployees();
         for (int x = 0; x < employees.size(); x++) {
@@ -656,6 +621,7 @@ public final class MainFrame extends JFrame {
         return null;
     }
 
+    //clock in the currently logged in employee
     public void clockIn() throws IOException, FileNotFoundException, ClassNotFoundException {
         Date date = clock.getDate();
         getEmployees();
@@ -680,10 +646,9 @@ public final class MainFrame extends JFrame {
 
         shifts.add(new Shift(currentUser, date, new Date(0, 0, 1)));
         saveShifts(date.getMonth(), date.getYear());
-
-        //clocking in without shift scheduled here
     }
 
+    //clock out function, similar to clock in
     public void clockOut() throws IOException, FileNotFoundException, ClassNotFoundException {
         Date date = clock.getDate();
         getEmployees();
@@ -706,6 +671,14 @@ public final class MainFrame extends JFrame {
                 return;
             }
         }
+    }
+    
+    public Menu getMenu() {
+        return this.menu;
+    }
+
+    public Menu getToppingMenu() {
+        return this.toppingMenu;
     }
     
 }

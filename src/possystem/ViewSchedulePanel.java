@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package possystem;
 
 import java.awt.Font;
@@ -341,7 +336,7 @@ public class ViewSchedulePanel extends CustomPanel {
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         try {
-            mainFrame.setNewPanel(new MainMenuPanel(mainFrame), Boolean.FALSE, this);
+            mainFrame.setNewPanel(new MainMenuPanel(mainFrame));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ViewSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -366,7 +361,7 @@ public class ViewSchedulePanel extends CustomPanel {
         //date then passed to brand new ViewSchedulePanel, generating new graphics with respect to new date
         setTime(date);
         try {
-            mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar), Boolean.FALSE, this);
+            mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ViewSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -390,7 +385,7 @@ public class ViewSchedulePanel extends CustomPanel {
         //date then passed to brand new ViewSchedulePanel, generating new graphics with respect to new date
         setTime(date);
         try {
-            mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar), Boolean.FALSE, this);
+            mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ViewSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -401,7 +396,7 @@ public class ViewSchedulePanel extends CustomPanel {
             if((System.currentTimeMillis()/1000 - mainFrame.getCurrentUser().getLastClock().getTime()/1000) > 300 && !mainFrame.getCurrentUser().getClockedIn()){
                 try {
                     mainFrame.clockIn();
-                    mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar), false, this);
+                    mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar));
                 } catch (IOException | ClassNotFoundException ex) {
                     Logger.getLogger(ViewSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -409,9 +404,7 @@ public class ViewSchedulePanel extends CustomPanel {
             else{
                 ExcessiveClocks.setText("Recent clock too soon, please wait.");
             }
-        } catch (IOException ex) {
-            Logger.getLogger(ViewSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ViewSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -422,7 +415,7 @@ public class ViewSchedulePanel extends CustomPanel {
     private void ClockOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClockOutButtonActionPerformed
         try {
             mainFrame.clockOut();
-            mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar), false, this);
+            mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ViewSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }

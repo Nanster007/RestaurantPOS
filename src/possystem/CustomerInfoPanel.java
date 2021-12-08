@@ -2,6 +2,8 @@ package possystem;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 
 /**
@@ -269,7 +271,7 @@ public class CustomerInfoPanel extends CustomPanel {
             customerOrder.setCustomerPhoneNumber(NumberField.getText());
             customerOrder.setCustomerAddress(AddressField.getText());
             customerOrder.setDelivery(DeliveryButton.isSelected());
-            mainFrame.setNewPanel(new NewOrderPanel(mainFrame, customerOrder), true, this);
+            mainFrame.setNewPanel(new NewOrderPanel(mainFrame, customerOrder));
         }
     }//GEN-LAST:event_ContinueOrderButtonActionPerformed
 
@@ -287,7 +289,11 @@ public class CustomerInfoPanel extends CustomPanel {
     }//GEN-LAST:event_NumberFieldActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        mainFrame.setNewPanel(mainFrame.getLastPage(), false, this);
+        try {
+            mainFrame.setNewPanel(new MainMenuPanel(mainFrame));
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(CustomerInfoPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

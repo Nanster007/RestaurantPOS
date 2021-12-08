@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package possystem;
 
 import java.io.Serializable;
@@ -23,7 +18,7 @@ public class Employee implements Serializable{
     private Date lastClock;
     private boolean manager;
     
-    //basic constructor
+    //basic constructor setting instance variables
     public Employee (String name, String phoneNumber, double payRate, int pin, boolean manager){
         this.name = name;
         this.phoneNumber = phoneNumber;

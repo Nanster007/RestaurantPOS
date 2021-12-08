@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package possystem;
 
 import java.awt.GridLayout;
@@ -24,15 +19,13 @@ public class MainMenuPanel extends CustomPanel {
     public MainMenuPanel(MainFrame mainFrame) throws IOException, FileNotFoundException, ClassNotFoundException {
         initComponents();
         this.mainFrame = mainFrame;
-        //update top left clock field
         setClockField(ClockLabel);
-        
-        //set 2x2 grid layout for menu buttons
-        ButtonsPanel.setLayout(new GridLayout(2, 2));
-        
-        //set current user label
         CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
         
+        //set 2x2 grid layout for main menu menu buttons
+        ButtonsPanel.setLayout(new GridLayout(2, 2));
+        
+        //enabling/disabling manager settings
         if(!mainFrame.getCurrentUser().isManager()){
             ManagerSettingsButton.setEnabled(false);
         }
@@ -58,7 +51,7 @@ public class MainMenuPanel extends CustomPanel {
         ScheduleButton = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         ManagerSettingsButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        LogoutButton = new javax.swing.JButton();
 
         CurrentUserLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         CurrentUserLabel.setText("Welcome: User's Name");
@@ -204,12 +197,12 @@ public class MainMenuPanel extends CustomPanel {
                 .addContainerGap())
         );
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setText("Log Out");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        LogoutButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        LogoutButton.setText("Log Out");
+        LogoutButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        LogoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                LogoutButtonActionPerformed(evt);
             }
         });
 
@@ -227,7 +220,7 @@ public class MainMenuPanel extends CustomPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(LogoutButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(ButtonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
@@ -241,7 +234,7 @@ public class MainMenuPanel extends CustomPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ButtonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -257,7 +250,7 @@ public class MainMenuPanel extends CustomPanel {
 
         //try catch for possible file reading failures
         try {  
-            mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar), Boolean.FALSE, this);
+            mainFrame.setNewPanel(new ViewSchedulePanel(mainFrame, calendar));
         } 
        
         catch (IOException | ClassNotFoundException ex) {
@@ -268,7 +261,7 @@ public class MainMenuPanel extends CustomPanel {
     private void NewOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewOrderButtonActionPerformed
         try {
             //create blank cutsomer order for customer info panel
-            mainFrame.setNewPanel(new CustomerInfoPanel(mainFrame, new CustomerOrder("", "", "", false)), true, this);
+            mainFrame.setNewPanel(new CustomerInfoPanel(mainFrame, new CustomerOrder("", "", "", false)));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(MainMenuPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -277,7 +270,7 @@ public class MainMenuPanel extends CustomPanel {
     private void ManagerSettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManagerSettingsButtonActionPerformed
 
         try {
-            mainFrame.setNewPanel(new ManagerSettingsPanel(mainFrame), true, this);
+            mainFrame.setNewPanel(new ManagerSettingsPanel(mainFrame));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(MainMenuPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -290,26 +283,26 @@ public class MainMenuPanel extends CustomPanel {
 
     private void OrderHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderHistoryButtonActionPerformed
         try {
-            mainFrame.setNewPanel(new OrderHistoryPanel(mainFrame), true, this);
+            mainFrame.setNewPanel(new OrderHistoryPanel(mainFrame));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(MainMenuPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_OrderHistoryButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        mainFrame.setNewPanel(new LoginPanel(mainFrame), Boolean.FALSE, this);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
+        mainFrame.setNewPanel(new LoginPanel(mainFrame));
+    }//GEN-LAST:event_LogoutButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ButtonsPanel;
     private javax.swing.JTextField ClockLabel;
     private javax.swing.JLabel CurrentUserLabel;
+    private javax.swing.JButton LogoutButton;
     private javax.swing.JButton ManagerSettingsButton;
     private javax.swing.JButton NewOrderButton;
     private javax.swing.JButton OrderHistoryButton;
     private javax.swing.JButton ScheduleButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package possystem;
 
 import java.awt.Color;
@@ -19,7 +14,10 @@ import javax.swing.JButton;
  */
 public class NewOrderPanel extends CustomPanel {
 
+    //mainframe for new panel calls
     private final MainFrame mainFrame;
+    
+    //order being displayed
     private final CustomerOrder customerOrder;
 
     public NewOrderPanel(MainFrame mainFrame, CustomerOrder customerOrder) {
@@ -27,29 +25,27 @@ public class NewOrderPanel extends CustomPanel {
         this.OrderDetailsTextArea.setFont(new Font(Font.MONOSPACED,
                 this.getFont().getStyle(),
                 this.getFont().getSize()));
-
         setClockField(ClockLabel);
         this.customerOrder = customerOrder;
         this.mainFrame = mainFrame;
+        
+        //set visual elements to customer order instance variables
         OrderIDLabel.setText(customerOrder.getOrderID().toString());
         CustomerNameLabel.setText(customerOrder.getCustomerName());
         CustomerPhoneLabel.setText(customerOrder.getCustomerPhoneNumber());
-        CustomerOrderTotalLabel.setText(String.format("%.2f", customerOrder.getOrderTotal()));
-
+        OrderDetailsTextArea.setText(customerOrder.toString());
+        CustomerOrderTotalLabel.setText(String.format("%.2f", customerOrder.getOrderTotal()));       
         if (!customerOrder.isDelivery()) {
             AddressLabel.setText("Pickup");
             CustomerAddressLabel.setVisible(false);
         } else {
             CustomerAddressLabel.setText(customerOrder.getCustomerAddress());
         }
-        
-        
-
-        OrderDetailsTextArea.setText(customerOrder.toString());
 
         setupMenuCategories();
     }
 
+    //display the categories available for current menu
     private void setupMenuCategories() {
         for (String categoryName : this.mainFrame.getMenu().getMenuCategoryNames()) {
             JButton button = new JButton(categoryName);
@@ -62,11 +58,12 @@ public class NewOrderPanel extends CustomPanel {
         }
     }
 
+    //set panel to category selected
     private void MenuCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
         JButton button = (JButton) evt.getSource();
         String categoryName = button.getText();
 
-        mainFrame.setNewPanel(new MenuCategoryPanel(mainFrame, customerOrder, categoryName), true, this);
+        mainFrame.setNewPanel(new MenuCategoryPanel(mainFrame, customerOrder, categoryName));
     }
 
     /**
@@ -298,7 +295,7 @@ public class NewOrderPanel extends CustomPanel {
 
     private void EditInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditInfoButtonActionPerformed
         try {
-            mainFrame.setNewPanel(new CustomerInfoPanel(mainFrame, customerOrder), true, this);
+            mainFrame.setNewPanel(new CustomerInfoPanel(mainFrame, customerOrder));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(NewOrderPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -306,19 +303,20 @@ public class NewOrderPanel extends CustomPanel {
 
     private void CancelOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelOrderButtonActionPerformed
         try {
-            mainFrame.setNewPanel(new MainMenuPanel(mainFrame), false, this);
+            mainFrame.setNewPanel(new MainMenuPanel(mainFrame));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(NewOrderPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        mainFrame.clearLastPanel();
     }//GEN-LAST:event_CancelOrderButtonActionPerformed
 
     private void PlaceOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlaceOrderButtonActionPerformed
         try {
-            mainFrame.setNewPanel(new MainMenuPanel(mainFrame), false, this);
+            mainFrame.setNewPanel(new MainMenuPanel(mainFrame));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(NewOrderPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //remove order first then add it back to allow order editing, would double add order if not
+        //removes nothing if order doesnt already exist
         mainFrame.removeCustomerOrder(customerOrder.getOrderID().toString());
         try {
             mainFrame.addCustomerOrder(customerOrder);

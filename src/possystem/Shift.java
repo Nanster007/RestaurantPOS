@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package possystem;
 
 import java.io.Serializable;
@@ -17,6 +12,7 @@ public class Shift implements Serializable{
     //employee and time variables for each shifts
     private final Employee employee;
     private Date clockStart, clockEnd, setStart, setEnd;
+    //boolean to not overwrite completed shifts
     private boolean shiftCompleted;
     
     //basic constructor
@@ -29,7 +25,7 @@ public class Shift implements Serializable{
         this.shiftCompleted = false;
     }
     
-    //likely a gross overcomplication of a formatted output of the shift
+    //big fat formatting of the shift object
     public String formattedShift(){
         String string = "";
         

@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package possystem;
 
 import possystem.menuitems.*;
 
 /**
  *
- * @author tylar
+ * @author Glenn
  */
 public class MenuCategoryPanel extends CustomPanel {
 
@@ -94,7 +89,7 @@ public class MenuCategoryPanel extends CustomPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
-        mainFrame.setNewPanel(new NewOrderPanel(mainFrame, customerOrder), Boolean.FALSE, this);
+        mainFrame.setNewPanel(new NewOrderPanel(mainFrame, customerOrder));
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

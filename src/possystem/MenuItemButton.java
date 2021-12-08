@@ -1,7 +1,3 @@
-/*
- * Here comes the text of your license
- * Each line should be prefixed with  *
- */
 package possystem;
 
 import javax.swing.JButton;
@@ -9,11 +5,11 @@ import possystem.menuitems.MenuItem;
 
 /**
  *
- * @author dakingofcheckerz
+ * @author glenn
  */
 public class MenuItemButton extends JButton {
 
-    MenuItem menuItem;
+    private final MenuItem menuItem;
 
     public MenuItemButton(MenuItem menuItem) {
         super();

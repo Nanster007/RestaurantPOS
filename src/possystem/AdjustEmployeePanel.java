@@ -430,7 +430,7 @@ public class AdjustEmployeePanel extends CustomPanel {
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         try {
             //previous panel button
-            mainFrame.setNewPanel(new ManagerSettingsPanel(mainFrame), Boolean.FALSE, this);
+            mainFrame.setNewPanel(new ManagerSettingsPanel(mainFrame));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
         }

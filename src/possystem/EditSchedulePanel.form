@@ -420,14 +420,14 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="LabelsPanel" max="32767" attributes="0"/>
+                      <Component id="daysOfWeekPanel" max="32767" attributes="0"/>
                       <Component id="CalendarPanel" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="LabelsPanel" min="-2" max="-2" attributes="0"/>
+                          <Component id="daysOfWeekPanel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="CalendarPanel" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -458,7 +458,7 @@
                     </DimensionLayout>
                   </Layout>
                 </Container>
-                <Container class="javax.swing.JPanel" name="LabelsPanel">
+                <Container class="javax.swing.JPanel" name="daysOfWeekPanel">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">

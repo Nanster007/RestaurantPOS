@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package possystem;
 
 import java.awt.GridLayout;
@@ -19,7 +14,10 @@ import java.util.logging.Logger;
  */
 public class ManagerSettingsPanel extends CustomPanel {
 
+    //mainframe variable to set new panels on button clicks
     private final MainFrame mainFrame;
+    
+    //gridlayouts to ensure visual symmetries 
     private final GridLayout gridLayout1;
     private final GridLayout gridLayout2;
     
@@ -27,6 +25,10 @@ public class ManagerSettingsPanel extends CustomPanel {
     public ManagerSettingsPanel(MainFrame mainFrame) throws IOException, FileNotFoundException, ClassNotFoundException {
         initComponents();
         this.mainFrame = mainFrame;
+        setClockField(ClockLabel);
+        CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
+        
+        //layout setup
         this.gridLayout1 = new GridLayout(1, 2);
         this.ButtonPanel.setLayout(gridLayout1);
         this.gridLayout1.setHgap(20);
@@ -34,12 +36,7 @@ public class ManagerSettingsPanel extends CustomPanel {
         this.gridLayout2 = new GridLayout(2, 1);
         this.ButtonsPanel.setLayout(gridLayout2);
         this.gridLayout2.setHgap(20);
-        this.gridLayout2.setVgap(50);
-        //update clock label
-        setClockField(ClockLabel);
-        //update current used label
-        CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
-        
+        this.gridLayout2.setVgap(50);  
     }
 
     /**
@@ -175,7 +172,7 @@ public class ManagerSettingsPanel extends CustomPanel {
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         try {
             //return to the main menu
-            mainFrame.setNewPanel(new MainMenuPanel(mainFrame), Boolean.FALSE, this);
+            mainFrame.setNewPanel(new MainMenuPanel(mainFrame));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ManagerSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -190,7 +187,7 @@ public class ManagerSettingsPanel extends CustomPanel {
 
         //try catch for possible file reading failures (editschedulepanel needs to read current month's shifts)
         try {
-            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, calendar), Boolean.FALSE, this);
+            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, calendar));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ManagerSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -199,7 +196,7 @@ public class ManagerSettingsPanel extends CustomPanel {
     private void AdjustEmployeesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdjustEmployeesButtonActionPerformed
         //try catch for possible file reading failes(adjust employee panel needs to read employees file)
         try {
-            mainFrame.setNewPanel(new AdjustEmployeePanel(mainFrame), false, this);
+            mainFrame.setNewPanel(new AdjustEmployeePanel(mainFrame));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ManagerSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package possystem;
 
 import java.awt.Font;
@@ -26,65 +21,73 @@ import javax.swing.SwingConstants;
  *
  * @author tylar
  */
+//panel to display all components when viewing 'edit schedule' options
 public class EditSchedulePanel extends CustomPanel {
 
+    //mainframe variable to access various variables needed for panel function
     private final MainFrame mainFrame;
+    
+    //calendar graphic displayed on the panel
     private final EditScheduleCalendar editScheduleCalendar;
+    
+    //array of shifts for the current month displayed
     private ArrayList<Shift> shifts;
-    private DefaultListModel listModel;
+    
+    //allows for single selection of shifts displayed in text box
+    private DefaultListModel shiftsListModel;
+    
+    //calendar to align various graphic elements with respect to date displayed
     private final Calendar calendar;
     
     public EditSchedulePanel(MainFrame mainFrame, Calendar calendar) throws IOException, FileNotFoundException, ClassNotFoundException {
+        //basic variable initializations
         initComponents();
         this.mainFrame = mainFrame;
         setClockField(ClockLabel);
         this.calendar = calendar;
         this.editScheduleCalendar = new EditScheduleCalendar(mainFrame, calendar);
-        this.shifts = mainFrame.getShifts(getMonth(), getYear());
-        CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
         
+        //graphic element assignments
+        CurrentUserLabel.setText("Welcome: " + mainFrame.getCurrentUser().getName());
         YearLabel.setText("" + getYear());
         DateLabel.setText(mainFrame.months[getMonth()]);
-  
+        
+        //access all shifts for the currently displayed month and year
+        this.shifts = mainFrame.getShifts(getMonth(), getYear());
+
+        //add calendar graphic to designated area and set layout for ease of centering
         CalendarPanel.add(editScheduleCalendar);
         CalendarPanel.setLayout(new GridLayout(1,1));
-        setSpinners();
-        
-        LabelsPanel.setLayout(new GridLayout(1, 7));
+
+        //7 columns for 7 days of the week
+        daysOfWeekPanel.setLayout(new GridLayout(1, 7));
+        //create labels for each day of week name
         for(int x=0; x<7; x++){
             JLabel label = new JLabel(mainFrame.daysOfWeek[x], SwingConstants.CENTER);
             label.setFont(new Font("Tahoma", 1, 18));
-            LabelsPanel.add(label);
+            daysOfWeekPanel.add(label);
         }
+        
         updateInterface();
+        setSpinners();
     }
     
-    private int getYear(){
-        return calendar.get(Calendar.YEAR);
-    }
-    
-    private int getMonth(){
-        return calendar.get(Calendar.MONTH);
-    }
-
-    private void setTime(Date date){
-        calendar.setTime(date);
-    }
-    
+    //updates shifts displayed upon various user interactions
     private void updateInterface() throws IOException, FileNotFoundException, ClassNotFoundException{
         
         shifts = mainFrame.getShifts(getMonth(), getYear());
-        listModel = new DefaultListModel();
+        shiftsListModel = new DefaultListModel();
             for(int x=0; x<shifts.size(); x++){
-                listModel.addElement(shifts.get(x).toString());
+                shiftsListModel.addElement(shifts.get(x).toString());
             }
-        ShiftsList = new JList(listModel);
+        ShiftsList = new JList(shiftsListModel);
         ListScrollPane.setViewportView(ShiftsList);
         ShiftsList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         
         editScheduleCalendar.clearSelectedDays();
     }
     
+    //sets various variables to enable smooth usage of the 'spinner' graphic elements determing shift times
     private void setSpinners() throws IOException, FileNotFoundException, ClassNotFoundException{
         SpinnerNumberModel model = new SpinnerNumberModel(1, 1, 12, 1);
         StartHour.setModel(model);
@@ -102,6 +105,21 @@ public class EditSchedulePanel extends CustomPanel {
         model2 = new SpinnerListModel(mainFrame.getEmployeeNames());
         EmployeeSpinner.setModel(model2);
     }
+    
+    //various getters+setters
+    private int getYear(){
+        return calendar.get(Calendar.YEAR);
+    }
+    
+    private int getMonth(){
+        return calendar.get(Calendar.MONTH);
+    }
+
+    private void setTime(Date date){
+        calendar.setTime(date);
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -139,7 +157,7 @@ public class EditSchedulePanel extends CustomPanel {
         EndPhase = new javax.swing.JSpinner();
         jPanel1 = new javax.swing.JPanel();
         CalendarPanel = new javax.swing.JPanel();
-        LabelsPanel = new javax.swing.JPanel();
+        daysOfWeekPanel = new javax.swing.JPanel();
         CreateShiftButton = new javax.swing.JButton();
         DeleteShiftButton = new javax.swing.JButton();
         NextMonthButton = new javax.swing.JButton();
@@ -284,16 +302,16 @@ public class EditSchedulePanel extends CustomPanel {
             .addGap(0, 354, Short.MAX_VALUE)
         );
 
-        LabelsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        daysOfWeekPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        javax.swing.GroupLayout LabelsPanelLayout = new javax.swing.GroupLayout(LabelsPanel);
-        LabelsPanel.setLayout(LabelsPanelLayout);
-        LabelsPanelLayout.setHorizontalGroup(
-            LabelsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout daysOfWeekPanelLayout = new javax.swing.GroupLayout(daysOfWeekPanel);
+        daysOfWeekPanel.setLayout(daysOfWeekPanelLayout);
+        daysOfWeekPanelLayout.setHorizontalGroup(
+            daysOfWeekPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        LabelsPanelLayout.setVerticalGroup(
-            LabelsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        daysOfWeekPanelLayout.setVerticalGroup(
+            daysOfWeekPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 33, Short.MAX_VALUE)
         );
 
@@ -301,13 +319,13 @@ public class EditSchedulePanel extends CustomPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LabelsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(daysOfWeekPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(CalendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(LabelsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(daysOfWeekPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CalendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -466,27 +484,31 @@ public class EditSchedulePanel extends CustomPanel {
     }//GEN-LAST:event_ClockLabelActionPerformed
 
     private void PreviousMonthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousMonthButtonActionPerformed
+        //if leap year, feb has 29 days
         if(getYear()%4 == 0){
             mainFrame.daysPerMonth[1] = 29;
         }
         else{
             mainFrame.daysPerMonth[1] = 28;
         }
-                 
+           
+        //if going from Jan of year x to Dec of year x-1, set new year and month
         if(getMonth() == 0){ 
             setTime(new Date((getYear()-1901), 11, 1));
         }
+        //else set to previous month
         else{
             setTime(new Date((getYear()-1900), getMonth()-1, 1));
         }
+        
+        //try catch statements for possible file reading errors
         try {
             shifts = mainFrame.getShifts(getMonth(), getYear());
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }      
         try {
-            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, calendar), Boolean.FALSE, this);
+            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, calendar));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -495,7 +517,7 @@ public class EditSchedulePanel extends CustomPanel {
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         try {
-            mainFrame.setNewPanel(new ManagerSettingsPanel(mainFrame), Boolean.FALSE, this);
+            mainFrame.setNewPanel(new ManagerSettingsPanel(mainFrame));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -522,7 +544,7 @@ public class EditSchedulePanel extends CustomPanel {
         }
         
         try {
-            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, calendar), Boolean.FALSE, this);
+            mainFrame.setNewPanel(new EditSchedulePanel(mainFrame, calendar));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(EditSchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -617,7 +639,6 @@ public class EditSchedulePanel extends CustomPanel {
     private javax.swing.JSpinner EndHour;
     private javax.swing.JSpinner EndMinute;
     private javax.swing.JSpinner EndPhase;
-    private javax.swing.JPanel LabelsPanel;
     private javax.swing.JScrollPane ListScrollPane;
     private javax.swing.JButton NextMonthButton;
     private javax.swing.JButton PreviousMonthButton;
@@ -629,6 +650,7 @@ public class EditSchedulePanel extends CustomPanel {
     private javax.swing.JSpinner StartMinute;
     private javax.swing.JSpinner StartPhase;
     private javax.swing.JLabel YearLabel;
+    private javax.swing.JPanel daysOfWeekPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;

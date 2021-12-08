@@ -9,14 +9,22 @@ import possystem.menuitems.OrderedMenuItem;
  *
  * @author tylar
  */
+//customer order object for each order placed on the system
 public class CustomerOrder implements Serializable {
 
+    //strings containing customer info
     private String customerName, customerAddress, customerPhoneNumber;
-    private final ArrayList<OrderedMenuItem> orderedItems;
-    private final UUID orderID;
+    //boolean for deilvery or pickup order types
     private boolean delivery;
+    
+    //list of items for the order
+    private final ArrayList<OrderedMenuItem> orderedItems;
+    
+    //unique id of order
+    private final UUID orderID;
 
     public CustomerOrder(String customerName, String customerPhoneNumber, String customerAddress, boolean delivery) {
+        //basic order info initilization 
         this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.customerPhoneNumber = customerPhoneNumber;
@@ -25,6 +33,7 @@ public class CustomerOrder implements Serializable {
         this.delivery = delivery;
     }
 
+    //returns the total price of the customerOrder instance
     public double getOrderTotal() {
 
         double orderTotal = 0;
@@ -38,6 +47,9 @@ public class CustomerOrder implements Serializable {
         return orderTotal;
     }
 
+    
+    //various getters+setters for object variables
+    
     public boolean isDelivery() {
         return delivery;
     }
@@ -45,8 +57,6 @@ public class CustomerOrder implements Serializable {
     public void setDelivery(boolean delivery) {
         this.delivery = delivery;
     }
-    
-    
 
     public void addMenuItem(OrderedMenuItem menuItem) {
         orderedItems.add(menuItem);
@@ -84,6 +94,7 @@ public class CustomerOrder implements Serializable {
         this.customerPhoneNumber = customerPhoneNumber;
     }
 
+    //used to display orders in UI
     @Override
     public String toString() {
         String toString = "---------------------------------------------- \n";

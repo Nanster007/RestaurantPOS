@@ -11,21 +11,22 @@ import possystem.menuitems.MenuItemOption;
 import possystem.menuitems.OrderedMenuItem;
 import possystem.menuitems.Topping;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
- * @author tylar
+ * @author glenn
  */
 public class MenuItemDetailsPanel extends CustomPanel {
 
-    MenuItem menuItem;
-    CustomerOrder customerOrder;
-    Color defaultColor;
-    MainFrame mainFrame;
+    //item for the details being displayed
+    private final MenuItem menuItem;
+    
+    //complete order for display
+    private final CustomerOrder customerOrder;
+    
+    //mainframe for new panel calls
+    private final MainFrame mainFrame;
+    
+    //lists for visual elements
     private List<MenuItemOptionPanel> optionPanels;
     private List<ToppingPanel> toppingPanels;
 
@@ -34,18 +35,16 @@ public class MenuItemDetailsPanel extends CustomPanel {
         this.menuItem = menuItem;
         this.customerOrder = customerOrder;
         this.mainFrame = mainFrame;
-
         initialize();
     }
 
+    //various ui updating calls
     private void initialize() {
-        defaultColor = null;
         this.optionPanels = new ArrayList();
         this.toppingPanels = new ArrayList();
 
         CurrentItemLabel.setText(menuItem.getName());
         BasePriceLabel.setText(String.format("$%.2f", menuItem.getBasePrice()));
-
         this.ExtraCommentsArea.setText(menuItem.getComments());
 
         initializeOptions();
@@ -53,6 +52,7 @@ public class MenuItemDetailsPanel extends CustomPanel {
         updateAddItemButton();
     }
 
+    //display all the large options for current item
     private void initializeOptions() {
         List<MenuItemOption> options = menuItem.getOptions();
 
@@ -326,11 +326,11 @@ public class MenuItemDetailsPanel extends CustomPanel {
         }
 
         customerOrder.addMenuItem(new OrderedMenuItem(this.menuItem, toppings, options));
-        mainFrame.setNewPanel(new NewOrderPanel(mainFrame, customerOrder), false, this);
+        mainFrame.setNewPanel(new NewOrderPanel(mainFrame, customerOrder));
     }//GEN-LAST:event_AddItemButtonActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
-        mainFrame.setNewPanel(mainFrame.getLastPage(), false, this);
+        mainFrame.setNewPanel(new NewOrderPanel(mainFrame, customerOrder));
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void CurrentItemPanelAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_CurrentItemPanelAncestorAdded

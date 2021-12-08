@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package possystem;
 
 import java.awt.Font;
@@ -18,8 +13,13 @@ import java.util.logging.Logger;
  */
 public class OrderHistoryPanel extends CustomPanel {
 
-    private MainFrame mainFrame;
-    private ArrayList<CustomerOrder> customerOrders;
+    //mainframe for new panel calls
+    private final MainFrame mainFrame;
+    
+    //list of orders displayed
+    private final ArrayList<CustomerOrder> customerOrders;
+    
+    //index of which order is selected
     private int selectedOrderIndex;
 
     public OrderHistoryPanel(MainFrame mainFrame) throws IOException, FileNotFoundException, ClassNotFoundException {
@@ -34,14 +34,17 @@ public class OrderHistoryPanel extends CustomPanel {
 
         OrderHistoryTextArea.setFont(monospacedFont);
         SelectedOrderTextArea.setFont(monospacedFont);
-
-        displayOrders();
+        
+        //disable edit and delete options for non managers
         if(!mainFrame.getCurrentUser().isManager()){
             EditOrderButton.setEnabled(false);
             DeleteButton.setEnabled(false);
         }
+        
+        displayOrders();
     }
 
+    //loop through all orders, displaying them in sequence
     private void displayOrders() {
         for (int i = 0; i < customerOrders.size(); i++) {
             OrderHistoryTextArea.setText(OrderHistoryTextArea.getText()
@@ -252,10 +255,8 @@ public class OrderHistoryPanel extends CustomPanel {
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         try {
-            mainFrame.setNewPanel(new MainMenuPanel(mainFrame), Boolean.FALSE, this);
-        } catch (IOException ex) {
-            Logger.getLogger(OrderHistoryPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+            mainFrame.setNewPanel(new MainMenuPanel(mainFrame));
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(OrderHistoryPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BackButtonActionPerformed
@@ -279,7 +280,7 @@ public class OrderHistoryPanel extends CustomPanel {
     }//GEN-LAST:event_NextOrderButtonActionPerformed
 
     private void EditOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditOrderButtonActionPerformed
-        mainFrame.setNewPanel(new NewOrderPanel(mainFrame, customerOrders.get(selectedOrderIndex)), Boolean.FALSE, this);
+        mainFrame.setNewPanel(new NewOrderPanel(mainFrame, customerOrders.get(selectedOrderIndex)));
     }//GEN-LAST:event_EditOrderButtonActionPerformed
 
     private void SearchByIDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchByIDButtonActionPerformed

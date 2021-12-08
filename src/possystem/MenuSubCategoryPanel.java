@@ -50,7 +50,7 @@ public class MenuSubCategoryPanel extends CustomPanel {
         MenuItem menuItem = button.getMenuItem();
 
         MenuItemDetailsPanel newPanel = new MenuItemDetailsPanel(mainFrame, menuItem, customerOrder);
-        mainFrame.setNewPanel(newPanel, true, this.parentPanel);
+        mainFrame.setNewPanel(newPanel);
     }
 
     /**

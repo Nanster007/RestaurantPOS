@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package possystem;
 
 import java.awt.Color;
@@ -20,9 +15,7 @@ import javax.swing.ButtonGroup;
  */
 public class LoginPanel extends CustomPanel {
 
-    /**
-     * Creates new form LoginPanel
-     */
+    //mainframe variable to access pins list
     private final MainFrame mainFrame;
     
     //buttongroup ensures only one button clicked at a time
@@ -33,28 +26,29 @@ public class LoginPanel extends CustomPanel {
     
     //login page
     public LoginPanel(MainFrame mainFrame) {
+        //standard inits
         initComponents();
         this.mainFrame = mainFrame;
         this.bg = new ButtonGroup();
-        //sets top left clock field
         setClockField(ClockLabel);
         
-        //just centers added fields 
+        //centers display on screen 
         TopPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         MiddlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         BottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         
         //bolder clocklabel border for this page
         ClockLabel.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+        
         //4x3 grid for 12 buttons 
         GridLayout layout = new GridLayout(4, 3);
+        //adds 12 secttions to keypad panel
+        KeyPad.setLayout(layout);
+        
         //removes padding
         layout.setVgap(0);
         layout.setHgap(0);
-        
-        //adds 12 buttons to keypad
-        KeyPad.setLayout(layout);
-        
+
         //loop to actually initialize and add buttons to panel
         for(int x=0; x<12; x++){
             CustomButton button = new CustomButton(buttonOrder[x], this);
@@ -239,7 +233,7 @@ public class LoginPanel extends CustomPanel {
             //call mainframe.LogIn() to check pin validity
             //pass it the current PinField text, converted into in integer
             if(mainFrame.logIn(Integer.parseInt(PinField.getText()))){
-                mainFrame.setNewPanel(new MainMenuPanel(mainFrame), Boolean.FALSE, this);
+                mainFrame.setNewPanel(new MainMenuPanel(mainFrame));
             }
             //if LogIn() returns false, invalid pin
             else{
