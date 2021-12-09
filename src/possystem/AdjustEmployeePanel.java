@@ -46,7 +46,7 @@ public class AdjustEmployeePanel extends CustomPanel {
         updateInterface();
         
         //set selected employee to first on list at initialization to read their info on both visual list element and user info visual elements
-        selectedEmployee = mainFrame.findEmployee(employees.getElementAt(0).toString());
+        this.selectedEmployee = mainFrame.findEmployee(employees.getElementAt(0).toString());
         EmployeesList.setSelectedIndex(0);
         
         //set employee info to newly^^selected currentEmployees information
@@ -106,21 +106,26 @@ public class AdjustEmployeePanel extends CustomPanel {
             @Override
             //this is whats called when user clicks a new employee selection on the list
             public void valueChanged(ListSelectionEvent e) {
-                //try catch for possible employee.txt file reading failes
                 try {
-                    selectedEmployee = mainFrame.findEmployee(EmployeesList.getSelectedValue().toString());
+                    //try catch for possible employee.txt file reading failes
+                    try {
+                        selectedEmployee = mainFrame.findEmployee(EmployeesList.getSelectedValue().toString());
+                    } catch (IOException | ClassNotFoundException ex) {
+                        Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    //update visual elements to newly selected employee
+                    NameField.setText(selectedEmployee.getName());
+                    NumberField.setText(selectedEmployee.getPhoneNumber());
+                    PayrateField.setText("" + selectedEmployee.getPayRate());
+                    ShiftsField.setText(mainFrame.getEmployeesShiftsOfMonth(selectedEmployee).toString());
+                    if(selectedEmployee.isManager()){
+                        ManagerButton.setSelected(true);
+                    }
+                    else{
+                        RegularButton.setSelected(true);
+                    }
                 } catch (IOException | ClassNotFoundException ex) {
                     Logger.getLogger(AdjustEmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                //update visual elements to newly selected employee
-                NameField.setText(selectedEmployee.getName());
-                NumberField.setText(selectedEmployee.getPhoneNumber());
-                PayrateField.setText("" + selectedEmployee.getPayRate());
-                if(selectedEmployee.isManager()){
-                    ManagerButton.setSelected(true);
-                }
-                else{
-                    RegularButton.setSelected(true);
                 }
             }
             
